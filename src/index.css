@@ -1,68 +1,53 @@
+@font-face {
+    font-family: "Gmarket Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff") format("woff");
+  }
+  
+  @font-face {
+    font-family: "Gmarket Sans";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+  }
+  
+  @font-face {
+    font-family: "Gmarket Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
+  }
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --Black: #000000;
+  --primary1: #271700;
+  --primary2: #FFFFFF;
+  --Secondary1: #676767;
+  --Secondary2: #939393;
+  --Secondary3: #D9D9D9;
+  --Main1: #DBF4DC;
+  --Main2: #7AC87D;
+  --Main3: #5AD75F;
+  --Sub1: #FFFFFF;
+  --Sub2: #FFFDEE;
+  --Sub5: #55533E;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --headingSmall: 700 12px / 140% "Gmarket Sans";
+  --headingMedium: 700 16px / 140% "Gmarket Sans";
+  --headingLarge: 700 21.3px / 140% "Gmarket Sans";
+  --headingXL: 700 28.4px / 140% "Gmarket Sans";
+  --headingXXL: 700 37.9px / 140% "Gmarket Sans";
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  --labelSmall: 500 12px / 150% "Gmarket Sans";
+  --labelMedium: 500 16px / 150% "Gmarket Sans";
+  --labelLarge: 500 21.3px / 150% "Gmarket Sans";
+  --labelXL: 500 28.4px / 150% "Gmarket Sans";
+  --labelXXL: 500 37.9px / 150% "Gmarket Sans";
+  
+  --paragraphSmall: 300 12px / 160% "Gmarket Sans";
+  --paragraphMedium: 300 16px / 160% "Gmarket Sans";
+  --paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
+  --paragraphXL: 300 28.4px / 160% "Gmarket Sans";
 }
