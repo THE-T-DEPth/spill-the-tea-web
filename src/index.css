@@ -1,53 +1,78 @@
 @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 300;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff") format("woff");
-  }
-  
-  @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 500;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
-  }
-  
-  @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 700;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
-  }
+	font-family: "Gmarket Sans";
+	font-style: normal;
+	font-weight: 300;
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Gmarket Sans";
+	font-style: normal;
+	font-weight: 500;
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Gmarket Sans";
+	font-style: normal;
+	font-weight: 700;
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
+}
+
+@font-face {
+	font-family: 'RixInooAriDuri';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
 
 :root {
-  --Black: #000000;
-  --primary1: #271700;
-  --primary2: #FFFFFF;
-  --Secondary1: #676767;
-  --Secondary2: #939393;
-  --Secondary3: #D9D9D9;
-  --Main1: #DBF4DC;
-  --Main2: #7AC87D;
-  --Main3: #5AD75F;
-  --Sub1: #FFFFFF;
-  --Sub2: #FFFDEE;
-  --Sub5: #55533E;
+	--Black: #000000;
+	--primary1: #271700;
+	--primary2: #FFFFFF;
+	--Secondary1: #676767;
+	--Secondary2: #939393;
+	--Secondary3: #D9D9D9;
+	--Main1: #DBF4DC;
+	--Main2: #7AC87D;
+	--Main3: #5AD75F;
+	--Sub1: #FFFFFF;
+	--Sub2: #FFFDEE;
+	--Sub5: #55533E;
+	--BackBar: #EFEFEF;
 
 
-  --headingSmall: 700 12px / 140% "Gmarket Sans";
-  --headingMedium: 700 16px / 140% "Gmarket Sans";
-  --headingLarge: 700 21.3px / 140% "Gmarket Sans";
-  --headingXL: 700 28.4px / 140% "Gmarket Sans";
-  --headingXXL: 700 37.9px / 140% "Gmarket Sans";
+	--headingSmall: 700 12px / 140% "Gmarket Sans";
+	--headingMedium: 700 16px / 140% "Gmarket Sans";
+	--headingLarge: 700 21.3px / 140% "Gmarket Sans";
+	--headingXL: 700 28.4px / 140% "Gmarket Sans";
+	--headingXXL: 700 37.9px / 140% "Gmarket Sans";
+	--searchBold: 700 10px / normal "Gmarket Sans";
 
-  --labelSmall: 500 12px / 150% "Gmarket Sans";
-  --labelMedium: 500 16px / 150% "Gmarket Sans";
-  --labelLarge: 500 21.3px / 150% "Gmarket Sans";
-  --labelXL: 500 28.4px / 150% "Gmarket Sans";
-  --labelXXL: 500 37.9px / 150% "Gmarket Sans";
-  
-  --paragraphSmall: 300 12px / 160% "Gmarket Sans";
-  --paragraphMedium: 300 16px / 160% "Gmarket Sans";
-  --paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-  --paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+	--labelMini: 500 10px / normal "Gmarket Sans";
+	--labelSmall: 500 12px / 150% "Gmarket Sans";
+	--labelMedium: 500 16px / 150% "Gmarket Sans";
+	--labelLarge: 500 21.3px / 150% "Gmarket Sans";
+	--labelXL: 500 28.4px / 150% "Gmarket Sans";
+	--labelXXL: 500 37.9px / 150% "Gmarket Sans";
+
+
+	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
+	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
+	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
+	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+
+	--headerXL: 400 25.35px / normal "RixInooAriDuri";
+	--headerL: 400 14px / normal "RixInooAriDuri";
+
+
+	--footerMini: 400 6px / normal "Pretendard";
 }
