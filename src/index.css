@@ -1,38 +1,41 @@
 @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 300;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff") format("woff");
-  }
-  
-  @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 500;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
-  }
-  
-  @font-face {
-    font-family: "Gmarket Sans";
-    font-style: normal;
-    font-weight: 700;
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
-  }
+  font-family: "Gmarket Sans";
+  font-style: normal;
+  font-weight: 300;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+    format("woff");
+}
+
+@font-face {
+  font-family: "Gmarket Sans";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+}
+
+@font-face {
+  font-family: "Gmarket Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+}
 
 :root {
   --Black: #000000;
   --primary1: #271700;
-  --primary2: #FFFFFF;
+  --primary2: #ffffff;
   --Secondary1: #676767;
   --Secondary2: #939393;
-  --Secondary3: #D9D9D9;
-  --Main1: #DBF4DC;
-  --Main2: #7AC87D;
-  --Main3: #5AD75F;
-  --Sub1: #FFFFFF;
-  --Sub2: #FFFDEE;
-  --Sub5: #55533E;
-
+  --Secondary3: #d9d9d9;
+  --Main1: #dbf4dc;
+  --Main2: #7ac87d;
+  --Main3: #5ad75f;
+  --Sub1: #ffffff;
+  --Sub2: #fffdee;
+  --Sub5: #55533e;
+  --Yellow: #fffbdb;
 
   --headingSmall: 700 12px / 140% "Gmarket Sans";
   --headingMedium: 700 16px / 140% "Gmarket Sans";
@@ -45,9 +48,13 @@
   --labelLarge: 500 21.3px / 150% "Gmarket Sans";
   --labelXL: 500 28.4px / 150% "Gmarket Sans";
   --labelXXL: 500 37.9px / 150% "Gmarket Sans";
-  
+
   --paragraphSmall: 300 12px / 160% "Gmarket Sans";
   --paragraphMedium: 300 16px / 160% "Gmarket Sans";
   --paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
   --paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+
+  --boxTitle: 700 14px / 19.6px "Gmarket Sans";
+  --boxKeyword: 500 8.73px / 10.03px "Gmarket Sans";
+  --boxInfo: 500 8px / 12px "Gmarket Sans";
 }
