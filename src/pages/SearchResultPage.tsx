@@ -7,7 +7,7 @@ import Pagination from "../styles/searchResult/Pagination";
 import { BoxProps } from "../components/searchResult/SearchBox";
 
 interface SearchResultPageProps {
-  searchQuery: string; // 검색어
+  searchQuery?: string; // 검색어
 }
 
 const SearchResultPage: React.FC<SearchResultPageProps> = ({
