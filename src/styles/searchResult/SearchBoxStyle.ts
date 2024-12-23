@@ -37,7 +37,7 @@ export const ImageContainer = styled.div`
   width: 140px;
   height: 140px;
   background: #dbdbdb;
-  overflow: hidden;
+
   margin-top: 8px;
 `;
 
@@ -82,12 +82,15 @@ export const InfoContainer = styled.div`
   padding-left: 19px;
   font: var(--boxInfo);
   color: var(--primary1);
+  margin: 0;
 `;
 
 export const LikeContainer = styled.div`
   display: flex;
   gap: 15px;
   margin-bottom: 5px;
+  height: 14px;
+  justify-content: center;
 `;
 
 export const Likes = styled.span`
@@ -106,4 +109,6 @@ export const TimeContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+  height: 14px;
+  justify-content: center;
 `;

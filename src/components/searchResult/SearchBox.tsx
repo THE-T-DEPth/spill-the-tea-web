@@ -6,7 +6,7 @@ import Comment from "../../assets/images/comment.svg";
 
 type Keyword = string;
 
-interface BoxProps {
+export interface BoxProps {
   title: string; //글 제목
   image: string; //이미지 URL
   keywords: Keyword[]; // 키워드 목록
@@ -23,9 +23,10 @@ const Box: React.FC<BoxProps> = ({
   likes,
   comments,
 }) => {
+  const truncatedTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
   return (
     <S.Container>
-      <S.Title>{title}</S.Title>
+      <S.Title>{truncatedTitle}</S.Title>
       <S.ImageContainer>
         <S.Image src={image} />
       </S.ImageContainer>
