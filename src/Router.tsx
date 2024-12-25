@@ -5,6 +5,7 @@ import FindPassPage from "./pages/FindPassPage";
 import CertificationNumPage from "./pages/CertificationNumPage";
 // import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from "./pages/SearchResultPage";
+import MyPage from "./pages/MyPage";
 
 const Router = () => {
 	return (
@@ -16,6 +17,7 @@ const Router = () => {
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/find-password" element={<FindPassPage />} />
 				<Route path="/certification-number" element={<CertificationNumPage />} />
+				<Route path="/MyPage" element={<MyPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
