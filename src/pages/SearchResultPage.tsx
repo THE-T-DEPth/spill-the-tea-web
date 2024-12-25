@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
-import SearchBox from "../components/searchResult/MainBox";
+import SearchBox from "../components/searchResult/Box";
 import BoxData from "../assets/data/BoxData";
 import * as S from "../styles/searchResult/SearchResultPageStyle";
 import SortButton from "../components/searchResult/SortButton";
 import Pagination from "../styles/searchResult/Pagination";
-import { BoxProps } from "../components/searchResult/MainBox";
+import { BoxProps } from "../components/searchResult/Box";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";

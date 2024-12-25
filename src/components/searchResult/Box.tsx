@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../../styles/searchResult/MainBoxStyle";
+import * as S from "../../styles/searchResult/BoxStyle";
 import Vector from "../../assets/images/time.svg";
 import Like from "../../assets/images/like.svg";
 import Comment from "../../assets/images/comment.svg";

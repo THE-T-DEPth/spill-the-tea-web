@@ -4,7 +4,7 @@ import RightArrow from "../../assets/images/right.svg";
 import LeftArrowDisable from "../../assets/images/leftdisable.svg";
 import RightArrowDisable from "../../assets/images/rightdisable.svg";
 import * as S from "../../styles/searchResult/PaginationStyle";
-import { BoxProps } from "../../components/searchResult/MainBox";
+import { BoxProps } from "../../components/searchResult/Box";
 
 interface PaginationProps {
   totalItems: number;
