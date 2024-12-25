@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as S from "../../styles/Layout/NavBarStyle";
 import TeaCupIcon from "../../assets/Icons/TeaCup2.svg";
 import SearchIcon from "../../assets/Icons/Search.svg";
