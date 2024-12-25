@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../../styles/searchResult/SearchBoxStyle";
+import * as S from "../../styles/searchResult/MainBoxStyle";
 import Vector from "../../assets/images/time.svg";
 import Like from "../../assets/images/like.svg";
 import Comment from "../../assets/images/comment.svg";
@@ -10,7 +10,8 @@ export interface BoxProps {
   title: string; //글 제목
   image: string; //이미지 URL
   keywords: Keyword[]; // 키워드 목록
-  time: string; // 작성 시간
+  date: string; // 작성 날짜
+  time?: string; // 작성 시간(없어도됨)
   likes: number; //공감 수
   comments: string; //댓글 수
 }
@@ -19,6 +20,7 @@ const Box: React.FC<BoxProps> = ({
   title,
   image,
   keywords,
+  date,
   time,
   likes,
   comments,
@@ -48,7 +50,7 @@ const Box: React.FC<BoxProps> = ({
         </S.LikeContainer>
         <S.TimeContainer>
           <img src={Vector} alt="clock Icon" className="Icon" />
-          {time}
+          {date} {time && ` / ${time}`}
         </S.TimeContainer>
       </S.InfoContainer>
     </S.Container>

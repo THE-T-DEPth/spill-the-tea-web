@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 1046px;
   height: 909px;
-  margin: 53px 197px 100px;
+  margin: 53px auto 100px;
 `;
 
 export const TitleContainer = styled.div`
@@ -51,5 +51,5 @@ export const EmptyContainer = styled.div`
   width: 467px;
   height: 30px;
   display: flex;
-  margin: 317px 486px 497px 487px;
+  margin: 317px auto 497px;
 `;

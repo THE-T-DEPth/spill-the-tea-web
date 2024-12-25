@@ -14,8 +14,8 @@ export const Title = styled.div`
 export const Container = styled.div`
   width: 190px;
   height: 253px;
-
-  background: #ffffff;
+  box-sizing: border-box;
+  background: var(--Sub1);
   border: 0.75px solid var(--Secondary2);
   display: flex;
   flex-direction: column;
@@ -23,21 +23,18 @@ export const Container = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-    /* 컨테이너에 호버 시 효과 */
     box-shadow: 0px 4px 17px rgba(38, 130, 42, 0.25);
   }
 
   &:hover ${Title} {
-    /* 컨테이너에 호버 시 Title의 배경색 변경 */
     background-color: var(--Main3);
+    transition: all 0.3s ease;
   }
 `;
 
 export const ImageContainer = styled.div`
   width: 140px;
   height: 140px;
-  background: #dbdbdb;
-
   margin-top: 8px;
 `;
 
