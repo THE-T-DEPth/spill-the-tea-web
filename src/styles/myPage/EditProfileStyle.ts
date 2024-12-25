@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import * as S from "../../styles/myPage/MyPageStyle";
 
 export const Container = styled.div`
   width: 404px;
   height: 882px;
   display: flex;
   flex-direction: column;
+  margin: 43px auto 84px;
 `;
 
 export const Title = styled.span`
