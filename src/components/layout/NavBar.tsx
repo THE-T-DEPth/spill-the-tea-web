@@ -4,13 +4,16 @@ import TeaCupIcon from "../../assets/Icons/TeaCup2.svg";
 import SearchIcon from "../../assets/Icons/Search.svg";
 import MyIcon from "../../assets/Icons/My.svg";
 import ClockIcon from "../../assets/Icons/Clock.svg";
-import { TSearchHistoryType } from '../../types/layout/NavBarType';
+import { TSearchHistoryType } from "../../types/layout/NavBarType";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
 	const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
 	const [isHistoryVisible, setIsHistoryVisible] = useState(false);
 	const [searchInput, setSearchInput] = useState("");
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
 	const searchBarRef = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
 
 	// 클릭 이벤트 핸들러
 	const handleClickOutside = (event: MouseEvent) => {
@@ -35,6 +38,18 @@ const NavBar = () => {
 		}
 	};
 
+	// 로그인/로그아웃 버튼 클릭 핸들러
+	const handleAuthButtonClick = () => {
+		if (isLoggedIn) {
+			// 로그아웃 처리
+			setIsLoggedIn(false);
+			alert("로그아웃되었습니다.");
+		} else {
+			// 로그인 페이지로 이동
+			navigate("/login");
+		}
+	};
+
 	return (
 		<S.Container>
 			{/* 찻잔 아이콘과 Spill The Tea 문구 */}
@@ -52,7 +67,7 @@ const NavBar = () => {
 				<S.NavLinks to="/collection">티컬렉션</S.NavLinks>
 			</S.Nav>
 
-			{/* 검색 바, My 아이콘, 로그아웃 버튼 */}
+			{/* 검색 바, My 아이콘, 로그인/로그아웃 버튼 */}
 			<S.RightSection>
 				<S.SearchBar ref={searchBarRef} onClick={() => setIsHistoryVisible(true)}>
 					<input
@@ -69,7 +84,6 @@ const NavBar = () => {
 					</S.SearchIconWrapper>
 				</S.SearchBar>
 
-
 				{/* 검색 기록 표시 */}
 				{isHistoryVisible && (
 					<S.SearchHistory>
@@ -85,7 +99,9 @@ const NavBar = () => {
 				<S.MyIconWrapper>
 					<img src={MyIcon} alt="My Icon" />
 				</S.MyIconWrapper>
-				<S.LogoutButton>로그아웃</S.LogoutButton>
+				<S.LogoutButton onClick={handleAuthButtonClick}>
+					{isLoggedIn ? "로그아웃" : "로그인"}
+				</S.LogoutButton>
 			</S.RightSection>
 		</S.Container>
 	);
