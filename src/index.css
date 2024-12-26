@@ -52,6 +52,8 @@
   --Sub2: #fffdee;
   --Sub5: #55533e;
   --BackBar: #efefef;
+  --InputBack: #f5f5f5;
+  --BackBar: #efefef;
   --DeleteButton: #948f79;
 
   --headingSmall: 700 12px / 140% "Gmarket Sans";
@@ -68,6 +70,7 @@
   --labelLarge: 500 21.3px / 150% "Gmarket Sans";
   --labelXL: 500 28.4px / 150% "Gmarket Sans";
   --labelXXL: 500 37.9px / 150% "Gmarket Sans";
+  --loginSmall: 500 15px / normal "Gmarket Sans";
 
   --paragraphSmall: 300 12px / 160% "Gmarket Sans";
   --paragraphMedium: 300 16px / 160% "Gmarket Sans";
