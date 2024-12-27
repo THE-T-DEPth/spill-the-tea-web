@@ -5,16 +5,10 @@ export const Container = styled.footer`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color:var(--Main2); 
-  height: 75.09px; 
+  background-color: var(--Main2);
+  height: 75.09px;
   padding: 20px 0;
   box-sizing: border-box;
-
-   /* 푸터를 화면 하단에 고정 */
-position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 `;
 
 export const Content = styled.div`
@@ -26,9 +20,9 @@ export const Content = styled.div`
 
 export const LogoWrapper = styled.div`
   img {
-    width: 158px; 
+    width: 158px;
     height: 10px;
-	margin-top: 17.09px;
+    margin-top: 17.09px;
   }
 `;
 
