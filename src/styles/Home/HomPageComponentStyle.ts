@@ -1,16 +1,11 @@
 import styled from "styled-components";
 
 export const HomeDiv = styled.div`
-    color: var(--Main3);
-    font: var(--headingXL);
+   margin-top: 74px;
 `;
 
 export const HomeDiv2 = styled.div`
-    color: var(--Secondary2);
-    font: var(--labelXL);
+  margin-top: 100px;
+  margin-bottom: 136px;
 `;
 
-export const HomeDiv3 = styled.div`
-    color: var(--Main5);
-    font: var(--paragraphXL);
-`;
