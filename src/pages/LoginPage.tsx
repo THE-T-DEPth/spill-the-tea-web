@@ -30,18 +30,18 @@ const LoginPage = () => {
 		return { success: true };
 	};
 
-	// Toggle password visibility
+
 	const togglePasswordVisibility = () => {
 		setIsPasswordVisible(!isPasswordVisible);
 	};
 
-	// Handle login
+
 	const handleLogin = () => {
-		// Clear previous errors
+
 		setEmailError("");
 		setPasswordError("");
 
-		// Validate email and password
+
 		const response = dummyApi(email, password);
 
 		if (!response.success) {
@@ -51,11 +51,16 @@ const LoginPage = () => {
 			if (response.error === "password") {
 				setPasswordError("비밀번호가 일치하지 않습니다.");
 			}
-			return; // Do not proceed further
+			return;
 		}
 
-		// Redirect to HomePage on successful login
+
 		navigate("/");
+	};
+
+
+	const handleFindPassword = () => {
+		navigate("/find-password");
 	};
 
 	return (
@@ -74,7 +79,9 @@ const LoginPage = () => {
 							setText={setEmail}
 							placeholder="이메일을 입력하세요."
 						/>
-						{emailError && <S.ErrorMessage>{emailError}</S.ErrorMessage>}
+						<S.ErrorMessage className={emailError ? "visible" : ""}>
+							{emailError}
+						</S.ErrorMessage>
 					</S.LoginInputWrapper>
 					<S.PasswordInputWrapper>
 						<S.PasswordWrapper>
@@ -91,12 +98,16 @@ const LoginPage = () => {
 								/>
 							</S.EyeButton>
 						</S.PasswordWrapper>
-						{passwordError && <S.ErrorMessage>{passwordError}</S.ErrorMessage>}
+						<S.ErrorMessage className={passwordError ? "visible" : ""}>
+							{passwordError}
+						</S.ErrorMessage>
 					</S.PasswordInputWrapper>
 					<S.NewInputWrapper>
 						<S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
 						<S.SignupButton>회원가입 하기</S.SignupButton>
-						<S.ForgotPassword>비밀번호 찾기</S.ForgotPassword>
+						<S.ForgotPassword onClick={handleFindPassword}>
+							비밀번호 찾기
+						</S.ForgotPassword>
 					</S.NewInputWrapper>
 				</S.LoginBox>
 			</S.Wrapper>
