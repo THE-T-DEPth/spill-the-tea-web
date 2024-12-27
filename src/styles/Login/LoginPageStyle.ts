@@ -27,7 +27,7 @@ export const LoginBox = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
-  padding: 32px;
+  /* padding: 32px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@ export const LoginInputWrapper = styled.div`
 
 export const PasswordInputWrapper = styled.div`
   width: 374px;
-  margin-top: 55px; /* 위 간격 */
+  margin-top: 38px; /* 위 간격 */
 `;
 
 export const NewInputWrapper = styled.div`
@@ -99,7 +99,7 @@ export const SignupButton = styled.button`
   height: 45px;
   background-color:var(--Sub1);
   color:var(--Main2);
-  border: 1px solid #7AC87D;
+  border: 1px solid var(--Main2);
   border-radius: 8px;
   padding-top: 4px;
   font: var(--labelLarge);
@@ -117,11 +117,17 @@ text-align: center;
 `;
 export const ErrorMessage = styled.p`
   font: var(--paragraphSmall); /* 폰트 변경 */
-  color: red;
+  color: transparent; /* 기본적으로 투명하게 설정 */
   margin-top: 2px; /* 박스와의 간격 설정 */
   margin-left: 0; /* 왼쪽 여백 제거 */
   align-self: flex-start; /* 에러 메시지가 입력 박스 바로 아래에 위치 */
-  
+  height: 1em; /* 고정 높이 설정으로 위치 변화 방지 */
+  transition: color 0.2s ease-in-out; /* 색상 전환 애니메이션 */
+
+  &.visible {
+    color: var(--error1); /* 조건 충족 시 빨간색으로 표시 */
+  }
 `;
+
 
 
