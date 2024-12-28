@@ -4,11 +4,11 @@ import Close from '../../assets/images/Close.svg';
 import Checkbox from './Checkbox';
 
 interface ComplainModalProps {
-  onClose: () => void; // onClose는 함수를 받아야 하므로 () => void 타입
+  setComplainModal: (value: boolean) => void; //
 }
 
 // React.FC를 사용한 ComplainModal 정의
-const ComplainModal: React.FC<ComplainModalProps> = ({ onClose }) => {
+const ComplainModal: React.FC<ComplainModalProps> = ({ setComplainModal }) => {
   const [step, setStep] = useState(1);
   const [onConfirm, setOnConfirm] = useState(false);
   const [checkedStates, setCheckedStates] = useState<{
@@ -42,11 +42,11 @@ const ComplainModal: React.FC<ComplainModalProps> = ({ onClose }) => {
   };
 
   const handleCancelClick = () => {
-    onClose(); // 모달 닫기
+    setComplainModal(false); // 모달 닫기
   };
 
   const handleSubmitClick = () => {
-    if (onConfirm) onClose();
+    if (onConfirm) setComplainModal(false);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ComplainModal: React.FC<ComplainModalProps> = ({ onClose }) => {
 
   return (
     <>
-      <S.Overlay onClick={onClose}></S.Overlay>
+      <S.Overlay onClick={() => setComplainModal(false)}></S.Overlay>
       <S.Modal>
         {step === 1 ? (
           <>
