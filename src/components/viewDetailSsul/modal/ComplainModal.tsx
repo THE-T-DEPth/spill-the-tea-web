@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as S from '../../styles/ViewDetailSsul/ComplainModalComponentStyle';
-import Close from '../../assets/images/Close.svg';
+import * as S from '../../../styles/ViewDetailSsul/ComplainModalComponentStyle';
+import Close from '../../../assets/images/Close.svg';
 import Checkbox from './Checkbox';
 
 interface ComplainModalProps {

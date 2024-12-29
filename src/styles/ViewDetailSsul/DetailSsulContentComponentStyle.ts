@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+export const CDiv = styled.div`
+  display: flex;
+  width: 85%;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
 export const DSCTitleDiv = styled.div`
   display: flex;
   width: 100%;
@@ -19,14 +30,24 @@ export const DSCTitleDiv = styled.div`
   }
 `;
 
+export const DSCTitle = styled.div`
+  display: flex;
+  line-height: 1;
+  justify-content: center;
+  align-items: center;
+  color: var(--Black);
+  font: var(--headingXXL);
+  margin: 10px 0;
+`;
+
 export const DSCMenuDiv = styled.div`
-  position: absolute; /* 부모나 뷰포트를 기준으로 조정 가능 */
-  top: 100px;
-  right: 10%;
+  position: relative;
 `;
 
 export const DSCMenuImg = styled.img`
+  position: relative;
   cursor: pointer;
+  padding-left: 100%;
 `;
 
 export const DSCMenuDetailContainer = styled.div`
@@ -34,7 +55,7 @@ export const DSCMenuDetailContainer = styled.div`
   width: 80px;
   z-index: 10;
   background-color: white;
-  left: 50%;
+  left: 101.5%;
   transform: translateX(-50%);
 `;
 
@@ -65,16 +86,6 @@ export const DSCDSCMenuDetail = styled.p`
   line-height: 1;
 `;
 
-export const DSCTitle = styled.div`
-  display: flex;
-  line-height: 1;
-  justify-content: center;
-  align-items: center;
-  color: var(--Black);
-  font: var(--headingXXL);
-  margin: 10px 0;
-`;
-
 export const DSCContentWholeDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -82,6 +93,8 @@ export const DSCContentWholeDiv = styled.div`
 `;
 
 export const DSCTagDiv = styled.div`
+  position: relative;
+  margin-top: -25px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -3,7 +3,12 @@ import styled from 'styled-components';
 export const DSRDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 85%;
+  margin: 0 auto;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export const DSRInputDiv = styled.div`
@@ -76,10 +81,23 @@ export const DSRContentDiv = styled.div`
   margin-bottom: 10px;
 `;
 
+export const DSRBtnDiv = styled.div`
+  display: flex;
+  width: 175px;
+  flex-shrink: 0;
+  margin-left: 10%;
+`;
+
+export const DSRBtnDiv2 = styled.div`
+  display: flex;
+  width: 109px;
+  flex-shrink: 0;
+  margin-left: 10%;
+`;
+
 export const DSRContent = styled.div`
   display: flex;
   font: var(--labelSmall);
-  width: 80%;
   margin-right: auto;
 `;
 

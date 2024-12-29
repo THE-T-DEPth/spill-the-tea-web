@@ -1,5 +1,5 @@
-import * as S from '../../styles/ViewDetailSsul/ComplainModalComponentStyle';
-import Close from '../../assets/images/Close.svg';
+import * as S from '../../../styles/ViewDetailSsul/ComplainModalComponentStyle';
+import Close from '../../../assets/images/Close.svg';
 
 interface RemoveModalProps {
   setOpenModal: (value: boolean) => void;
