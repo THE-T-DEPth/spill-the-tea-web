@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as S from "../../styles/Layout/NavBarStyle";
 import TeaCupIcon from "../../assets/Icons/TeaCup2.svg";
 import SearchIcon from "../../assets/Icons/Search.svg";
@@ -17,7 +17,10 @@ const NavBar = () => {
 
 	// 클릭 이벤트 핸들러
 	const handleClickOutside = (event: MouseEvent) => {
-		if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+		if (
+			searchBarRef.current &&
+			!searchBarRef.current.contains(event.target as Node)
+		) {
 			setIsHistoryVisible(false);
 		}
 	};
@@ -33,6 +36,7 @@ const NavBar = () => {
 	// 검색 기록에 입력 추가
 	const handleSearchSubmit = () => {
 		if (searchInput.trim() !== "") {
+			navigate(`/searchresult?query=${encodeURIComponent(searchInput)}`);
 			setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
 			setSearchInput("");
 		}
