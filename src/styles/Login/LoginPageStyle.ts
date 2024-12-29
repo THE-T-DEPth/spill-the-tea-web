@@ -41,14 +41,14 @@ export const LoginInputWrapper = styled.div`
 
 export const PasswordInputWrapper = styled.div`
   width: 374px;
-  margin-top: 38px; /* 위 간격 */
+  margin-top: 18px; /* 위 간격 */
 `;
 
 export const NewInputWrapper = styled.div`
   width: 374px;
  height: 138px;
   margin-top: 50px; /* LoginInputWrapper와의 간격 */
-  margin-bottom: 56px; /* 아래 간격 */
+  margin-bottom: 56px; 
 `;
 
 export const Label = styled.label`
@@ -118,7 +118,7 @@ text-align: center;
 export const ErrorMessage = styled.p`
   font: var(--paragraphSmall); /* 폰트 변경 */
   color: transparent; /* 기본적으로 투명하게 설정 */
-  margin-top: 2px; /* 박스와의 간격 설정 */
+  margin-top: 2.82px; /* 박스와의 간격 설정 */
   margin-left: 0; /* 왼쪽 여백 제거 */
   align-self: flex-start; /* 에러 메시지가 입력 박스 바로 아래에 위치 */
   height: 1em; /* 고정 높이 설정으로 위치 변화 방지 */
