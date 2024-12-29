@@ -8,95 +8,107 @@ import { TSearchHistoryType } from "../../types/layout/NavBarType";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const navigate = useNavigate();
-  const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
-  const [isHistoryVisible, setIsHistoryVisible] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
-  const searchBarRef = useRef<HTMLDivElement>(null);
+	const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
+	const [isHistoryVisible, setIsHistoryVisible] = useState(false);
+	const [searchInput, setSearchInput] = useState("");
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+	const searchBarRef = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
 
-  // 클릭 이벤트 핸들러
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      searchBarRef.current &&
-      !searchBarRef.current.contains(event.target as Node)
-    ) {
-      setIsHistoryVisible(false);
-    }
-  };
+	// 클릭 이벤트 핸들러
+	const handleClickOutside = (event: MouseEvent) => {
+		if (
+			searchBarRef.current &&
+			!searchBarRef.current.contains(event.target as Node)
+		) {
+			setIsHistoryVisible(false);
+		}
+	};
 
-  // 외부 클릭 감지
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+	// 외부 클릭 감지
+	useEffect(() => {
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
-  // 검색 기록에 입력 추가
-  const handleSearchSubmit = () => {
-    if (searchInput.trim() !== "") {
-      navigate(`/searchresult?query=${encodeURIComponent(searchInput)}`);
-      setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
-      setSearchInput("");
-    }
-  };
+	// 검색 기록에 입력 추가
+	const handleSearchSubmit = () => {
+		if (searchInput.trim() !== "") {
+			navigate(`/searchresult?query=${encodeURIComponent(searchInput)}`);
+			setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
+			setSearchInput("");
+		}
+	};
 
-  return (
-    <S.Container>
-      {/* 찻잔 아이콘과 Spill The Tea 문구 */}
-      <S.LeftSection onClick={() => window.location.reload()}>
-        <S.IconWrapper>
-          <img src={TeaCupIcon} alt="Tea Cup Icon" />
-        </S.IconWrapper>
-        <S.Title>Spill The Tea : 썰푸는 장소</S.Title>
-      </S.LeftSection>
+	// 로그인/로그아웃 버튼 클릭 핸들러
+	const handleAuthButtonClick = () => {
+		if (isLoggedIn) {
+			// 로그아웃 처리
+			setIsLoggedIn(false);
+			alert("로그아웃되었습니다.");
+		} else {
+			// 로그인 페이지로 이동
+			navigate("/login");
+		}
+	};
 
-      {/* 네비게이션 링크 */}
-      <S.Nav>
-        <S.NavLinks to="/">찻집 대문</S.NavLinks>
-        <S.NavLinks to="/menu">메뉴판</S.NavLinks>
-        <S.NavLinks to="/collection">티컬렉션</S.NavLinks>
-      </S.Nav>
+	return (
+		<S.Container>
+			{/* 찻잔 아이콘과 Spill The Tea 문구 */}
+			<S.LeftSection onClick={() => window.location.reload()}>
+				<S.IconWrapper>
+					<img src={TeaCupIcon} alt="Tea Cup Icon" />
+				</S.IconWrapper>
+				<S.Title>Spill The Tea : 썰푸는 장소</S.Title>
+			</S.LeftSection>
 
-      {/* 검색 바, My 아이콘, 로그아웃 버튼 */}
-      <S.RightSection>
-        <S.SearchBar
-          ref={searchBarRef}
-          onClick={() => setIsHistoryVisible(true)}
-        >
-          <input
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="원하는 썰을 제목 검색으로 찾아보세요!"
-            onKeyPress={(e) => {
-              if (e.key === "Enter") handleSearchSubmit();
-            }}
-          />
-          <S.SearchIconWrapper onClick={handleSearchSubmit}>
-            <img src={SearchIcon} alt="Search Icon" />
-          </S.SearchIconWrapper>
-        </S.SearchBar>
+			{/* 네비게이션 링크 */}
+			<S.Nav>
+				<S.NavLinks to="/">찻집 대문</S.NavLinks>
+				<S.NavLinks to="/menu">메뉴판</S.NavLinks>
+				<S.NavLinks to="/collection">티컬렉션</S.NavLinks>
+			</S.Nav>
 
-        {/* 검색 기록 표시 */}
-        {isHistoryVisible && (
-          <S.SearchHistory>
-            {searchHistory.map((item, index) => (
-              <S.SearchHistoryItem key={index}>
-                <img src={ClockIcon} alt="Clock Icon" />
-                <span>{item}</span>
-              </S.SearchHistoryItem>
-            ))}
-          </S.SearchHistory>
-        )}
+			{/* 검색 바, My 아이콘, 로그인/로그아웃 버튼 */}
+			<S.RightSection>
+				<S.SearchBar ref={searchBarRef} onClick={() => setIsHistoryVisible(true)}>
+					<input
+						type="text"
+						value={searchInput}
+						onChange={(e) => setSearchInput(e.target.value)}
+						placeholder="원하는 썰을 제목 검색으로 찾아보세요!"
+						onKeyPress={(e) => {
+							if (e.key === "Enter") handleSearchSubmit();
+						}}
+					/>
+					<S.SearchIconWrapper onClick={handleSearchSubmit}>
+						<img src={SearchIcon} alt="Search Icon" />
+					</S.SearchIconWrapper>
+				</S.SearchBar>
 
-        <S.MyIconWrapper>
-          <img src={MyIcon} alt="My Icon" />
-        </S.MyIconWrapper>
-        <S.LogoutButton>로그아웃</S.LogoutButton>
-      </S.RightSection>
-    </S.Container>
-  );
+				{/* 검색 기록 표시 */}
+				{isHistoryVisible && (
+					<S.SearchHistory>
+						{searchHistory.map((item, index) => (
+							<S.SearchHistoryItem key={index}>
+								<img src={ClockIcon} alt="Clock Icon" />
+								<span>{item}</span>
+							</S.SearchHistoryItem>
+						))}
+					</S.SearchHistory>
+				)}
+
+				<S.MyIconWrapper>
+					<img src={MyIcon} alt="My Icon" />
+				</S.MyIconWrapper>
+				<S.LogoutButton onClick={handleAuthButtonClick}>
+					{isLoggedIn ? "로그아웃" : "로그인"}
+				</S.LogoutButton>
+			</S.RightSection>
+		</S.Container>
+	);
 };
 
 export default NavBar;
