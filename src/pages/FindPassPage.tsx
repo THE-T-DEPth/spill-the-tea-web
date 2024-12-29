@@ -5,34 +5,42 @@ import NavBar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import LoginInput from "../components/login/LoginInput";
 import { useNavigate } from "react-router-dom";
+import { verifyEmail } from "../api/DummyApi";
 
-const FindPassPage = () => {
-	const [email, setEmail] = useState("");
-	const [emailError, setEmailError] = useState("");
-	const [showError, setShowError] = useState(false); // 에러 메시지 표시 여부
+const FindPassPage: React.FC = () => {
+	const [email, setEmail] = useState<string>("");
+	const [emailError, setEmailError] = useState<string>("");
 	const navigate = useNavigate();
+
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
-		setEmailError(""); // 에러 메시지 초기화
-		setShowError(false); // 에러 표시 초기화
+		setEmailError("");
 	};
 
-	const handleFindPassword = () => {
-		if (!email) {
-			setEmailError("이메일을 입력하세요.");
-			setShowError(true);
-			return;
-		}
 
-		if (email !== "user@example.com") {
-			setEmailError("해당 이메일이 존재하지 않습니다.");
-			setShowError(true);
-			return;
-		}
+	const handleFindPassword = async () => {
 
-		navigate("/certification-number");
+		!email && setEmailError("이메일을 입력하세요.");
+
+		// 이메일이 비어 있으면 함수 실행 종료
+		if (!email) return;
+
+		try {
+			const emailExists = await verifyEmail(email);
+
+
+			emailExists
+				? navigate("/certification-number", { state: { email } })
+				: setEmailError("해당 이메일이 존재하지 않습니다.");
+		} catch (error) {
+			console.error("Error verifying email:", error);
+
+			// 서버 에러 처리
+			setEmailError("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
+		}
 	};
+
 
 	return (
 		<>
@@ -40,7 +48,7 @@ const FindPassPage = () => {
 			<NavBar />
 			<S.Wrapper>
 				<S.Title>비밀번호 찾기</S.Title>
-				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😊"</S.Subtitle>
+				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
 				<S.PasswordBox>
 					<S.passwordWrapper>
 						<S.Label>비밀번호 찾기</S.Label>
@@ -51,7 +59,7 @@ const FindPassPage = () => {
 							placeholder="이메일을 입력하세요."
 							onChange={handleEmailChange}
 						/>
-						<S.ErrorMessage className={showError ? "visible" : ""}>
+						<S.ErrorMessage className={emailError ? "visible" : ""}>
 							{emailError}
 						</S.ErrorMessage>
 					</S.passwordWrapper>

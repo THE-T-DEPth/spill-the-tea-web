@@ -40,14 +40,21 @@ export const passwordWrapper = styled.div`
 export const Label = styled.label`
   font: var(--loginSmall);
   color: var(--Sub5);
-  margin-bottom: 12px;
   display: block;
+  
+`;
+
+export const EmailLabel = styled.p`
+  font: var(--headingSmall);
+  color: var(--Black);
+  margin-top: 5px;
+  margin-bottom: 12px;
 `;
 
 export const SubmitButton = styled.button`
   width: 374px;
   height: 45px;
-  margin-top: 67px;
+  margin-top: 43px;
   background-color: var(--Sub1);
   color: var(--Main2);
   border: 1px solid var(--Main2);
@@ -56,17 +63,12 @@ export const SubmitButton = styled.button`
   font: var(--labelLarge);
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--Main2);
-    color: var(--Sub1);
-  }
 `;
 
 export const ErrorMessage = styled.p`
   font: var(--paragraphSmall);
   color: transparent;
   margin-top: 2px;
-  margin-left: 0;
   align-self: flex-start;
   height: 1em;
   transition: color 0.2s;
