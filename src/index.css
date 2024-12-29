@@ -20,19 +20,18 @@
 }
 
 @font-face {
-	font-family: 'RixInooAriDuri';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+	font-family: "RixInooAriDuri";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-family: "Pretendard";
+	src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
 	font-weight: 400;
 	font-style: normal;
 }
-
 
 :root {
 	--Black: #000000;
@@ -50,6 +49,16 @@
 	--BackBar: #EFEFEF;
 	--BackYellow: #FFFEF8;
 
+	--Green1: #DBF4DC;
+	--Green2: #7AC87D;
+	--Green3: #5AD75F;
+	--EarlGrey: #55533E;
+	--Yellow: #FFFBDB;
+	--G5: #676767;
+	--G4: #939393;
+	--G3: #D9D9D9;
+	--HeadLine: #271700;
+
 
 
 	--headingSmall: 700 12px / 140% "Gmarket Sans";
@@ -66,9 +75,7 @@
 	--labelXL: 500 28.4px / 150% "Gmarket Sans";
 	--labelXXL: 500 37.9px / 150% "Gmarket Sans";
 
-
-
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
+	<<<<<<< HEAD --paragraphSmall: 300 12px / 160% "Gmarket Sans";
 	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
 	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
 	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
@@ -76,7 +83,20 @@
 	--headerXL: 400 25.35px / normal "RixInooAriDuri";
 	--headerL: 400 14px / normal "RixInooAriDuri";
 	--headerTop: 400 17px / normal "RixInooAriDuri";
+	=======--paragraphSmall: 300 12px / 160% "Gmarket Sans";
+	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
+	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
+	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
 
+	--boxTitle: 700 14px / 19.6px "Gmarket Sans";
+	--boxKeyword: 500 8.73px / 10.03px "Gmarket Sans";
+	--boxInfo: 500 8px / 12px "Gmarket Sans";
+	--dropDown: 500 16px / 24px "Gmarket Sans";
+	--searchKeyword: 700 21.3px / 150% "Gmarket Sans";
+	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
+	--topBar: 500 16px / 18.4px "Gmarket Sans";
+	>>>>>>>origin/develop --headerXL: 400 25.35px / normal "RixInooAriDuri";
+	--headerL: 400 14px / normal "RixInooAriDuri";
 
 	--footerMini: 400 6px / normal "Pretendard";
 }
