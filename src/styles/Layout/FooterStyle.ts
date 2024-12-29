@@ -10,12 +10,6 @@ export const Container = styled.footer`
   padding: 20px 0;
   box-sizing: border-box;
 
-
-   /* 푸터를 화면 하단에 고정
-position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%; */
 `;
 
 export const Content = styled.div`
