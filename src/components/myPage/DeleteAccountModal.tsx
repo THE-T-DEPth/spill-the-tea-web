@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import * as S from "../../styles/myPage/DeleteAccountModalStyle";
-import CloseIcon from "../../assets/image/closeIcon.svg";
+import CloseIcon from "../../assets/images/closeIcon.svg";
 import { ModalProps } from "../../types/myPage/ModalProps";
 
 const DeleteAccountModal: React.FC<ModalProps> = ({

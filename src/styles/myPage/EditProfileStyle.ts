@@ -76,7 +76,7 @@ export const NicknameInput = styled.input`
   font: var(--labelMedium);
   padding: 6px 13px 7px;
   border: none;
-  background: var(--Input);
+  background: var(--InputBack);
   border-radius: 8px;
   color: var(--Secondary1);
   &:focus {
@@ -101,7 +101,7 @@ export const PasswordInput = styled.input`
   box-sizing: border-box;
   padding: 10.5px 13px;
   border: none;
-  background: var(--Input);
+  background: var(--InputBack);
   border-radius: 8px;
   &::placeholder {
     color: var(--Secondary1);
@@ -123,7 +123,7 @@ export const CheckInput = styled.input`
   box-sizing: border-box;
   padding: 10.5px 13px;
   border: none;
-  background: var(--Input);
+  background: var(--InputBack);
   border-radius: 8px;
   margin-top: 14px;
   &::placeholder {
@@ -172,14 +172,14 @@ export const SaveButton = styled.button`
 
 export const ErrorMessage = styled.p<{ $isDefault: boolean }>`
   font: var(--paragraphSmall);
-  color: ${(props) => (props.$isDefault ? "var(--primary1)" : "var(--Red)")};
+  color: ${(props) => (props.$isDefault ? "var(--primary1)" : "var(--error1)")};
   margin-top: 3px;
   margin-bottom: 0;
 `;
 
 export const CheckMessage = styled.p<{ $isMatch: boolean }>`
   font: var(--paragraphSmall);
-  color: ${(props) => (props.$isMatch ? "var(--primary1)" : "var(--Red)")};
+  color: ${(props) => (props.$isMatch ? "var(--primary1)" : "var(--error1)")};
   margin-top: 3px;
   margin-bottom: 0;
   height: 19px;

@@ -7,7 +7,7 @@ export interface ProfileData {
 
 export const ProfileData: ProfileData = {
   id: 1,
-  profileImage: "/src/assets/image/profileimg.png",
+  profileImage: "/src/assets/images/profileimg.png",
   nickname: "멋쟁이 뎁스 돌맹이 777",
 };
 

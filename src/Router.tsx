@@ -17,7 +17,7 @@ const Router = () => {
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/find-password" element={<FindPassPage />} />
 				<Route path="/certification-number" element={<CertificationNumPage />} />
-				<Route path="/MyPage" element={<MyPage />} />
+				<Route path="/mypage" element={<MyPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
