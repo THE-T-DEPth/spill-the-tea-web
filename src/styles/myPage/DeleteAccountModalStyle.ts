@@ -1,10 +1,24 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9;
+  pointer-events: all;
+`;
+
 export const ModalContainer = styled.div`
   width: 566px;
   height: 257px;
-  position: absolute;
-  top: 204px;
+  position: fixed;
+  top: 384px;
+  left: 437px;
   background: var(--primary2);
   z-index: 10;
   box-shadow: 0px 8px 30px rgba(18, 0, 0, 0.23);
@@ -46,7 +60,7 @@ export const ButtonContainer = styled.div`
   height: 44px;
   display: flex;
   gap: 59px;
-  margin: 67px auto 0;
+  margin: 57px auto 0;
 `;
 
 export const CancelButton = styled.button`

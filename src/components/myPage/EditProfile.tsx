@@ -3,7 +3,7 @@ import * as S from "../../styles/myPage/EditProfileStyle";
 import { ProfileData } from "../../assets/data/profileData";
 
 // 연속된 문자 검사 함수
-const hasSequentialChars = (value) => {
+const hasSequentialChars = (value: string) => {
   for (let i = 0; i < value.length - 2; i++) {
     const charCode1 = value.charCodeAt(i);
     const charCode2 = value.charCodeAt(i + 1);
@@ -20,7 +20,7 @@ const hasSequentialChars = (value) => {
 };
 
 // 비밀번호 유효성 검사 함수
-const validatePassword = (value) => {
+const validatePassword = (value: string) => {
   const isLengthValid = value.length >= 8 && value.length <= 20;
   const hasUpperLower = /[A-Z]/.test(value) && /[a-z]/.test(value);
   const hasNumber = /\d/.test(value);
@@ -39,7 +39,7 @@ const validatePassword = (value) => {
 
 const EditProfile = () => {
   const defaultMessage =
-    "비밀번호는 8~20자 이내로 구성되며, 대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.";
+    "8~20자 이내, 대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.";
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [nickname, setNickname] = useState(ProfileData.nickname);
@@ -47,7 +47,7 @@ const EditProfile = () => {
   const [checkPasswordError, setCheckPasswordError] = useState("");
   const [isMatch, setIsMatch] = useState(false);
 
-  const checkPasswordsMatch = (password, checkPassword) => {
+  const checkPasswordsMatch = (password: string, checkPassword: string) => {
     if (checkPassword.trim() === "") {
       setCheckPasswordError("");
       setIsMatch(false);
@@ -60,8 +60,8 @@ const EditProfile = () => {
     }
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value: string = e.target.value;
 
     if (value.length > 20) return;
 
@@ -76,15 +76,18 @@ const EditProfile = () => {
     checkPasswordsMatch(value, checkPassword);
   };
 
-  const handleCheckPasswordChange = (e) => {
-    const value = e.target.value;
+  const handleCheckPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value: string = e.target.value;
     setCheckPassword(value);
 
     checkPasswordsMatch(password, value);
   };
 
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value); // 닉네임 상태 업데이트
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value: string = e.target.value;
+    setNickname(value); // 닉네임 상태 업데이트
   };
 
   const isDefaultMessage = passwordError === defaultMessage;

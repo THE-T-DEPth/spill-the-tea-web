@@ -92,7 +92,7 @@ export const PasswordLabel = styled.span`
 
 export const PasswordContainer = styled.div`
   width: 100%;
-  height: 105px;
+  height: 67px;
 `;
 
 export const PasswordInput = styled.input`
