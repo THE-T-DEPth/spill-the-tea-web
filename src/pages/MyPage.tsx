@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as S from "../styles/myPage/MyPageStyle";
 import EditProfile from "../components/myPage/EditProfile";
 import LeaveService from "../components/myPage/LeaveService";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as S from "../../styles/myPage/LeaveServiceStyle";
 import LogoutModal from "./ConfirmationModal";
 import DeleteAccountModal from "../../components/myPage/DeleteAccountModal";
