@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import SearchResultPage from "./pages/SearchResultPage";
 import Layout from "./components/layout/Layout";
 
+
 const Router = () => {
   return (
     <BrowserRouter>
