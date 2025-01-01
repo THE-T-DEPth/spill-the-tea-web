@@ -37,6 +37,5 @@ export const GridContainer = styled.div`
 export const PaginationContainer = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: center;
 `;

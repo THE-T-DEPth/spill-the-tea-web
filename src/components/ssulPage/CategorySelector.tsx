@@ -4,7 +4,7 @@ import DropDownIcon from '../../assets/Icons/KeywordDropdown.svg';
 
 interface CategorySelectorProps {
   selectedCategory: string;
-  setSelectedCategory: (category: string) => void; // 상위 상태 변경 함수
+  setSelectedCategory: (category: string) => void;
 }
 
 const CategorySelector: React.FC<CategorySelectorProps> = ({
@@ -37,7 +37,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       </S.DropdownHeader>
       {isOpen && (
         <S.DropdownList>
-          {Categories.filter((category) => category !== selectedCategory) // 선택된 카테고리 제외
+          {Categories.filter((category) => category !== selectedCategory) // 선택된 카테고리는 제외
             .map((category, index) => (
               <S.DropdownItem
                 key={index}

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from '../../styles/ssulPage/CategoryBarStyle';
 import CategorySelector from './CategorySelector';
 import Keyword from './Keyword';
 
-const Keywords = {
+const Keywords: Record<string, string[]> = {
   '감정/ 관계': [
     '# 첫사랑',
     '# 우정',
@@ -94,7 +94,7 @@ const CategoryBar: React.FC<CategoryBarProps> = ({
             keyword={keyword}
             addKeyword={addKeyword}
             removeKeyword={removeKeyword}
-            isSelected={selectedKeywords.includes(keyword)} // 선택 상태 전달
+            isSelected={selectedKeywords.includes(keyword)}
           />
         ))}
       </S.KeywordsList>

@@ -16,9 +16,9 @@ const Keyword: React.FC<KeywordProps> = ({
 }) => {
   const handleClick = () => {
     if (isSelected) {
-      removeKeyword(keyword); // 이미 선택된 경우 제거
+      removeKeyword(keyword);
     } else {
-      addKeyword(keyword); // 선택되지 않은 경우 추가
+      addKeyword(keyword);
     }
   };
 
