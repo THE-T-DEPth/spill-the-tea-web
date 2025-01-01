@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "../../styles/Layout/LayoutStyle";
-
+import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import NavBar from "../layout/NavBar";
 
@@ -11,6 +11,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
 		<S.Container>
+			<Header />
 			{/* 네비게이션 바 */}
 			<NavBar />
 
