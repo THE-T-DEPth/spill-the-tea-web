@@ -62,6 +62,9 @@ const LoginPage = () => {
 	const handleFindPassword = () => {
 		navigate("/find-password");
 	};
+	const signupEmail = () => {
+		navigate("/signup-email");
+	};
 
 	return (
 		<>
@@ -104,7 +107,7 @@ const LoginPage = () => {
 					</S.PasswordInputWrapper>
 					<S.NewInputWrapper>
 						<S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
-						<S.SignupButton>회원가입 하기</S.SignupButton>
+						<S.SignupButton onClick={signupEmail}>회원가입 하기</S.SignupButton>
 						<S.ForgotPassword onClick={handleFindPassword}>
 							비밀번호 찾기
 						</S.ForgotPassword>

@@ -5,10 +5,15 @@ import FindPassPage from "./pages/FindPassPage";
 import CertificationNumPage from "./pages/CertificationNumPage";
 // import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from "./pages/SearchResultPage";
+import SignupEmailPage from "./pages/SignupEmailPage";
+import SignupPage from "./pages/SignupPage";
+import SignupDonePage from "./pages/SignupDonePage";
 
 const Router = () => {
 	return (
+
 		<BrowserRouter>
+
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				{/* <Route path="/viewDetailSsul" element={<ViewDetailSsul />} /> */}
@@ -16,9 +21,15 @@ const Router = () => {
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/find-password" element={<FindPassPage />} />
 				<Route path="/certification-number" element={<CertificationNumPage />} />
+				<Route path="/signup-email" element={<SignupEmailPage />} />
+				<Route path="/signup" element={<SignupPage />} />
+				<Route path="/signupdone" element={<SignupDonePage />} />
 			</Routes>
+
 		</BrowserRouter>
+
 	);
 }
 
 export default Router;
+
