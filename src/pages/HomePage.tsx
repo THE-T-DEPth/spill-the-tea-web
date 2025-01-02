@@ -3,6 +3,7 @@ import Footer from "../components/layout/Footer";
 import NavBar from "../components/layout/NavBar";
 import TopBar from "../components/Home/TopBar";
 import MainInputBox from "../components/Home/MainInputBox";
+import MakeTeaButton from "../components/Home/MakeTeaButton";
 import * as S from "../styles/Home/HomPageComponentStyle";
 
 const sampleData1 = [
@@ -110,6 +111,9 @@ const HomePage = () => {
 			<TopBar text='"오늘도 썰 한 잔, 짤 한 스푼 🍵"' />
 			<S.HomeDiv><MainInputBox text='터지는 순 🔥' boxData={sampleData1} /></S.HomeDiv>
 			<S.HomeDiv2><MainInputBox text='갓 나온 따근따끈' boxData={sampleData2} /></S.HomeDiv2>
+			<S.MakeTeaButtonContainer>
+				<MakeTeaButton />
+			</S.MakeTeaButtonContainer>
 			<Footer />
 		</>
 	);
