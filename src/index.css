@@ -75,7 +75,6 @@
 	--labelXL: 500 28.4px / 150% "Gmarket Sans";
 	--labelXXL: 500 37.9px / 150% "Gmarket Sans";
 
-	<<<<<<< HEAD --paragraphSmall: 300 12px / 160% "Gmarket Sans";
 	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
 	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
 	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
@@ -83,7 +82,7 @@
 	--headerXL: 400 25.35px / normal "RixInooAriDuri";
 	--headerL: 400 14px / normal "RixInooAriDuri";
 	--headerTop: 400 17px / normal "RixInooAriDuri";
-	=======--paragraphSmall: 300 12px / 160% "Gmarket Sans";
+	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
 	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
 	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
 	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
@@ -95,7 +94,7 @@
 	--searchKeyword: 700 21.3px / 150% "Gmarket Sans";
 	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
 	--topBar: 500 16px / 18.4px "Gmarket Sans";
-	>>>>>>>origin/develop --headerXL: 400 25.35px / normal "RixInooAriDuri";
+	--headerXL: 400 25.35px / normal "RixInooAriDuri";
 	--headerL: 400 14px / normal "RixInooAriDuri";
 
 	--footerMini: 400 6px / normal "Pretendard";
