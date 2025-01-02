@@ -5,6 +5,7 @@ import FindPassPage from "./pages/FindPassPage";
 import CertificationNumPage from "./pages/CertificationNumPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import TemporaryPassPage from "./pages/TemporaryPassPage";
+import ChangePassPage from "./pages/ChangePassPage";
 
 const Router = () => {
 	return (
@@ -16,6 +17,7 @@ const Router = () => {
 				<Route path="/find-password" element={<FindPassPage />} />
 				<Route path="/certification-number" element={<CertificationNumPage />} />
 				<Route path="/temporary-password" element={<TemporaryPassPage />} />
+				<Route path="/change-password" element={<ChangePassPage />} />
 
 			</Routes>
 		</BrowserRouter>
