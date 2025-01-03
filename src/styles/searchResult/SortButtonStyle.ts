@@ -9,18 +9,21 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 115px;
+  width: 220px;
   height: 38px;
   margin-left: auto;
   background: var(--primary2);
   box-sizing: border-box;
   border: 1px solid var(--Main2);
   border-radius: 4px;
-  padding: 7px 15px 7px 14px;
+  padding: 7px 13px 7px 20px;
   font: var(--dropDown);
   display: flex;
   align-items: center;
-  gap: 8px;
+
+  img {
+    margin-left: auto;
+  }
 `;
 
 export const DropdownContainer = styled.div`
