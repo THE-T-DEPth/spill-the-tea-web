@@ -5,8 +5,6 @@ import * as S from "../styles/searchResult/SearchResultPageStyle";
 import SortButton from "../components/searchResult/SortButton";
 import Pagination from "../components/searchResult/Pagination";
 import { BoxProps } from "../components/searchResult/Box";
-
-import Footer from "../components/layout/Footer";
 import TopBar from "../components/searchResult/TopBar";
 import { useLocation } from "react-router-dom";
 
