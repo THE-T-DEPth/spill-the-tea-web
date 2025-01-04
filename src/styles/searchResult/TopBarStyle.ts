@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 1440px;
   height: 42px;
-  background: var(--YellowBar);
+  background: var(--Sub2);
   display: flex;
   justify-content: center;
   align-items: center;
