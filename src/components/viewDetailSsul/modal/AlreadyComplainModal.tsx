@@ -1,4 +1,4 @@
-import * as S from '../../styles/ViewDetailSsul/AlreadComplainModalComponentStyle';
+import * as S from '../../../styles/ViewDetailSsul/AlreadyComplainModalComponentStyle';
 import Close from '../../assets/images/Close.svg';
 
 interface AlreadyProps {
