@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 220px;
@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin-left: auto;
   margin-top: -7px;
   position: relative;
+  height: 38px;
 `;
 
 export const Button = styled.button`
@@ -20,6 +21,7 @@ export const Button = styled.button`
   font: var(--dropDown);
   display: flex;
   align-items: center;
+  position: relative;
 
   img {
     margin-left: auto;
@@ -33,7 +35,7 @@ export const DropdownContainer = styled.div`
   background: var(--primary2);
   display: flex;
   flex-direction: column;
-  top: calc(100% - 10px);
+  top: calc(100% + 11px);
   position: absolute;
   z-index: 100;
 
@@ -60,6 +62,6 @@ export const DropdownMenu = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: var(--Green);
+    background: var(--DropdownHover);
   }
 `;
