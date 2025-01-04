@@ -52,6 +52,7 @@
   --Sub2: #fffdee;
   --Sub5: #55533e;
   --BackBar: #efefef;
+  --DeleteButton: #948f79;
   --InputBack: #f5f5f5;
   --error1: #ff0000;
   --Green1: #dbf4dc;
@@ -79,6 +80,7 @@
   --headingXXL: 700 37.9px / 140% 'Gmarket Sans';
   --searchBold: 700 10px / normal 'Gmarket Sans';
 
+  --labelButton: 500 19.5px / normal 'Gmarket Sans';
   --labelMini: 500 10px / normal 'Gmarket Sans';
   --labelSmall: 500 12px / 150% 'Gmarket Sans';
   --labelMedium: 500 16px / 150% 'Gmarket Sans';
