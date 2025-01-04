@@ -1,8 +1,8 @@
-import React from "react";
-import * as S from "../../styles/Layout/LayoutStyle";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
-import NavBar from "../layout/NavBar";
+import React from 'react';
+import * as S from '../../styles/Layout/LayoutStyle';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
+import NavBar from '../layout/NavBar';
 
 interface LayoutProps {
   children: React.ReactNode;
