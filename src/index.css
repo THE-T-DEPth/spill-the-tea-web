@@ -51,9 +51,8 @@
   --Sub1: #ffffff;
   --Sub2: #fffdee;
   --Sub5: #55533e;
-  --Yellow: #fffbdb;
-  --Green: #edffed;
   --BackBar: #efefef;
+  --DeleteButton: #948f79;
 
   --headingSmall: 700 12px / 140% "Gmarket Sans";
   --headingMedium: 700 16px / 140% "Gmarket Sans";
@@ -62,6 +61,7 @@
   --headingXXL: 700 37.9px / 140% "Gmarket Sans";
   --searchBold: 700 10px / normal "Gmarket Sans";
 
+  --labelButton: 500 19.5px / normal "Gmarket Sans";
   --labelMini: 500 10px / normal "Gmarket Sans";
   --labelSmall: 500 12px / 150% "Gmarket Sans";
   --labelMedium: 500 16px / 150% "Gmarket Sans";
