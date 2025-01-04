@@ -7,6 +7,8 @@ import FindPassPage from './pages/FindPassPage';
 import CertificationNumPage from './pages/CertificationNumPage';
 // import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from './pages/SearchResultPage';
+import WritePage from './pages/WritePage';
+import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
 
 const Router = () => {
   return (
@@ -21,6 +23,8 @@ const Router = () => {
             path='/certification-number'
             element={<CertificationNumPage />}
           />
+          <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
+          <Route path='/write' element={<WritePage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
