@@ -9,4 +9,6 @@ export const Container = styled.div`
   align-items: center;
   margin: 0;
   font: var(--topBar);
+  border-top: 0.75px solid var(--Secondary3);
+  border-bottom: 0.75px solid var(--Secondary3);
 `;
