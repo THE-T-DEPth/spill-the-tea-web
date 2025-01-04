@@ -1,15 +1,28 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
+import Layout from './components/layout/Layout';
+
+import LoginPage from './pages/LoginPage';
+import FindPassPage from './pages/FindPassPage';
+import CertificationNumPage from './pages/CertificationNumPage';
+// import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from './pages/SearchResultPage';
+
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
-        <Route path='/searchresult' element={<SearchResultPage />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/searchresult' element={<SearchResultPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/find-password' element={<FindPassPage />} />
+          <Route
+            path='/certification-number'
+            element={<CertificationNumPage />}
+          />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };
