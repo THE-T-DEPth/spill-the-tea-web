@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as S from '../styles/myPage/MyPageStyle';
 import EditProfile from '../components/myPage/EditProfile';
 import LeaveService from '../components/myPage/LeaveService';
+import MyPosts from '../components/myPage/myPosts';
 import MyPageNavbar from '../components/myPage/MyPageNavbar';
 import TopBar from '../components/searchResult/TopBar';
 
@@ -14,6 +15,8 @@ const MyPage = () => {
         return <EditProfile />;
       case 'leaveService':
         return <LeaveService />;
+      case 'myPosts':
+        return <MyPosts />;
 
       default:
     }
