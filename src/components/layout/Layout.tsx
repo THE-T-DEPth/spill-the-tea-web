@@ -1,8 +1,8 @@
-import React from "react";
-import * as S from "../../styles/Layout/LayoutStyle";
-
-import Footer from "../layout/Footer";
-import NavBar from "../layout/NavBar";
+import React from 'react';
+import * as S from '../../styles/Layout/LayoutStyle';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
+import NavBar from '../layout/NavBar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,8 +11,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <S.Container>
+      <Header />
       {/* 네비게이션 바 */}
-      <NavBar />
+      {location.pathname !== '/mypage' && <NavBar />}
 
       {/* 메인 콘텐츠 */}
       <S.Main>{children}</S.Main>

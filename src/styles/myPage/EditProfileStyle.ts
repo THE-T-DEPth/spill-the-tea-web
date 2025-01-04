@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 404px;
   height: 882px;
   display: flex;
   flex-direction: column;
-  margin: 43px auto 84px;
+  margin: 76px auto 84px;
 `;
 
 export const Title = styled.span`
@@ -172,14 +172,14 @@ export const SaveButton = styled.button`
 
 export const ErrorMessage = styled.p<{ $isDefault: boolean }>`
   font: var(--paragraphSmall);
-  color: ${(props) => (props.$isDefault ? "var(--primary1)" : "var(--error1)")};
+  color: ${(props) => (props.$isDefault ? 'var(--primary1)' : 'var(--error1)')};
   margin-top: 3px;
   margin-bottom: 0;
 `;
 
 export const CheckMessage = styled.p<{ $isMatch: boolean }>`
   font: var(--paragraphSmall);
-  color: ${(props) => (props.$isMatch ? "var(--primary1)" : "var(--error1)")};
+  color: ${(props) => (props.$isMatch ? 'var(--primary1)' : 'var(--error1)')};
   margin-top: 3px;
   margin-bottom: 0;
   height: 19px;

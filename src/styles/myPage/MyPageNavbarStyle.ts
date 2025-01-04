@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 1440px;
-  height: 71px;
+  height: 47px;
+  background: var(--Main1);
 `;
 
 export const NavContainer = styled.div`
