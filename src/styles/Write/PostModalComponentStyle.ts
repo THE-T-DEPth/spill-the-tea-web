@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // 배경 오버레이
 export const Overlay = styled.div`
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +10,6 @@ export const Overlay = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  touch-action: none; /* 터치 비활성화 */
   pointer-events: auto;
 `;
 
@@ -48,8 +48,7 @@ export const ModalText = styled.p`
 export const ButtonDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-bottom: 30px;
-  padding-top: 25px;
+  padding: 25px 10px 30px 10px;
 `;
 
 // 취소 버튼
@@ -64,8 +63,7 @@ export const CancelButton = styled.button`
   cursor: pointer;
   width: 171px;
   height: 44px;
-  margin-left: 15%;
-  margin-right: 5%;
+  margin: auto;
 `;
 
 // 확인 버튼
@@ -80,27 +78,5 @@ export const ConfirmButton = styled.button`
   cursor: pointer;
   width: 171px;
   height: 44px;
-  margin-left: 5%;
-  margin-right: 15%;
-`;
-
-// 신고 사유 리스트
-export const ReasonList = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 10%;
-  gap: 10px;
-`;
-
-// 신고 사유 항목
-export const Reason = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font: var(--labelLarge);
-
-  input {
-    margin: 0;
-    cursor: pointer;
-  }
+  margin: auto;
 `;
