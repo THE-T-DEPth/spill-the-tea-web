@@ -72,10 +72,10 @@ const SsulPage = () => {
             </S.GridContainer>
             <S.PaginationContainer>
               <Pagination
-                totalItems={BoxData.length} // 총 데이터 개수
-                itemsPerPage={15} // 페이지당 아이템 개수
-                items={BoxData} // 전체 데이터 배열
-                onPageChange={handlePageChange} // 페이지 데이터 업데이트
+                totalItems={BoxData.length}
+                itemsPerPage={15}
+                items={BoxData}
+                onPageChange={handlePageChange}
               />
             </S.PaginationContainer>
           </S.BoxContainer>
