@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import * as S from '../styles/ssulPage/SsulPageStyle';
 import CategoryBar from '../components/ssulPage/CategoryBar';
 import SelectedKeywordsBar from '../components/ssulPage/SelectedKeywordsBar';
