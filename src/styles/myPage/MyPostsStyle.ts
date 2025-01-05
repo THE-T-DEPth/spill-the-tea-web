@@ -28,3 +28,16 @@ export const PaginationContainer = styled.div`
   width: 100%;
   justify-content: center;
 `;
+
+export const EmptyMessage = styled.span`
+  font: var(--searchEmpty);
+  color: var(--Black);
+`;
+
+export const EmptyContainer = styled.div`
+  width: 467px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin: 350px auto 422px;
+`;

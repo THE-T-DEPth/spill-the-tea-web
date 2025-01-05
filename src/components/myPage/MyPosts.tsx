@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import * as S from '../../styles/myPage/MypostsStyle';
+import { useState, useCallback } from 'react';
+import * as S from '../../styles/myPage/MyPostsStyle';
 import Box from '../searchResult/Box';
 import BoxData from '../../assets/data/BoxData';
 import { BoxProps } from '../../components/searchResult/Box';
@@ -13,33 +13,41 @@ const MyPosts = () => {
   }, []);
 
   return (
-    <S.Container>
-      <S.SortButtonContainer>
-        <SortButton />
-      </S.SortButtonContainer>
-      <S.GridContainer>
-        {currentItems.map((data, index) => (
-          <Box
-            key={index}
-            title={data.title}
-            image={data.image}
-            keywords={data.keywords}
-            date={data.date}
-            time={data.time}
-            likes={data.likes}
-            comments={data.comments}
-          />
-        ))}
-      </S.GridContainer>
-      <S.PaginationContainer>
-        <Pagination
-          totalItems={BoxData.length}
-          itemsPerPage={15}
-          items={BoxData}
-          onPageChange={handlePageChange}
-        />
-      </S.PaginationContainer>
-    </S.Container>
+    <>
+      {BoxData.length === 0 ? (
+        <S.EmptyContainer>
+          <S.EmptyMessage>스필터디에서 썰을 풀어보세요!😂</S.EmptyMessage>
+        </S.EmptyContainer>
+      ) : (
+        <S.Container>
+          <S.SortButtonContainer>
+            <SortButton />
+          </S.SortButtonContainer>
+          <S.GridContainer>
+            {currentItems.map((data, index) => (
+              <Box
+                key={index}
+                title={data.title}
+                image={data.image}
+                keywords={data.keywords}
+                date={data.date}
+                time={data.time}
+                likes={data.likes}
+                comments={data.comments}
+              />
+            ))}
+          </S.GridContainer>
+          <S.PaginationContainer>
+            <Pagination
+              totalItems={BoxData.length}
+              itemsPerPage={15}
+              items={BoxData}
+              onPageChange={handlePageChange}
+            />
+          </S.PaginationContainer>
+        </S.Container>
+      )}
+    </>
   );
 };
 
