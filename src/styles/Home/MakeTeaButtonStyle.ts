@@ -4,7 +4,7 @@ export const ButtonContainer = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:var(--EarlGrey); /* 기본 색상 */
+  background-color:var(--EarlGrey); 
   color: var(--Sub1);
   font: var(--headingLarge);
   width: 213px;
@@ -17,10 +17,10 @@ export const ButtonContainer = styled.button`
   position: relative; 
   overflow: visible; 
 
-  /* Gradient Stroke */
+  
   border: 2px solid transparent;
-  background-image: linear-gradient(#55533e, #55533e), /* 기본 배경 */
-    linear-gradient(141.28deg, #86846a 0%, #312f20 100%); /* Stroke Gradient */
+  background-image: linear-gradient(#55533e, #55533e), 
+    linear-gradient(141.28deg, #86846a 0%, #312f20 100%); 
   background-origin: border-box;
   background-clip: padding-box, border-box;
 
