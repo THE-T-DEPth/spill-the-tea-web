@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import * as S from "../styles/Login/LoginPageStyle";
 import EyeIcon from "../assets/Icons/Eye.svg";
 import EyeOffIcon from "../assets/Icons/EyeOff.svg";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import NavBar from "../components/layout/NavBar";
 import { useNavigate } from "react-router-dom";
 import LoginInput from "../components/login/LoginInput";
 
@@ -65,8 +62,7 @@ const LoginPage = () => {
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Title>로그인</S.Title>
 				<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?🤤"</S.Subtitle>
@@ -111,7 +107,7 @@ const LoginPage = () => {
 					</S.NewInputWrapper>
 				</S.LoginBox>
 			</S.Wrapper>
-			<Footer />
+
 		</>
 	);
 };

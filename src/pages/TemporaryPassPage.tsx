@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import * as S from "../styles/Login/TemporaryPassPageStyle";
-import Header from "../components/layout/Header";
-import NavBar from "../components/layout/NavBar";
-import Footer from "../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchTemporaryPassword } from "../api/DummyApi";
 
@@ -31,8 +28,7 @@ const TemporaryPassPage: React.FC = () => {
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Title>비밀번호 찾기</S.Title>
 				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
@@ -54,7 +50,7 @@ const TemporaryPassPage: React.FC = () => {
 					</S.ButtonWrapper>
 				</S.PasswordBox>
 			</S.Wrapper>
-			<Footer />
+
 		</>
 	);
 };
