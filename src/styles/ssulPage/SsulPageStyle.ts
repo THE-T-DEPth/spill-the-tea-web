@@ -10,7 +10,7 @@ export const EmptyContainer = styled.div`
   align-items: center;
   width: 652px;
   height: 53px;
-  margin: 274px auto;
+  margin: 274px auto 727px;
 `;
 
 export const EmptyMessage = styled.p`

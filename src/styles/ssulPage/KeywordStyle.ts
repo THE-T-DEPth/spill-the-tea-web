@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const KeywordContainer = styled.p<{ $isSelected: boolean }>`
+export const KeywordContainer = styled.div<{ $isSelected: boolean }>`
   width: 94px;
   height: 35px;
   font: var(--labelMedium);

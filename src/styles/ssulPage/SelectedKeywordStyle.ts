@@ -13,4 +13,5 @@ export const Container = styled.div`
   border-radius: 3px;
   color: var(--primary2);
   font: var(--selectedKeyword);
+  white-space: nowrap;
 `;

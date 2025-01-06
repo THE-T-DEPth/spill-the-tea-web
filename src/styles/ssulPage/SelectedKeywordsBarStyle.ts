@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const Title = styled.p`
   font: var(--searchEmpty);
   margin-left: 128px;
+  white-space: nowrap;
 `;
 
 export const KeywordsList = styled.div`
