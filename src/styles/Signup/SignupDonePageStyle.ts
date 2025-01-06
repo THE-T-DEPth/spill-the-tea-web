@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* 화면 전체 높이에 맞춤 */
   background-color:var(--BackFirst);
 `;
 

@@ -15,7 +15,7 @@ export const Header = styled.div`
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
-  margin-top: 101px;
+  margin-top: 149px;
 `;
 
 export const Subtitle = styled.p`
@@ -40,7 +40,7 @@ export const SignupBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 132px;
 `;
 
 export const InputWrapper = styled.div`
@@ -79,15 +79,8 @@ export const CustomButton = styled.button`
   border-radius: 8px;
   font: var(--labelLarge);
   cursor: pointer;
-
-  &:disabled {
-    background-color: var(--Green2);
-    cursor: not-allowed;
-  }
-
-  &:hover:not(:disabled) {
-    background-color: var(--Green2);
-  }
+ background-color: var(--Green2);
+  
 `;
 
 export const TypeInputWrapper = styled.div`

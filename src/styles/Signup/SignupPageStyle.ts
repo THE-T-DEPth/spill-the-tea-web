@@ -15,7 +15,7 @@ export const Header = styled.div`
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
-  margin-top: 101px;
+  margin-top: 135px;
 `;
 
 export const SignupBox = styled.div`
@@ -26,7 +26,7 @@ export const SignupBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 119px;
 `;
 
 export const SignupInputWrapper = styled.div`

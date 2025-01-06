@@ -8,11 +8,11 @@ const SignupEmailPage: React.FC = () => {
 	const [email, setEmail] = useState('');
 	const [verificationCode, setVerificationCode] = useState('');
 	const [emailStatus, setEmailStatus] = useState<'valid' | 'invalid' | null>(null);
-	const [isVerified, setIsVerified] = useState(false); // 인증 완료 상태
+	const [isVerified, setIsVerified] = useState(false);
 	const [timer, setTimer] = useState(300); // 타이머 초기값: 300초 (5분)
 	const [isTimerActive, setIsTimerActive] = useState(false);
-	const [showModal, setShowModal] = useState(false); // 모달 상태
-	const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
+	const [showModal, setShowModal] = useState(false);
+	const navigate = useNavigate();
 
 	const handleEmailCheck = () => {
 		setEmailStatus(email === 'test@example.com' ? 'invalid' : 'valid');
@@ -111,7 +111,7 @@ const SignupEmailPage: React.FC = () => {
 						<S.InputWrapper>
 							<S.CustomButton
 								onClick={handleNext}
-								disabled={!verificationCode}
+
 							>
 								다음
 							</S.CustomButton>
