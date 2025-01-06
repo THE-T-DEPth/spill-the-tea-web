@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+`;
 
 export const EmptyContainer = styled.div`
   display: flex;
@@ -8,7 +10,7 @@ export const EmptyContainer = styled.div`
   align-items: center;
   width: 652px;
   height: 53px;
-  margin: 274px 394px;
+  margin: 274px auto;
 `;
 
 export const EmptyMessage = styled.p`

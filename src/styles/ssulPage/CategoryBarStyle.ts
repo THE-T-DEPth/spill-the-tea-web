@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 1440px;
+  width: 100%;
   height: 89px;
   display: flex;
   align-items: center;
@@ -10,7 +10,6 @@ export const Container = styled.div`
 `;
 
 export const KeywordsList = styled.div`
-  width: 1084px;
   display: flex;
   gap: 16px;
 `;

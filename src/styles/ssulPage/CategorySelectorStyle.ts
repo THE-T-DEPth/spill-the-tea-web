@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 148px;
   position: relative;
-
   box-sizing: border-box;
 `;
 
 export const DropdownHeader = styled.div`
   height: 61px;
+  width: 148px;
   background-color: var(--Sub5);
   cursor: pointer;
   display: flex;
