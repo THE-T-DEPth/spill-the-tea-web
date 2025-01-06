@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SignupInputBox from "../components/signup/SignupInputBox";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import NavBar from "../components/layout/NavBar";
 import Modal from "../components/signup/Modal"; // 모달 컴포넌트 추가
 import * as S from '../styles/Signup/SignupEmailPageStyle';
 import { useNavigate } from 'react-router-dom'; // React Router
@@ -68,8 +65,7 @@ const SignupEmailPage: React.FC = () => {
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Header>
 					<S.Title>회원가입</S.Title>
@@ -123,7 +119,7 @@ const SignupEmailPage: React.FC = () => {
 					</S.SignupInputWrapper>
 				</S.SignupBox>
 			</S.Wrapper>
-			<Footer />
+
 			{/* 모달 컴포넌트 */}
 			{showModal && (
 				<Modal

@@ -1,8 +1,5 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import NavBar from "../components/layout/NavBar";
 import * as S from '../styles/Signup/SignupDonePageStyle';
 
 const SignupDone: React.FC = () => {
@@ -19,8 +16,7 @@ const SignupDone: React.FC = () => {
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Content>
 					<S.Title>
@@ -30,7 +26,7 @@ const SignupDone: React.FC = () => {
 					<S.Button onClick={handleMoveToMain}>찻집 대문으로 이동</S.Button>
 				</S.Content>
 			</S.Wrapper>
-			<Footer />
+
 		</>
 	);
 };

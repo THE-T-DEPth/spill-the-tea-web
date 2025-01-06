@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import SignupInputBox from "../components/signup/SignupInputBox";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import NavBar from "../components/layout/NavBar";
 import * as S from '../styles/Signup/SignupPageStyle';
 import { useNavigate } from 'react-router-dom';
 
@@ -72,8 +69,7 @@ const SignupPage: React.FC = () => {
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Header>
 					<S.Title>회원가입</S.Title>
@@ -134,7 +130,7 @@ const SignupPage: React.FC = () => {
 					</S.SignupInputWrapper>
 				</S.SignupBox>
 			</S.Wrapper>
-			<Footer />
+
 		</>
 	);
 };
