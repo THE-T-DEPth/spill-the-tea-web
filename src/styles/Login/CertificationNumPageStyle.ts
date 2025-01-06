@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
-  margin-top: 150px;
+  margin-top: 228px;
 `;
 
 export const Subtitle = styled.p`
@@ -26,7 +26,7 @@ export const PasswordBox = styled.div`
   background: var(--primary2);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
-  margin-bottom: 213px;
+  margin-bottom: 211px;
   display: flex;
   flex-direction: column;
   align-items: center;
