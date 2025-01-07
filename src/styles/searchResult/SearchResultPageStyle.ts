@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 1046px;
   height: 909px;
-  margin: 53px 197px 100px;
+  margin: 53px auto 100px;
 `;
 
 export const TitleContainer = styled.div`
@@ -39,7 +39,6 @@ export const SortButton = styled.button`
 export const PaginationContainer = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: center;
 `;
 
