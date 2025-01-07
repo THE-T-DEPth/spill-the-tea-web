@@ -1,6 +1,7 @@
 import TopBar from "../components/Home/TopBar";
 import MainInputBox from "../components/Home/MainInputBox";
 import MakeTeaButton from "../components/Home/MakeTeaButton";
+
 import * as S from "../styles/Home/HomPageComponentStyle";
 import boxData from "../assets/data/BoxData";
 
