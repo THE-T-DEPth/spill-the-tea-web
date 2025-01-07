@@ -27,13 +27,13 @@ export const PaginationContainer = styled.div`
 
 export const EmptyMessage = styled.span`
   font: var(--searchEmpty);
-  color: var(--Black);
+  color: var(--Secondary2);
 `;
 
 export const EmptyContainer = styled.div`
-  width: 467px;
+  width: 100%;
   height: 30px;
   display: flex;
   justify-content: center;
-  margin: 350px auto 422px;
+  margin: 414px auto 609px;
 `;
