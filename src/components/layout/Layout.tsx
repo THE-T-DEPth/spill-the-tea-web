@@ -13,7 +13,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 		<S.Container>
 			<Header />
 			{/* 네비게이션 바 */}
-			<NavBar />
+			{location.pathname !== '/login' &&
+				location.pathname !== '/find-password' &&
+				location.pathname !== '/certification-number' &&
+				location.pathname !== '/signup-email' &&
+				location.pathname !== '/signup' &&
+				location.pathname !== '/signupdone' &&
+				location.pathname !== '/mypage' && <NavBar />}
+
 
 			{/* 메인 콘텐츠 */}
 			<S.Main>{children}</S.Main>
