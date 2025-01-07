@@ -1,13 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.4);
   z-index: 9;
   pointer-events: all;
@@ -16,7 +17,7 @@ export const Container = styled.div`
 export const ModalContainer = styled.div`
   width: 566px;
   height: 257px;
-  position: absolute;
+
   top: 384px;
   left: 437px;
   background: var(--primary2);
