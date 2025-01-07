@@ -22,10 +22,11 @@ const HomePage = () => {
 					boxData={boxData}
 					emptyText="아직은 따끈따끈한 티가 없네요,,,"
 				/>
+				{/* "티 만들기" 버튼을 두 번째 MainInputBox에 포함 */}
+				<S.MakeTeaButtonContainer>
+					<MakeTeaButton />
+				</S.MakeTeaButtonContainer>
 			</S.HomeDiv2>
-			<S.MakeTeaButtonContainer>
-				<MakeTeaButton />
-			</S.MakeTeaButtonContainer>
 		</>
 	);
 };

@@ -20,10 +20,12 @@ export const LeftArrow = styled.button`
   border: none;
   cursor: pointer;
   z-index: 10;
+
   img {
     width: 17px;
     height: 36px;
   }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -39,10 +41,12 @@ export const RightArrow = styled.button`
   border: none;
   cursor: pointer;
   z-index: 10;
+
   img {
     width: 17px;
     height: 36px;
   }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -74,7 +78,7 @@ export const Header = styled.div`
   background-color: var(--Main1);
   color: var(--Black);
   padding-left: 34px;
-  margin-top: 9.5px 834px 9.5px ;
+  margin: 9.5px 0; /* 기존 잘못된 마진 수정 */
 `;
 
 export const ContentContainer = styled.div`
@@ -84,16 +88,17 @@ export const ContentContainer = styled.div`
   overflow: hidden;
   position: relative;
   background-color: var(--BackYellow);
-  display: flex; 
- 
+  display: flex;
 `;
 
 export const Slider = styled.div<{ startIndex: number }>`
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-  transform: ${({ startIndex }) => `translateX(-${startIndex * 25}%)`}; /* 25%는 한 번에 4개의 항목 */
-  /* width: max-content; */
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    transform: ${({ startIndex }) => `translateX(-${startIndex * 190}px)`}; /* 190px 기준 */
+    width: 100%;
 `;
+
+
 
 
 
@@ -109,23 +114,13 @@ export const BoxWrapper = styled.div<{ isActive: boolean }>`
   height: 253px;
 `;
 
-
 export const EmptyMessage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
- 
-  margin-top: 139px;
-  margin-bottom:152px;
-  margin-left:340px ;
-
+  margin: 139px 340px 152px 340px; /* 기존 margin-top, margin-bottom, margin-left 통합 */
   color: var(--G5);
   font: var(--headingXL);
   text-align: center;
-  position: relative; /* 위치 조정을 위한 relative */
-  
+  position: relative;
 `;
-
-
-

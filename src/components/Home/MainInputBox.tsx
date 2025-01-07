@@ -10,24 +10,28 @@ interface MainInputBoxProps {
 	emptyText?: string; // boxData가 없을 때 표시할 텍스트
 }
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 4; // 한 번에 표시할 박스 개수
 
 const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText }) => {
 	const [startIndex, setStartIndex] = useState(0);
+	const totalItems = boxData.length;
 
 	const handleNext = () => {
 		setStartIndex((prevIndex) =>
-			Math.min(prevIndex + ITEMS_PER_PAGE, boxData.length - ITEMS_PER_PAGE)
+			(prevIndex + ITEMS_PER_PAGE) % totalItems // ITEMS_PER_PAGE만큼 이동, 마지막에서 처음으로 순환
 		);
 	};
 
 	const handlePrev = () => {
-		setStartIndex((prevIndex) => Math.max(prevIndex - ITEMS_PER_PAGE, 0));
+		setStartIndex((prevIndex) =>
+			(prevIndex - ITEMS_PER_PAGE + totalItems) % totalItems // ITEMS_PER_PAGE만큼 이동, 처음에서 마지막으로 순환
+		);
 	};
+
 
 	return (
 		<S.OutContainer>
-			<S.LeftArrow onClick={handlePrev} disabled={startIndex === 0}>
+			<S.LeftArrow onClick={handlePrev}>
 				<img src={VectorLeft} alt="Left Arrow" />
 			</S.LeftArrow>
 			<S.Container>
@@ -40,8 +44,10 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 					) : (
 						<S.Slider startIndex={startIndex}>
 							{boxData.map((data, index) => {
+								// 활성화된 슬라이드 아이템인지 확인
 								const isActive =
 									index >= startIndex && index < startIndex + ITEMS_PER_PAGE;
+
 								return (
 									<S.BoxWrapper key={index} isActive={isActive}>
 										<Box {...data} disabled={!isActive} />
@@ -52,10 +58,7 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 					)}
 				</S.ContentContainer>
 			</S.Container>
-			<S.RightArrow
-				onClick={handleNext}
-				disabled={startIndex + ITEMS_PER_PAGE >= boxData.length}
-			>
+			<S.RightArrow onClick={handleNext}>
 				<img src={VectorRight} alt="Right Arrow" />
 			</S.RightArrow>
 		</S.OutContainer>
