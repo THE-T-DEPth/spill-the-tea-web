@@ -19,6 +19,7 @@ export const NavContainer = styled.div`
 
 export const Edit = styled.p`
   cursor: pointer;
+  transition: all 0.3s ease;
   &:hover {
     color: var(--primary1);
   }
@@ -26,6 +27,7 @@ export const Edit = styled.p`
 
 export const MyPost = styled.p`
   cursor: pointer;
+  transition: all 0.3s ease;
   &:hover {
     color: var(--primary1);
   }
@@ -33,6 +35,7 @@ export const MyPost = styled.p`
 
 export const Leave = styled.p`
   cursor: pointer;
+  transition: all 0.3s ease;
   &:hover {
     color: var(--primary1);
   }
