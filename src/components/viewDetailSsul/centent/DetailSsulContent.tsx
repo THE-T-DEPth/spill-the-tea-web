@@ -6,13 +6,19 @@ import EmptyHeart from '../../../assets/images/EmptyHeart.svg';
 import Comment from '../../../assets/images/GrayComment.svg';
 import Share from '../../../assets/images/Share.svg';
 import Menu from '../../../assets/images/FixMenu.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import CopyUrlModal from '../modal/CopyUrlModal';
+import TTSModal from '../modal/TTSModal';
 
 const DetailSsulContent: React.FC<{
   setIsRemoveModal: (value: boolean) => void;
 }> = ({ setIsRemoveModal }) => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [openUrl, setOpenUrl] = useState<boolean>(false);
+  const [openTTS, setOpenTTS] = useState<boolean>(false);
+  const [confirmTTS, setConfirmTTS] = useState<boolean>(false);
 
   const handleHeartClick = () => {
     setIsHeartClick(!isHeartClick);
@@ -23,18 +29,20 @@ const DetailSsulContent: React.FC<{
     setIsRemoveModal(true);
   };
 
+  //공유버튼 클릭했을 시
   const handleShareClick = () => {
     const currentUrl = window.location.href;
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
-        alert('현재 페이지 주소가 복사되었습니다.');
+        setOpenUrl(true);
       })
       .catch((err) => {
         console.error('주소 복사에 실패했습니다:', err); // 에러 처리
       });
   };
 
+  //메뉴 버튼 클릭했을 시
   const handleMenuClick = () => {
     setOpenMenu(!openMenu);
   };
@@ -84,69 +92,171 @@ const DetailSsulContent: React.FC<{
     }
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia('(max-width: 767px)').matches);
+    };
+
+    handleResize(); // 초기 설정
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
-      <S.CDiv>
-        <S.DSCTitleDiv>
-          <S.DSCTitle>{dummyData[0].title}</S.DSCTitle>
-        </S.DSCTitleDiv>
-        <S.DSCMenuDiv>
-          {/*토큰과 내 게시글임이 맞을때 view*/}
-          <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
-          {openMenu ? (
-            <>
-              <S.DSCMenuDetailContainer>
-                <S.DSCMenuDetailFixDiv>
-                  <S.DSCDSCMenuDetail>수정하기</S.DSCDSCMenuDetail>
-                </S.DSCMenuDetailFixDiv>
-                <S.DSCMenuDetailRemoveDiv>
-                  <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
-                    삭제하기
-                  </S.DSCDSCMenuDetail>
-                </S.DSCMenuDetailRemoveDiv>
-              </S.DSCMenuDetailContainer>
-            </>
+      {!isMobile ? (
+        <S.CDiv>
+          <S.DSCTitleDiv>
+            <S.DSCTitle>{dummyData[0].title}</S.DSCTitle>
+          </S.DSCTitleDiv>
+          <S.DSCMenuDiv>
+            {/*토큰과 내 게시글임이 맞을때 view*/}
+            <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
+            {openMenu ? (
+              <>
+                <S.DSCMenuDetailContainer>
+                  <S.DSCMenuDetailFixDiv>
+                    <S.DSCDSCMenuDetail>수정하기</S.DSCDSCMenuDetail>
+                  </S.DSCMenuDetailFixDiv>
+                  <S.DSCMenuDetailRemoveDiv>
+                    <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
+                      삭제하기
+                    </S.DSCDSCMenuDetail>
+                  </S.DSCMenuDetailRemoveDiv>
+                </S.DSCMenuDetailContainer>
+              </>
+            ) : (
+              <></>
+            )}
+          </S.DSCMenuDiv>
+          <S.DSCContentWholeDiv>
+            <S.DSCTagDiv>
+              {dummyData[0].tags.map((value, index) => {
+                return <S.DSCEachTag key={index}># {value}</S.DSCEachTag>;
+              })}
+            </S.DSCTagDiv>
+
+            <S.DSCProfileDiv>
+              <S.DSCProfileImg src={dummyData[0].profile} />
+              <S.DSCProfileTextDiv>
+                <S.DSCName>{dummyData[0].nickname}</S.DSCName>
+                <S.DSCProfileDate>{dummyData[0].date}</S.DSCProfileDate>
+              </S.DSCProfileTextDiv>
+            </S.DSCProfileDiv>
+            <S.DSCSpeaker
+              src={Speaker}
+              onClick={() => {
+                setOpenTTS(true); // TTS 모달 열기
+              }}
+            />
+            <S.DSCContentDiv>
+              <S.DSCContentText>{dummyData[0].content}</S.DSCContentText>
+              <S.DSCContentImg src={dummyData[0].image} />
+            </S.DSCContentDiv>
+            <S.DSCAnoterDiv>
+              <S.DSCHeartImg
+                onClick={handleHeartClick}
+                src={isHeartClick ? FullHeart : EmptyHeart}
+              />
+              <S.DSCHeartNum>{dummyData[0].heart}</S.DSCHeartNum>
+              <S.DSCCommenttImg src={Comment} />
+              <S.DSCCommenttNum>{dummyData[0].review}</S.DSCCommenttNum>
+              <S.DSCShareImg src={Share} onClick={handleShareClick} />
+            </S.DSCAnoterDiv>
+          </S.DSCContentWholeDiv>
+          {openUrl ? <CopyUrlModal setOpenUrl={setOpenUrl} /> : <></>}
+          {openTTS ? (
+            <TTSModal
+              setOpenModal={setOpenTTS}
+              setConfirmTTS={(value) => {
+                setConfirmTTS(value);
+                if (value) {
+                  speak(dummyData[0].content, window.speechSynthesis); // TTS 실행
+                }
+              }}
+            />
           ) : (
             <></>
           )}
-        </S.DSCMenuDiv>
-        <S.DSCContentWholeDiv>
-          <S.DSCTagDiv>
-            {dummyData[0].tags.map((value, index) => {
-              return <S.DSCEachTag key={index}># {value}</S.DSCEachTag>;
-            })}
-          </S.DSCTagDiv>
-
+        </S.CDiv>
+      ) : (
+        <S.CDiv>
           <S.DSCProfileDiv>
             <S.DSCProfileImg src={dummyData[0].profile} />
             <S.DSCProfileTextDiv>
               <S.DSCName>{dummyData[0].nickname}</S.DSCName>
               <S.DSCProfileDate>{dummyData[0].date}</S.DSCProfileDate>
             </S.DSCProfileTextDiv>
+            <S.DSCMenuDiv>
+              {/*토큰과 내 게시글임이 맞을때 view*/}
+              <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
+              {openMenu ? (
+                <>
+                  <S.DSCMenuDetailContainer>
+                    <S.DSCMenuDetailFixDiv>
+                      <S.DSCDSCMenuDetail>수정하기</S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailFixDiv>
+                    <S.DSCMenuDetailRemoveDiv>
+                      <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
+                        삭제하기
+                      </S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailRemoveDiv>
+                  </S.DSCMenuDetailContainer>
+                </>
+              ) : (
+                <></>
+              )}
+            </S.DSCMenuDiv>
           </S.DSCProfileDiv>
-          <S.DSCSpeaker
-            src={Speaker}
-            onClick={() => {
-              speechSynthesis.cancel();
-              speak(dummyData[0].content, window.speechSynthesis);
-            }}
-          />
-          <S.DSCContentDiv>
-            <S.DSCContentText>{dummyData[0].content}</S.DSCContentText>
-            <S.DSCContentImg src={dummyData[0].image} />
-          </S.DSCContentDiv>
-          <S.DSCAnoterDiv>
-            <S.DSCHeartImg
-              onClick={handleHeartClick}
-              src={isHeartClick ? FullHeart : EmptyHeart}
+          <S.DSCTagDiv>
+            {dummyData[0].tags.map((value, index) => {
+              return <S.DSCEachTag key={index}># {value}</S.DSCEachTag>;
+            })}
+          </S.DSCTagDiv>
+          <S.DSCTitleDiv>
+            <S.DSCTitle>{dummyData[0].title}</S.DSCTitle>
+            <S.DSCSpeaker
+              src={Speaker}
+              onClick={() => {
+                setOpenTTS(true); // TTS 모달 열기
+              }}
             />
-            <S.DSCHeartNum>{dummyData[0].heart}</S.DSCHeartNum>
-            <S.DSCCommenttImg src={Comment} />
-            <S.DSCCommenttNum>{dummyData[0].review}</S.DSCCommenttNum>
-            <S.DSCShareImg src={Share} onClick={handleShareClick} />
-          </S.DSCAnoterDiv>
-        </S.DSCContentWholeDiv>
-      </S.CDiv>
+          </S.DSCTitleDiv>
+          <S.DSCContentWholeDiv>
+            <S.DSCContentDiv>
+              <S.DSCContentText>{dummyData[0].content}</S.DSCContentText>
+              <S.DSCContentImg src={dummyData[0].image} />
+            </S.DSCContentDiv>
+            <S.DSCAnoterDiv>
+              <S.DSCHeartImg
+                onClick={handleHeartClick}
+                src={isHeartClick ? FullHeart : EmptyHeart}
+              />
+              <S.DSCHeartNum>{dummyData[0].heart}</S.DSCHeartNum>
+              <S.DSCCommenttImg src={Comment} />
+              <S.DSCCommenttNum>{dummyData[0].review}</S.DSCCommenttNum>
+              <S.DSCShareImg src={Share} onClick={handleShareClick} />
+            </S.DSCAnoterDiv>
+          </S.DSCContentWholeDiv>
+          {openUrl ? <CopyUrlModal setOpenUrl={setOpenUrl} /> : <></>}
+          {openTTS ? (
+            <TTSModal
+              setOpenModal={setOpenTTS}
+              setConfirmTTS={(value) => {
+                setConfirmTTS(value);
+                if (value) {
+                  speak(dummyData[0].content, window.speechSynthesis); // TTS 실행
+                }
+              }}
+            />
+          ) : (
+            <></>
+          )}
+        </S.CDiv>
+      )}
     </>
   );
 };

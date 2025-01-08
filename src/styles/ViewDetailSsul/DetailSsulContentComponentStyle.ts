@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
+let MAX = '767px';
+
 export const CDiv = styled.div`
   display: flex;
   width: 85%;
   flex-direction: column;
   margin: 0 auto;
 
-  @media (max-width: 800px) {
+  @media (max-width: ${MAX}) {
     width: 100%;
   }
 `;
@@ -28,9 +30,16 @@ export const DSCTitleDiv = styled.div`
     height: 1px;
     background-color: var(--G3);
   }
+
+  @media (max-width: ${MAX}) {
+    margin-bottom: 10px;
+    &::after {
+      content: none;
+    }
+  }
 `;
 
-export const DSCTitle = styled.div`
+export const DSCTitle = styled.p`
   display: flex;
   line-height: 1;
   justify-content: center;
@@ -38,16 +47,30 @@ export const DSCTitle = styled.div`
   color: var(--Black);
   font: var(--headingXXL);
   margin: 10px 0;
+
+  @media (max-width: ${MAX}) {
+    font: var(--headingLarge);
+    margin: auto 0;
+  }
 `;
 
 export const DSCMenuDiv = styled.div`
   position: relative;
+
+  @media (max-width: ${MAX}) {
+    margin-left: auto;
+    margin-right: 20px;
+  }
 `;
 
 export const DSCMenuImg = styled.img`
   position: relative;
   cursor: pointer;
   padding-left: 100%;
+
+  @media (max-width: ${MAX}) {
+    padding-left: 0;
+  }
 `;
 
 export const DSCMenuDetailContainer = styled.div`
@@ -57,6 +80,15 @@ export const DSCMenuDetailContainer = styled.div`
   background-color: white;
   left: 101.5%;
   transform: translateX(-50%);
+
+  @media (max-width: ${MAX}) {
+    position: absolute;
+    width: 80px;
+    z-index: 10;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 export const DSCMenuDetailFixDiv = styled.div`
@@ -98,6 +130,11 @@ export const DSCTagDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  @media (max-width: ${MAX}) {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 export const DSCEachTag = styled.button`
@@ -113,12 +150,25 @@ export const DSCEachTag = styled.button`
   width: 94px;
   height: 35px;
   cursor: pointer;
+
+  @media (max-width: ${MAX}) {
+    width: 67px;
+    height: 24px;
+    font: var(--labelSmall);
+    margin: 0 6px 6px 0;
+    border-radius: 1.5px;
+  }
 `;
 
 export const DSCProfileDiv = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 33px;
+
+  @media (max-width: ${MAX}) {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const DSCProfileImg = styled.img`
@@ -127,11 +177,20 @@ export const DSCProfileImg = styled.img`
   height: 75px;
   margin-right: 10px;
   border-radius: 4px;
+
+  @media (max-width: ${MAX}) {
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 export const DSCProfileTextDiv = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${MAX}) {
+    margin: auto 0;
+  }
 `;
 
 export const DSCName = styled.p`
@@ -139,6 +198,12 @@ export const DSCName = styled.p`
   color: var(--Green2);
   font: var(--headingMedium);
   margin: 35% 0 3px 0;
+
+  @media (max-width: ${MAX}) {
+    font: var(--headingSmall);
+    margin: 0 0 3px 0;
+    line-height: 1;
+  }
 `;
 
 export const DSCProfileDate = styled.p`
@@ -146,6 +211,13 @@ export const DSCProfileDate = styled.p`
   color: var(--G5);
   font: var(--paragraphSmall);
   margin: 0;
+
+  @media (max-width: ${MAX}) {
+    font: var(--paragraphSmall);
+    font-size: 8px;
+    line-height: 1;
+    margin-top: 3px;
+  }
 `;
 
 export const DSCSpeaker = styled.img`
@@ -158,6 +230,11 @@ export const DSCSpeaker = styled.img`
   padding: 6px 7px;
   cursor: pointer;
   margin-bottom: 9px;
+
+  @media (max-width: ${MAX}) {
+    margin: auto 0 auto 20px;
+    border-radius: 1.5px;
+  }
 `;
 
 export const DSCContentDiv = styled.div`
@@ -173,6 +250,12 @@ export const DSCContentText = styled.p`
   font: var(--paragraphMedium);
   white-space: pre-line;
   margin-bottom: 30px;
+
+  @media (max-width: ${MAX}) {
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
 `;
 
 export const DSCContentImg = styled.img`
@@ -180,6 +263,12 @@ export const DSCContentImg = styled.img`
   height: 300px;
   border-radius: 4px;
   margin-bottom: 30px;
+  @media (max-width: ${MAX}) {
+    display: flex;
+    height: 233px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const DSCAnoterDiv = styled.div`
@@ -188,6 +277,14 @@ export const DSCAnoterDiv = styled.div`
   width: 300px;
   height: 24px;
   padding-bottom: 29px;
+  @media (max-width: ${MAX}) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 24px;
+    padding-bottom: 29px;
+    margin-top: 15px;
+  }
 `;
 
 export const DSCHeartImg = styled.img`
@@ -225,4 +322,128 @@ export const DSCShareImg = styled.img`
   width: 24px;
   margin-left: auto;
   cursor: pointer;
+`;
+
+//나중에 출력할 때 font를 import 해와야함
+export const Div = styled.div`
+  //font import
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: normal;
+    src:
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff')
+        format('woff');
+  }
+  @font-face {
+    font-family: 'NanumMyeongjo';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.eot');
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.woff')
+      format('woff');
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nanum Pen Script';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff')
+        format('woff');
+  }
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanumgothic']::before {
+    font-family: Nanum Gothic;
+    content: '나눔고딕';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumgothic {
+    font-family: Nanum Gothic;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanumgothic']::before {
+    font-family: Nanum Gothic;
+    content: '나눔고딕';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumgothic {
+    font-family: Nanum Gothic;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanummyeongjo']::before {
+    font-family: NanumMyeongjo;
+    content: '나눔 명조';
+  }
+  /* Set effect font-families */
+  .ql-font-nanummyeongjo {
+    font-family: NanumMyeongjo;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanummyeongjo']::before {
+    font-family: NanumMyeongjo;
+    content: '나눔 명조';
+  }
+  /* Set effect font-families */
+  .ql-font-nanummyeongjo {
+    font-family: NanumMyeongjo;
+  }
+
+  .ql-snow .ql-picker.ql-font .ql-picker-label[data-value='dohyeon']::before {
+    font-family: BMDOHYEON;
+    content: '도 혜온';
+  }
+  /* Set effect font-families */
+  .ql-font-dohyeon {
+    font-family: BMDOHYEON;
+  }
+
+  .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='dohyeon']::before {
+    font-family: BMDOHYEON;
+    content: '도 혜온';
+  }
+  /* Set effect font-families */
+  .ql-font-dohyeon {
+    font-family: BMDOHYEON;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanumpenscript']::before {
+    font-family: Nanum Pen Script;
+    content: '나눔 펜 스크립트';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumpenscript {
+    font-family: Nanum Pen Script;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanumpenscript']::before {
+    font-family: Nanum Pen Script;
+    content: '나눔 펜 스크립트';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumpenscript {
+    font-family: Nanum Pen Script;
+  }
 `;

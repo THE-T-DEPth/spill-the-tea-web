@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
+let MAX = '767px';
+
 export const DSRDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 85%;
   margin: 0 auto;
+  align-items: center;
+  margin-bottom: 20px;
+  box-sizing: border-box;
 
-  @media (max-width: 800px) {
+  @media (max-width: ${MAX}) {
     width: 100%;
   }
 `;
@@ -15,7 +20,18 @@ export const DSRInputDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 20px 0 25px 0;
+  margin: 20px auto 10px auto;
+
+  @media (max-width: ${MAX}) {
+    margin: 15px auto 10px auto;
+  }
+`;
+
+export const DSRRInputDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 auto 10px auto;
 `;
 
 //placeholder 색상 변경
@@ -30,6 +46,7 @@ export const DSRInput = styled.input`
   padding-top: auto;
   padding-bottom: auto;
   outline: none;
+  margin: 0 auto 0 auto;
   ::placeholder {
     color: blue; /* placeholder 텍스트 색상 */
   }
@@ -46,17 +63,60 @@ export const DSRSendImg = styled.img`
   cursor: pointer;
 `;
 
+export const DSRWholeCommentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 15px auto 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
 export const DSREachCommentDiv = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 15px auto 0 auto;
   width: 100%;
+  box-sizing: border-box;
+
+  align-items: center;
+`;
+
+export const DSRCocomentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 11%;
+`;
+
+export const ReviewDiv = styled.div<{ $openrereview: string }>`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: ${({ $openrereview }) =>
+    $openrereview == 'true' ? '#FFFDEE' : 'white'};
+  padding: ${({ $openrereview }) =>
+    $openrereview == 'true' ? '20px 30px' : '0'};
+  width: ${({ $openrereview }) =>
+    $openrereview == 'true' ? 'calc(100% + 60px)' : '100%'};
+
+  @media (max-width: ${MAX}) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: ${({ $openrereview }) =>
+      $openrereview == 'true' ? '#FFFDEE' : 'white'};
+    padding: ${({ $openrereview }) => ($openrereview == 'true' ? '10px' : '0')};
+    width: ${({ $openrereview }) =>
+      $openrereview == 'true' ? 'calc(100% + 20px)' : '100%'};
+  }
 `;
 
 export const DSRProfileDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 7px;
+  margin: 10px auto 7px auto;
 `;
 
 export const DSRProfileImg = styled.img`
@@ -70,9 +130,12 @@ export const DSRProfileImg = styled.img`
 export const DSRProfileName = styled.div`
   display: flex;
   align-items: center;
-
   font: var(--headingSmall);
   color: black;
+
+  @media (max-width: ${MAX}) {
+    margin-right: auto;
+  }
 `;
 
 export const DSRContentDiv = styled.div`
@@ -86,6 +149,10 @@ export const DSRBtnDiv = styled.div`
   width: 175px;
   flex-shrink: 0;
   margin-left: 10%;
+
+  @media (max-width: ${MAX}) {
+    margin: auto 0;
+  }
 `;
 
 export const DSRBtnDiv2 = styled.div`
@@ -99,6 +166,7 @@ export const DSRContent = styled.div`
   display: flex;
   font: var(--labelSmall);
   margin-right: auto;
+  left: 0;
 `;
 
 export const DSRReviewBtn = styled.button`
@@ -140,7 +208,7 @@ export const DSRDateHeartDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 `;
 
 export const DSRDateDiv = styled.div`
