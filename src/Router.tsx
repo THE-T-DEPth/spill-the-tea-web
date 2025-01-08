@@ -8,6 +8,8 @@ import CertificationNumPage from './pages/CertificationNumPage';
 // import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from './pages/SearchResultPage';
 import SsulPage from './pages/SsulPage';
+import TemporaryPassPage from "./pages/TemporaryPassPage";
+import ChangePassPage from "./pages/ChangePassPage";
 
 const Router = () => {
   return (
@@ -22,6 +24,8 @@ const Router = () => {
             path='/certification-number'
             element={<CertificationNumPage />}
           />
+          <Route path="/temporary-password" element={<TemporaryPassPage />} />
+					<Route path="/change-password" element={<ChangePassPage />} />
           <Route path='/ssulpage' element={<SsulPage />} />
         </Routes>
       </Layout>
