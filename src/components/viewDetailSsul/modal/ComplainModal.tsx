@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as S from '../../../styles/ViewDetailSsul/ComplainModalComponentStyle';
+import * as S from '../../../styles/ViewDetailSsul/modal/ComplainModalComponentStyle';
 import Close from '../../../assets/images/Close.svg';
 import Checkbox from './Checkbox';
 
@@ -56,45 +56,50 @@ const ComplainModal: React.FC<ComplainModalProps> = ({ setComplainModal }) => {
 
   return (
     <>
-      <S.Overlay onClick={() => setComplainModal(false)}></S.Overlay>
-      <S.Modal>
-        {step === 1 ? (
-          <>
-            <S.CloseBtn src={Close} onClick={handleCancelClick} />
-            <S.ModalText>해당 댓글을 신고하시겠습니까?</S.ModalText>
-            <S.ButtonDiv>
-              <S.CancelButton onClick={handleCancelClick}>취소</S.CancelButton>
-              <S.ConfirmButton onClick={handleConfirmClick}>
-                확인
-              </S.ConfirmButton>
-            </S.ButtonDiv>
-          </>
-        ) : (
-          <>
-            <S.CloseBtn src={Close} onClick={handleCancelClick} />
-            <S.ModalText>
-              해당 댓글을 신고하시는 이유를 선택해주세요.
-            </S.ModalText>
-            <S.ReasonList>
-              {reasons.map((reason) => (
-                <Checkbox
-                  key={reason.id}
-                  id={reason.id}
-                  label={reason.label}
-                  checked={checkedStates[reason.id]}
-                  handler={handleCheckboxChange(reason.id)}
-                />
-              ))}
-            </S.ReasonList>
-            <S.ButtonDiv>
-              <S.CancelButton onClick={handleCancelClick}>취소</S.CancelButton>
-              <S.ConfirmButton onClick={handleSubmitClick}>
-                확인
-              </S.ConfirmButton>
-            </S.ButtonDiv>
-          </>
-        )}
-      </S.Modal>
+      <S.Overlay>
+        <S.Modal>
+          {step === 1 ? (
+            <>
+              <S.CloseBtn src={Close} onClick={handleCancelClick} />
+              <S.ModalText>해당 댓글을 신고하시겠습니까?</S.ModalText>
+              <S.ButtonDiv>
+                <S.CancelButton onClick={handleCancelClick}>
+                  취소
+                </S.CancelButton>
+                <S.ConfirmButton onClick={handleConfirmClick}>
+                  확인
+                </S.ConfirmButton>
+              </S.ButtonDiv>
+            </>
+          ) : (
+            <>
+              <S.CloseBtn src={Close} onClick={handleCancelClick} />
+              <S.ModalText>
+                해당 댓글을 신고하시는 이유를 선택해주세요.
+              </S.ModalText>
+              <S.ReasonList>
+                {reasons.map((reason) => (
+                  <Checkbox
+                    key={reason.id}
+                    id={reason.id}
+                    label={reason.label}
+                    checked={checkedStates[reason.id]}
+                    handler={handleCheckboxChange(reason.id)}
+                  />
+                ))}
+              </S.ReasonList>
+              <S.ButtonDiv>
+                <S.CancelButton onClick={handleCancelClick}>
+                  취소
+                </S.CancelButton>
+                <S.ConfirmButton onClick={handleSubmitClick}>
+                  확인
+                </S.ConfirmButton>
+              </S.ButtonDiv>
+            </>
+          )}
+        </S.Modal>
+      </S.Overlay>
     </>
   );
 };

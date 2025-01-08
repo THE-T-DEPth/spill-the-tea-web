@@ -1,4 +1,4 @@
-import * as S from '../../../styles/ViewDetailSsul/ComplainModalComponentStyle';
+import * as S from '../../../styles/ViewDetailSsul/modal/ComplainModalComponentStyle';
 import Close from '../../../assets/images/Close.svg';
 
 interface RemoveModalProps {
@@ -18,17 +18,20 @@ const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal }) => {
 
   return (
     <>
-      <S.Overlay onClick={handleCancelClick}></S.Overlay>
-      <S.Modal>
-        <>
-          <S.CloseBtn src={Close} onClick={handleCancelClick} />
-          <S.ModalText>정말 썰을 삭제하시겠습니까?</S.ModalText>
-          <S.ButtonDiv>
-            <S.CancelButton onClick={handleCancelClick}>취소</S.CancelButton>
-            <S.ConfirmButton onClick={handleConfirmClick}>확인</S.ConfirmButton>
-          </S.ButtonDiv>
-        </>
-      </S.Modal>
+      <S.Overlay>
+        <S.Modal>
+          <>
+            <S.CloseBtn src={Close} onClick={handleCancelClick} />
+            <S.ModalText>정말 썰을 삭제하시겠습니까?</S.ModalText>
+            <S.ButtonDiv>
+              <S.CancelButton onClick={handleCancelClick}>취소</S.CancelButton>
+              <S.ConfirmButton onClick={handleConfirmClick}>
+                확인
+              </S.ConfirmButton>
+            </S.ButtonDiv>
+          </>
+        </S.Modal>
+      </S.Overlay>
     </>
   );
 };

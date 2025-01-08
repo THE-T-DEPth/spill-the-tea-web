@@ -1,4 +1,4 @@
-import * as S from '../../../styles/ViewDetailSsul/CheckboxComponentStyle';
+import * as S from '../../../styles/ViewDetailSsul/modal/CheckboxComponentStyle';
 
 interface Input {
   id: string;
