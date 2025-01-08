@@ -1,36 +1,42 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Layout from "./components/layout/Layout";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import Layout from './components/layout/Layout';
 
-import LoginPage from "./pages/LoginPage";
-import FindPassPage from "./pages/FindPassPage";
-import CertificationNumPage from "./pages/CertificationNumPage";
+import LoginPage from './pages/LoginPage';
+import FindPassPage from './pages/FindPassPage';
+import CertificationNumPage from './pages/CertificationNumPage';
 // import ViewDetailSsul from "./pages/ViewDetailSsul";
-import SearchResultPage from "./pages/SearchResultPage";
+import SearchResultPage from './pages/SearchResultPage';
+import SsulPage from './pages/SsulPage';
+import TemporaryPassPage from "./pages/TemporaryPassPage";
+import ChangePassPage from "./pages/ChangePassPage";
 import SignupEmailPage from "./pages/SignupEmailPage";
 import SignupPage from "./pages/SignupPage";
 import SignupDonePage from "./pages/SignupDonePage";
-
 const Router = () => {
-	return (
-
-		<BrowserRouter>
-			<Layout>
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					<Route path="/searchresult" element={<SearchResultPage />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/find-password" element={<FindPassPage />} />
-					<Route path="/certification-number" element={<CertificationNumPage />} />
-					<Route path="/signup-email" element={<SignupEmailPage />} />
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/searchresult' element={<SearchResultPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/find-password' element={<FindPassPage />} />
+          <Route
+            path='/certification-number'
+            element={<CertificationNumPage />}
+          />
+          <Route path="/temporary-password" element={<TemporaryPassPage />} />
+					<Route path="/change-password" element={<ChangePassPage />} />
+    			<Route path="/signup-email" element={<SignupEmailPage />} />
 					<Route path="/signup" element={<SignupPage />} />
 					<Route path="/signupdone" element={<SignupDonePage />} />
-				</Routes>
-			</Layout>
-		</BrowserRouter>
-
-	);
-}
+          <Route path='/ssulpage' element={<SsulPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
+};
 
 export default Router;
 

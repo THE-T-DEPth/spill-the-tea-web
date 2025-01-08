@@ -1,40 +1,44 @@
 import React, { useState } from "react";
 import * as S from "../styles/Login/CertificationNumPageStyle";
 import LoginInput from "../components/login/LoginInput";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { verifyCertificationNumber, fetchTemporaryPassword } from "../api/DummyApi";
 
 const CertificationNumPage = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const email = location.state?.email || "";
 	const [certificationNumber, setCertificationNumber] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
-	const [showError, setShowError] = useState(false); // 에러 메시지 표시 여부
-	const navigate = useNavigate();
+	const [showError, setShowError] = useState(false);
 
-
-	const correctCertificationNumber = "123456";
-
-	// 입력 값 변경 핸들러
 	const handleCertificationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCertificationNumber(e.target.value);
 		setErrorMessage("");
 		setShowError(false);
 	};
 
-	// 인증번호 확인 및 페이지 이동 핸들러
-	const handleCertificationSubmit = () => {
-		if (!certificationNumber) {
-			setErrorMessage("인증번호를 입력하세요.");
-			setShowError(true);
-			return;
-		}
+	const handleCertificationSubmit = async () => {
+		!certificationNumber &&
+			(setErrorMessage("인증번호를 입력하세요."), setShowError(true));
 
-		if (certificationNumber !== correctCertificationNumber) {
-			setErrorMessage("인증번호가 일치하지 않습니다, 다시 확인해주세요.");
-			setShowError(true);
-			return;
-		}
-
-
-		navigate("/next-page");
+		certificationNumber &&
+			(await verifyCertificationNumber(email, certificationNumber)
+				.then(async (isValid) => {
+					isValid
+						? fetchTemporaryPassword(email).then((temporaryPassword) =>
+							navigate("/temporary-password", {
+								state: { email, temporaryPassword },
+							})
+						)
+						: (setErrorMessage("인증번호가 올바르지 않습니다. 다시 확인해주세요."),
+							setShowError(true));
+				})
+				.catch((error) => {
+					console.error("Error validating certification number:", error);
+					setErrorMessage("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
+					setShowError(true);
+				}));
 	};
 
 	return (
@@ -42,10 +46,11 @@ const CertificationNumPage = () => {
 
 			<S.Wrapper>
 				<S.Title>비밀번호 찾기</S.Title>
-				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😊"</S.Subtitle>
+				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
 				<S.PasswordBox>
 					<S.passwordWrapper>
-						<S.Label>인증하기</S.Label>
+						<S.Label>비밀번호 인증하기</S.Label>
+						<S.EmailLabel>{`"${email}"로 인증번호가 발송되었습니다.`}</S.EmailLabel>
 						<LoginInput
 							type="password"
 							text={certificationNumber}

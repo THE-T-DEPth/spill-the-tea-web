@@ -69,7 +69,7 @@ const LoginPage = () => {
 
 			<S.Wrapper>
 				<S.Title>로그인</S.Title>
-				<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?😊"</S.Subtitle>
+				<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?🤤"</S.Subtitle>
 				<S.LoginBox>
 					<S.LoginInputWrapper>
 						<S.Label>로그인</S.Label>
