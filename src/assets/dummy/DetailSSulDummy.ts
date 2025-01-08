@@ -2,8 +2,8 @@ import Profile from '../images/Profile.svg';
 
 const dummyData = [
   {
-    title: '과방에 고양이 들어왔다',
-    tags: ['위로', '신뢰', '배신', '똥', '똥', '똥222'],
+    title: '과방에 고양이 들어왔다다다다다다',
+    tags: ['위로', '신뢰', '배신', '똥', '똥', '똥222', 'eee'],
     profile: Profile,
     nickname: '김소연',
     date: '24.12.22 / 12:12',
