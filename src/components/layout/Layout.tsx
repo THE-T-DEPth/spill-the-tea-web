@@ -9,8 +9,10 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const isWritePage = location.pathname === '/write';
+
   return (
-    <S.Container>
+    <S.Container style={{ minWidth: isWritePage ? '1400px' : '' }}>
       <Header />
       {/* 네비게이션 바 */}
       <NavBar />
