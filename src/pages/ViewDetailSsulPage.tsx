@@ -1,6 +1,6 @@
 import * as S from '../styles/ViewDetailSsul/ViewDetailSsulPageComponentStyle';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ComplainModal from '../components/viewDetailSsul/modal/ComplainModal';
 import RemoveModal from '../components/viewDetailSsul/modal/RemoveModal';
 import DetailSsulReview from '../components/viewDetailSsul/review/DetailSsulReview';

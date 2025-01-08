@@ -26,18 +26,12 @@ interface Reply {
 const DetailSsulReview: React.FC<{
   setIsComplainModalOpen: (value: boolean) => void;
 }> = ({ setIsComplainModalOpen }) => {
-  const [nickname, setNickname] = useState<string | null>('');
   const [input, setInput] = useState<
     string | number | readonly string[] | undefined
-  >();
+  >('');
 
   const handleInputValue = (e: any) => {
     setInput(e.target.value);
-  };
-
-  const handleReviewClick = (nickname: string | null) => {
-    setNickname('@' + nickname);
-    setInput('@' + nickname + ' ');
   };
 
   const handleComplainClick = () => {
@@ -56,20 +50,22 @@ const DetailSsulReview: React.FC<{
           />
           <S.DSRSendImg src={Send} />
         </S.DSRInputDiv>
-        {commentDummy.map(
-          (
-            comment: Comment,
-            index: number //댓글
-          ) => (
-            <S.DSREachCommentDiv key={index}>
-              <Review
-                handleComplainClick={handleComplainClick}
-                handleReviewClick={handleReviewClick}
-                comment={comment}
-              />
-            </S.DSREachCommentDiv>
-          )
-        )}
+        <S.DSRWholeCommentDiv>
+          {commentDummy.map(
+            (
+              comment: Comment,
+              index: number //댓글
+            ) => (
+              <S.DSREachCommentDiv key={index}>
+                <Review
+                  handleComplainClick={handleComplainClick}
+                  comment={comment}
+                  id={index}
+                />
+              </S.DSREachCommentDiv>
+            )
+          )}
+        </S.DSRWholeCommentDiv>
       </S.DSRDiv>
     </>
   );
