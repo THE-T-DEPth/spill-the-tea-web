@@ -4,6 +4,11 @@ import Search from '../../../assets/images/Search.svg';
 import Play from '../../../assets/images/Play.svg';
 import keywordData from '../../../assets/dummy/KeywordDummy';
 import * as S from '../../../styles/Write/SelectAnotherComponentStyle';
+import KeywordModal from '../modal/KeywordModal';
+import AnotherBtn from './AnotherBtn';
+import SelectVoice from './SelectVoice';
+import BottomBtn from './BottomBtn';
+import SelectKeywordType from './SelecteKeywordType';
 
 interface KeywordProp {
   selectedThreeKeywords: string[];
@@ -16,6 +21,7 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
   const [selectedKeywordType, setSelectedKeywordType] = useState<number>(1);
   const [ttsInput, setTtsInput] = useState<any>('');
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [openKeywordModal, setOpenKeywordModal] = useState<boolean>(false);
   const [selectedVoice, setSelectedVoice] =
     useState<string>('차분한 성인 남성');
 
@@ -27,16 +33,16 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
     setNovelizationValue('');
   };
 
-  const handleTypeClick = (key: string) => {
-    setSelectedType(key);
+  const handleTypeClick = (selectType: string) => {
+    setSelectedType(selectType);
   };
 
-  const handleKeywordType = (key: number) => {
-    setSelectedKeywordType(key);
+  const handleKeywordType = (selectType: number) => {
+    setSelectedKeywordType(selectType);
   };
 
-  const handleVoiceClick = (key: string) => {
-    setSelectedVoice(key);
+  const handleVoiceClick = (selectType: string) => {
+    setSelectedVoice(selectType);
   };
 
   const handleTtsInput = (e: any) => {
@@ -64,7 +70,7 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
       props.setSelectedThreeKeywords(selectedKeywords);
       //제출하는 api 연결
     } else {
-      alert('키워드를 3개 선택해주셔야 합니다.');
+      setOpenKeywordModal(true);
     }
   };
 
@@ -117,44 +123,26 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
     <>
       <S.AnotherInputDiv>
         <S.AnotherBtnDiv>
-          <S.AnotherBtn
-            onClick={() => {
-              handleTypeClick('소설화');
-            }}
-            style={{
-              color: selectedType === '소설화' ? 'var(--Green3)' : 'var(--G4)',
-            }}>
-            소설화
-          </S.AnotherBtn>
-          <S.AnotherBtn
-            onClick={() => {
-              handleTypeClick('짤 검색');
-            }}
-            style={{
-              color: selectedType === '짤 검색' ? 'var(--Green3)' : 'var(--G4)',
-            }}>
-            짤 검색
-          </S.AnotherBtn>
-          <S.AnotherBtn
-            onClick={() => {
-              handleTypeClick('음성 출력');
-            }}
-            style={{
-              color:
-                selectedType === '음성 출력' ? 'var(--Green3)' : 'var(--G4)',
-            }}>
-            음성 출력
-          </S.AnotherBtn>
-          <S.AnotherBtn
-            onClick={() => {
-              handleTypeClick('키워드 지정');
-            }}
-            style={{
-              color:
-                selectedType === '키워드 지정' ? 'var(--Green3)' : 'var(--G4)',
-            }}>
-            키워드 지정
-          </S.AnotherBtn>
+          <AnotherBtn
+            type='소설화'
+            selectedType={selectedType}
+            handleTypeClick={handleTypeClick}
+          />
+          <AnotherBtn
+            type='짤 검색'
+            selectedType={selectedType}
+            handleTypeClick={handleTypeClick}
+          />
+          <AnotherBtn
+            type='음성 출력'
+            selectedType={selectedType}
+            handleTypeClick={handleTypeClick}
+          />
+          <AnotherBtn
+            type='키워드 지정'
+            selectedType={selectedType}
+            handleTypeClick={handleTypeClick}
+          />
         </S.AnotherBtnDiv>
         <S.AnotherTextDiv>
           {selectedType === '소설화' ? (
@@ -201,7 +189,7 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
             <S.AnotherMiddleDiv style={{ height: '633px', border: '0' }}>
               <S.JjalDiv>
                 {JjalData.map((data, index) => (
-                  <S.Jjal src={data.image} />
+                  <S.Jjal src={data.image} key={index} />
                 ))}
               </S.JjalDiv>
             </S.AnotherMiddleDiv>
@@ -219,48 +207,12 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
                 }}
               />
             </S.VoiceTextDiv>
-            <S.VoiceSelectDiv
-              onClick={() => {
-                handleVoiceClick('차분한 성인 남성');
-              }}
-              style={{
-                backgroundColor:
-                  selectedVoice === '차분한 성인 남성'
-                    ? 'var(--Green1)'
-                    : 'white',
-              }}>
-              <p style={{ marginLeft: '20px' }}>차분한 성인 남성</p>
-              <S.PlayImg
-                src={Play}
-                onClick={() => {
-                  speechSynthesis.cancel();
-                  speak(ttsInput, window.speechSynthesis);
-                }}
-              />
-            </S.VoiceSelectDiv>
-            <S.VoiceSelectDiv
-              onClick={() => {
-                handleVoiceClick('차분한 성인 여성');
-              }}
-              style={{
-                backgroundColor:
-                  selectedVoice === '차분한 성인 여성'
-                    ? 'var(--Green1)'
-                    : 'white',
-              }}>
-              <p style={{ marginLeft: '20px' }}>차분한 성인 여성</p>
-              <S.PlayImg
-                src={Play}
-                onClick={() => {
-                  speechSynthesis.cancel();
-                  speak(ttsInput, window.speechSynthesis);
-                }}
-              />
-            </S.VoiceSelectDiv>
-            <S.VoiceSelectedDiv>
-              <S.SelectedVoice>선택</S.SelectedVoice>
-              <S.SelectedVoiceText>{selectedVoice}</S.SelectedVoiceText>
-            </S.VoiceSelectedDiv>
+            <SelectVoice
+              ttsInput={ttsInput}
+              selectedVoice={selectedVoice}
+              handleVoiceClick={handleVoiceClick}
+              speak={speak}
+            />
           </>
         ) : (
           <></>
@@ -269,63 +221,16 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
         {selectedType === '키워드 지정' ? (
           <>
             <S.KeywordTypeDiv>
-              <S.KeywordType
-                onClick={() => handleKeywordType(1)}
-                style={{
-                  backgroundColor:
-                    selectedKeywordType === 1
-                      ? 'var(--Green3)'
-                      : 'var(--Yellow)',
-                }}>
-                감정/관계
-              </S.KeywordType>
-              <S.KeywordType
-                onClick={() => handleKeywordType(2)}
-                style={{
-                  backgroundColor:
-                    selectedKeywordType === 2
-                      ? 'var(--Green3)'
-                      : 'var(--Yellow)',
-                }}>
-                일상/삶
-              </S.KeywordType>
-              <S.KeywordType
-                onClick={() => handleKeywordType(3)}
-                style={{
-                  backgroundColor:
-                    selectedKeywordType === 3
-                      ? 'var(--Green3)'
-                      : 'var(--Yellow)',
-                }}>
-                취미/관심사
-              </S.KeywordType>
-              <S.KeywordType
-                onClick={() => handleKeywordType(4)}
-                style={{
-                  backgroundColor:
-                    selectedKeywordType === 4
-                      ? 'var(--Green3)'
-                      : 'var(--Yellow)',
-                }}>
-                상상/가상
-              </S.KeywordType>
-              <S.KeywordType
-                onClick={() => handleKeywordType(5)}
-                style={{
-                  backgroundColor:
-                    selectedKeywordType === 5
-                      ? 'var(--Green3)'
-                      : 'var(--Yellow)',
-                  border: 'none',
-                }}>
-                고민/조언
-              </S.KeywordType>
+              <SelectKeywordType
+                selectedKeywordType={selectedKeywordType}
+                handleKeywordType={handleKeywordType}
+              />
             </S.KeywordTypeDiv>
 
             <S.KeywordMiddleDiv>
               {filteredKeywords?.map((keyword, index) => (
                 <S.Keywords
-                  key={keyword}
+                  key={index}
                   onClick={() => {
                     handleKeywordClick(keyword);
                   }}
@@ -359,39 +264,14 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
           <></>
         )}
 
-        {selectedType === '소설화' ? (
-          <>
-            <S.AnotherBottomDiv>
-              <S.AnotherCancelBtn onClick={handleNovelizationRemove}>
-                취소
-              </S.AnotherCancelBtn>
-              <S.AnotherSaveBtn>글에 적용</S.AnotherSaveBtn>
-            </S.AnotherBottomDiv>
-          </>
-        ) : (
-          <></>
-        )}
-        {selectedType === '음성 출력' ? (
-          <>
-            <S.AnotherBottomDiv>
-              <S.AnotherCancelBtn>작성 취소</S.AnotherCancelBtn>
-              <S.AnotherSaveBtn>저장</S.AnotherSaveBtn>
-            </S.AnotherBottomDiv>
-          </>
-        ) : (
-          <></>
-        )}
-        {selectedType === '키워드 지정' ? (
-          <>
-            <S.AnotherBottomDiv>
-              <S.AnotherCancelBtn onClick={handleKeywordRemove}>
-                작성 취소
-              </S.AnotherCancelBtn>
-              <S.AnotherSaveBtn onClick={handleSubmitKeyword}>
-                저장
-              </S.AnotherSaveBtn>
-            </S.AnotherBottomDiv>
-          </>
+        <BottomBtn
+          selectedType={selectedType}
+          handleNovelizationRemove={handleNovelizationRemove}
+          handleKeywordRemove={handleKeywordRemove}
+          handleSubmitKeyword={handleSubmitKeyword}
+        />
+        {openKeywordModal ? (
+          <KeywordModal setOpenModal={setOpenKeywordModal} />
         ) : (
           <></>
         )}
