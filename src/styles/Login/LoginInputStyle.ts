@@ -12,10 +12,10 @@ export const InputWrap = styled.div`
 export const Input = styled.input`
   width: 374px;
   height: 45px;
-  border: none; /* 테두리 경계 제거 */
-  border-radius: 8px;
+  border: none; 
+  border-radius: px;
   background-color: var(--InputBack);
-  padding: 10px 13px 11px 13px; /* 오른쪽 여백을 아이콘 버튼과 조화롭게 조정 */
+  padding: 10px 13px 11px 13px; 
   font: var(--labelMedium);
   color: var(--Sub5);
   box-sizing: border-box;

@@ -38,6 +38,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+    format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
   --Black: #000000;
   --primary1: #271700;
@@ -59,11 +67,15 @@
   --Green2: #7ac87d;
   --Green3: #5ad75f;
   --EarlGrey: #55533e;
+  --LightGrey: #7d7d7d;
   --Yellow: #fffbdb;
   --G5: #676767;
   --G4: #939393;
   --G3: #d9d9d9;
   --HeadLine: #271700;
+  --BackFirst: #f6f6f6;
+  --BackColor: #f6f6f6;
+  --KeywordBorder: #dec181;
   --DropdownHover: #edffed;
 
   --labelMini: 500 10px / normal 'Gmarket Sans';
@@ -97,12 +109,23 @@
   --boxKeyword: 500 8.73px / 10.03px 'Gmarket Sans';
   --boxInfo: 500 8px / 12px 'Gmarket Sans';
   --dropDown: 500 16px / 24px 'Gmarket Sans';
-  --searchKeyword: 700 21.3px / 150% 'Gmarket Sans';
+  --searchKeyword: 700 21.33px / 150% 'Gmarket Sans';
   --searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
   --topBar: 500 16px / 18.4px 'Gmarket Sans';
 
+  --paragraphMini: 300 10px / 160% 'Gmarket Sans';
+  --paragraphMiniL: 300 10px / 160% 'Gmarket Sans';
+  --paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+  --paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+  --paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+  --paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
   --headerXL: 400 25.35px / normal 'RixInooAriDuri';
   --headerL: 400 14px / normal 'RixInooAriDuri';
 
+  --headerXL: 400 25.35px / normal 'RixInooAriDuri';
+  --headerL: 400 14px / normal 'RixInooAriDuri';
   --footerMini: 400 6px / normal 'Pretendard';
+  --buttonText: 700 12.48px / normal 'Pretendard';
+
+  --selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
 }
