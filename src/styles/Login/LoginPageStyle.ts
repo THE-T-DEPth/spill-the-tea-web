@@ -116,16 +116,16 @@ text-align: center;
   cursor: pointer;
 `;
 export const ErrorMessage = styled.p`
-  font: var(--paragraphSmall); /* 폰트 변경 */
-  color: transparent; /* 기본적으로 투명하게 설정 */
-  margin-top: 2.82px; /* 박스와의 간격 설정 */
-  margin-left: 0; /* 왼쪽 여백 제거 */
-  align-self: flex-start; /* 에러 메시지가 입력 박스 바로 아래에 위치 */
-  height: 1em; /* 고정 높이 설정으로 위치 변화 방지 */
-  transition: color 0.2s ease-in-out; /* 색상 전환 애니메이션 */
+  font: var(--paragraphSmall); 
+  color: transparent; 
+  margin-top: 2.82px; 
+  margin-left: 0; 
+  align-self: flex-start; 
+  height: 1em; 
+  transition: color 0.2s ease-in-out; 
 
   &.visible {
-    color: var(--error1); /* 조건 충족 시 빨간색으로 표시 */
+    color: var(--error1); 
   }
 `;
 

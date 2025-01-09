@@ -34,7 +34,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "다섯 번째 게시글",
 		image: "src/assets/images/boximg.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -42,7 +42,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "여섯 번째 게시글",
 		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -51,7 +51,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "일곱번째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -59,7 +59,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "8째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -67,7 +67,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "9 번째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -77,7 +77,7 @@ const boxData = [
 	},
 
 	{
-		title: "두 번째 게시글",
+		title: "10 번째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -85,7 +85,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "11 번째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
@@ -93,7 +93,7 @@ const boxData = [
 		comments: "1.1K",
 	},
 	{
-		title: "두 번째 게시글",
+		title: "12 번째 게시글",
 		image: "https://via.placeholder.com/140",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",

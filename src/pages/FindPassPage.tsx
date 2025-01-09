@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 const FindPassPage = () => {
 	const [email, setEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
-	const [showError, setShowError] = useState(false); // 에러 메시지 표시 여부
+	const [showError, setShowError] = useState(false);
 	const navigate = useNavigate();
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
-		setEmailError(""); // 에러 메시지 초기화
-		setShowError(false); // 에러 표시 초기화
+		setEmailError("");
+		setShowError(false);
 	};
 
 	const handleFindPassword = () => {

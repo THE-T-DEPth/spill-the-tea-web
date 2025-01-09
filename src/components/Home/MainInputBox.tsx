@@ -5,29 +5,57 @@ import VectorRight from "../../assets/Icons/VectorRight.svg";
 import Box, { BoxProps } from "../searchResult/Box";
 
 interface MainInputBoxProps {
-	text: string; // Header에 표시할 텍스트 내용
-	boxData: BoxProps[]; // Box 컴포넌트의 데이터를 배열로 전달받음
-	emptyText?: string; // boxData가 없을 때 표시할 텍스트
+	text: string;
+	boxData: BoxProps[];
+	emptyText?: string;
 }
 
-const ITEMS_PER_PAGE = 4; // 한 번에 표시할 박스 개수
+const ITEMS_PER_PAGE = 4;
+const MAX_ITEMS = 12;
 
 const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText }) => {
-	const [startIndex, setStartIndex] = useState(0);
-	const totalItems = boxData.length;
+	const normalizedData = boxData.length > MAX_ITEMS
+		? boxData.slice(0, MAX_ITEMS)
+		: [...boxData, ...Array(MAX_ITEMS - boxData.length).fill(null)];
+
+
+	const loopedData = [
+		...normalizedData.slice(-ITEMS_PER_PAGE),
+		...normalizedData,
+		...normalizedData.slice(0, ITEMS_PER_PAGE),
+	];
+
+	const [currentIndex, setCurrentIndex] = useState(ITEMS_PER_PAGE);
+	const [isTransitioning, setIsTransitioning] = useState(false);
+
 
 	const handleNext = () => {
-		setStartIndex((prevIndex) =>
-			(prevIndex + ITEMS_PER_PAGE) % totalItems // ITEMS_PER_PAGE만큼 이동, 마지막에서 처음으로 순환
-		);
+		if (isTransitioning) return;
+		setIsTransitioning(true);
+		setCurrentIndex((prevIndex) => prevIndex + ITEMS_PER_PAGE);
 	};
+
 
 	const handlePrev = () => {
-		setStartIndex((prevIndex) =>
-			(prevIndex - ITEMS_PER_PAGE + totalItems) % totalItems // ITEMS_PER_PAGE만큼 이동, 처음에서 마지막으로 순환
-		);
+		if (isTransitioning) return;
+		setIsTransitioning(true);
+		setCurrentIndex((prevIndex) => prevIndex - ITEMS_PER_PAGE);
 	};
 
+
+	const handleTransitionEnd = () => {
+		setIsTransitioning(false);
+
+
+		if (currentIndex >= loopedData.length - ITEMS_PER_PAGE) {
+			setCurrentIndex(ITEMS_PER_PAGE);
+		}
+
+
+		if (currentIndex < ITEMS_PER_PAGE) {
+			setCurrentIndex(loopedData.length - ITEMS_PER_PAGE * 2);
+		}
+	};
 
 	return (
 		<S.OutContainer>
@@ -39,18 +67,21 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 					<S.Header>{text}</S.Header>
 				</S.HeaderWrap>
 				<S.ContentContainer>
-					{boxData.length === 0 ? (
+					{normalizedData.length === 0 ? (
 						<S.EmptyMessage>{emptyText || "데이터가 없습니다."}</S.EmptyMessage>
 					) : (
-						<S.Slider startIndex={startIndex}>
-							{boxData.map((data, index) => {
-								// 활성화된 슬라이드 아이템인지 확인
+						<S.Slider
+							startIndex={currentIndex}
+							onTransitionEnd={handleTransitionEnd}
+							isTransitioning={isTransitioning}
+						>
+							{loopedData.map((data, index) => {
 								const isActive =
-									index >= startIndex && index < startIndex + ITEMS_PER_PAGE;
+									index >= currentIndex && index < currentIndex + ITEMS_PER_PAGE;
 
 								return (
 									<S.BoxWrapper key={index} isActive={isActive}>
-										<Box {...data} disabled={!isActive} />
+										{data ? <Box {...data} disabled={!isActive} /> : null}
 									</S.BoxWrapper>
 								);
 							})}
