@@ -6,7 +6,7 @@ import TopBar from '../components/searchResult/TopBar';
 import Box from '../components/searchResult/Box';
 import BoxData from '../assets/data/SsulPagedata';
 import { BoxProps } from '../components/searchResult/Box';
-import Pagination from '../styles/searchResult/Pagination';
+import Pagination from '../components/searchResult/Pagination';
 
 const SsulPage = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]); // 선택된 키워드 초기화
