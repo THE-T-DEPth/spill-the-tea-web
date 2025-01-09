@@ -3,6 +3,8 @@ import * as S from '../../styles/Layout/LayoutStyle';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import NavBar from '../layout/NavBar';
+import YellowNav from './YellowNav';
+import WriteNav from './WriteNav';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,8 +23,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         location.pathname !== '/signup-email' &&
         location.pathname !== '/signup' &&
         location.pathname !== '/signupdone' &&
-        location.pathname !== '/mypage' && <NavBar />}
+        location.pathname !== '/mypage' &&
+        location.pathname !== '/write' && <NavBar />}
 
+      {isWritePage ? <WriteNav /> : <></>}
+      <YellowNav />
       {/* 메인 콘텐츠 */}
       <S.Main>{children}</S.Main>
 
