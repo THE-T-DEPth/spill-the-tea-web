@@ -14,28 +14,28 @@ import SignupEmailPage from "./pages/SignupEmailPage";
 import SignupPage from "./pages/SignupPage";
 import SignupDonePage from "./pages/SignupDonePage";
 const Router = () => {
-  return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/searchresult' element={<SearchResultPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/find-password' element={<FindPassPage />} />
-          <Route
-            path='/certification-number'
-            element={<CertificationNumPage />}
-          />
-          <Route path="/temporary-password" element={<TemporaryPassPage />} />
+	return (
+		<BrowserRouter>
+			<Layout>
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/searchresult' element={<SearchResultPage />} />
+					<Route path='/login' element={<LoginPage />} />
+					<Route path='/find-password' element={<FindPassPage />} />
+					<Route
+						path='/certification-number'
+						element={<CertificationNumPage />}
+					/>
+					<Route path="/temporary-password" element={<TemporaryPassPage />} />
 					<Route path="/change-password" element={<ChangePassPage />} />
-    			<Route path="/signup-email" element={<SignupEmailPage />} />
+					<Route path="/signup-email" element={<SignupEmailPage />} />
 					<Route path="/signup" element={<SignupPage />} />
 					<Route path="/signupdone" element={<SignupDonePage />} />
-          <Route path='/ssulpage' element={<SsulPage />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
-  );
+					<Route path='/ssulpage' element={<SsulPage />} />
+				</Routes>
+			</Layout>
+		</BrowserRouter>
+	);
 };
 
 export default Router;
