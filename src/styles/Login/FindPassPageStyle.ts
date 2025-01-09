@@ -6,12 +6,13 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #f6f6f6;
+  height: calc(100vh - 100px);
 `;
 
 export const Title = styled.h1`
   font:var(--headingXXL);
   color: var(--Black);
-  margin-top: 150px;
+  margin-top: 230px;
 
 `;
 

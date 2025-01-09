@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
-  margin-top: 150px;
+  margin-top: 228px;
 `;
 
 export const Subtitle = styled.p`
@@ -26,7 +26,7 @@ export const PasswordBox = styled.div`
   background: var(--primary2);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
-  margin-bottom: 213px;
+  margin-bottom: 211px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,14 +40,21 @@ export const passwordWrapper = styled.div`
 export const Label = styled.label`
   font: var(--loginSmall);
   color: var(--Sub5);
-  margin-bottom: 12px;
   display: block;
+  
+`;
+
+export const EmailLabel = styled.p`
+  font: var(--headingSmall);
+  color: var(--Black);
+  margin-top: 5px;
+  margin-bottom: 12px;
 `;
 
 export const SubmitButton = styled.button`
   width: 374px;
   height: 45px;
-  margin-top: 67px;
+  margin-top: 43px;
   background-color: var(--Sub1);
   color: var(--Main2);
   border: 1px solid var(--Main2);
@@ -56,17 +63,12 @@ export const SubmitButton = styled.button`
   font: var(--labelLarge);
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--Main2);
-    color: var(--Sub1);
-  }
 `;
 
 export const ErrorMessage = styled.p`
   font: var(--paragraphSmall);
   color: transparent;
   margin-top: 2px;
-  margin-left: 0;
   align-self: flex-start;
   height: 1em;
   transition: color 0.2s;

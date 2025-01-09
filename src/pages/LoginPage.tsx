@@ -2,9 +2,7 @@ import { useState } from "react";
 import * as S from "../styles/Login/LoginPageStyle";
 import EyeIcon from "../assets/Icons/Eye.svg";
 import EyeOffIcon from "../assets/Icons/EyeOff.svg";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import NavBar from "../components/layout/NavBar";
+
 import { useNavigate } from "react-router-dom";
 import LoginInput from "../components/login/LoginInput";
 
@@ -62,14 +60,16 @@ const LoginPage = () => {
 	const handleFindPassword = () => {
 		navigate("/find-password");
 	};
+	const signupEmail = () => {
+		navigate("/signup-email");
+	};
 
 	return (
 		<>
-			<Header />
-			<NavBar />
+
 			<S.Wrapper>
 				<S.Title>로그인</S.Title>
-				<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?😊"</S.Subtitle>
+				<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?🤤"</S.Subtitle>
 				<S.LoginBox>
 					<S.LoginInputWrapper>
 						<S.Label>로그인</S.Label>
@@ -104,14 +104,14 @@ const LoginPage = () => {
 					</S.PasswordInputWrapper>
 					<S.NewInputWrapper>
 						<S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
-						<S.SignupButton>회원가입 하기</S.SignupButton>
+						<S.SignupButton onClick={signupEmail}>회원가입 하기</S.SignupButton>
 						<S.ForgotPassword onClick={handleFindPassword}>
 							비밀번호 찾기
 						</S.ForgotPassword>
 					</S.NewInputWrapper>
 				</S.LoginBox>
 			</S.Wrapper>
-			<Footer />
+
 		</>
 	);
 };
