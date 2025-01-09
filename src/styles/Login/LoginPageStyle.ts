@@ -36,18 +36,18 @@ export const LoginBox = styled.div`
 
 export const LoginInputWrapper = styled.div`
   width: 374px;
-  margin-top: 55px; /* 위 간격 */
+  margin-top: 55px; 
 `;
 
 export const PasswordInputWrapper = styled.div`
   width: 374px;
-  margin-top: 18px; /* 위 간격 */
+  margin-top: 18px; 
 `;
 
 export const NewInputWrapper = styled.div`
   width: 374px;
  height: 138px;
-  margin-top: 50px; /* LoginInputWrapper와의 간격 */
+  margin-top: 50px; 
   margin-bottom: 56px; 
 `;
 

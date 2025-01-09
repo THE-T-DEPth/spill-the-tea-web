@@ -63,7 +63,12 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   padding: 3.5px 6px;
   height: 17px;
   font: var(--boxInfo);
+<<<<<<< HEAD
   color: ${({ disabled }) => (disabled ? "var(--G5)" : "var(--primary1)")};
+=======
+  color: var(--primary1);
+  /* background-color: ; */
+>>>>>>> origin/develop
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
