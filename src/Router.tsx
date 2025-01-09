@@ -9,6 +9,12 @@ import CertificationNumPage from './pages/CertificationNumPage';
 import SearchResultPage from './pages/SearchResultPage';
 import WritePage from './pages/WritePage';
 import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
+import SsulPage from './pages/SsulPage';
+import TemporaryPassPage from "./pages/TemporaryPassPage";
+import ChangePassPage from "./pages/ChangePassPage";
+import SignupEmailPage from "./pages/SignupEmailPage";
+import SignupPage from "./pages/SignupPage";
+import SignupDonePage from "./pages/SignupDonePage";
 
 const Router = () => {
   return (
@@ -25,6 +31,12 @@ const Router = () => {
           />
           <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
           <Route path='/write' element={<WritePage />} />
+          <Route path="/temporary-password" element={<TemporaryPassPage />} />
+					<Route path="/change-password" element={<ChangePassPage />} />
+    			<Route path="/signup-email" element={<SignupEmailPage />} />
+					<Route path="/signup" element={<SignupPage />} />
+					<Route path="/signupdone" element={<SignupDonePage />} />
+          <Route path='/ssulpage' element={<SsulPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
@@ -32,3 +44,4 @@ const Router = () => {
 };
 
 export default Router;
+

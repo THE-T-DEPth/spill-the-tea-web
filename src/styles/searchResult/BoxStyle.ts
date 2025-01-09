@@ -58,7 +58,7 @@ export const Keyword = styled.span`
   height: 17px;
   font: var(--boxInfo);
   color: var(--primary1);
-  background-color: ;
+  /* background-color: ; */
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
