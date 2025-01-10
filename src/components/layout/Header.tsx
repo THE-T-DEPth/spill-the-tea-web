@@ -7,21 +7,28 @@ import MyIcon from "../../assets/Icons/My.svg";
 import ClockIcon from "../../assets/Icons/Clock.svg";
 import LogoutModal from "./LogoutModal";
 import { TSearchHistoryType } from "../../types/layout/NavBarType";
+import useNSMediaQuery from "../../hooks/useNSMediaQuery";
 
 const Header = () => {
 	const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
 	const [isHistoryVisible, setIsHistoryVisible] = useState(false);
 	const [searchInput, setSearchInput] = useState("");
-	const [isLoggedIn, setIsLoggedIn] = useState(true); // 기본값을 로그인 상태로 유지
+	const [isLoggedIn, setIsLoggedIn] = useState(true);
 	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isSearchActive, setIsSearchActive] = useState(false); // 모바일에서 SearchBar 활성화 상태
 	const searchBarRef = useRef<HTMLDivElement>(null);
 	const navigate = useNavigate();
+	const { isMobile } = useNSMediaQuery();
 
 	// 외부 클릭 감지
 	const handleClickOutside = (event: MouseEvent) => {
-		searchBarRef.current &&
-			!searchBarRef.current.contains(event.target as Node) &&
+		if (
+			searchBarRef.current &&
+			!searchBarRef.current.contains(event.target as Node)
+		) {
 			setIsHistoryVisible(false);
+			setIsSearchActive(false); // SearchBar 비활성화
+		}
 	};
 
 	useEffect(() => {
@@ -30,14 +37,10 @@ const Header = () => {
 	}, []);
 
 	const handleSearchSubmit = () => {
-		searchInput.trim() &&
-			setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4)) &&
+		if (searchInput.trim()) {
+			setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
 			setSearchInput("");
-	};
-
-	const handleSearchHistoryClick = (item: string) => {
-		setSearchInput(item);
-		setIsHistoryVisible(false);
+		}
 	};
 
 	const handleLogoutClick = () => {
@@ -53,9 +56,14 @@ const Header = () => {
 		setIsModalVisible(false);
 	};
 
-
 	const handleLoginClick = () => {
 		navigate("/login");
+	};
+
+	const handleSearchIconClick = () => {
+		if (isMobile) {
+			setIsSearchActive((prev) => !prev); // 모바일에서 SearchBar 활성화 토글
+		}
 	};
 
 	return (
@@ -64,27 +72,44 @@ const Header = () => {
 				<S.IconWrapper>
 					<img src={TeaCupIcon} alt="Tea Cup Icon" />
 				</S.IconWrapper>
-				<S.Title>Spill The Tea : 썰푸는 장소</S.Title>
+
+
+
+				{!isMobile || !isSearchActive ? (
+					<S.Title>Spill The Tea : 썰푸는 장소</S.Title>
+				) : null}
 			</S.LeftSection>
 
 			<S.RightSection>
-				<S.SearchBar ref={searchBarRef} onClick={() => setIsHistoryVisible(true)}>
-					<input
-						type="text"
-						value={searchInput}
-						onChange={(e) => setSearchInput(e.target.value)}
-						placeholder="원하는 썰을 제목 검색으로 찾아보세요!"
-						onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()}
-					/>
-					<S.SearchIconWrapper onClick={handleSearchSubmit}>
+				{isMobile && !isSearchActive ? ( // 모바일에서 SearchIcon만 표시
+					<S.SearchIconWrapper onClick={handleSearchIconClick}>
 						<img src={SearchIcon} alt="Search Icon" />
 					</S.SearchIconWrapper>
-				</S.SearchBar>
+				) : (
+					<S.SearchBar ref={searchBarRef} onClick={() => setIsHistoryVisible(true)}>
+						<input
+							type="text"
+							value={searchInput}
+							onChange={(e) => setSearchInput(e.target.value)}
+							placeholder="원하는 썰을 제목 검색으로 찾아보세요!"
+							onKeyPress={(e) => e.key === "Enter" && handleSearchSubmit()}
+						/>
+						<S.SearchIconWrapper onClick={handleSearchSubmit}>
+							<img src={SearchIcon} alt="Search Icon" />
+						</S.SearchIconWrapper>
+					</S.SearchBar>
+				)}
 
-				{isHistoryVisible && (
+				{isHistoryVisible && searchHistory.length > 0 && (
 					<S.SearchHistory>
 						{searchHistory.map((item, index) => (
-							<S.SearchHistoryItem key={index} onClick={() => handleSearchHistoryClick(item)}>
+							<S.SearchHistoryItem
+								key={index}
+								onClick={() => {
+									setSearchInput(item);
+									setIsHistoryVisible(false);
+								}}
+							>
 								<img src={ClockIcon} alt="Clock Icon" />
 								<span>{item}</span>
 							</S.SearchHistoryItem>
@@ -96,11 +121,13 @@ const Header = () => {
 					<img src={MyIcon} alt="My Icon" />
 				</S.MyIconWrapper>
 
-				<S.LogoutButton
-					onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}
-				>
-					{isLoggedIn ? "로그아웃" : "로그인"}
-				</S.LogoutButton>
+				{!isMobile && (
+					<S.LogoutButton
+						onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}
+					>
+						{isLoggedIn ? "로그아웃" : "로그인"}
+					</S.LogoutButton>
+				)}
 
 				{isModalVisible && (
 					<LogoutModal

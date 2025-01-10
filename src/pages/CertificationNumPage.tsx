@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const CertificationNumPage = () => {
 	const [certificationNumber, setCertificationNumber] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
-	const [showError, setShowError] = useState(false); // 에러 메시지 표시 여부
+	const [showError, setShowError] = useState(false);
 	const navigate = useNavigate();
 
 
