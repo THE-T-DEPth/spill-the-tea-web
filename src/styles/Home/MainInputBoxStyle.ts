@@ -84,7 +84,7 @@ export const Slider = styled.div<{ startIndex: number; isTransitioning: boolean 
   transition: ${({ isTransitioning }) => (isTransitioning ? "transform 0.3s ease-in-out" : "none")};
   transform: ${({ startIndex }) =>
 		`translateX(calc(-${startIndex * 212}px + 112px))`};
-  width: calc(100% + 112px); /* 여유 공간 확보 */
+  width: calc(100% + 112px); 
 `;
 
 export const BoxWrapper = styled.div<{ isActive: boolean }>`
