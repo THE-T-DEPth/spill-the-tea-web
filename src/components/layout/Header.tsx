@@ -22,15 +22,11 @@ const Header = () => {
 
 	// 외부 클릭 감지
 	const handleClickOutside = (event: MouseEvent) => {
-		if (
-			searchBarRef.current &&
-			!searchBarRef.current.contains(event.target as Node)
-		) {
+		searchBarRef.current &&
+			!searchBarRef.current.contains(event.target as Node) &&
 			setIsHistoryVisible(false);
-			setIsSearchActive(false); // SearchBar 비활성화
-		}
+		setIsSearchActive(false);
 	};
-
 	useEffect(() => {
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -40,8 +36,14 @@ const Header = () => {
 		if (searchInput.trim()) {
 			setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
 			setSearchInput("");
+			setIsHistoryVisible(false);
 		}
 	};
+	const handleSearchHistoryClick = (item: string) => {
+		setSearchInput(item);
+		setIsHistoryVisible(false);
+	};
+
 
 	const handleLogoutClick = () => {
 		setIsModalVisible(true);
@@ -62,7 +64,7 @@ const Header = () => {
 
 	const handleSearchIconClick = () => {
 		if (isMobile) {
-			setIsSearchActive((prev) => !prev); // 모바일에서 SearchBar 활성화 토글
+			setIsSearchActive((prev) => !prev);
 		}
 	};
 
@@ -81,7 +83,7 @@ const Header = () => {
 			</S.LeftSection>
 
 			<S.RightSection>
-				{isMobile && !isSearchActive ? ( // 모바일에서 SearchIcon만 표시
+				{isMobile && !isSearchActive ? (
 					<S.SearchIconWrapper onClick={handleSearchIconClick}>
 						<img src={SearchIcon} alt="Search Icon" />
 					</S.SearchIconWrapper>
@@ -103,19 +105,14 @@ const Header = () => {
 				{isHistoryVisible && searchHistory.length > 0 && (
 					<S.SearchHistory>
 						{searchHistory.map((item, index) => (
-							<S.SearchHistoryItem
-								key={index}
-								onClick={() => {
-									setSearchInput(item);
-									setIsHistoryVisible(false);
-								}}
-							>
+							<S.SearchHistoryItem key={index} onClick={() => handleSearchHistoryClick(item)}>
 								<img src={ClockIcon} alt="Clock Icon" />
 								<span>{item}</span>
 							</S.SearchHistoryItem>
 						))}
 					</S.SearchHistory>
 				)}
+
 
 				<S.MyIconWrapper>
 					<img src={MyIcon} alt="My Icon" />
