@@ -13,6 +13,9 @@ import ChangePassPage from './pages/ChangePassPage';
 import SignupEmailPage from './pages/SignupEmailPage';
 import SignupPage from './pages/SignupPage';
 import SignupDonePage from './pages/SignupDonePage';
+import WritePage from './pages/WritePage';
+import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -32,6 +35,8 @@ const Router = () => {
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/signupdone' element={<SignupDonePage />} />
           <Route path='/ssulpage' element={<SsulPage />} />
+          <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
+          <Route path='/write' element={<WritePage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
