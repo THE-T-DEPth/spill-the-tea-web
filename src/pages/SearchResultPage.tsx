@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import SearchBox from '../components/searchResult/Box';
 import BoxData from '../assets/data/BoxData';
 import * as S from '../styles/searchResult/SearchResultPageStyle';
-import SortButton from '../components/searchResult/SortButton';
 import Pagination from '../components/searchResult/Pagination';
 import { BoxProps } from '../components/searchResult/Box';
 import TopBar from '../components/searchResult/TopBar';
@@ -37,7 +36,6 @@ const SearchResultPage: React.FC<SearchResultPageProps> = () => {
             <S.SearchTitle>
               <span>“{searchQuery}”</span>에 맞는 썰입니다!
             </S.SearchTitle>
-            <SortButton />
           </S.TitleContainer>
           <S.GridContainer>
             {currentItems.map((data, index) => (
