@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -6,6 +7,12 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--BackColor);
+  height: calc(100vh - 100px);
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: var(--primary2);
+	height: calc(100vh);
+  }
 `;
 
 export const Title = styled.h1`
@@ -14,7 +21,15 @@ export const Title = styled.h1`
   margin-top: 172px;
   margin-bottom: 32px;
   text-align: center;
-  width: 452px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    font: var(--searchEmpty); 
+	margin-top: 161px;
+	text-align: left; 
+    width: 100%; 
+	max-width: 343px;
+	margin-bottom: 0px;
+  }
 `;
 
 export const PasswordBox = styled.div`
@@ -25,29 +40,40 @@ export const PasswordBox = styled.div`
   border-radius: 22px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    width: 343px; 
+    background: none; 
+    box-shadow: none; 
+  }
 `;
 
 export const FirstInputWrapper = styled.div`
-  width: 374px;
+  width: 100%;
+  max-width: 374px; 
   margin-top: 20px;
-  margin-left: 39px;
-  margin-right: 39px;
+  margin: 0 auto; 
   position: relative;
 `;
 
 export const SecondInputWrapper = styled.div`
-  width: 374px;
-  margin-left: 39px;
-  margin-right: 39px;
+  width: 100%; 
+  max-width: 374px; 
+  margin: 0 auto;
   position: relative;
 `;
 
 export const ChangeSubtitle = styled.div`
-  margin-top: 30px;
+  margin-top: 55px;
   font: var(--loginSmall);
   color: var(--EarlGrey);
   margin-bottom: 12px;
+  transition: color 0.2s ease-in-out;
+  ${isMobile}{
+	color: var(--G5);
+	margin-top: 42px;
+  }
 `;
 
 export const ErrorMessage = styled.p`
@@ -81,9 +107,9 @@ export const SuccessMessage = styled.p`
 `;
 
 export const PasswordGuidelineWrapper = styled.div`
-  width: 374px;
-  margin-left: 39px;
-  margin-right: 39px;
+  width: 100%;
+  max-width: 374px; 
+  margin: 0 auto; 
 `;
 
 export const PasswordGuidelineTitle = styled.p`
@@ -91,6 +117,9 @@ export const PasswordGuidelineTitle = styled.p`
   color: var(--EarlGrey);
   margin-bottom: 8px;
   text-align: left;
+  ${isMobile}{
+	color: var(--G5);
+  }
 `;
 
 export const PasswordGuidelineText = styled.div`
@@ -98,6 +127,11 @@ export const PasswordGuidelineText = styled.div`
   color: var(--G5);
   text-align: left;
   line-height: 1.5;
+  transition: color 0.2s ease-in-out;
+  ${isMobile}{
+	color: var(--G5);
+  }
+  
 `;
 
 export const Button = styled.button`
@@ -111,5 +145,18 @@ export const Button = styled.button`
   cursor: pointer;
   margin : 51.82px 39px 54.18px 39px;
   padding-top: 4px;
+  transition: color 0.2s ease-in-out;
+  ${isMobile} {
+	width: 343px;
+  height: 50px;
+  margin-bottom: 10px;
+  font: var(--labelButtonMobile);
+  background-color: var(--Sub1);
+  color: var(--Green2);
+  border: 1px solid var(--Green2);
+  border-radius: 4px;
+  align-items: center;
+  margin-top: 102px;
+  }
 
 `;

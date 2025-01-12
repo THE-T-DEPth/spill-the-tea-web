@@ -3,7 +3,7 @@ import * as S from "../styles/Login/CertificationNumPageStyle";
 import LoginInput from "../components/login/LoginInput";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyCertificationNumber, fetchTemporaryPassword } from "../api/DummyApi";
-
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 const CertificationNumPage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -11,6 +11,7 @@ const CertificationNumPage = () => {
 	const [certificationNumber, setCertificationNumber] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [showError, setShowError] = useState(false);
+	const { isMobile } = useNSMediaQuery();
 
 	const handleCertificationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCertificationNumber(e.target.value);
@@ -45,11 +46,11 @@ const CertificationNumPage = () => {
 		<>
 
 			<S.Wrapper>
-				<S.Title>비밀번호 찾기</S.Title>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 찾기"}</S.Title>
 				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
 				<S.PasswordBox>
 					<S.passwordWrapper>
-						<S.Label>비밀번호 인증하기</S.Label>
+						<S.Label>{isMobile ? "인증하기" : "비밀번호 인증하기"}</S.Label>
 						<S.EmailLabel>{`"${email}"로 인증번호가 발송되었습니다.`}</S.EmailLabel>
 						<LoginInput
 							type="password"

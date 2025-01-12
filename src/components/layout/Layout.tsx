@@ -3,24 +3,39 @@ import * as S from "../../styles/Layout/LayoutStyle";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import NavBar from "../layout/NavBar";
+import { useLocation } from "react-router-dom";
+import useNSMediaQuery from "../../hooks/useNSMediaQuery";
 
 interface LayoutProps {
 	children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+
+	const location = useLocation();
+	const { isMobile } = useNSMediaQuery();
+
+	const excludedPaths = [
+		"/login",
+		"/find-password",
+		"/certification-number",
+		"/temporary-password",
+		"/change-password",
+		"/signup-email",
+		"/signup",
+		"/signupdone",
+	];
+
+	const shouldHideHeaderAndNavBar =
+		isMobile && excludedPaths.includes(location.pathname);
+
 	return (
 		<S.Container>
-			<Header />
-			{/* 네비게이션 바 */}
-			{location.pathname !== '/login' &&
-				location.pathname !== '/find-password' &&
-				location.pathname !== '/certification-number' &&
-				location.pathname !== '/signup-email' &&
-				location.pathname !== '/signup' &&
-				location.pathname !== '/signupdone' &&
-				location.pathname !== '/mypage' && <NavBar />}
+			{!shouldHideHeaderAndNavBar && <Header />}
 
+			{!shouldHideHeaderAndNavBar && location.pathname !== "/mypage" && (
+				<NavBar />
+			)}
 
 			{/* 메인 콘텐츠 */}
 			<S.Main>{children}</S.Main>
