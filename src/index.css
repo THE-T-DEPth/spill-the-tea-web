@@ -34,8 +34,8 @@
 }
 
 @font-face {
-	font-family: "Pretendard";
-	src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff") format("woff");
+	font-family: 'Pretendard';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -43,33 +43,34 @@
 :root {
 	--Black: #000000;
 	--primary1: #271700;
-	--primary2: #FFFFFF;
+	--primary2: #ffffff;
 	--Secondary1: #676767;
 	--Secondary2: #939393;
-	--Secondary3: #D9D9D9;
-	--Main1: #DBF4DC;
-	--Main2: #7AC87D;
-	--Main3: #5AD75F;
-	--Sub1: #FFFFFF;
-	--Sub2: #FFFDEE;
-	--Sub5: #55533E;
-	--BackBar: #EFEFEF;
-	--DeleteButton: #948F79;
-	--InputBack: #F5F5F5;
-	--error1: #FF0000;
-	--Green1: #DBF4DC;
-	--Green2: #7AC87D;
-	--Green3: #5AD75F;
-	--EarlGrey: #55533E;
-	--LightGrey: #7D7D7D;
-	--Yellow: #FFFBDB;
+	--Secondary3: #d9d9d9;
+	--Main1: #dbf4dc;
+	--Main2: #7ac87d;
+	--Main3: #5ad75f;
+	--Sub1: #ffffff;
+	--Sub2: #fffdee;
+	--Sub5: #55533e;
+	--BackBar: #efefef;
+	--DeleteButton: #948f79;
+	--InputBack: #f5f5f5;
+	--error1: #ff0000;
+	--Green1: #dbf4dc;
+	--Green2: #7ac87d;
+	--Green3: #5ad75f;
+	--EarlGrey: #55533e;
+	--LightGrey: #7d7d7d;
+	--Yellow: #fffbdb;
 	--G5: #676767;
 	--G4: #939393;
-	--G3: #D9D9D9;
+	--G3: #d9d9d9;
 	--HeadLine: #271700;
 	--BackFirst: #f6f6f6;
 	--BackColor: #f6f6f6;
 	--KeywordBorder: #dec181;
+	--DropdownHover: #edffed;
 
 	--labelMini: 500 10px / normal 'Gmarket Sans';
 	--labelSmall: 500 12px / 150% 'Gmarket Sans';
@@ -106,20 +107,19 @@
 	--searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
 	--topBar: 500 16px / 18.4px 'Gmarket Sans';
 
-	--paragraphMini: 300 10px / 160% "Gmarket Sans";
-	--paragraphMiniL: 300 10px / 160% "Gmarket Sans";
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
-	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
-	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+	--paragraphMini: 300 10px / 160% 'Gmarket Sans';
+	--paragraphMiniL: 300 10px / 160% 'Gmarket Sans';
+	--paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+	--paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+	--paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+	--paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
 	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
 	--headerL: 400 14px / normal 'RixInooAriDuri';
 
-
-	--headerXL: 400 25.35px / normal "RixInooAriDuri";
-	--headerL: 400 14px / normal "RixInooAriDuri";
-	--footerMini: 400 6px / normal "Pretendard";
-	--buttonText: 700 12.48px / normal "Pretendard";
-
+	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
+	--headerL: 400 14px / normal 'RixInooAriDuri';
+	--footerMini: 400 6px / normal 'Pretendard';
+	--footerText: 400 10px / normal 'Pretendard';
+	--buttonText: 700 12.48px / normal 'Pretendard';
 	--selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
 }
