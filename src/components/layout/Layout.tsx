@@ -5,6 +5,8 @@ import Footer from "../layout/Footer";
 import NavBar from "../layout/NavBar";
 import { useLocation } from "react-router-dom";
 import useNSMediaQuery from "../../hooks/useNSMediaQuery";
+import YellowNav from './YellowNav';
+import WriteNav from './WriteNav';
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -30,13 +32,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 		isMobile && excludedPaths.includes(location.pathname);
 
 	return (
-		<S.Container>
+		<S.Container style={{ minWidth: isWritePage ? '1400px' : '' }}>
 			{!shouldHideHeaderAndNavBar && <Header />}
 
-			{!shouldHideHeaderAndNavBar && location.pathname !== "/mypage" && (
+			{!shouldHideHeaderAndNavBar && location.pathname !== "/mypage" && location.pathname !== '/write' && (
 				<NavBar />
 			)}
 
+			{isWritePage ? <WriteNav /> : <></>}
+			<YellowNav />
 			{/* 메인 콘텐츠 */}
 			<S.Main>{children}</S.Main>
 
