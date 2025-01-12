@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as S from "../styles/Login/TemporaryPassPageStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchTemporaryPassword } from "../api/DummyApi";
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const TemporaryPassPage: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const email = location.state?.email || "";
 	const [temporaryPassword, setTemporaryPassword] = useState<string>("******");
+	const { isMobile } = useNSMediaQuery();
 
 	useEffect(() => {
 		const fetchPassword = async () => {
@@ -30,7 +32,7 @@ const TemporaryPassPage: React.FC = () => {
 		<>
 
 			<S.Wrapper>
-				<S.Title>비밀번호 찾기</S.Title>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 찾기"}</S.Title>
 				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
 				<S.PasswordBox>
 					<S.passwordWrapper>

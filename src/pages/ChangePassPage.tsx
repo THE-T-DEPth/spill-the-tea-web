@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginInput from "../components/login/LoginInput"; // LoginInput 컴포넌트 경로
 import * as S from "../styles/Login/ChangePassPageStyle";
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const isValidPassword = (password: string): boolean => {
 	const lengthCondition = password.length >= 8 && password.length <= 20;
@@ -15,6 +16,7 @@ const ChangePassPage: React.FC = () => {
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 	const [passwordError, setPasswordError] = useState(false);
 	const [isSameAsNewPassword, setIsSameAsNewPassword] = useState(false);
+	const { isMobile } = useNSMediaQuery();
 
 	const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -42,7 +44,7 @@ const ChangePassPage: React.FC = () => {
 		<>
 
 			<S.Wrapper>
-				<S.Title>비밀번호 변경하기</S.Title>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 변경하기"}</S.Title>
 				<S.PasswordBox>
 					<S.FirstInputWrapper>
 						<S.ChangeSubtitle>비밀번호 변경하기</S.ChangeSubtitle>
@@ -79,8 +81,20 @@ const ChangePassPage: React.FC = () => {
 					<S.PasswordGuidelineWrapper>
 						<S.PasswordGuidelineTitle>비밀번호 설정 안내</S.PasswordGuidelineTitle>
 						<S.PasswordGuidelineText>
-							"비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br></br> 각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다."
+							{isMobile ? (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나<br />
+									반복되는 문자는 사용할 수 없습니다.
+								</>
+							) : (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다.
+								</>
+							)}
 						</S.PasswordGuidelineText>
+
 					</S.PasswordGuidelineWrapper>
 					<S.Button onClick={handleChangePassword}>확인</S.Button>
 				</S.PasswordBox>
