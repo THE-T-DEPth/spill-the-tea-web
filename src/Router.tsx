@@ -15,6 +15,7 @@ import SignupPage from './pages/SignupPage';
 import SignupDonePage from './pages/SignupDonePage';
 import WritePage from './pages/WritePage';
 import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
+import LikedSsulPage from './pages/LikedSsulPage';
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
           <Route path='/ssulpage' element={<SsulPage />} />
           <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
           <Route path='/write' element={<WritePage />} />
+          <Route path='/likedssuls' element={<LikedSsulPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
