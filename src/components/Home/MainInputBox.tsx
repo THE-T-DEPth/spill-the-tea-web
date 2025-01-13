@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import * as S from "../../styles/Home/MainInputBoxStyle";
-import Box, { BoxProps } from "../searchResult/Box";
+import Box, { BoxProps } from "../Home/Box";
 import VectorLeft from "../../assets/Icons/VectorLeft.svg";
 import VectorRight from "../../assets/Icons/VectorRight.svg";
 import useNSMediaQuery from "../../hooks/useNSMediaQuery";
