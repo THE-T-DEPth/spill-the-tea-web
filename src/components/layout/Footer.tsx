@@ -4,14 +4,18 @@ import GithubIcon from "../../assets/Icons/Github.svg";
 import InstaIcon from "../../assets/Icons/Insta.svg";
 import MailIcon from "../../assets/Icons/Mail.svg";
 import DepthLogo from "../../assets/Icons/DepthLogo.svg";
+import LogoMobile from "../../assets/Icons/LogoMobile.svg"; // 모바일 로고 import
+import useNSMediaQuery from "../../hooks/useNSMediaQuery"; // 반응형 훅
 
 const Footer = () => {
+	const { isMobile } = useNSMediaQuery(); // 모바일 여부 판단
+
 	return (
 		<S.Container>
 			<S.Content>
 				{/* 로고 */}
 				<S.LogoWrapper>
-					<img src={DepthLogo} alt="Depth Logo" />
+					<img src={isMobile ? LogoMobile : DepthLogo} alt="Depth Logo" />
 				</S.LogoWrapper>
 
 				{/* 텍스트 */}

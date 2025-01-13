@@ -1,26 +1,31 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 220px;
   display: flex;
   margin-left: auto;
-  margin-top: 1px;
+  margin-top: -7px;
   position: relative;
+  height: 38px;
 `;
 
 export const Button = styled.button`
-  width: 115px;
+  width: 220px;
   height: 38px;
   margin-left: auto;
   background: var(--primary2);
   box-sizing: border-box;
   border: 1px solid var(--Main2);
   border-radius: 4px;
-  padding: 7px 15px 7px 14px;
+  padding: 7px 13px 7px 20px;
   font: var(--dropDown);
   display: flex;
   align-items: center;
-  gap: 8px;
+  position: relative;
+
+  img {
+    margin-left: auto;
+  }
 `;
 
 export const DropdownContainer = styled.div`
@@ -30,7 +35,7 @@ export const DropdownContainer = styled.div`
   background: var(--primary2);
   display: flex;
   flex-direction: column;
-  top: calc(100% - 10px);
+  top: calc(100% + 11px);
   position: absolute;
   z-index: 100;
 
@@ -57,6 +62,6 @@ export const DropdownMenu = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: var(--Green);
+    background: var(--DropdownHover);
   }
 `;

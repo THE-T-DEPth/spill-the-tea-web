@@ -76,6 +76,7 @@
   --BackFirst: #f6f6f6;
   --BackColor: #f6f6f6;
   --KeywordBorder: #dec181;
+  --DropdownHover: #edffed;
 
   --labelMini: 500 10px / normal 'Gmarket Sans';
   --labelSmall: 500 12px / 150% 'Gmarket Sans';
@@ -124,8 +125,10 @@
   --headerXL: 400 25.35px / normal 'RixInooAriDuri';
   --headerL: 400 14px / normal 'RixInooAriDuri';
   --footerMini: 400 6px / normal 'Pretendard';
+  --footerText: 400 10px / normal 'Pretendard';
   --buttonText: 700 12.48px / normal 'Pretendard';
   --selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
+
   --mypageTitle: 700 21.33px / 29.86px 'Gmarket Sans';
   --mypageButton: 500 21.33px / 31.99px 'Gmarket Sans';
   --modalButton: 500 19.5px / 22.42px 'Gmarket Sans';
