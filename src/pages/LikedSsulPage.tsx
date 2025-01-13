@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import * as S from '../styles/likedssuls/LikedSsulPageStyle';
 import TopBar from '../components/searchResult/TopBar';
-import SortButton from '../components/searchResult/SortButton';
+import SortButton from '../components/likedssuls/SortButton';
 import Box from '../components/searchResult/Box';
 import BoxData from '../assets/data/BoxData';
 import { BoxProps } from '../components/searchResult/Box';
-import Pagination from '../styles/searchResult/Pagination';
+import Pagination from '../components/searchResult/Pagination';
 
 const LikedSsulPage = () => {
   const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15)); // 초기 데이터
