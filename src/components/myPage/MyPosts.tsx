@@ -3,8 +3,8 @@ import * as S from '../../styles/myPage/MyPostsStyle';
 import Box from '../searchResult/Box';
 import BoxData from '../../assets/data/BoxData';
 import { BoxProps } from '../../components/searchResult/Box';
-import SortButton from '../searchResult/SortButton';
-import Pagination from '../../styles/searchResult/Pagination';
+import SortButton from '../likedssuls/SortButton';
+import Pagination from '../../components/searchResult/Pagination';
 
 const MyPosts = () => {
   const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15));
