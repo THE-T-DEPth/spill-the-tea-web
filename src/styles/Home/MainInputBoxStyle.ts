@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const OutContainer = styled.div`
   width: 100%;
@@ -32,6 +33,10 @@ export const LeftArrow = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    display: none; 
+  }
 `;
 
 export const RightArrow = styled(LeftArrow)`
@@ -48,6 +53,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+  }
 `;
 
 export const HeaderWrap = styled.div`
@@ -58,6 +68,11 @@ export const HeaderWrap = styled.div`
   align-items: center;
   font: var(--headerTop);
   border-bottom: 0.75px solid #dbdbdb;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+  }
 `;
 
 export const Header = styled.div`
@@ -66,6 +81,11 @@ export const Header = styled.div`
   color: var(--Black);
   padding-left: 34px;
   margin: 9.5px 0;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+	font: var(--headerMedium);
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -77,6 +97,11 @@ export const ContentContainer = styled.div`
   position: relative;
   background-color: var(--BackYellow);
   display: flex;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+  }
 `;
 
 export const Slider = styled.div<{ startIndex: number; isTransitioning: boolean }>`
