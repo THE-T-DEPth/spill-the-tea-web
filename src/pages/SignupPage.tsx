@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SignupInputBox from "../components/signup/SignupInputBox";
 import * as S from '../styles/Signup/SignupPageStyle';
 import { useNavigate } from 'react-router-dom';
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 // Dummy API for nickname check
 const checkNicknameAvailability = (nickname: string): Promise<'valid' | 'invalid'> => {
@@ -19,6 +20,7 @@ const SignupPage: React.FC = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [nicknameStatus, setNicknameStatus] = useState<'valid' | 'invalid' | null>(null);
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+	const { isMobile } = useNSMediaQuery();
 
 	const navigate = useNavigate();
 
@@ -72,7 +74,10 @@ const SignupPage: React.FC = () => {
 
 			<S.Wrapper>
 				<S.Header>
-					<S.Title>회원가입</S.Title>
+					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
+					{isMobile && (
+						<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
+					)}
 				</S.Header>
 				<S.SignupBox>
 					<S.SignupInputWrapper>
@@ -110,8 +115,17 @@ const SignupPage: React.FC = () => {
 							/>
 						</S.SignInputWrapper>
 						<S.PasswordGuideline>
-							비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를 <br />
-							각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다.
+							{isMobile ? (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 <br />사용할 수 없습니다.
+								</>
+							) : (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다.
+								</>
+							)}
 						</S.PasswordGuideline>
 						<S.InputWrapper>
 							<SignupInputBox
