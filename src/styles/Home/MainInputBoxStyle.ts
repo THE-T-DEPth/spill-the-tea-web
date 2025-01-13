@@ -43,7 +43,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1046px;
   height: 376px;
-  background-color: #f6f6f6;
+  background-color:var(--Sub2);
   border: 0.75px solid #dbdbdb;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,6 @@ export const Slider = styled.div<{ startIndex: number; isTransitioning: boolean 
 
 export const BoxWrapper = styled.div<{ isActive: boolean }>`
   pointer-events: ${({ isActive }) => (isActive ? "auto" : "none")};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
   transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
