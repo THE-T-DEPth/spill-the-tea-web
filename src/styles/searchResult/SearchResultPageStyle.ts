@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 1046px;
@@ -39,7 +39,6 @@ export const SortButton = styled.button`
 export const PaginationContainer = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: center;
 `;
 
