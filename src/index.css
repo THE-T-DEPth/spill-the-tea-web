@@ -124,4 +124,8 @@
 	--footerText: 400 10px / normal 'Pretendard';
 	--buttonText: 700 12.48px / normal 'Pretendard';
 	--selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
+
+	--mypageTitle: 700 21.33px / 29.86px 'Gmarket Sans';
+	--mypageButton: 500 21.33px / 31.99px 'Gmarket Sans';
+	--modalButton: 500 19.5px / 22.42px 'Gmarket Sans';
 }
