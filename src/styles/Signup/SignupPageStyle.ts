@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from "../../hooks/Media";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -6,36 +7,81 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color:var(--BackFirst);
+  height: calc(100vh - 100px);
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: var(--primary2);
+	height: calc(100vh);
+  }
 `;
 
 export const Header = styled.div`
-  text-align: center;
+    width: 100%; 
+  max-width: 452px; 
+  margin: 0 auto; 
+  text-align: center; 
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    max-width: 343px; 
+    text-align: left; 
+  }
 `;
 
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
   margin-top: 135px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    font: var(--searchEmpty); 
+    margin-top: 161px;
+  }
+`;
+export const Subtitle = styled.p`
+  /* 기본적으로 숨김 처리 */
+  display: none;
+
+  ${isMobile} {
+    display: block; /* 모바일에서만 표시 */
+    font: var(--labelSmall); 
+    color: var(--G5);
+  }
 `;
 
+
 export const SignupBox = styled.div`
-  width: 452px;
+  width: 100%; 
+  max-width: 452px;
   background:var(--Sub1);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto; 
   margin-bottom: 119px;
+  transition: all 0.3s ease-in-out;
+${isMobile} {
+  width: 100%;
+  max-width: 343px;
+  margin-top: 0px;
+  margin-bottom: 65px;
+  background: none; 
+  box-shadow: none; 
+}
 `;
 
 export const SignupInputWrapper = styled.div`
-  width: 374px;
+    width: 100%; 
+  max-width: 374px; 
+  margin: 0 auto; 
   margin-top: 55px;
 `;
 
 export const NameInputWrapper = styled.div`
-  width: 100%;
+  width: 100%; 
+  max-width: 374px; 
+  margin: 0 auto; 
   margin-bottom: 17px;
 `;
 
@@ -58,6 +104,11 @@ export const Label = styled.label`
   color: var(--Sub5);
   margin-bottom: 12px;
   display: block;
+  ${isMobile}{
+	font: var(--signupMobile);
+	color: var(--G5);
+	margin-top: 0px;
+  }
 `;
 
 export const NicknameStatusText = styled.p<{ status: 'valid' | 'invalid' | null }>`
@@ -109,9 +160,16 @@ export const SubmitButton = styled.button<{ disabled: boolean }>`
   font: var(--labelLarge);
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   transition: background-color 0.3s ease, color 0.3s ease;
+  ${isMobile} {
+	width: 343px;
+  height: 45px;
+  margin-bottom: 0px;
+  font: var(--labelMedium);
+  border-radius: 4px;
+  }
 
   &:hover:not(:disabled) {
-    background-color: var(--Green2); /* 비활성화 상태가 아닌 경우 hover 색상 */
+    background-color: var(--Green2);
   }
 `;
 

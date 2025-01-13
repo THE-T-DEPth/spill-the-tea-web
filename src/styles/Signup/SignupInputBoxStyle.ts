@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from "../../hooks/Media";
 
 export const InputWrap = styled.div`
 	display: flex;
@@ -24,6 +25,11 @@ export const InputField = styled.input`
 	font: var(--labelMedium);
 	color: var(--Sub5);
 	box-sizing: border-box;
+	${isMobile} {
+	width: 342.64px;
+	height: 42.99px;
+	border-radius: 4px;
+  }
 
 	&::placeholder {
 		color: #bbb;
@@ -54,6 +60,13 @@ export const ButtonOverlay = styled.div`
 	font:var(--buttonText);
 	cursor: pointer;
 	box-sizing: border-box; 
+	${isMobile} {
+	width: 78px;
+	height: 33px;
+	border-radius: 5px;
+	padding-top: 2px;
+	font:var(--labelSmall);
+  }
 	
 `;
 

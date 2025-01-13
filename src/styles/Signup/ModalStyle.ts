@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { isMobile } from "../../hooks/Media";
+
 
 export const Overlay = styled.div`
   position: fixed;
@@ -20,6 +22,11 @@ export const ModalBox = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
+  ${isMobile}{
+	width: 345px;
+	height: 157px;
+	border-radius: 4px;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -29,10 +36,18 @@ export const CloseButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  ${isMobile}{
+	top: 10px;
+	right: 10px;
+  }
 
   img {
     width: 16px;
     height: 16px;
+	${isMobile}{
+	width: 10px;
+	height: 10px;
+  }
   }
 `;
 
@@ -41,6 +56,11 @@ export const Message = styled.p`
   color: var(--HeadLine);
   margin-bottom: 52px;
   margin-top: 86px;
+  ${isMobile}{
+  font: var(--headingSmall);
+  margin-top: 41.1px;
+  margin-bottom: 37.9px;
+  }
 `;
 
 export const ConfirmButton = styled.button`
@@ -54,4 +74,12 @@ export const ConfirmButton = styled.button`
   border-radius: 20px;
   font: var(--labelLarge);
   cursor: pointer;
+  ${isMobile}{
+	width: 105px;
+	height: 27px;
+	border-radius: 4px;
+	font:var(--labelSmall);
+	padding-top: 2px;
+	margin-bottom: 34px;
+  }
 `;
