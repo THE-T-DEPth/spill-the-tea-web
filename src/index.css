@@ -1,153 +1,159 @@
 @font-face {
-	font-family: 'Gmarket Sans';
-	font-style: normal;
-	font-weight: 300;
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+    format('woff');
 }
 
 @font-face {
-	font-family: 'Gmarket Sans';
-	font-style: normal;
-	font-weight: 500;
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
 }
 
 @font-face {
-	font-family: 'Gmarket Sans';
-	font-style: normal;
-	font-weight: 700;
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+    format('woff');
 }
 
 @font-face {
-	font-family: 'RixInooAriDuri';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
+  font-family: 'RixInooAriDuri';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'Pretendard';
-	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+    format('woff');
+  font-weight: 700;
+  font-style: normal;
 }
 
 :root {
-	--Black: #000000;
-	--primary1: #271700;
-	--primary2: #ffffff;
-	--Secondary1: #676767;
-	--Secondary2: #939393;
-	--Secondary3: #d9d9d9;
-	--Main1: #dbf4dc;
-	--Main2: #7ac87d;
-	--Main3: #5ad75f;
-	--Sub1: #ffffff;
-	--Sub2: #fffdee;
-	--Sub5: #55533e;
-	--BackBar: #efefef;
-	--DeleteButton: #948f79;
-	--InputBack: #f5f5f5;
-	--error1: #ff0000;
-	--Green1: #dbf4dc;
-	--Green2: #7ac87d;
-	--Green3: #5ad75f;
-	--EarlGrey: #55533e;
-	--LightGrey: #7d7d7d;
-	--Yellow: #fffbdb;
-	--G5: #676767;
-	--G4: #939393;
-	--G3: #d9d9d9;
-	--HeadLine: #271700;
-	--BackFirst: #f6f6f6;
-	--BackColor: #f6f6f6;
-	--KeywordBorder: #dec181;
-	--DropdownHover: #edffed;
+  --Black: #000000;
+  --primary1: #271700;
+  --primary2: #ffffff;
+  --Secondary1: #676767;
+  --Secondary2: #939393;
+  --Secondary3: #d9d9d9;
+  --Main1: #dbf4dc;
+  --Main2: #7ac87d;
+  --Main3: #5ad75f;
+  --Sub1: #ffffff;
+  --Sub2: #fffdee;
+  --Sub5: #55533e;
+  --BackBar: #efefef;
+  --DeleteButton: #948f79;
+  --InputBack: #f5f5f5;
+  --error1: #ff0000;
+  --Green1: #dbf4dc;
+  --Green2: #7ac87d;
+  --Green3: #5ad75f;
+  --EarlGrey: #55533e;
+  --LightGrey: #7d7d7d;
+  --Yellow: #fffbdb;
+  --G5: #676767;
+  --G4: #939393;
+  --G3: #d9d9d9;
+  --HeadLine: #271700;
+  --BackFirst: #f6f6f6;
+  --BackColor: #f6f6f6;
+  --KeywordBorder: #dec181;
+  --DropdownHover: #edffed;
 
-	--labelMini: 500 10px / normal 'Gmarket Sans';
-	--labelSmall: 500 12px / 150% 'Gmarket Sans';
-	--labelMedium: 500 16px / 150% 'Gmarket Sans';
-	--labelLarge: 500 21.3px / 150% 'Gmarket Sans';
-	--labelXL: 500 28.4px / 150% 'Gmarket Sans';
-	--labelXXL: 500 37.9px / 150% 'Gmarket Sans';
-	--loginSmall: 500 15px / normal 'Gmarket Sans';
-	--headingSmall: 700 12px / 140% 'Gmarket Sans';
-	--headingMedium: 700 16px / 140% 'Gmarket Sans';
-	--headingLarge: 700 21.3px / 140% 'Gmarket Sans';
-	--headingXL: 700 28.4px / 140% 'Gmarket Sans';
-	--headingXXL: 700 37.9px / 140% 'Gmarket Sans';
-	--searchBold: 700 10px / normal 'Gmarket Sans';
+  --labelMini: 500 10px / normal 'Gmarket Sans';
+  --labelSmall: 500 12px / 150% 'Gmarket Sans';
+  --labelMedium: 500 16px / 150% 'Gmarket Sans';
+  --labelLarge: 500 21.3px / 150% 'Gmarket Sans';
+  --labelXL: 500 28.4px / 150% 'Gmarket Sans';
+  --labelXXL: 500 37.9px / 150% 'Gmarket Sans';
+  --loginSmall: 500 15px / normal 'Gmarket Sans';
+  --headingSmall: 700 12px / 140% 'Gmarket Sans';
+  --headingMedium: 700 16px / 140% 'Gmarket Sans';
+  --headingLarge: 700 21.3px / 140% 'Gmarket Sans';
+  --headingXL: 700 28.4px / 140% 'Gmarket Sans';
+  --headingXXL: 700 37.9px / 140% 'Gmarket Sans';
+  --searchBold: 700 10px / normal 'Gmarket Sans';
 
-	--labelButton: 500 19.5px / normal 'Gmarket Sans';
-	--labelMini: 500 10px / normal 'Gmarket Sans';
-	--labelSmall: 500 12px / 150% 'Gmarket Sans';
-	--labelMedium: 500 16px / 150% 'Gmarket Sans';
-	--labelLarge: 500 21.3px / 150% 'Gmarket Sans';
-	--labelXL: 500 28.4px / 150% 'Gmarket Sans';
-	--labelXXL: 500 37.9px / 150% 'Gmarket Sans';
+  --labelButton: 500 19.5px / normal 'Gmarket Sans';
+  --labelMini: 500 10px / normal 'Gmarket Sans';
+  --labelSmall: 500 12px / 150% 'Gmarket Sans';
+  --labelMedium: 500 16px / 150% 'Gmarket Sans';
+  --labelLarge: 500 21.3px / 150% 'Gmarket Sans';
+  --labelXL: 500 28.4px / 150% 'Gmarket Sans';
+  --labelXXL: 500 37.9px / 150% 'Gmarket Sans';
 
-	--paragraphSmall: 300 12px / 160% 'Gmarket Sans';
-	--paragraphMedium: 300 16px / 160% 'Gmarket Sans';
-	--paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
-	--paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
+  --paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+  --paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+  --paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+  --paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
 
-	--boxTitle: 700 14px / 19.6px 'Gmarket Sans';
-	--boxKeyword: 500 8.73px / 10.03px 'Gmarket Sans';
-	--boxInfo: 500 8px / 12px 'Gmarket Sans';
-	--dropDown: 500 16px / 24px 'Gmarket Sans';
-	--searchKeyword: 700 21.33px / 150% 'Gmarket Sans';
-	--searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
-	--topBar: 500 16px / 18.4px 'Gmarket Sans';
+  --boxTitle: 700 14px / 19.6px 'Gmarket Sans';
+  --boxKeyword: 500 8.73px / 10.03px 'Gmarket Sans';
+  --boxInfo: 500 8px / 12px 'Gmarket Sans';
+  --dropDown: 500 16px / 24px 'Gmarket Sans';
+  --searchKeyword: 700 21.33px / 150% 'Gmarket Sans';
+  --searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
+  --topBar: 500 16px / 18.4px 'Gmarket Sans';
 
-	--paragraphMini: 300 10px / 160% "Gmarket Sans";
-	--paragraphMiniL: 300 10px / 160% "Gmarket Sans";
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
-	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
-	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
-	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
-	--headerL: 400 14px / normal 'RixInooAriDuri';
+  --paragraphMini: 300 10px / 160% 'Gmarket Sans';
+  --paragraphMiniL: 300 10px / 160% 'Gmarket Sans';
+  --paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+  --paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+  --paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+  --paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
+  --headerXL: 400 25.35px / normal 'RixInooAriDuri';
+  --headerL: 400 14px / normal 'RixInooAriDuri';
 
-	--headerFirst: 400 22px / normal "RixInooAriDuri";
-	--headerXL: 400 25.35px / normal "RixInooAriDuri";
-	--headerL: 400 14px / normal "RixInooAriDuri";
-	--headerTop: 400 17px / normal "RixInooAriDuri";
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
-	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
-	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+  --headerFirst: 400 22px / normal 'RixInooAriDuri';
+  --headerXL: 400 25.35px / normal 'RixInooAriDuri';
+  --headerL: 400 14px / normal 'RixInooAriDuri';
+  --headerTop: 400 17px / normal 'RixInooAriDuri';
+  --paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+  --paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+  --paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+  --paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
 
-	--boxTitle: 700 14px / 19.6px "Gmarket Sans";
-	--boxKeyword: 500 8.73px / 10.03px "Gmarket Sans";
-	--boxInfo: 500 8px / 12px "Gmarket Sans";
-	--dropDown: 500 16px / 24px "Gmarket Sans";
-	--searchKeyword: 700 21.3px / 150% "Gmarket Sans";
-	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
-	--topBar: 500 16px / 18.4px "Gmarket Sans";
-	--boxTitle: 700 14px / 19.6px "Gmarket Sans";
-	--boxKeyword: 500 8.73px / 10.03px "Gmarket Sans";
-	--boxInfo: 500 8px / 12px "Gmarket Sans";
-	--dropDown: 500 16px / 24px "Gmarket Sans";
-	--searchKeyword: 700 21.3px / 150% "Gmarket Sans";
-	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
-	--topBar: 500 16px / 18.4px "Gmarket Sans";
+  --boxTitle: 700 14px / 19.6px 'Gmarket Sans';
+  --boxKeyword: 500 8.73px / 10.03px 'Gmarket Sans';
+  --boxInfo: 500 8px / 12px 'Gmarket Sans';
+  --dropDown: 500 16px / 24px 'Gmarket Sans';
+  --searchKeyword: 700 21.3px / 150% 'Gmarket Sans';
+  --searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
+  --topBar: 500 16px / 18.4px 'Gmarket Sans';
+  --boxTitle: 700 14px / 19.6px 'Gmarket Sans';
+  --boxKeyword: 500 8.73px / 10.03px 'Gmarket Sans';
+  --boxInfo: 500 8px / 12px 'Gmarket Sans';
+  --dropDown: 500 16px / 24px 'Gmarket Sans';
+  --searchKeyword: 700 21.3px / 150% 'Gmarket Sans';
+  --searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
+  --topBar: 500 16px / 18.4px 'Gmarket Sans';
 
-	--headerXL: 400 25.35px / normal "RixInooAriDuri";
-	--headerL: 400 14px / normal "RixInooAriDuri";
-	--footerMini: 400 6px / normal "Pretendard";
-	--footerText: 400 10px / normal 'Pretendard';
-	--buttonText: 700 12.48px / normal "Pretendard";
-	--selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
+  --headerXL: 400 25.35px / normal 'RixInooAriDuri';
+  --headerL: 400 14px / normal 'RixInooAriDuri';
+  --footerMini: 400 6px / normal 'Pretendard';
+  --footerText: 400 10px / normal 'Pretendard';
+  --buttonText: 700 12.48px / normal 'Pretendard';
+  --selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
 
-	--mypageTitle: 700 21.33px / 29.86px 'Gmarket Sans';
-	--mypageButton: 500 21.33px / 31.99px 'Gmarket Sans';
-	--modalButton: 500 19.5px / 22.42px 'Gmarket Sans';
+  --mypageTitle: 700 21.33px / 29.86px 'Gmarket Sans';
+  --mypageButton: 500 21.33px / 31.99px 'Gmarket Sans';
+  --modalButton: 500 19.5px / 22.42px 'Gmarket Sans';
 }

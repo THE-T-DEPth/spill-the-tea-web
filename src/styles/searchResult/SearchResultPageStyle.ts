@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
-  width: 1046px;
+  max-width: 1046px;
   height: 909px;
   margin: 53px auto 100px;
+
+  ${isMobile} {
+    width: 359px;
+    margin: 18px auto;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -29,6 +35,13 @@ export const GridContainer = styled.div`
   grid-auto-flow: row;
   width: 100%;
   box-sizing: border-box;
+
+  ${isMobile} {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 8px;
+    grid-row-gap: 18px;
+  }
 `;
 
 export const SortButton = styled.button`
