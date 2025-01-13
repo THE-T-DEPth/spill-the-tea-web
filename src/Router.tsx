@@ -16,7 +16,6 @@ import SignupDonePage from './pages/SignupDonePage';
 import WritePage from './pages/WritePage';
 import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
 import LikedSsulPage from './pages/LikedSsulPage';
-import SignupDonePage from './pages/SignupDonePage';
 import MyPage from './pages/MyPage';
 
 const Router = () => {
