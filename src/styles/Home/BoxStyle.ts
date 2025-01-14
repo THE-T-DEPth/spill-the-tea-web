@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { isMobile } from "../../hooks/Media";
 export const Title = styled.div<{ disabled?: boolean }>`
   width: 100%;
   height: 27px;
@@ -10,6 +10,9 @@ export const Title = styled.div<{ disabled?: boolean }>`
   align-items: center;
   justify-content: center;
   color: ${({ disabled }) => (disabled ? "var(--G5)" : "inherit")}; /* 텍스트 색상 변경 */
+  ${isMobile}{
+	font: var(--boxTitleMobile);
+  }
 `;
 
 export const Container = styled.div<{ disabled?: boolean }>`
@@ -22,6 +25,10 @@ export const Container = styled.div<{ disabled?: boolean }>`
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
+  ${isMobile}{
+	width: 152.88px;
+	height: 210px;
+  }
 
   &:hover {
     box-shadow: ${({ disabled }) =>
@@ -41,6 +48,11 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
   margin-top: 8px;
   background: ${({ disabled }) => (disabled ? "var(--G3)" : "none")};
   opacity: 1; /* 투명도 제거 */
+  ${isMobile}{
+	width: 113px;
+  height: 113px;
+  margin-top: 6.44px;
+  }
 `;
 
 export const Image = styled.img<{ disabled?: boolean }>`
@@ -57,6 +69,11 @@ export const Keywords = styled.div`
   justify-content: center;
   gap: 13px;
   margin: 8px 0 10px;
+  ${isMobile}{
+	margin-top: 6.44px;
+	margin-bottom: 6.44px;
+	gap: 10.46px;
+  }
 `;
 
 export const Keyword = styled.span<{ disabled?: boolean }>`
@@ -67,6 +84,10 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
+  ${isMobile}{    
+	padding: 2.84px 5px;
+	font: var(--boxInfoMobile);
+  }
 
   background-color: ${({ disabled }) =>
 		disabled ? "var(--G3)" : "transparent"};
@@ -91,6 +112,9 @@ export const InfoContainer = styled.div<{ disabled?: boolean }>`
   font: var(--boxInfo);
   color: ${({ disabled }) => (disabled ? "var(--G5)" : "var(--primary1)")};
   margin: 0;
+  ${isMobile}{    
+	margin-bottom: 4px;
+  }
 `;
 
 export const LikeContainer = styled.div<{ disabled?: boolean }>`
@@ -99,6 +123,10 @@ export const LikeContainer = styled.div<{ disabled?: boolean }>`
   margin-bottom: 5px;
   height: 14px;
   justify-content: center;
+  ${isMobile}{
+	gap: 12px;
+	margin-bottom: 4px;
+  }
   
 `;
 
@@ -123,4 +151,7 @@ export const TimeContainer = styled.div<{ disabled?: boolean }>`
   height: 14px;
   justify-content: center;
   color: ${({ disabled }) => (disabled ? "var(--G5)" : "inherit")};
+  ${isMobile}{    
+	margin-bottom: 8.06px;
+  }
 `;

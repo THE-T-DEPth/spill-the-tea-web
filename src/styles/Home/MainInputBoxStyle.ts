@@ -57,6 +57,7 @@ export const Container = styled.div`
   ${isMobile} {
     background-color: transparent; 
     border: none; 
+	height: 280px;
   }
 `;
 
@@ -72,6 +73,8 @@ export const HeaderWrap = styled.div`
   ${isMobile} {
     background-color: transparent; 
     border: none; 
+	margin-top: 0px;
+	height: 0px;
   }
 `;
 
@@ -81,10 +84,14 @@ export const Header = styled.div`
   color: var(--Black);
   padding-left: 34px;
   margin: 9.5px 0;
+  transition: all 0.3s ease-in-out;
   ${isMobile} {
     background-color: transparent; 
     border: none; 
 	font: var(--headerMedium);
+	padding-left: 16px;
+	margin: 0;
+
   }
 `;
 
@@ -104,15 +111,32 @@ export const ContentContainer = styled.div`
   }
 `;
 
-export const Slider = styled.div<{ startIndex: number; isTransitioning: boolean }>`
-  display: flex;
-  transition: ${({ isTransitioning }) => (isTransitioning ? "transform 0.3s ease-in-out" : "none")};
-  transform: ${({ startIndex }) =>
-		`translateX(calc(-${startIndex * 212}px + 112px))`};
-  width: calc(100% + 112px); 
-`;
+interface SliderProps {
+	startIndex: number;
+	isTransitioning: boolean;
+	isMobile: boolean;
+}
 
-export const BoxWrapper = styled.div<{ isActive: boolean }>`
+export const Slider = styled.div.withConfig({
+	shouldForwardProp: (prop) => !["startIndex", "isTransitioning", "isMobile"].includes(prop),
+}) <SliderProps>`
+	display: flex;
+	transition: ${({ isTransitioning }) => (isTransitioning ? "transform 0.3s ease-in-out" : "none")};
+	transform: ${({ startIndex, isMobile }) => {
+		const boxWidth = isMobile ? 152.88 : 190;
+		const boxMargin = 11;
+		const containerOffset = isMobile ? 118.9 : 112;
+		return `translateX(calc(-${startIndex * (boxWidth + boxMargin * 2)}px + ${containerOffset}px))`;
+	}};
+	width: ${({ isMobile }) => (isMobile ? "calc(100% + 118.9px)" : "calc(100% + 112px)")};
+  `;
+
+
+
+
+export const BoxWrapper = styled.div.attrs<{ isActive: boolean }>(() => ({
+	isActive: undefined, // DOM에 전달되지 않도록 설정
+})) <{ isActive: boolean }>`
   pointer-events: ${({ isActive }) => (isActive ? "auto" : "none")};
   transition: opacity 0.3s ease;
   display: flex;
@@ -122,6 +146,10 @@ export const BoxWrapper = styled.div<{ isActive: boolean }>`
   margin: 37px 11px;
   width: 190px;
   height: 253px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    margin-top: 15px;
+  }
 `;
 
 export const EmptyMessage = styled.div`

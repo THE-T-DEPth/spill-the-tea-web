@@ -19,7 +19,7 @@ const boxData = [
 	},
 	{
 		title: "13글자이상13글자이상13글자이상",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -27,7 +27,7 @@ const boxData = [
 	},
 	{
 		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -52,7 +52,7 @@ const boxData = [
 	},
 	{
 		title: "일곱번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -60,7 +60,7 @@ const boxData = [
 	},
 	{
 		title: "8째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -68,7 +68,7 @@ const boxData = [
 	},
 	{
 		title: "9 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		time: "14:15",
@@ -78,7 +78,7 @@ const boxData = [
 
 	{
 		title: "10 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -86,7 +86,7 @@ const boxData = [
 	},
 	{
 		title: "11 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -94,7 +94,7 @@ const boxData = [
 	},
 	{
 		title: "12 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		time: "14:15",
@@ -103,7 +103,7 @@ const boxData = [
 	},
 	{
 		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -111,7 +111,7 @@ const boxData = [
 	},
 	{
 		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,
@@ -119,32 +119,7 @@ const boxData = [
 	},
 	{
 		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
-		keywords: ["# 스트레스", "# 시험", "# 돈"],
-		date: "24.12.20",
-		time: "14:15",
-		likes: 300,
-		comments: "1.1K",
-	},
-	{
-		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
-		keywords: ["# 스트레스", "# 시험", "# 돈"],
-		date: "24.12.20",
-		likes: 300,
-		comments: "1.1K",
-	},
-	{
-		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
-		keywords: ["# 스트레스", "# 시험", "# 돈"],
-		date: "24.12.20",
-		likes: 300,
-		comments: "1.1K",
-	},
-	{
-		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		time: "14:15",
@@ -153,7 +128,32 @@ const boxData = [
 	},
 	{
 		title: "두 번째 게시글",
-		image: "https://via.placeholder.com/140",
+		image: "src/assets/images/boximg2.png",
+		keywords: ["# 스트레스", "# 시험", "# 돈"],
+		date: "24.12.20",
+		likes: 300,
+		comments: "1.1K",
+	},
+	{
+		title: "두 번째 게시글",
+		image: "src/assets/images/boximg2.png",
+		keywords: ["# 스트레스", "# 시험", "# 돈"],
+		date: "24.12.20",
+		likes: 300,
+		comments: "1.1K",
+	},
+	{
+		title: "두 번째 게시글",
+		image: "src/assets/images/boximg2.png",
+		keywords: ["# 스트레스", "# 시험", "# 돈"],
+		date: "24.12.20",
+		time: "14:15",
+		likes: 300,
+		comments: "1.1K",
+	},
+	{
+		title: "두 번째 게시글",
+		image: "src/assets/images/boximg2.png",
 		keywords: ["# 스트레스", "# 시험", "# 돈"],
 		date: "24.12.20",
 		likes: 300,

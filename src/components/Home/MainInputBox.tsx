@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import * as S from "../../styles/Home/MainInputBoxStyle";
 import Box, { BoxProps } from "../Home/Box";
@@ -119,6 +120,7 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 							startIndex={currentIndex}
 							onTransitionEnd={handleTransitionEnd}
 							isTransitioning={isTransitioning}
+							isMobile={isMobile}
 						>
 							{loopedData.map((data, index) => {
 								const isActive =
