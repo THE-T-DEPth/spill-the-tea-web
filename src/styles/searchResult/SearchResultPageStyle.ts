@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
-  max-width: 1046px;
   width: 100%;
+  max-width: 1046px;
   margin: 53px auto 71px;
+  overflow: hidden;
 
   ${isMobile} {
     width: 359px;
@@ -35,14 +36,14 @@ export const SearchTitle = styled.span`
 `;
 
 export const GridContainer = styled.div`
+  width: 100%;
+  max-width: 1046px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 24px;
   grid-row-gap: 47px;
   grid-auto-flow: row;
-  width: 100%;
-  max-width: 1046px;
   box-sizing: border-box;
 
   ${isMobile} {
