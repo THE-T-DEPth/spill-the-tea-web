@@ -1,42 +1,78 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import Send from '../../../assets/images/CombinedShape.svg';
-import commentDummy from '../../../assets/dummy/CommentSSulDummy';
 import Review from './Review';
+import {
+  getComment,
+  postComment,
+} from '../../../api/viewDetailSsul/viewDetailComment';
 
 interface Comment {
-  profile: string;
+  commentId: number;
+  profileImage: string;
   nickname: string;
   content: string;
-  time: string;
-  date: string;
-  heart: number;
-  review: Reply[];
+  createTime: string;
+  createDate: string;
+  likedCount: number;
+  replyList: Reply[];
 }
 
 interface Reply {
-  profile: string;
+  commentId: number;
+  parentCommentId: number;
+  profileImage: string;
   nickname: string;
   content: string;
-  time: string;
-  date: string;
-  heart: number;
+  createTime: string;
+  createDate: string;
+  likedCount: number;
 }
 
 const DetailSsulReview: React.FC<{
   setIsComplainModalOpen: (value: boolean) => void;
-}> = ({ setIsComplainModalOpen }) => {
-  const [input, setInput] = useState<
-    string | number | readonly string[] | undefined
-  >('');
+  postId: number;
+  setCommentId: (value: number) => void;
+}> = ({ setIsComplainModalOpen, postId, setCommentId }) => {
+  const [input, setInput] = useState<string>('');
+  const [comments, setComments] = useState<Comment[]>([]);
 
-  const handleInputValue = (e: any) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
   const handleComplainClick = () => {
     setIsComplainModalOpen(true); // 모달 열기
   };
+
+  const handleSubmitClick = () => {
+    if (!input.trim()) {
+      alert('댓글 내용을 입력해주세요!');
+      return;
+    }
+
+    const fetchPostComment = async () => {
+      try {
+        await postComment(1, input);
+      } catch (error) {
+        console.log('postComment 중 오류 발생', error);
+      }
+    };
+    fetchPostComment();
+    setInput('');
+  };
+
+  useEffect(() => {
+    const fetchComment = async () => {
+      try {
+        const data = await getComment(1);
+        setComments(data.data);
+      } catch (error) {
+        console.log('fetchComment 오류 발생', error);
+      }
+    };
+    fetchComment();
+  }, [postId, handleSubmitClick]);
 
   return (
     <>
@@ -48,10 +84,10 @@ const DetailSsulReview: React.FC<{
             onChange={(e) => handleInputValue(e)}
             value={input}
           />
-          <S.DSRSendImg src={Send} />
+          <S.DSRSendImg src={Send} onClick={handleSubmitClick} />
         </S.DSRInputDiv>
         <S.DSRWholeCommentDiv>
-          {commentDummy.map(
+          {comments.map(
             (
               comment: Comment,
               index: number //댓글
@@ -59,6 +95,7 @@ const DetailSsulReview: React.FC<{
               <S.DSREachCommentDiv key={index}>
                 <Review
                   handleComplainClick={handleComplainClick}
+                  setCommentId={setCommentId}
                   comment={comment}
                   id={index}
                 />

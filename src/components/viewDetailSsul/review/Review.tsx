@@ -3,54 +3,112 @@ import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyl
 import FullHeart from '../../../assets/images/FullHeart.svg';
 import Send from '../../../assets/images/CombinedShape.svg';
 import ReReview from './ReReview';
+import {
+  postComment,
+  postCommentLike,
+} from '../../../api/viewDetailSsul/viewDetailComment';
+import Profile from '../../../assets/images/Profile.svg';
+import ArrowSmall from '../../../assets/images/Arrow_small.svg';
+import ArrowUpSmall from '../../../assets/images/ArrowUp_small.svg';
 
 interface Comment {
-  profile: string;
+  commentId: number;
+  profileImage: string;
   nickname: string;
   content: string;
-  time: string;
-  date: string;
-  heart: number;
-  review: Reply[];
+  createTime: string;
+  createDate: string;
+  likedCount: number;
+  replyList: Reply[];
 }
 
 interface Reply {
-  profile: string;
+  commentId: number;
+  parentCommentId: number;
+  profileImage: string;
   nickname: string;
   content: string;
-  time: string;
-  date: string;
-  heart: number;
+  createTime: string;
+  createDate: string;
+  likedCount: number;
 }
 
 interface ReviewProps {
   comment: Comment;
   handleComplainClick: () => void;
+  setCommentId: (value: number) => void;
   id: number;
 }
 
 const Review: React.FC<ReviewProps> = ({
   comment,
   handleComplainClick,
+  setCommentId,
   id,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [openRereview, setOpenRereview] = useState<number | null>(null);
+  const [openRereviewInput, setOpenRereviewInput] = useState<number | null>(
+    null
+  );
+  const [openRereviewIds, setOpenRereviewIds] = useState<Set<number>>(
+    new Set()
+  ); // 펼쳐진 대댓글 ID 관리
   const [nickname, setNickname] = useState<string | null>('');
-  const [input, setInput] = useState<
-    string | number | readonly string[] | undefined
-  >();
+  const [input, setInput] = useState<string>('');
 
-  const handleInputValue = (e: any) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const handleRereviewClick = (key: number) => {
-    setOpenRereview((prev) => (prev === key ? null : key)); // 같은 키를 클릭하면 닫기
+  const handleRereviewInputClick = (key: number) => {
+    setOpenRereviewInput((prev) => (prev === key ? null : key)); // 같은 키를 클릭하면 닫기
+  };
+
+  const handleToggleRereview = (key: number) => {
+    setOpenRereviewIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(key)) {
+        newSet.delete(key); // 이미 열려있으면 닫기
+      } else {
+        newSet.add(key); // 닫혀있으면 열기
+      }
+      return newSet;
+    });
   };
 
   const handleReviewClick = (nickname: string | null) => {
     setNickname('@' + nickname);
+    setInput('@' + nickname + ' ');
+  };
+
+  const handleCommentHeartClick = () => {
+    const fetchPostCommentLike = async () => {
+      try {
+        await postCommentLike(comment.commentId);
+      } catch (error) {
+        console.log('fetchPostCommentLike 중 오류 발생', error);
+        throw error;
+      }
+    };
+    fetchPostCommentLike();
+  };
+
+  const handleRereviewSubmitClick = (
+    parentCommentId: number,
+    nickname: string
+  ) => {
+    if (!input.trim()) {
+      alert('댓글 내용을 입력해주세요!');
+      return;
+    }
+    const fetchPostRereview = async () => {
+      try {
+        await postComment(1, input, parentCommentId);
+      } catch (error) {
+        console.log('fetchPostRereview 중 오류 발생', error);
+      }
+    };
+    fetchPostRereview();
     setInput('@' + nickname + ' ');
   };
 
@@ -67,74 +125,106 @@ const Review: React.FC<ReviewProps> = ({
     };
   }, []);
 
-  //모바일일때와 아닐때 구조 순서가 달라짐으로 isMobile로 html 구조를 분리
-
   return (
-    <S.ReviewDiv $openrereview={openRereview == id ? 'true' : 'false'}>
+    <S.ReviewDiv $openrereview={openRereviewInput == id ? 'true' : 'false'}>
       {!isMobile ? (
         <>
+          {/* 댓글 프로필 영역 */}
           <S.DSRProfileDiv>
             <S.DSRProfileImg
-              src={comment.profile}
+              src={comment.profileImage ? comment.profileImage : Profile}
               alt={`${comment.nickname} 프로필`}
             />
             <S.DSRProfileName>{comment.nickname}</S.DSRProfileName>
           </S.DSRProfileDiv>
+          {/* 댓글 본문 */}
           <S.DSRContentDiv>
             <S.DSRContent>{comment.content}</S.DSRContent>
             <S.DSRBtnDiv>
               <S.DSRReviewBtn
                 onClick={() => {
                   handleReviewClick(comment.nickname);
-                  handleRereviewClick(id);
+                  handleRereviewInputClick(id);
                 }}>
                 대댓글
               </S.DSRReviewBtn>
-              <S.DSRHeartBtn>공감</S.DSRHeartBtn>
-              <S.DSRComplainBtn onClick={handleComplainClick}>
+              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                공감
+              </S.DSRHeartBtn>
+              <S.DSRComplainBtn
+                onClick={() => {
+                  handleComplainClick(); // 기존 함수 호출
+                  setCommentId(id); // 추가 동작 수행
+                }}>
                 신고
               </S.DSRComplainBtn>
             </S.DSRBtnDiv>
           </S.DSRContentDiv>
+          {/* 댓글 시간 및 공감수 */}
           <S.DSRDateHeartDiv>
             <S.DSRDateDiv>
-              <S.DSRDate>{comment.time}</S.DSRDate>
-              <S.DSRDate>{comment.date}</S.DSRDate>
+              <S.DSRDate>{comment.createTime}</S.DSRDate>
+              <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
               <S.DSRHeartImg src={FullHeart} alt='공감 수' />
-              <S.DSRHeartNum>{comment.heart}</S.DSRHeartNum>
+              <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
-          {comment.review.length > 0 &&
-            id == openRereview && ( //대댓글
-              <div>
-                <S.DSRRInputDiv>
-                  <S.DSRInput
-                    placeholder='댓글을 입력하세요.'
-                    onChange={(e) => handleInputValue(e)}
-                    value={input}
+
+          {!openRereviewIds.has(id) ? (
+            <S.RereviewDiv onClick={() => handleToggleRereview(id)}>
+              <S.RereviewArrowImg src={ArrowSmall} />
+              <S.RereviewP>대댓글 더보기</S.RereviewP>
+            </S.RereviewDiv>
+          ) : (
+            <></>
+          )}
+
+          {id === openRereviewInput && (
+            <S.DSRRInputDiv>
+              <S.DSRInput
+                placeholder='댓글을 입력하세요.'
+                onChange={(e) => handleInputValue(e)}
+                value={input}
+              />
+              <S.DSRSendImg
+                src={Send}
+                onClick={() =>
+                  handleRereviewSubmitClick(comment.commentId, comment.nickname)
+                }
+              />
+            </S.DSRRInputDiv>
+          )}
+
+          {/* 대댓글 보기 / 접기 */}
+          {!openRereviewIds.has(id) ? (
+            <></>
+          ) : (
+            <>
+              {comment.replyList.map((reply: Reply, replyIndex: number) => (
+                <S.DSREachCommentDiv
+                  key={replyIndex}
+                  style={{ width: '95%', marginLeft: 'auto' }}>
+                  <ReReview
+                    openInput={id === openRereviewInput}
+                    reply={reply}
+                    handleComplainClick={handleComplainClick}
                   />
-                  <S.DSRSendImg src={Send} />
-                </S.DSRRInputDiv>
-                {comment.review.map((reply: Reply, replyIndex: number) => (
-                  <S.DSREachCommentDiv
-                    key={replyIndex}
-                    style={{ width: '90%', marginLeft: 'auto' }}>
-                    <ReReview
-                      reply={reply}
-                      handleComplainClick={handleComplainClick}
-                    />
-                  </S.DSREachCommentDiv>
-                ))}
-              </div>
-            )}
+                </S.DSREachCommentDiv>
+              ))}
+              <S.RereviewDiv onClick={() => handleToggleRereview(id)}>
+                <S.RereviewArrowImg src={ArrowUpSmall} />
+                <S.RereviewP>대댓글 접기</S.RereviewP>
+              </S.RereviewDiv>
+            </>
+          )}
         </>
       ) : (
         <>
           <S.DSRProfileDiv>
             <S.DSRProfileImg
-              src={comment.profile}
+              src={comment.profileImage ? comment.profileImage : Profile}
               alt={`${comment.nickname} 프로필`}
             />
             <S.DSRProfileName>{comment.nickname}</S.DSRProfileName>
@@ -142,11 +232,13 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRReviewBtn
                 onClick={() => {
                   handleReviewClick(comment.nickname);
-                  handleRereviewClick(id);
+                  handleRereviewInputClick(id);
                 }}>
                 대댓글
               </S.DSRReviewBtn>
-              <S.DSRHeartBtn>공감</S.DSRHeartBtn>
+              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                공감
+              </S.DSRHeartBtn>
               <S.DSRComplainBtn onClick={handleComplainClick}>
                 신고
               </S.DSRComplainBtn>
@@ -157,37 +249,64 @@ const Review: React.FC<ReviewProps> = ({
           </S.DSRContentDiv>
           <S.DSRDateHeartDiv>
             <S.DSRDateDiv>
-              <S.DSRDate>{comment.time}</S.DSRDate>
-              <S.DSRDate>{comment.date}</S.DSRDate>
+              <S.DSRDate>{comment.createTime}</S.DSRDate>
+              <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
               <S.DSRHeartImg src={FullHeart} alt='공감 수' />
-              <S.DSRHeartNum>{comment.heart}</S.DSRHeartNum>
+              <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
-          {comment.review.length > 0 &&
-            id == openRereview && ( //대댓글
-              <div>
-                <S.DSRRInputDiv>
-                  <S.DSRInput
-                    placeholder='댓글을 입력하세요.'
-                    onChange={(e) => handleInputValue(e)}
-                    value={input}
+          {!openRereviewIds.has(id) ? (
+            <S.RereviewDiv onClick={() => handleToggleRereview(id)}>
+              <S.RereviewArrowImg src={ArrowSmall} />
+              <S.RereviewP>대댓글 더보기</S.RereviewP>
+            </S.RereviewDiv>
+          ) : (
+            <></>
+          )}
+
+          {id === openRereviewInput && (
+            <S.DSRRInputDiv>
+              <S.DSRInput
+                placeholder='댓글을 입력하세요.'
+                onChange={(e) => handleInputValue(e)}
+                value={input}
+              />
+              <S.DSRSendImg
+                src={Send}
+                onClick={() =>
+                  handleRereviewSubmitClick(comment.commentId, comment.nickname)
+                }
+              />
+            </S.DSRRInputDiv>
+          )}
+
+          {/* 대댓글 보기 / 접기 */}
+          {!openRereviewIds.has(id) ? (
+            <></>
+          ) : (
+            <>
+              {comment.replyList.map((reply: Reply, replyIndex: number) => (
+                <S.DSREachCommentDiv
+                  key={replyIndex}
+                  style={{
+                    width: '95%',
+                    marginLeft: 'auto',
+                  }}>
+                  <ReReview
+                    openInput={id === openRereviewInput}
+                    reply={reply}
+                    handleComplainClick={handleComplainClick}
                   />
-                  <S.DSRSendImg src={Send} />
-                </S.DSRRInputDiv>
-                {comment.review.map((reply: Reply, replyIndex: number) => (
-                  <S.DSREachCommentDiv
-                    key={replyIndex}
-                    style={{ width: '90%', marginLeft: 'auto' }}>
-                    <ReReview
-                      reply={reply}
-                      handleComplainClick={handleComplainClick}
-                    />
-                  </S.DSREachCommentDiv>
-                ))}
-              </div>
-            )}
+                </S.DSREachCommentDiv>
+              ))}
+              <S.RereviewDiv onClick={() => handleToggleRereview(id)}>
+                <S.RereviewArrowImg src={ArrowUpSmall} />
+                <S.RereviewP>대댓글 접기</S.RereviewP>
+              </S.RereviewDiv>
+            </>
+          )}
         </>
       )}
     </S.ReviewDiv>
