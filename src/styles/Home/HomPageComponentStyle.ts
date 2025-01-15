@@ -1,16 +1,28 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+display:flex;
+flex-direction: column;
+`;
+
 export const HomeDiv = styled.div`
-    color: var(--Main3);
-    font: var(--headingXL);
+  margin-top: 74px;
 `;
 
 export const HomeDiv2 = styled.div`
-    color: var(--Secondary2);
-    font: var(--labelXL);
+  margin-top: 100px;
+  margin-bottom: 136px;
+  position: relative; 
 `;
 
-export const HomeDiv3 = styled.div`
-    color: var(--Main5);
-    font: var(--paragraphXL);
+export const MakeTeaButtonContainer = styled.div`
+  position: absolute;
+  bottom: -60px;
+  right: calc((100% - 1440px) / 2 + 55px); 
+  z-index: 10;
+
+  @media (max-width: 1440px) {
+    right: 55px; 
+  }
 `;
+

@@ -1,23 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  margin: 45px auto 56px;
   width: 1046px;
-  height: 909px;
-  margin: 53px auto 100px;
-`;
-
-export const TitleContainer = styled.div`
-  width: 100%;
-  display: flex;
-  height: 56px;
-`;
-export const SearchTitle = styled.span`
-  font: var(--labelLarge);
-
-  span {
-    font: var(--searchKeyword);
-    color: var(--Main3);
-  }
+  height: 975px;
 `;
 
 export const GridContainer = styled.div`
@@ -29,26 +15,25 @@ export const GridContainer = styled.div`
   grid-auto-flow: row;
   width: 100%;
   box-sizing: border-box;
-`;
-
-export const SortButton = styled.button`
-  display: inline-block;
-  margin-top: 1px;
+  margin-top: 27px;
+  height: 853px;
 `;
 
 export const PaginationContainer = styled.div`
+  height: 24px;
   display: flex;
-  width: 100%;
   justify-content: center;
 `;
 
 export const EmptyMessage = styled.span`
   font: var(--searchEmpty);
+  color: var(--Secondary2);
 `;
 
 export const EmptyContainer = styled.div`
-  width: 467px;
+  width: 100%;
   height: 30px;
   display: flex;
-  margin: 317px auto 497px;
+  justify-content: center;
+  margin: 414px auto 609px;
 `;
