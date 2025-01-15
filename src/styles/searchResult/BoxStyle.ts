@@ -16,6 +16,7 @@ export const Title = styled.div<{ disabled?: boolean }>`
   ${isMobile} {
     width: 100%;
     height: 17px;
+    font: var(--boxTitleMini);
   }
 `;
 
@@ -46,6 +47,8 @@ export const Container = styled.div<{ disabled?: boolean }>`
   ${isMobile} {
     width: 114px;
     height: 179px;
+    border: none;
+    transition: all 0.3s ease;
   }
 `;
 
@@ -58,6 +61,8 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
 
   ${isMobile} {
     width: 100%;
+    height: 105px;
+    margin: 0 0 6px;
   }
 `;
 
@@ -77,7 +82,9 @@ export const Keywords = styled.div`
   margin: 8px 0 10px;
 
   ${isMobile} {
-    gap: 3.5px;
+    gap: 0;
+    margin: 0 0 5.32px;
+    justify-content: space-between;
   }
 `;
 
@@ -103,6 +110,9 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   ${isMobile} {
     padding: 2.84px 5px;
     height: 13.68px;
+    font: var(--boxKeywordMini);
+    border-radius: 22.5295px;
+    border: 0.48px solid transparent;
   }
 `;
 
@@ -117,6 +127,12 @@ export const InfoContainer = styled.div<{ disabled?: boolean }>`
   font: var(--boxInfo);
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'var(--primary1)')};
   margin: 0;
+
+  ${isMobile} {
+    height: 24.44px;
+    padding-left: 3px;
+    font: var(--boxInfoMini);
+  }
 `;
 
 export const LikeContainer = styled.div<{ disabled?: boolean }>`
@@ -124,7 +140,13 @@ export const LikeContainer = styled.div<{ disabled?: boolean }>`
   gap: 15px;
   margin-bottom: 5px;
   height: 14px;
-  justify-content: center;
+  align-items: center;
+
+  ${isMobile} {
+    gap: 12px;
+    height: 11.26px;
+    margin-bottom: 2px;
+  }
 `;
 
 export const Likes = styled.span<{ disabled?: boolean }>`
@@ -132,6 +154,15 @@ export const Likes = styled.span<{ disabled?: boolean }>`
   align-items: center;
   gap: 4px;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
+
+  ${isMobile} {
+    gap: 3px;
+    img {
+      width: 9.39px;
+      height: 8.61px;
+      padding: 1.41px 0.94px;
+    }
+  }
 `;
 
 export const Comments = styled.span<{ disabled?: boolean }>`
@@ -139,13 +170,29 @@ export const Comments = styled.span<{ disabled?: boolean }>`
   align-items: center;
   gap: 4px;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
+  ${isMobile} {
+    gap: 3px;
+    img {
+      width: 9.39px;
+      height: 9.39px;
+    }
+  }
 `;
 
 export const TimeContainer = styled.div<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
   gap: 4px;
-  height: 14px;
+  height: 11.17px;
   justify-content: center;
+  align-items: center;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
+
+  ${isMobile} {
+    height: 11.17px;
+    img {
+      width: 9.31px;
+      height: 9.31px;
+    }
+  }
 `;

@@ -3,6 +3,7 @@ import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   max-width: 1046px;
+  width: 100%;
   height: 909px;
   margin: 53px auto 100px;
 
@@ -34,6 +35,7 @@ export const GridContainer = styled.div`
   grid-row-gap: 47px;
   grid-auto-flow: row;
   width: 100%;
+  max-width: 1046px;
   box-sizing: border-box;
 
   ${isMobile} {
