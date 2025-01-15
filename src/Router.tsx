@@ -35,7 +35,10 @@ const Router = () => {
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/signupdone' element={<SignupDonePage />} />
           <Route path='/ssulpage' element={<SsulPage />} />
-          <Route path='/viewDetailSsul' element={<ViewDetailSsulPage />} />
+          <Route
+            path='/viewDetailSsul/:posdId'
+            element={<ViewDetailSsulPage />}
+          />
           <Route path='/write' element={<WritePage />} />
         </Routes>
       </Layout>

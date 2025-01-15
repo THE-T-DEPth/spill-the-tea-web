@@ -1,32 +1,35 @@
 import * as S from '../../../styles/ViewDetailSsul/modal/ComplainModalComponentStyle';
 import Close from '../../../assets/images/Close.svg';
-import { deleteMyPost } from '../../../api/viewDetailSsul/viewDetailContent';
 import { useNavigate } from 'react-router-dom';
+import { postPostReport } from '../../../api/viewDetailSsul/viewDetailContent';
 
-interface RemoveModalProps {
+interface BlockModalProps {
   setOpenModal: (value: boolean) => void;
   postId: number | undefined;
 }
 
 // React.FC를 사용한 ComplainModal 정의
-const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal, postId }) => {
+const ReportPostModal: React.FC<BlockModalProps> = ({
+  setOpenModal,
+  postId,
+}) => {
   const navigate = useNavigate();
 
   const handleCancelClick = () => {
     setOpenModal(false); // 모달 닫기
   };
 
-  //확인을 눌렀을 때, 삭제
+  //로그인 되면 아마 될거임
   const handleConfirmClick = () => {
-    const fetchDeletePost = async () => {
+    const fetchPostReport = async () => {
       try {
-        await deleteMyPost(1);
+        await postPostReport(1);
       } catch (error) {
-        console.log('fetchDeletePost 중 오류 발생', error);
+        console.log('fetchPostReport 중 오류 발생', error);
         throw error;
       }
     };
-    fetchDeletePost();
+    fetchPostReport();
     navigate('/');
   };
 
@@ -36,7 +39,7 @@ const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal, postId }) => {
         <S.Modal>
           <>
             <S.CloseBtn src={Close} onClick={handleCancelClick} />
-            <S.ModalText>정말 썰을 삭제하시겠습니까?</S.ModalText>
+            <S.ModalText>해당 썰을 신고하시겠습니까?</S.ModalText>
             <S.ButtonDiv>
               <S.CancelButton onClick={handleCancelClick}>취소</S.CancelButton>
               <S.ConfirmButton onClick={handleConfirmClick}>
@@ -50,4 +53,4 @@ const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal, postId }) => {
   );
 };
 
-export default RemoveModal;
+export default ReportPostModal;
