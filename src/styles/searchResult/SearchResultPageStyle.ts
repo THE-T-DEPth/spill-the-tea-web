@@ -4,12 +4,11 @@ import { isMobile } from '../../hooks/Media';
 export const Container = styled.div`
   max-width: 1046px;
   width: 100%;
-  height: 909px;
-  margin: 53px auto 100px;
+  margin: 53px auto 71px;
 
   ${isMobile} {
     width: 359px;
-    margin: 18px auto;
+    margin: 18px auto 40px;
   }
 `;
 
@@ -24,6 +23,14 @@ export const SearchTitle = styled.span`
   span {
     font: var(--searchKeyword);
     color: var(--Main3);
+  }
+
+  ${isMobile} {
+    font: var(--labelMedium);
+
+    span {
+      font: var(--searchKeywordMini);
+    }
   }
 `;
 
@@ -43,12 +50,8 @@ export const GridContainer = styled.div`
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 8px;
     grid-row-gap: 18px;
+    transition: all 0.3s ease;
   }
-`;
-
-export const SortButton = styled.button`
-  display: inline-block;
-  margin-top: 1px;
 `;
 
 export const PaginationContainer = styled.div`
@@ -59,11 +62,20 @@ export const PaginationContainer = styled.div`
 
 export const EmptyMessage = styled.span`
   font: var(--searchEmpty);
+
+  ${isMobile} {
+    font: var(--searchEmptyMini);
+    color: var(--Secondary1);
+  }
 `;
 
 export const EmptyContainer = styled.div`
-  width: 467px;
   height: 30px;
   display: flex;
+  justify-content: center;
   margin: 317px auto 497px;
+  ${isMobile} {
+    margin: 274px auto 286px;
+    transition: all 0.3s ease;
+  }
 `;
