@@ -117,15 +117,15 @@ text-align: center;
 `;
 export const ErrorMessage = styled.p`
   font: var(--paragraphSmall); 
-  color: transparent; /* 기본적으로 투명하게 설정 */
+  color: transparent; 
   margin-top: 2.82px; 
   margin-left: 0; 
-  align-self: flex-start; /* 에러 메시지가 입력 박스 바로 아래에 위치 */
+  align-self: flex-start; 
   height: 1em; 
   transition: color 0.2s ease-in-out; 
 
   &.visible {
-    color: var(--error1); /* 조건 충족 시 빨간색으로 표시 */
+    color: var(--error1); 
   }
 `;
 
