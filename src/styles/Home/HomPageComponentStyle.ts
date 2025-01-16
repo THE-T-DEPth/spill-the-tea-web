@@ -11,7 +11,7 @@ export const HomeDiv = styled.div`
   margin-top: 74px;
   transition: all 0.3s ease-in-out;
   ${isMobile}{
-	margin-top: 34px;
+	margin-top: 0px;
   }
 `;
 
@@ -21,8 +21,8 @@ export const HomeDiv2 = styled.div`
   position: relative; 
   transition: all 0.3s ease-in-out;
   ${isMobile} {
-	margin-top: 0px;
-	margin-bottom: 109.43px;
+	margin-top: -80px;
+	margin-bottom: 60.43px;
 	}
 
 `;

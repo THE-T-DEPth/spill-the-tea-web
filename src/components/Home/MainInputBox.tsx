@@ -113,7 +113,7 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 					<S.Header>{text}</S.Header>
 				</S.HeaderWrap>
 				<S.ContentContainer>
-					{normalizedData.length === 0 ? (
+					{boxData.length === 0 ? ( // 수정된 조건
 						<S.EmptyMessage>{emptyText || "데이터가 없습니다."}</S.EmptyMessage>
 					) : (
 						<S.Slider
@@ -135,6 +135,7 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 						</S.Slider>
 					)}
 				</S.ContentContainer>
+
 			</S.Container>
 			{!isMobile && (
 				<S.RightArrow onClick={handleNext}>

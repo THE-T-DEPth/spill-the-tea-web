@@ -158,7 +158,14 @@ export const EmptyMessage = styled.div`
   align-items: center;
   margin: 139px auto;
   color: var(--G5);
-  font: var(--headingXL);
+  font: var(--headingXL); 
   text-align: center;
   position: relative;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    margin: 50px auto; 
+    font: var(--headingLarge); 
+	color: var(--G3);
+  }
 `;
+
