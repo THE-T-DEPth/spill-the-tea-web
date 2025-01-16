@@ -1,38 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import SignupInputBox from "../components/signup/SignupInputBox";
-import Modal from "../components/signup/Modal"; // 모달 컴포넌트 추가
+import Modal from "../components/signup/Modal";
 import * as S from '../styles/Signup/SignupEmailPageStyle';
-import { useNavigate } from 'react-router-dom'; // React Router
+import { useNavigate } from 'react-router-dom';
+import { getCheckEmailAvailability, getVerifyEmailCode, getVerificationCode } from '../api/signUp/signUpEmail';
 
 const SignupEmailPage: React.FC = () => {
 	const [email, setEmail] = useState('');
 	const [verificationCode, setVerificationCode] = useState('');
 	const [emailStatus, setEmailStatus] = useState<'valid' | 'invalid' | null>(null);
 	const [isVerified, setIsVerified] = useState(false);
-	const [timer, setTimer] = useState(300); // 타이머 초기값: 300초 (5분)
+	const [timer, setTimer] = useState(300);
 	const [isTimerActive, setIsTimerActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
 
-	const handleEmailCheck = () => {
-		setEmailStatus(email === 'test@example.com' ? 'invalid' : 'valid');
+	// 이메일 중복 체크 로직
+	const handleEmailCheck = async () => {
+		try {
+			const result = await getCheckEmailAvailability(email);
+			if (result.success && result.data.availability) {
+				setEmailStatus('valid');
+			} else {
+				setEmailStatus('invalid');
+			}
+		} catch (error) {
+			console.error('이메일 중복 체크 오류:', error);
+			alert('이메일 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
+		}
 	};
+	//인증번호 전송
+	const handleSendVerificationCode = async () => {
+		try {
+			if (!email) {
+				alert('이메일을 입력해주세요.');
+				return;
+			}
+			const result = await getVerificationCode(email);
+			alert('인증번호가 이메일로 전송되었습니다.');
+			console.log('서버 응답:', result);
 
-	const handleCodeSend = () => {
-		alert('인증번호 전송!');
-		setTimer(300); // 타이머 초기화
-		setIsTimerActive(true); // 타이머 활성화
-	};
-
-	const handleCodeVerify = () => {
-		if (verificationCode !== '123456') {
-			setShowModal(true);
-		} else {
-			alert('인증번호가 확인되었습니다.');
-			setIsVerified(true);
+			// 인증번호 전송 성공 시 타이머 시작
+			setIsTimerActive(true);
+			setTimer(300); // 5분 타이머 초기화
+		} catch (error) {
+			console.error('인증번호 전송 실패:', error);
+			alert('인증번호 전송에 실패했습니다. 다시 시도해주세요.');
 		}
 	};
 
+
+	// 인증번호 확인 로직
+	const handleCodeVerify = async () => {
+		try {
+			const result = await getVerifyEmailCode(verificationCode);
+			if (result.success) {
+				alert(result.data.message);
+				setIsVerified(true);
+			} else {
+				setShowModal(true);
+			}
+		} catch (error) {
+			console.error('인증번호 확인 중 오류 발생:', error);
+			setShowModal(true);
+		}
+	};
+
+	// 다음 버튼 클릭 시 이동 로직
 	const handleNext = () => {
 		if (isVerified) {
 			navigate('/signup');
@@ -41,10 +75,12 @@ const SignupEmailPage: React.FC = () => {
 		}
 	};
 
+	// 모달 닫기 로직
 	const handleCloseModal = () => {
 		setShowModal(false);
 	};
 
+	// 타이머 관리 로직
 	useEffect(() => {
 		let interval: NodeJS.Timeout;
 		if (isTimerActive && timer > 0) {
@@ -57,6 +93,7 @@ const SignupEmailPage: React.FC = () => {
 		return () => clearInterval(interval);
 	}, [isTimerActive, timer]);
 
+	// 타이머 포맷팅 함수
 	const formatTime = (time: number) => {
 		const minutes = Math.floor(time / 60);
 		const seconds = time % 60;
@@ -65,7 +102,6 @@ const SignupEmailPage: React.FC = () => {
 
 	return (
 		<>
-
 			<S.Wrapper>
 				<S.Header>
 					<S.Title>회원가입</S.Title>
@@ -76,6 +112,7 @@ const SignupEmailPage: React.FC = () => {
 					<S.SignupInputWrapper>
 						<S.Label>회원가입</S.Label>
 
+						{/* 이메일 입력 및 중복 체크 */}
 						<S.InputWrapper>
 							<SignupInputBox
 								placeholder="이메일을 입력하세요."
@@ -93,11 +130,15 @@ const SignupEmailPage: React.FC = () => {
 							</S.EmailStatusText>
 						</S.InputWrapper>
 
+						{/* 인증번호 전송 */}
 						<S.InputWrapper>
-							<S.CustomButtonUp onClick={handleCodeSend}>
+							<S.CustomButtonUp onClick={handleSendVerificationCode}>
 								인증번호 전송하기
 							</S.CustomButtonUp>
 						</S.InputWrapper>
+
+
+						{/* 인증번호 입력 및 확인 */}
 						<S.TypeInputWrapper>
 							<SignupInputBox
 								placeholder="인증번호를 입력하세요."
@@ -108,19 +149,16 @@ const SignupEmailPage: React.FC = () => {
 							/>
 							<S.TimerText>{isTimerActive ? formatTime(timer) : '타이머 종료'}</S.TimerText>
 						</S.TypeInputWrapper>
-						<S.InputWrapper>
-							<S.CustomButton
-								onClick={handleNext}
 
-							>
-								다음
-							</S.CustomButton>
+						{/* 다음 버튼 */}
+						<S.InputWrapper>
+							<S.CustomButton onClick={handleNext}>다음</S.CustomButton>
 						</S.InputWrapper>
 					</S.SignupInputWrapper>
 				</S.SignupBox>
 			</S.Wrapper>
 
-			{/* 모달 컴포넌트 */}
+			{/* 모달 표시 */}
 			{showModal && (
 				<Modal
 					message="인증번호가 동일하지 않습니다. 다시 확인해주세요."
