@@ -10,6 +10,7 @@ export const Container = styled.div`
   ${isMobile} {
     width: 359px;
     margin: 18px auto 40px;
+    transition: all 0.3s ease;
   }
 `;
 
@@ -17,6 +18,12 @@ export const TitleContainer = styled.div`
   width: 100%;
   display: flex;
   height: 56px;
+
+  ${isMobile} {
+    height: 24px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
 `;
 export const SearchTitle = styled.span`
   font: var(--labelLarge);
@@ -28,7 +35,7 @@ export const SearchTitle = styled.span`
 
   ${isMobile} {
     font: var(--labelMedium);
-
+    transition: all 0.3s ease;
     span {
       font: var(--searchKeywordMini);
     }
@@ -67,6 +74,7 @@ export const EmptyMessage = styled.span`
   ${isMobile} {
     font: var(--searchEmptyMini);
     color: var(--Secondary1);
+    transition: all 0.3s ease;
   }
 `;
 
