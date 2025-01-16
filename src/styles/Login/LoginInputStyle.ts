@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const InputWrap = styled.div`
   display: flex;
-  align-items: flex-start; /* 위로 이동하지 않도록 수정 */
+  align-items: flex-start; 
   position: relative;
-  flex-direction: column; /* 문구를 아래로 배치 */
+  flex-direction: column; 
   width: 100%;
   
 `;
@@ -13,7 +13,7 @@ export const Input = styled.input`
   width: 374px;
   height: 45px;
   border: none; 
-  border-radius: px;
+  border-radius: 8px;
   background-color: var(--InputBack);
   padding: 10px 13px 11px 13px; 
   font: var(--labelMedium);
