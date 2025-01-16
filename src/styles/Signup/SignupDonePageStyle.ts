@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from "../../hooks/Media";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -17,11 +18,17 @@ width: 736px;
 margin-top: 309px;
 font: var(--labelXXL);
 color: var(--HeadLine);
+${isMobile}{
+	font: var(--labelMedium);
+}
 `;
 
 export const Highlight = styled.span`
 font: var(--labelXXL);
 color: var(--Green3);
+${isMobile}{
+	font: var(--labelMedium);
+}
 `;
 
 export const Button = styled.button`
@@ -37,4 +44,12 @@ export const Button = styled.button`
   font: var(--labelLarge);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  ${isMobile} {
+	width: 276px;
+  height: 50px;
+  margin-top: 64px;
+  margin-bottom: 213px;
+  font: var(--labelButtonMobile);
+  border-radius: 4px;
+  }
 `;
