@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as S from "../styles/Login/LoginPageStyle";
 import EyeIcon from "../assets/Icons/Eye.svg";
 import EyeOffIcon from "../assets/Icons/EyeOff.svg";

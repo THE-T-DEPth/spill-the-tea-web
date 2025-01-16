@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const Container = styled.header`
   display: flex;
@@ -7,6 +8,8 @@ export const Container = styled.header`
   height: 58px;
   background-color: var(--Sub1); 
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
 `;
 
 export const LeftSection = styled.div`
@@ -18,12 +21,23 @@ export const LeftSection = styled.div`
   margin-top: 20px;
   margin-left: 26px;
   margin-bottom: 19px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    gap: 5px; 
+    margin-left: 17px;
+	
+  }
+  
 `;
 
 export const IconWrapper = styled.div`
   img {
     width: 24px;
     height: 24px;
+	${isMobile} {
+    width: 18px;
+	height: 19px;
+  }
   }
 `;
 
@@ -31,6 +45,10 @@ export const Title = styled.h1`
   font: var(--headerL);
   color: var(--Sub5);
   margin: 0;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    margin-left: 7px;
+  }
 `;
 
 export const RightSection = styled.div`
@@ -40,10 +58,15 @@ export const RightSection = styled.div`
   margin-top: 15px;
   margin-bottom: 15px;
   margin-right: 29px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    gap: 10px; 
+    margin-right: 16.5px;
+  }
 `;
 
 export const SearchBar = styled.div`
-  position: relative; /* 부모 요소를 기준으로 검색 기록 위치 조정 */
+  position: relative; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,6 +75,13 @@ export const SearchBar = styled.div`
   border: 1px solid var(--Main2);
   border-radius: 5px;
   padding: 0px 8px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+   width: 280px;
+	margin-left:5px;
+	background-color: var(--InputBack);
+	
+  }
 
   input {
     flex: 1;
@@ -62,10 +92,16 @@ export const SearchBar = styled.div`
     background: none;
     padding-left: 4px;
     margin-top: 2px;
+	
 
     &::placeholder {
       color: var(--Secondary3);
+	  ${isMobile} {
+         width: 299.16px;
+		font: var(--labelSmall);
+      }
     }
+	
   }
 `;
 
@@ -75,7 +111,15 @@ export const SearchIconWrapper = styled.div`
     height: 16px;
     margin-top: 3px;
     margin-left: 8px;
+	transition: all 0.3s ease-in-out;
+	${isMobile} {
+   width: 18px;
+   height: 18px;
+   margin-left: 4px;
   }
+  }
+ 
+ 
 `;
 
 export const MyIconWrapper = styled.div`
@@ -83,10 +127,16 @@ export const MyIconWrapper = styled.div`
     width: 28px;
     height: 28px;
     margin-top: 3px;
+	transition: all 0.3s ease-in-out;
 
+	${isMobile} {
+   width: 23.17px;
+   height: 23.17px;
+  }
     &:hover {
       opacity: 0.8;
     }
+	
   }
 `;
 
@@ -104,14 +154,20 @@ export const LogoutButton = styled.button`
 
 export const SearchHistory = styled.div`
   position: absolute;
-  top: 55px; 
-  margin-left: 0px; /* SearchBar의 왼쪽과 맞춤 */
-  width: 274px; /* SearchBar의 너비와 동일 */
+  top: 48px; 
+  margin-left: 0px; 
+  width: 274px; 
   background-color: var(--Sub1);
   border: 1px solid var(--Main2);
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+   width: 298px;
+   margin-left: 4px;
+    
+  }
 `;
 
 export const SearchHistoryItem = styled.div`

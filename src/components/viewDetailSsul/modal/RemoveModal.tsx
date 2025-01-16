@@ -1,19 +1,33 @@
 import * as S from '../../../styles/ViewDetailSsul/modal/ComplainModalComponentStyle';
 import Close from '../../../assets/images/Close.svg';
+import { deleteMyPost } from '../../../api/viewDetailSsul/viewDetailContent';
+import { useNavigate } from 'react-router-dom';
 
 interface RemoveModalProps {
   setOpenModal: (value: boolean) => void;
+  postId: number | undefined;
 }
 
 // React.FC를 사용한 ComplainModal 정의
-const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal }) => {
+const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal, postId }) => {
+  const navigate = useNavigate();
+
   const handleCancelClick = () => {
     setOpenModal(false); // 모달 닫기
   };
 
   //확인을 눌렀을 때, 삭제
   const handleConfirmClick = () => {
-    //삭제 api
+    const fetchDeletePost = async () => {
+      try {
+        await deleteMyPost(1);
+      } catch (error) {
+        console.log('fetchDeletePost 중 오류 발생', error);
+        throw error;
+      }
+    };
+    fetchDeletePost();
+    navigate('/');
   };
 
   return (

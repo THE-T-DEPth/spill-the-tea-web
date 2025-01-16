@@ -9,24 +9,98 @@ import Menu from '../../../assets/images/FixMenu.svg';
 import { useEffect, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';
+import {
+  DeleteLike,
+  deleteMyPost,
+  getLike,
+  getMyPost,
+  getPostDetail,
+  postLike,
+} from '../../../api/viewDetailSsul/viewDetailContent';
+
+//반환값 바뀔꺼임 memberid 없애고 사용자 프로필, 사용자 이름, email 추가하고 email setBlockEmail로 넘겨주기
+interface PostDetail {
+  postId: number;
+  title: string;
+  keywordList: string[];
+  nickname: string;
+  createdDateTime: string;
+  voiceType: string;
+  content: string;
+  thumb: string; //이미지
+  likedCount: number;
+  commentCount: number;
+  memberId: number;
+}
 
 const DetailSsulContent: React.FC<{
   setIsRemoveModal: (value: boolean) => void;
-}> = ({ setIsRemoveModal }) => {
+  setIsEditModal: (value: boolean) => void;
+  setIsReportModal: (value: boolean) => void;
+  setIsBlockModal: (value: boolean) => void;
+  setBlockEmail: (value: string) => void;
+  postId: number;
+}> = ({
+  setIsRemoveModal,
+  setIsEditModal,
+  setIsReportModal,
+  setIsBlockModal,
+  setBlockEmail,
+  postId,
+}) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
   const [openTTS, setOpenTTS] = useState<boolean>(false);
   const [confirmTTS, setConfirmTTS] = useState<boolean>(false);
+  const [postDetail, setPostDetail] = useState<PostDetail>();
+  const [token, setToken] = useState<string | null>();
+  const [myPost, setMyPost] = useState<boolean>();
 
+  //하트 post 및 delete
   const handleHeartClick = () => {
-    setIsHeartClick(!isHeartClick);
+    console.log(token);
+    const nextIsHeartClick = !isHeartClick;
+    if (token) {
+      setIsHeartClick(nextIsHeartClick);
+      if (nextIsHeartClick) {
+        const fetchPostLike = async () => {
+          try {
+            await postLike(1);
+          } catch (error) {
+            console.log('fetchPostLike 중 오류 발생', error);
+          }
+        };
+        fetchPostLike();
+      } else if (nextIsHeartClick == false) {
+        const fetchDeleteLike = async () => {
+          try {
+            await DeleteLike(1);
+          } catch (error) {
+            console.log('fetchDeleteLike 중 오류 발생', error);
+          }
+        };
+        fetchDeleteLike();
+      }
+    }
+  };
+
+  const handleEditClick = () => {
+    setIsEditModal(true);
   };
 
   const handleRemoveClick = () => {
     //게시물 삭제 버튼을 클릭했을 때 나타나는 동작
     setIsRemoveModal(true);
+  };
+
+  const handleReportClick = () => {
+    setIsReportModal(true);
+  };
+
+  const handleBlockClick = () => {
+    setIsBlockModal(true);
   };
 
   //공유버튼 클릭했을 시
@@ -42,11 +116,51 @@ const DetailSsulContent: React.FC<{
       });
   };
 
+  //이거 시간 설정 잘못된듯 - 저녁20:30분 게시글 11:30이라고 뜸
+  const formatDateTime = (isoString: string): string => {
+    const date = new Date(isoString);
+
+    // 날짜 추출
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
+    const year = date.getFullYear().toString().slice(-2); // 마지막 두 자리
+
+    // 시간 추출
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    // 원하는 형식으로 반환
+    return `${year}.${month}.${day} / ${hours}:${minutes}`;
+  };
+
+  //post 가져오기
+  useEffect(() => {
+    const fetchPostDetailData = async () => {
+      try {
+        // API 호출 및 데이터 가져오기
+        const data = await getPostDetail(1);
+        const keywordArray = data.data.keywordList
+          .replace(/^\[|\]$/g, '') // 대괄호 제거
+          .split(',') // 콤마로 분리
+          .map((keyword: string) => keyword.trim()); // 앞뒤 공백 제거
+
+        setPostDetail({
+          ...data.data, // 기존 데이터 복사
+          keywordList: keywordArray, // keywordList 업데이트
+        });
+      } catch (error) {
+        console.log('오류 발생:', error);
+      }
+    };
+    fetchPostDetailData();
+  }, [postId, handleHeartClick]);
+
   //메뉴 버튼 클릭했을 시
   const handleMenuClick = () => {
     setOpenMenu(!openMenu);
   };
 
+  //음성 관리
   const pitch = 1; //음성의 높낮이
   const rate = 10; //음성의 속도
 
@@ -92,6 +206,45 @@ const DetailSsulContent: React.FC<{
     }
   }
 
+  //페이지 reload 될 때마다 하트 클릭상태 최신 유지
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+    const fetchMyLike = async (currentPostId: number) => {
+      if (token) {
+        try {
+          const data = await getLike(); // API 호출
+          const likedPosts = data.data.contents; // 좋아요 목록 데이터 추출
+
+          // 현재 postId가 좋아요 목록에 있는지 확인
+          const isLiked = likedPosts.some(
+            (post: { postId: number }) => post.postId === currentPostId
+          );
+
+          setIsHeartClick(isLiked);
+        } catch (error) {
+          console.log('fetchMyLike 중 오류 발생', error);
+          throw error;
+        }
+      }
+    };
+    fetchMyLike(1);
+
+    const fetchMyPost = async (currentPostId: number) => {
+      if (token) {
+        try {
+          const data = await getMyPost();
+          const IsMyPost = data.data.contents.some(
+            (post: { postId: number }) => post.postId === currentPostId
+          );
+
+          setMyPost(IsMyPost);
+        } catch (error) {}
+      }
+    };
+    fetchMyPost(1);
+  }, [token]);
+
+  //반응형 크기 조정
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);
@@ -110,40 +263,68 @@ const DetailSsulContent: React.FC<{
       {!isMobile ? (
         <S.CDiv>
           <S.DSCTitleDiv>
-            <S.DSCTitle>{dummyData[0].title}</S.DSCTitle>
+            <S.DSCTitle>{postDetail?.title}</S.DSCTitle>
           </S.DSCTitleDiv>
           <S.DSCMenuDiv>
             {/*토큰과 내 게시글임이 맞을때 view*/}
-            <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
+            {token ? (
+              <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
+            ) : (
+              <></>
+            )}
             {openMenu ? (
-              <>
-                <S.DSCMenuDetailContainer>
-                  <S.DSCMenuDetailFixDiv>
-                    <S.DSCDSCMenuDetail>수정하기</S.DSCDSCMenuDetail>
-                  </S.DSCMenuDetailFixDiv>
-                  <S.DSCMenuDetailRemoveDiv>
-                    <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
-                      삭제하기
-                    </S.DSCDSCMenuDetail>
-                  </S.DSCMenuDetailRemoveDiv>
-                </S.DSCMenuDetailContainer>
-              </>
+              <S.DSCMenuDetailContainer>
+                {myPost ? (
+                  <>
+                    <S.DSCMenuDetailFixDiv>
+                      <S.DSCDSCMenuDetail onClick={handleEditClick}>
+                        수정하기
+                      </S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailFixDiv>
+                    <S.DSCMenuDetailRemoveDiv>
+                      <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
+                        삭제하기
+                      </S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailRemoveDiv>
+                  </>
+                ) : (
+                  <>
+                    <S.DSCMenuDetailFixDiv>
+                      <S.DSCDSCMenuDetail onClick={handleReportClick}>
+                        신고하기
+                      </S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailFixDiv>
+                    <S.DSCMenuDetailRemoveDiv>
+                      <S.DSCDSCMenuDetail onClick={handleBlockClick}>
+                        차단하기
+                      </S.DSCDSCMenuDetail>
+                    </S.DSCMenuDetailRemoveDiv>
+                  </>
+                )}
+              </S.DSCMenuDetailContainer>
             ) : (
               <></>
             )}
           </S.DSCMenuDiv>
           <S.DSCContentWholeDiv>
             <S.DSCTagDiv>
-              {dummyData[0].tags.map((value, index) => {
-                return <S.DSCEachTag key={index}># {value}</S.DSCEachTag>;
-              })}
+              {postDetail?.keywordList ? (
+                postDetail.keywordList.map((value, index) => (
+                  <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+                ))
+              ) : (
+                <p>로딩 중...</p>
+              )}
             </S.DSCTagDiv>
 
             <S.DSCProfileDiv>
               <S.DSCProfileImg src={dummyData[0].profile} />
               <S.DSCProfileTextDiv>
                 <S.DSCName>{dummyData[0].nickname}</S.DSCName>
-                <S.DSCProfileDate>{dummyData[0].date}</S.DSCProfileDate>
+                <S.DSCProfileDate>
+                  {postDetail?.createdDateTime &&
+                    formatDateTime(postDetail.createdDateTime)}
+                </S.DSCProfileDate>
               </S.DSCProfileTextDiv>
             </S.DSCProfileDiv>
             <S.DSCSpeaker
@@ -153,17 +334,17 @@ const DetailSsulContent: React.FC<{
               }}
             />
             <S.DSCContentDiv>
-              <S.DSCContentText>{dummyData[0].content}</S.DSCContentText>
-              <S.DSCContentImg src={dummyData[0].image} />
+              <S.DSCContentText>{postDetail?.content}</S.DSCContentText>
+              <S.DSCContentImg src={postDetail?.thumb} />
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
-                onClick={handleHeartClick}
-                src={isHeartClick ? FullHeart : EmptyHeart}
+                onClick={token ? handleHeartClick : () => {}}
+                src={isHeartClick || !token ? FullHeart : EmptyHeart}
               />
-              <S.DSCHeartNum>{dummyData[0].heart}</S.DSCHeartNum>
+              <S.DSCHeartNum>{postDetail?.likedCount}</S.DSCHeartNum>
               <S.DSCCommenttImg src={Comment} />
-              <S.DSCCommenttNum>{dummyData[0].review}</S.DSCCommenttNum>
+              <S.DSCCommenttNum>{postDetail?.commentCount}</S.DSCCommenttNum>
               <S.DSCShareImg src={Share} onClick={handleShareClick} />
             </S.DSCAnoterDiv>
           </S.DSCContentWholeDiv>
@@ -174,7 +355,10 @@ const DetailSsulContent: React.FC<{
               setConfirmTTS={(value) => {
                 setConfirmTTS(value);
                 if (value) {
-                  speak(dummyData[0].content, window.speechSynthesis); // TTS 실행
+                  speak(
+                    postDetail?.content ? postDetail.content : '',
+                    window.speechSynthesis
+                  ); // TTS 실행
                 }
               }}
             />
@@ -188,36 +372,60 @@ const DetailSsulContent: React.FC<{
             <S.DSCProfileImg src={dummyData[0].profile} />
             <S.DSCProfileTextDiv>
               <S.DSCName>{dummyData[0].nickname}</S.DSCName>
-              <S.DSCProfileDate>{dummyData[0].date}</S.DSCProfileDate>
+              <S.DSCProfileDate>
+                {postDetail?.createdDateTime &&
+                  formatDateTime(postDetail.createdDateTime)}
+              </S.DSCProfileDate>
             </S.DSCProfileTextDiv>
             <S.DSCMenuDiv>
               {/*토큰과 내 게시글임이 맞을때 view*/}
               <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
               {openMenu ? (
-                <>
-                  <S.DSCMenuDetailContainer>
-                    <S.DSCMenuDetailFixDiv>
-                      <S.DSCDSCMenuDetail>수정하기</S.DSCDSCMenuDetail>
-                    </S.DSCMenuDetailFixDiv>
-                    <S.DSCMenuDetailRemoveDiv>
-                      <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
-                        삭제하기
-                      </S.DSCDSCMenuDetail>
-                    </S.DSCMenuDetailRemoveDiv>
-                  </S.DSCMenuDetailContainer>
-                </>
+                <S.DSCMenuDetailContainer>
+                  {myPost ? (
+                    <>
+                      <S.DSCMenuDetailFixDiv>
+                        <S.DSCDSCMenuDetail onClick={handleEditClick}>
+                          수정하기
+                        </S.DSCDSCMenuDetail>
+                      </S.DSCMenuDetailFixDiv>
+                      <S.DSCMenuDetailRemoveDiv>
+                        <S.DSCDSCMenuDetail onClick={handleRemoveClick}>
+                          삭제하기
+                        </S.DSCDSCMenuDetail>
+                      </S.DSCMenuDetailRemoveDiv>
+                    </>
+                  ) : (
+                    <>
+                      <S.DSCMenuDetailFixDiv>
+                        <S.DSCDSCMenuDetail onClick={handleReportClick}>
+                          신고하기
+                        </S.DSCDSCMenuDetail>
+                      </S.DSCMenuDetailFixDiv>
+                      <S.DSCMenuDetailRemoveDiv>
+                        <S.DSCDSCMenuDetail onClick={handleBlockClick}>
+                          차단하기
+                        </S.DSCDSCMenuDetail>
+                      </S.DSCMenuDetailRemoveDiv>
+                    </>
+                  )}
+                </S.DSCMenuDetailContainer>
               ) : (
                 <></>
               )}
             </S.DSCMenuDiv>
           </S.DSCProfileDiv>
           <S.DSCTagDiv>
-            {dummyData[0].tags.map((value, index) => {
-              return <S.DSCEachTag key={index}># {value}</S.DSCEachTag>;
-            })}
+            {postDetail?.keywordList ? (
+              postDetail.keywordList.map((value, index) => (
+                <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+              ))
+            ) : (
+              <p>로딩 중...</p>
+            )}
           </S.DSCTagDiv>
           <S.DSCTitleDiv>
-            <S.DSCTitle>{dummyData[0].title}</S.DSCTitle>
+            <S.DSCTitle>{postDetail?.title}</S.DSCTitle>
             <S.DSCSpeaker
               src={Speaker}
               onClick={() => {
@@ -227,17 +435,17 @@ const DetailSsulContent: React.FC<{
           </S.DSCTitleDiv>
           <S.DSCContentWholeDiv>
             <S.DSCContentDiv>
-              <S.DSCContentText>{dummyData[0].content}</S.DSCContentText>
-              <S.DSCContentImg src={dummyData[0].image} />
+              <S.DSCContentText>{postDetail?.content}</S.DSCContentText>
+              <S.DSCContentImg src={postDetail?.thumb} />
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
                 onClick={handleHeartClick}
                 src={isHeartClick ? FullHeart : EmptyHeart}
               />
-              <S.DSCHeartNum>{dummyData[0].heart}</S.DSCHeartNum>
+              <S.DSCHeartNum>{postDetail?.likedCount}</S.DSCHeartNum>
               <S.DSCCommenttImg src={Comment} />
-              <S.DSCCommenttNum>{dummyData[0].review}</S.DSCCommenttNum>
+              <S.DSCCommenttNum>{postDetail?.commentCount}</S.DSCCommenttNum>
               <S.DSCShareImg src={Share} onClick={handleShareClick} />
             </S.DSCAnoterDiv>
           </S.DSCContentWholeDiv>
@@ -248,7 +456,10 @@ const DetailSsulContent: React.FC<{
               setConfirmTTS={(value) => {
                 setConfirmTTS(value);
                 if (value) {
-                  speak(dummyData[0].content, window.speechSynthesis); // TTS 실행
+                  speak(
+                    postDetail?.content ? postDetail.content : '',
+                    window.speechSynthesis
+                  ); // TTS 실행
                 }
               }}
             />
