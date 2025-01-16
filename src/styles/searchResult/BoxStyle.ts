@@ -49,6 +49,9 @@ export const Container = styled.div<{ disabled?: boolean }>`
     height: 179px;
     border: none;
     transition: all 0.3s ease;
+    &:hover {
+      box-shadow: none;
+    }
   }
 `;
 
