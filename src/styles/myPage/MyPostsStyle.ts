@@ -1,8 +1,14 @@
 import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   width: 1046px;
   margin: 0 auto;
+
+  ${isMobile} {
+    width: 100%;
+    margin: 11px auto 39px;
+  }
 `;
 
 export const SortButtonContainer = styled.div`
