@@ -3,7 +3,7 @@ import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   width: 404px;
-  height: 882px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,8 @@ export const Container = styled.div`
 
   ${isMobile} {
     width: 358px;
-    margin: 42px auto 116px;
+
+    margin: 42px auto 135px;
     transition: all 0.3s ease;
   }
 `;

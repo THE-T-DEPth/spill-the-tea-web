@@ -9,6 +9,8 @@ export const Container = styled.div`
 
   ${isMobile} {
     width: 264px;
+    margin: 226px auto 237px;
+    height: 118px;
   }
 `;
 
