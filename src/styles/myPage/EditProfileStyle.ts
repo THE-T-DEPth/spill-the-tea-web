@@ -8,12 +8,12 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 76px auto 84px;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 358px;
 
     margin: 42px auto 135px;
-    transition: all 0.3s ease;
   }
 `;
 
@@ -22,11 +22,11 @@ export const Title = styled.span`
   width: 100%;
   height: 30px;
   text-align: center;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     font: var(--headingMedium);
     height: 22px;
-    transition: all 0.3s ease;
   }
 `;
 
@@ -34,6 +34,7 @@ export const ImgContainer = styled.div`
   margin: 13px 77px 35px;
   width: 250px;
   height: 250px;
+  transition: all 0.3s ease;
 
   img {
     width: 100%;
@@ -54,6 +55,7 @@ export const ProfileButton = styled.div`
   height: 44px;
   gap: 64px;
   margin: 0 27px 50px;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 263px;
@@ -74,6 +76,7 @@ export const ChangeButton = styled.button`
   border: 1px solid var(--Main2);
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 108px;
@@ -92,6 +95,7 @@ export const DeleteButton = styled.button`
   border: 1px solid var(--Main2);
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 108px;
@@ -105,6 +109,7 @@ export const NicknameLabel = styled.label`
   font: var(--mypageTitle);
   margin-bottom: 14px 
   box-sizing: border-box;
+  transition: all 0.3s ease;
 
   ${isMobile} {
   font: var(--headingSmall);
@@ -125,6 +130,7 @@ export const NicknameInput = styled.input`
   background: var(--InputBack);
   border-radius: 8px;
   color: var(--Secondary1);
+  transition: all 0.3s ease;
   &:focus {
     outline: none;
   }
@@ -139,6 +145,7 @@ export const PasswordLabel = styled.span`
   width: 100%;
   font: var(--mypageTitle);
   margin-bottom: 14px;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     font: var(--headingSmall);
@@ -148,6 +155,7 @@ export const PasswordLabel = styled.span`
 export const PasswordContainer = styled.div`
   width: 100%;
   height: 67px;
+  transition: all 0.3s ease;
   ${isMobile} {
     height: 86px;
   }
@@ -161,6 +169,7 @@ export const PasswordInput = styled.input`
   border: none;
   background: var(--InputBack);
   border-radius: 8px;
+  transition: all 0.3s ease;
   &::placeholder {
     color: var(--Secondary1);
     font: var(--labelMedium);
@@ -176,6 +185,7 @@ export const PasswordInput = styled.input`
 export const CheckContainer = styled.div`
   width: 100%;
   height: 67px;
+  transition: all 0.3s ease;
 `;
 
 export const CheckInput = styled.input`
@@ -187,6 +197,7 @@ export const CheckInput = styled.input`
   background: var(--InputBack);
   border-radius: 8px;
   margin-top: 14px;
+  transition: all 0.3s ease;
   &::placeholder {
     color: var(--Secondary1);
     font: var(--labelMedium);
@@ -206,6 +217,7 @@ export const ButtonContainer = styled.div`
   height: 50px;
   gap: 51px;
   margin: 62px 5.5px 0;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 264px;
@@ -227,6 +239,7 @@ export const CancelButton = styled.button`
   font: var(--mypageButton);
   color: var(--Secondary1);
   cursor: pointer;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 108px;
@@ -246,6 +259,7 @@ export const SaveButton = styled.button`
   font: var(--mypageButton);
   color: var(--primary2);
   cursor: pointer;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 108px;
@@ -260,6 +274,7 @@ export const ErrorMessage = styled.p<{ $isDefault: boolean }>`
   margin-top: 3px;
   margin-bottom: 0;
   height: 19px;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     margin-bottom: 11px;
@@ -274,4 +289,5 @@ export const CheckMessage = styled.p<{ $isMatch: boolean }>`
   margin-top: 3px;
   margin-bottom: 0;
   height: 19px;
+  transition: all 0.3s ease;
 `;
