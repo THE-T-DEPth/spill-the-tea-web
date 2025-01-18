@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as S from "../styles/Login/TemporaryPassPageStyle";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchTemporaryPassword } from "../api/DummyApi";
+
 
 const TemporaryPassPage: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const email = location.state?.email || "";
-	const [temporaryPassword, setTemporaryPassword] = useState<string>("******");
+	const temporaryPassword = location.state?.temporaryPassword || "******";
 
-	useEffect(() => {
-		const fetchPassword = async () => {
-			const password = await fetchTemporaryPassword(email);
-			setTemporaryPassword(password);
-		};
-		fetchPassword();
-	}, [email]);
 
 
 	const goToLoginPage = () => {
