@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--BackColor);
-  height: calc(100vh - 100px);
+  height: calc(100vh - 133px);
   transition: all 0.3s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);

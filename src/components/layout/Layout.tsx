@@ -1,8 +1,8 @@
-import React from "react";
-import * as S from "../../styles/Layout/LayoutStyle";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
-import NavBar from "../layout/NavBar";
+import React from 'react';
+import * as S from '../../styles/Layout/LayoutStyle';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
+import NavBar from '../layout/NavBar';
 import { useLocation } from "react-router-dom";
 import useNSMediaQuery from "../../hooks/useNSMediaQuery";
 import YellowNav from './YellowNav';
@@ -15,7 +15,6 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
 	const location = useLocation();
 	const { isMobile } = useNSMediaQuery();
-	const isWritePage = location.pathname === '/write';
 
 	const excludedPaths = [
 		"/login",
@@ -28,14 +27,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 		"/signupdone",
 	];
 
-	const shouldHideHeaderAndNavBar =
-		isMobile && excludedPaths.includes(location.pathname);
+	const shouldHideNavBar = excludedPaths.includes(location.pathname);
+	const isWritePage = location.pathname === '/write';
 
 	return (
 		<S.Container style={{ minWidth: isWritePage ? '1400px' : '' }}>
-			{!shouldHideHeaderAndNavBar && <Header />}
+			{/* 헤더는 PC에서는 항상 표시 */}
+			{(!isMobile || !shouldHideNavBar) && <Header />}
 
-			{!shouldHideHeaderAndNavBar && location.pathname !== "/mypage" && location.pathname !== '/write' && (
+			{/* 네비게이션 바 */}
+			{!shouldHideNavBar && location.pathname !== "/mypage" && location.pathname !== "/write" && (
 				<NavBar />
 			)}
 
