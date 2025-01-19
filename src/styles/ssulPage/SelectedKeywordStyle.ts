@@ -29,15 +29,11 @@ export const Container = styled.div<{ $isInModal?: boolean }>`
       $isInModal &&
       `
     padding: 4px;
-
     width: 68px;
     height: 24px;
-
-    background: #5ad75f;
-
-    border: 0.6px solid #55533e;
+    background:var(--Main3);
+    border: 0.6px solid var(--EarlGrey);
     border-radius: 1.5px;
-
     font: var(--labelSmall);
     `}
   }
