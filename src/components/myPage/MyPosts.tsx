@@ -28,23 +28,25 @@ const MyPosts = () => {
         </S.EmptyContainer>
       ) : (
         <S.Container>
-          <S.SortButtonContainer>
-            <SortButton />
-          </S.SortButtonContainer>
-          <S.GridContainer>
-            {currentItems.map((data, index) => (
-              <Box
-                key={index}
-                title={data.title}
-                image={data.image}
-                keywords={data.keywords}
-                date={data.date}
-                time={data.time}
-                likes={data.likes}
-                comments={data.comments}
-              />
-            ))}
-          </S.GridContainer>
+          <S.MainContainer>
+            <S.SortButtonContainer>
+              <SortButton />
+            </S.SortButtonContainer>
+            <S.GridContainer>
+              {currentItems.map((data, index) => (
+                <Box
+                  key={index}
+                  title={data.title}
+                  image={data.image}
+                  keywords={data.keywords}
+                  date={data.date}
+                  time={data.time}
+                  likes={data.likes}
+                  comments={data.comments}
+                />
+              ))}
+            </S.GridContainer>
+          </S.MainContainer>
           <S.PaginationContainer>
             <Pagination
               totalItems={BoxData.length}

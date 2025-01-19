@@ -10,10 +10,21 @@ export const Container = styled.div`
   }
 `;
 
+export const MainContainer = styled.div`
+  margin: 0 auto;
+  width: 1046px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  ${isMobile} {
+    width: 359px;
+  }
+`;
+
 export const SortButtonContainer = styled.div`
   margin-top: 42px;
   ${isMobile} {
-    margin-top: 28px;
+    margin-top: 11px;
   }
 `;
 
@@ -34,6 +45,7 @@ export const GridContainer = styled.div`
     grid-column-gap: 8px;
     grid-row-gap: 18px;
     transition: all 0.3s ease;
+    margin-top: 14.53px;
   }
 `;
 
