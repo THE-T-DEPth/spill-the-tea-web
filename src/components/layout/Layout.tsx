@@ -13,9 +13,9 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-
 	const location = useLocation();
 	const { isMobile } = useNSMediaQuery();
+	const isWritePage = location.pathname === '/write';
 
 	const excludedPaths = [
 		"/login",
