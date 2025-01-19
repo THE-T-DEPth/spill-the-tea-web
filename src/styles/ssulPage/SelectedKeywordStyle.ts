@@ -15,6 +15,7 @@ export const Container = styled.div<{ $isInModal?: boolean }>`
   color: var(--primary2);
   font: var(--selectedKeyword);
   white-space: nowrap;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     font: var(--selcetedKeywordMini);
@@ -27,8 +28,6 @@ export const Container = styled.div<{ $isInModal?: boolean }>`
     ${({ $isInModal }) =>
       $isInModal &&
       `
-      box-sizing: border-box;
-
     padding: 4px;
 
     width: 68px;

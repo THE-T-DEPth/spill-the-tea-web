@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 148px;
   position: relative;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     width: 100%;

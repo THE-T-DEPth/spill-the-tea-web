@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: center;
   gap: 25px;
   border-bottom: 1px solid var(--Secondary3);
+  box-sizing: border-box;
 
   ${isMobile} {
     width: 100%;
@@ -18,6 +19,12 @@ export const Container = styled.div`
     justify-content: start;
     margin-top: 34.42px;
     gap: 0;
+  }
+`;
+
+export const CategorySelectorContainer = styled.div`
+  ${isMobile} {
+    width: 100%;
   }
 `;
 

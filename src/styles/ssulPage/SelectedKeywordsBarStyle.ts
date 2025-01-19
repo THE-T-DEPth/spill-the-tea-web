@@ -8,6 +8,7 @@ export const Container = styled.div<{ $isInModal?: boolean }>`
   gap: 42px;
   align-items: center;
   margin-top: 24px;
+  transition: all 0.3s ease;
 
   ${isMobile} {
     border: none;

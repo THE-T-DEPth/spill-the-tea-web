@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { isMobile } from '../../hooks/Media';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  transition: all 0.3s ease;
+`;
 
 export const EmptyContainer = styled.div`
   display: flex;
@@ -31,8 +33,13 @@ export const EmptyMessage = styled.p`
 export const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 61px auto 73px;
   width: 1046px;
+  margin: 61px auto 73px;
+
+  ${isMobile} {
+    width: 359px;
+    margin: 22px auto 37px;
+  }
 `;
 
 export const GridContainer = styled.div`
@@ -45,6 +52,15 @@ export const GridContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   transition: all 0.3s ease;
+  ${isMobile} {
+  }
+
+  ${isMobile} {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 8px;
+    grid-row-gap: 18px;
+  }
 `;
 
 export const PaginationContainer = styled.div`
@@ -59,7 +75,6 @@ export const MobileCategoryBar = styled.div`
   padding: 0 16px;
   display: flex;
   box-sizing: border-box;
-  transition: all 0.3s ease;
   ${isMobile} {
     display: flex;
     flex-direction: column;
@@ -88,5 +103,4 @@ export const KeywordButton = styled.button`
   font: var(--keywordButton);
   margin-top: 13px;
   background-color: var(--primary2);
-  transition: all 0.3s ease;
 `;
