@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import { isMobile } from "../../hooks/Media";
 
-export const Wrapper = styled.div`
+
+export const Content = styled.div`
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: calc(100vh - 126px);
   background-color:var(--BackFirst);
-`;
-
-export const Content = styled.div`
-  text-align: center;
+  ${isMobile} {
+    background-color: var(--primary2);
+	
+  }
 `;
 
 export const Title = styled.h1`
@@ -20,6 +23,7 @@ font: var(--labelXXL);
 color: var(--HeadLine);
 ${isMobile}{
 	font: var(--labelMedium);
+	margin-top: 338px;
 }
 `;
 
@@ -36,7 +40,8 @@ export const Button = styled.button`
   height: 45px;
   margin-top: 88px;
   margin-bottom: 319px;
-  padding-top: 4px;
+  padding-top: 8.5px;
+  padding-bottom: 6.5px;
   background-color: var(--Green2);
   color: var(--Sub1);
   border: none;

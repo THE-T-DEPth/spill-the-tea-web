@@ -7,11 +7,10 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color:var(--BackFirst);
-  height: calc(100vh - 100px);
+  height: calc(100vh - 126px);
   transition: all 0.3s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh);
   }
 `;
 
@@ -34,11 +33,10 @@ export const Title = styled.h1`
   transition: all 0.3s ease-in-out;
   ${isMobile} {
     font: var(--searchEmpty); 
-    margin-top: 161px;
+    margin-top: 105px;
   }
 `;
 export const Subtitle = styled.p`
-  /* 기본적으로 숨김 처리 */
   display: none;
 
   ${isMobile} {
@@ -64,8 +62,8 @@ export const SignupBox = styled.div`
 ${isMobile} {
   width: 100%;
   max-width: 343px;
-  margin-top: 0px;
-  margin-bottom: 65px;
+  margin-top: -30px;
+  margin-bottom: 0px;
   background: none; 
   box-shadow: none; 
 }
@@ -111,16 +109,16 @@ export const Label = styled.label`
   }
 `;
 
-export const NicknameStatusText = styled.p<{ status: 'valid' | 'invalid' | null }>`
+export const NicknameStatusText = styled.p<{ $status: 'valid' | 'invalid' | null }>`
   font: var(--paragraphSmall);
   margin-top: 2.82px;
   color: ${(props) =>
-		props.status === 'valid'
+		props.$status === 'valid'
 			? 'green'
-			: props.status === 'invalid'
+			: props.$status === 'invalid'
 				? 'red'
 				: 'transparent'};
-  visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.$status ? 'visible' : 'hidden')};
   height: 20px;
   transition: color 0.3s ease;
 `;
@@ -163,7 +161,7 @@ export const SubmitButton = styled.button<{ disabled: boolean }>`
   ${isMobile} {
 	width: 343px;
   height: 45px;
-  margin-bottom: 0px;
+  margin-bottom: 65px;
   font: var(--labelMedium);
   border-radius: 4px;
   }

@@ -98,7 +98,7 @@ const SignupPage: React.FC = () => {
 								onChange={handleNicknameChange}
 								button={<div onClick={handleNicknameCheck}>중복체크</div>}
 							/>
-							<S.NicknameStatusText status={nicknameStatus}>
+							<S.NicknameStatusText $status={nicknameStatus}>
 								{nicknameStatus === 'valid'
 									? '해당 닉네임을 이용 가능합니다.'
 									: nicknameStatus === 'invalid'

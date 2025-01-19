@@ -86,7 +86,7 @@ const SignupEmailPage: React.FC = () => {
 								onChange={(e) => setEmail(e.target.value)}
 								button={<div onClick={handleEmailCheck}>중복체크</div>}
 							/>
-							<S.EmailStatusText status={emailStatus}>
+							<S.EmailStatusText $status={emailStatus}>
 								{emailStatus === 'valid'
 									? '이메일 사용이 가능합니다.'
 									: emailStatus === 'invalid'

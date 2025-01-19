@@ -7,11 +7,10 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--BackColor);
-  height: calc(100vh - 100px);
+  height: calc(100vh - 126px);
   transition: all 0.3s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh);
   }
 `;
 
@@ -82,7 +81,7 @@ export const SignupBox = styled.div`
   ${isMobile} {
     width: 100%;
     max-width: 343px;
-	margin-top: 0px;
+	margin-top: -30px;
 	margin-bottom: 0px;
     background: none; 
     box-shadow: none; 
@@ -164,16 +163,16 @@ export const TypeInputWrapper = styled.div`
 `;
 
 
-export const EmailStatusText = styled.p<{ status: 'valid' | 'invalid' | null }>`
+export const EmailStatusText = styled.p<{ $status: 'valid' | 'invalid' | null }>`
   font: var(--paragraphSmall);
   margin-top: 2.82px;
   color: ${(props) =>
-		props.status === 'valid'
+		props.$status === 'valid'
 			? 'red'
-			: props.status === 'invalid'
+			: props.$status === 'invalid'
 				? 'red'
 				: 'transparent'};
-  visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.$status ? 'visible' : 'hidden')};
   height: 20px;
   transition: color 0.3s ease;
 `;
