@@ -2,24 +2,23 @@ import styled from 'styled-components';
 import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
-  width: 1046px;
+  width: 100%;
   margin: 0 auto;
 
   ${isMobile} {
     width: 100%;
-    margin: 0 auto;
   }
 `;
 
 export const SortButtonContainer = styled.div`
   margin-top: 42px;
   ${isMobile} {
-    margin-top: 11px;
+    margin-top: 28px;
   }
 `;
 
 export const GridContainer = styled.div`
-  width: 100%;
+  width: 1046px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -27,8 +26,9 @@ export const GridContainer = styled.div`
   grid-row-gap: 47px;
   grid-auto-flow: row;
   box-sizing: border-box;
-  margin-top: 30px;
+  margin: 30px auto 0;
   ${isMobile} {
+    width: 359px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 8px;
