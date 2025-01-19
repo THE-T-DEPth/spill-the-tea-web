@@ -1,17 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const PaginationContainer = styled.div`
   width: 170px;
   height: 24px;
   display: flex;
   margin-top: 32px;
+
+  ${isMobile} {
+    margin-top: 25px;
+  }
 `;
 
 export const PaginationButton = styled.button<{ $disabled: boolean }>`
   background: none;
   border: none;
   padding: 0;
-  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +25,7 @@ export const PaginationButtonLeft = styled.button<{ $disabled: boolean }>`
   background: none;
   border: none;
   padding: 0;
-  cursor: ${(props) => (props.$disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.$disabled ? 'default' : 'pointer')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +37,7 @@ export const PaginationButtonRight = styled.button<{ $disabled: boolean }>`
   background: none;
   border: none;
   padding: 0;
-  cursor: ${(props) => (props.$disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.$disabled ? 'default' : 'pointer')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,19 +53,19 @@ export const NumberContainer = styled.div<{ $groupLength: number }>`
   justify-content: center;
   margin: 3px 0;
   gap: ${(props) => {
-    if (props.$groupLength === 2) return "36px";
-    if (props.$groupLength === 3) return "25px";
-    return "0px";
+    if (props.$groupLength === 2) return '36px';
+    if (props.$groupLength === 3) return '25px';
+    return '0px';
   }};
 `;
 
 export const PageNumber = styled.button<{ $isActive: boolean }>`
   color: ${(props) =>
-    props.$isActive ? "var(--primary1)" : "var(--Secondary2)"};
+    props.$isActive ? 'var(--primary1)' : 'var(--Secondary2)'};
   border: none;
   background: none;
   font: var(--labelSmall);
-  text-decoration: ${(props) => (props.$isActive ? "underline" : "none")};
+  text-decoration: ${(props) => (props.$isActive ? 'underline' : 'none')};
   text-underline-offset: 3px;
   padding: 0;
   cursor: pointer;
