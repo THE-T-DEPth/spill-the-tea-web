@@ -9,6 +9,7 @@ import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
 import useNSMediaQuery from '../hooks/useNSMediaQuery';
 import KeywordModal from '../components/ssulPage/KeywordModal';
+import MakeTeaButton from '../components/Home/MakeTeaButton';
 
 const SsulPage = () => {
   const { isMobile } = useNSMediaQuery();
@@ -125,6 +126,9 @@ const SsulPage = () => {
             </S.PaginationContainer>
           </S.BoxContainer>
         )}
+        <S.MakeTeaButtonContainer>
+          <MakeTeaButton />
+        </S.MakeTeaButtonContainer>
       </S.Container>
     </>
   );

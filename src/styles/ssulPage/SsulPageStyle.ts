@@ -104,3 +104,16 @@ export const KeywordButton = styled.button`
   margin-top: 13px;
   background-color: var(--primary2);
 `;
+
+export const MakeTeaButtonContainer = styled.div`
+  position: fixed;
+  bottom: 79px;
+  right: calc((100% - 1440px) / 2 + 55px);
+  z-index: 10;
+  @media (max-width: 1440px) {
+    right: 55px;
+  }
+  ${isMobile} {
+    display: none;
+  }
+`;
