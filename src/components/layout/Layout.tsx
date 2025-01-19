@@ -12,9 +12,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isWritePage = location.pathname === '/write';
+  const isEditPage = /^\/edit\/\d+$/.test(location.pathname);
 
   return (
-    <S.Container style={{ minWidth: isWritePage ? '1400px' : '' }}>
+    <S.Container
+      style={{ minWidth: isWritePage || isEditPage ? '1400px' : '' }}>
       <Header />
       {/* 네비게이션 바 */}
       {location.pathname !== '/login' &&
@@ -24,9 +26,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         location.pathname !== '/signup' &&
         location.pathname !== '/signupdone' &&
         location.pathname !== '/mypage' &&
-        location.pathname !== '/write' && <NavBar />}
+        location.pathname !== '/write' &&
+        !/^\/edit\/\d+$/.test(location.pathname) && <NavBar />}
 
-      {isWritePage ? <WriteNav /> : <></>}
+      {isWritePage || isEditPage ? <WriteNav /> : <></>}
       <YellowNav />
       {/* 메인 콘텐츠 */}
       <S.Main>{children}</S.Main>

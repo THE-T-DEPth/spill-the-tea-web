@@ -67,7 +67,7 @@ const DetailSsulContent: React.FC<{
       if (nextIsHeartClick) {
         const fetchPostLike = async () => {
           try {
-            await postLike(1);
+            await postLike(postId);
           } catch (error) {
             console.log('fetchPostLike 중 오류 발생', error);
           }
@@ -76,7 +76,7 @@ const DetailSsulContent: React.FC<{
       } else if (nextIsHeartClick == false) {
         const fetchDeleteLike = async () => {
           try {
-            await DeleteLike(1);
+            await DeleteLike(postId);
           } catch (error) {
             console.log('fetchDeleteLike 중 오류 발생', error);
           }
@@ -138,7 +138,7 @@ const DetailSsulContent: React.FC<{
     const fetchPostDetailData = async () => {
       try {
         // API 호출 및 데이터 가져오기
-        const data = await getPostDetail(1);
+        const data = await getPostDetail(postId);
         const keywordArray = data.data.keywordList
           .replace(/^\[|\]$/g, '') // 대괄호 제거
           .split(',') // 콤마로 분리
@@ -227,22 +227,21 @@ const DetailSsulContent: React.FC<{
         }
       }
     };
-    fetchMyLike(1);
+    fetchMyLike(postId);
 
     const fetchMyPost = async (currentPostId: number) => {
-      if (token) {
-        try {
-          const data = await getMyPost();
-          const IsMyPost = data.data.contents.some(
-            (post: { postId: number }) => post.postId === currentPostId
-          );
-
-          setMyPost(IsMyPost);
-        } catch (error) {}
-      }
+      // if (token) {
+      try {
+        const data = await getMyPost();
+        const IsMyPost = data.data.contents.some(
+          (post: { postId: number }) => post.postId === currentPostId
+        );
+        setMyPost(IsMyPost);
+      } catch (error) {}
+      // }
     };
-    fetchMyPost(1);
-  }, [token]);
+    fetchMyPost(postId);
+  }, [postId]);
 
   //반응형 크기 조정
   useEffect(() => {

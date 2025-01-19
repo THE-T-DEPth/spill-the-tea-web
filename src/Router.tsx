@@ -38,10 +38,11 @@ const Router = () => {
           <Route path='/signupdone' element={<SignupDonePage />} />
           <Route path='/ssulpage' element={<SsulPage />} />
           <Route
-            path='/viewDetailSsul/:posdId'
+            path='/viewDetailSsul/:postId'
             element={<ViewDetailSsulPage />}
           />
-          <Route path='/write' element={<WritePage />} />
+          <Route path='/write' element={<WritePage mode='write' />} />
+          <Route path='/edit/:postId' element={<WritePage mode='edit' />} />
           <Route path='/likedssuls' element={<LikedSsulPage />} />
           <Route path='/mypage' element={<MyPage />} />
         </Routes>
