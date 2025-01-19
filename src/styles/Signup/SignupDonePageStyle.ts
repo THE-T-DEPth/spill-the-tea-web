@@ -8,10 +8,11 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 126px);
+  height: calc(100vh - 133px);
   background-color:var(--BackFirst);
   ${isMobile} {
     background-color: var(--primary2);
+	height: calc(100vh - 126px);
 	
   }
 `;
