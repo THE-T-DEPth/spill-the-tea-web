@@ -31,7 +31,7 @@ export const DSRRInputDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 0 auto 10px auto;
+  margin: 5px auto 8px auto;
 `;
 
 //placeholder 색상 변경
@@ -74,19 +74,23 @@ export const DSRWholeCommentDiv = styled.div`
 export const DSREachCommentDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 15px auto 0 auto;
+  margin: 5px auto 10px auto;
   width: 100%;
   box-sizing: border-box;
 
   align-items: center;
 `;
 
-export const DSRCocomentDiv = styled.div`
+export const DSRCocomentDiv = styled.div<{ $inputclick: string }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  margin-left: 11%;
+  margin-left: 5%;
+  background-color: ${({ $inputclick }) =>
+    $inputclick == 'true' ? '' : '#F9F9F9'};
+  border-radius: 10px;
+  padding-left: 20px;
 `;
 
 export const ReviewDiv = styled.div<{ $openrereview: string }>`
@@ -106,9 +110,10 @@ export const ReviewDiv = styled.div<{ $openrereview: string }>`
     box-sizing: border-box;
     background-color: ${({ $openrereview }) =>
       $openrereview == 'true' ? '#FFFDEE' : 'white'};
-    padding: ${({ $openrereview }) => ($openrereview == 'true' ? '10px' : '0')};
+    padding: ${({ $openrereview }) =>
+      $openrereview == 'true' ? '15px 6%' : '0'};
     width: ${({ $openrereview }) =>
-      $openrereview == 'true' ? 'calc(100% + 20px)' : '100%'};
+      $openrereview == 'true' ? 'calc(100vw - 15px)' : '100%'};
   }
 `;
 
@@ -247,4 +252,25 @@ export const DSRHeartNum = styled.p`
   line-height: 1;
   font-size: 8px;
   margin: auto 0;
+`;
+
+export const RereviewDiv = styled.div`
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+`;
+
+export const RereviewArrowImg = styled.img`
+  display: flex;
+  height: 11px;
+`;
+
+export const RereviewP = styled.p`
+  display: flex;
+  color: var(--G4);
+  font: var(--paragraphMedium);
+  align-items: center;
+  font-size: 8px;
+  margin: auto 0;
+  padding: 0;
 `;
