@@ -2,11 +2,11 @@ import { useState } from "react";
 import * as S from "../styles/Login/LoginPageStyle";
 import EyeIcon from "../assets/Icons/Eye.svg";
 import EyeOffIcon from "../assets/Icons/EyeOff.svg";
-
 import { useNavigate } from "react-router-dom";
-import { postLogin } from "../api/login/loginPage"; // 실제 API import
+import { postLogin } from "../api/login/loginPage";
 import LoginInput from "../components/login/LoginInput";
-import { AxiosError } from "axios"; // AxiosError 타입 import
+import { AxiosError } from "axios";
+
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -54,7 +54,11 @@ const LoginPage = () => {
 					setEmailError("존재하지 않는 이메일입니다.");
 				} else if (errorMessage === "Invalid password") {
 					setPasswordError("비밀번호가 일치하지 않습니다.");
+				} else {
+					setEmailError("알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
 				}
+			} else {
+				setEmailError("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
 			}
 		}
 	};
