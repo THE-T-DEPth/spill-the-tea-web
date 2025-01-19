@@ -7,11 +7,15 @@ import Box from '../components/searchResult/Box';
 import BoxData from '../assets/data/SsulPagedata';
 import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
+import useNSMediaQuery from '../hooks/useNSMediaQuery';
+import KeywordModal from '../components/ssulPage/KeywordModal';
 
 const SsulPage = () => {
+  const { isMobile } = useNSMediaQuery();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]); // 선택된 키워드 초기화
   const [selectedCategory, setSelectedCategory] = useState('감정/ 관계'); // 카테고리 변경
   const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15));
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 키워드 추가
   const addKeyword = (keyword: string) => {
@@ -34,20 +38,61 @@ const SsulPage = () => {
     setCurrentItems(pageItems);
   }, []);
 
+  const handleKeywordButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <TopBar text='"오늘도 썰 한 잔, 짤 한 스푼 🍵" ' />
       <S.Container>
-        {/* 카테고리 - 해당 키워드 */}
-        <CategoryBar
-          addKeyword={addKeyword}
-          removeKeyword={removeKeyword}
-          selectedKeywords={selectedKeywords}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={handleCategoryChange}
-        />
-        {/* 선택된 키워드 */}
-        <SelectedKeywordsBar selectedKeywords={selectedKeywords} />
+        {isMobile ? (
+          <>
+            <S.MobileCategoryBar>
+              {/* 모달화면 */}
+              <S.KeywordContainer>
+                <S.Title>선택 키워드</S.Title>
+                <S.KeywordButton onClick={handleKeywordButtonClick}>
+                  키워드 지정
+                </S.KeywordButton>
+              </S.KeywordContainer>
+              <SelectedKeywordsBar
+                selectedKeywords={selectedKeywords}
+                isInModal={isModalOpen}
+              />
+            </S.MobileCategoryBar>
+            {isModalOpen && (
+              <KeywordModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                selectedKeywords={selectedKeywords}
+                addKeyword={addKeyword}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={handleCategoryChange}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {/* 카테고리 - 해당 키워드 */}
+            <CategoryBar
+              addKeyword={addKeyword}
+              removeKeyword={removeKeyword}
+              selectedKeywords={selectedKeywords}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={handleCategoryChange}
+            />
+            {/* 선택된 키워드 */}
+            <SelectedKeywordsBar
+              selectedKeywords={selectedKeywords}
+              isInModal={false}
+            />
+          </>
+        )}
         {selectedKeywords.length === 0 ? (
           <S.EmptyContainer>
             <S.EmptyMessage>

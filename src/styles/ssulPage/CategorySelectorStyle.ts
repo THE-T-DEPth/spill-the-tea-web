@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   width: 148px;
   position: relative;
   box-sizing: border-box;
+
+  ${isMobile} {
+    width: 100%;
+  }
 `;
 
 export const DropdownHeader = styled.div`
@@ -27,7 +32,6 @@ export const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-left: auto;
 `;
 
@@ -57,4 +61,33 @@ export const DropdownItem = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`;
+
+export const MobileCategoryList = styled.div`
+  display: flex;
+  height: 57px;
+
+  & :first-child {
+    border-left: none;
+  }
+
+  & :last-child {
+    border-right: none;
+  }
+
+  ${isMobile} {
+    width: 100%;
+  }
+`;
+
+export const MobileCategoryItem = styled.div<{ $isSelected: boolean }>`
+  width: 100%;
+  font: var(--headingSmall);
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? 'var(--Main3)' : 'var(--CategoryMini)'};
+  border: 0.78px solid var(--Secondary2);
+  border-right: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
