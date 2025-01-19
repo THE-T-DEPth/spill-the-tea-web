@@ -22,7 +22,6 @@ const FindPassPage: React.FC = () => {
 
 		!email && setEmailError("이메일을 입력하세요.");
 
-		// 이메일이 비어 있으면 함수 실행 종료
 		if (!email) return;
 
 		try {
@@ -35,7 +34,7 @@ const FindPassPage: React.FC = () => {
 		} catch (error) {
 			console.error("Error verifying email:", error);
 
-			// 서버 에러 처리
+
 			setEmailError("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
 		}
 	};

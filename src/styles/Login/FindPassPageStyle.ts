@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   transition: color 0.2s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh);
+	height: calc(100vh - 126px);
   }
 `;
 
@@ -22,7 +22,7 @@ export const Title = styled.h1`
   transition: color 0.2s ease-in-out;
   ${isMobile} {
     font: var(--searchEmpty); 
-	margin-top: 161px;
+	margin-top: 200px;
 	text-align: left; 
     width: 100%; 
 	max-width: 343px;
