@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const OutContainer = styled.div`
   width: 100%;
@@ -32,6 +33,10 @@ export const LeftArrow = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    display: none; 
+  }
 `;
 
 export const RightArrow = styled(LeftArrow)`
@@ -43,11 +48,17 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1046px;
   height: 376px;
-  background-color: #f6f6f6;
+  background-color:var(--Sub2);
   border: 0.75px solid #dbdbdb;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+	height: 280px;
+  }
 `;
 
 export const HeaderWrap = styled.div`
@@ -58,6 +69,13 @@ export const HeaderWrap = styled.div`
   align-items: center;
   font: var(--headerTop);
   border-bottom: 0.75px solid #dbdbdb;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+	margin-top: 0px;
+	height: 0px;
+  }
 `;
 
 export const Header = styled.div`
@@ -66,6 +84,15 @@ export const Header = styled.div`
   color: var(--Black);
   padding-left: 34px;
   margin: 9.5px 0;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+	font: var(--headerMedium);
+	padding-left: 16px;
+	margin: 0;
+
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -77,19 +104,40 @@ export const ContentContainer = styled.div`
   position: relative;
   background-color: var(--BackYellow);
   display: flex;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    background-color: transparent; 
+    border: none; 
+  }
 `;
 
-export const Slider = styled.div<{ startIndex: number; isTransitioning: boolean }>`
-  display: flex;
-  transition: ${({ isTransitioning }) => (isTransitioning ? "transform 0.3s ease-in-out" : "none")};
-  transform: ${({ startIndex }) =>
-		`translateX(calc(-${startIndex * 212}px + 112px))`};
-  width: calc(100% + 112px); 
-`;
+interface SliderProps {
+	startIndex: number;
+	isTransitioning: boolean;
+	isMobile: boolean;
+}
 
-export const BoxWrapper = styled.div<{ isActive: boolean }>`
+export const Slider = styled.div.withConfig({
+	shouldForwardProp: (prop) => !["startIndex", "isTransitioning", "isMobile"].includes(prop),
+}) <SliderProps>`
+	display: flex;
+	transition: ${({ isTransitioning }) => (isTransitioning ? "transform 0.3s ease-in-out" : "none")};
+	transform: ${({ startIndex, isMobile }) => {
+		const boxWidth = isMobile ? 152.88 : 190;
+		const boxMargin = 11;
+		const containerOffset = isMobile ? 118.9 : 112;
+		return `translateX(calc(-${startIndex * (boxWidth + boxMargin * 2)}px + ${containerOffset}px))`;
+	}};
+	width: ${({ isMobile }) => (isMobile ? "calc(100% + 118.9px)" : "calc(100% + 112px)")};
+  `;
+
+
+
+
+export const BoxWrapper = styled.div.attrs<{ isActive: boolean }>(() => ({
+	isActive: undefined, // DOM에 전달되지 않도록 설정
+})) <{ isActive: boolean }>`
   pointer-events: ${({ isActive }) => (isActive ? "auto" : "none")};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
   transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -98,6 +146,10 @@ export const BoxWrapper = styled.div<{ isActive: boolean }>`
   margin: 37px 11px;
   width: 190px;
   height: 253px;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    margin-top: 15px;
+  }
 `;
 
 export const EmptyMessage = styled.div`
@@ -106,7 +158,14 @@ export const EmptyMessage = styled.div`
   align-items: center;
   margin: 139px auto;
   color: var(--G5);
-  font: var(--headingXL);
+  font: var(--headingXL); 
   text-align: center;
   position: relative;
+  transition: all 0.3s ease-in-out;
+  ${isMobile} {
+    margin: 50px auto; 
+    font: var(--headingLarge); 
+	color: var(--G3);
+  }
 `;
+
