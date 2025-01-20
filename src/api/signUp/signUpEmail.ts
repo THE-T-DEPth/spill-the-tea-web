@@ -20,12 +20,15 @@ export async function getCheckEmailAvailability(email: string) {
 // 인증번호 전송 API
 export async function getVerificationCode(email: string) {
 	try {
-		// 인증번호 전송 API 호출
 		const response = await api.get(`/mails/join`, {
 			params: { email },
 		});
 		if (response.status === 200) {
 			console.log('인증번호 전송 성공:', response.data);
+
+			const verificationCode = response.data.code;
+			console.log('인증번호:', verificationCode);
+
 			return response.data;
 		} else {
 			throw new Error(`HTTP 오류 발생: ${response.status}`);

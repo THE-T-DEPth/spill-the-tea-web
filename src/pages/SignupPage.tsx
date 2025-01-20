@@ -5,9 +5,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { getcheckNicknameAvailability, postRegisterUser } from '../api/signUp/signUpPage';
 
 const SignupPage: React.FC = () => {
-	// 이메일을 이전 페이지에서 전달받음
+
 	const location = useLocation();
-	const email = location.state?.email; // 전달받은 이메일
+	const email = location.state?.email;
 	const navigate = useNavigate();
 
 	const [name, setName] = useState('');
@@ -62,33 +62,27 @@ const SignupPage: React.FC = () => {
 
 	const handleSignup = async () => {
 		try {
-			// 이메일이 없으면 회원가입 불가
+
 			if (!email) {
 				alert('이메일 정보가 누락되었습니다. 인증 페이지로 돌아가세요.');
-				navigate('/signup-email'); // 이메일 인증 페이지로 리디렉션
+				navigate('/signup-email');
 				return;
 			}
-
-			// 입력 값 유효성 검증
 			if (!name || !nickname || !password || password !== confirmPassword) {
 				alert('모든 입력 필드를 올바르게 작성해주세요.');
 				return;
 			}
-
-			// 회원가입 API 호출
 			const response = await postRegisterUser(email, password, name, nickname);
-
 			if (response.success) {
-				// 회원가입 성공 후 동작
+				alert('회원가입이 완료되었습니다.');
 				navigate('/signupdone');
-			} else {
-				alert(response?.data?.message || '회원가입에 실패했습니다.');
 			}
 		} catch (error) {
 			console.error('회원가입 중 오류 발생:', error);
 			alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
 		}
 	};
+
 
 	const isFormValid = name.length >= 2 && nicknameStatus === 'valid' && isPasswordMatch && password.length >= 8;
 
