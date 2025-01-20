@@ -7,6 +7,31 @@ import { postLogin } from "../api/login/loginPage";
 import LoginInput from "../components/login/LoginInput";
 import { AxiosError } from "axios";
 
+const validateInputs = (email: string, password: string): { valid: boolean; emailError: string; passwordError: string } => {
+	let emailError = "";
+	let passwordError = "";
+
+	if (!email) {
+		emailError = "이메일을 입력해주세요.";
+	} else {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(email)) {
+			emailError = "유효한 이메일 주소를 입력해주세요.";
+		}
+	}
+
+	if (!password) {
+		passwordError = "비밀번호를 입력해주세요.";
+	} else if (password.length < 8) {
+		passwordError = "비밀번호는 최소 8자 이상이어야 합니다.";
+	}
+
+	return {
+		valid: !emailError && !passwordError,
+		emailError,
+		passwordError,
+	};
+};
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -25,10 +50,18 @@ const LoginPage = () => {
 		setEmailError("");
 		setPasswordError("");
 
+		// 입력값 검증
+		const { valid, emailError, passwordError } = validateInputs(email, password);
+		if (!valid) {
+			setEmailError(emailError);
+			setPasswordError(passwordError);
+			return;
+		}
+
 		try {
 			// 실제 API 호출
 			const data = await postLogin({
-				email: email,
+				email: email.trim(),
 				password: password,
 			});
 
@@ -47,7 +80,6 @@ const LoginPage = () => {
 			}
 		} catch (error) {
 			if (error instanceof AxiosError && error.response) {
-				// 서버에서 받은 에러 응답 처리
 				const errorMessage = error.response.data.message;
 
 				if (errorMessage === "Invalid email") {
