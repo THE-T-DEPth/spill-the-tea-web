@@ -1,8 +1,9 @@
-import { useState } from "react";
-import * as S from "../../styles/myPage/LeaveServiceStyle";
-import LogoutModal from "./ConfirmationModal";
-import DeleteAccountModal from "../../components/myPage/DeleteAccountModal";
-import ConfirmationModal from "./ConfirmationModal";
+import { useState } from 'react';
+import * as S from '../../styles/myPage/LeaveServiceStyle';
+import LogoutModal from './ConfirmationModal';
+import DeleteAccountModal from '../../components/myPage/DeleteAccountModal';
+import ConfirmationModal from './ConfirmationModal';
+import { logout } from '../../api/myPage/logout';
 
 const LeaveService = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // 로그아웃 모달
@@ -10,15 +11,26 @@ const LeaveService = () => {
     useState(false); // 계정 삭제 모달
   const [isFinalConfirmationModalOpen, setIsFinalConfirmationModalOpen] =
     useState(false); // 최종 확인 모달
-  const [modalMessage, setModalMessage] = useState("");
+  const [modalMessage, setModalMessage] = useState('');
 
-  const handleLogout = () => {
-    setModalMessage("스필더티에서 로그아웃 완료!");
+  const handleLogout = async () => {
+    setModalMessage('스필더티에서 로그아웃 완료!'); // 모달 메시지는 고정
     setIsLogoutModalOpen(true);
+
+    try {
+      const resultMessage = await logout();
+      if (resultMessage) {
+        console.log('로그아웃 성공:', resultMessage);
+      } else {
+        console.error('로그아웃 실패. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('로그아웃 처리 중 오류 발생:', error);
+    }
   };
 
   const handleAccountDeletion = () => {
-    setModalMessage("정말로 Spill the tea를 탈퇴하신다고요?");
+    setModalMessage('정말로 Spill the tea를 탈퇴하신다고요?');
     setIsDeleteAccountModalOpen(true);
   };
 
@@ -36,7 +48,7 @@ const LeaveService = () => {
 
   const handleConfirmDeleteAccount = () => {
     setIsDeleteAccountModalOpen(false);
-    setModalMessage("탈퇴가 완료되었습니다.");
+    setModalMessage('탈퇴가 완료되었습니다.');
     setIsFinalConfirmationModalOpen(true);
   };
 
