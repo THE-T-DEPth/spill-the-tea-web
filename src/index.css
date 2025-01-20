@@ -107,27 +107,29 @@
 	--searchEmpty: 700 21.33px / 29.86px 'Gmarket Sans';
 	--topBar: 500 16px / 18.4px 'Gmarket Sans';
 
-	--paragraphMini: 300 10px / 160% "Gmarket Sans";
-	--paragraphMiniL: 300 10px / 160% "Gmarket Sans";
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
-	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
-	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+	--paragraphMini: 300 10px / 160% 'Gmarket Sans';
+	--paragraphMiniL: 300 10px / 160% 'Gmarket Sans';
+	--paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+	--paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+	--paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+	--paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
 	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
 	--headerL: 400 14px / normal 'RixInooAriDuri';
 
-	--headerFirst: 400 22px / normal "RixInooAriDuri";
-	--headerXL: 400 25.35px / normal "RixInooAriDuri";
-	--headerL: 400 14px / normal "RixInooAriDuri";
-	--headerTop: 400 17px / normal "RixInooAriDuri";
-	--paragraphSmall: 300 12px / 160% "Gmarket Sans";
-	--paragraphMedium: 300 16px / 160% "Gmarket Sans";
-	--paragraphLarge: 300 21.3px / 160% "Gmarket Sans";
-	--paragraphXL: 300 28.4px / 160% "Gmarket Sans";
+	--headerFirst: 400 22px / normal 'RixInooAriDuri';
+	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
+	--headerL: 400 14px / normal 'RixInooAriDuri';
+	--headerTop: 400 17px / normal 'RixInooAriDuri';
+	--paragraphSmall: 300 12px / 160% 'Gmarket Sans';
+	--paragraphMedium: 300 16px / 160% 'Gmarket Sans';
+	--paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
+	--paragraphXL: 300 28.4px / 160% 'Gmarket Sans';
 
 	--boxTitle: 700 14px / 19.6px "Gmarket Sans";
+	--boxTitleMobile: 700 12px / 140% "Gmarket Sans";
 	--boxKeyword: 500 8.73px / 10.03px "Gmarket Sans";
 	--boxInfo: 500 8px / 12px "Gmarket Sans";
+	--boxInfoMobile: 500 7px / 12px "Gmarket Sans";
 	--dropDown: 500 16px / 24px "Gmarket Sans";
 	--searchKeyword: 700 21.3px / 150% "Gmarket Sans";
 	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
@@ -140,14 +142,20 @@
 	--searchEmpty: 700 21.33px / 29.86px "Gmarket Sans";
 	--topBar: 500 16px / 18.4px "Gmarket Sans";
 
-	--headerXL: 400 25.35px / normal "RixInooAriDuri";
-	--headerL: 400 14px / normal "RixInooAriDuri";
-	--footerMini: 400 6px / normal "Pretendard";
+	--headerXL: 400 25.35px / normal 'RixInooAriDuri';
+	--headerL: 400 14px / normal 'RixInooAriDuri';
+	--footerMini: 400 6px / normal 'Pretendard';
 	--footerText: 400 10px / normal 'Pretendard';
-	--buttonText: 700 12.48px / normal "Pretendard";
+	--buttonText: 700 12.48px / normal 'Pretendard';
 	--selectedKeyword: 500 21.33px / 150% 'Gmarket Sans';
 
 	--mypageTitle: 700 21.33px / 29.86px 'Gmarket Sans';
 	--mypageButton: 500 21.33px / 31.99px 'Gmarket Sans';
 	--modalButton: 500 19.5px / 22.42px 'Gmarket Sans';
+
+	--boxTitleMini: 700 9.26px / 12.97px 'Gmarket Sans';
+	--boxKeywordMini: 500 7px / 8.05px 'Gmarket Sans';
+	--boxInfoMini: 500 7px/ 10.5px 'Gmarket Sans';
+	--searchKeywordMini: 700 16px / 22.4px 'Gmarket Sans';
+	--searchEmptyMini: 500 14px / 19.6px 'Gmarket Sans';
 }
