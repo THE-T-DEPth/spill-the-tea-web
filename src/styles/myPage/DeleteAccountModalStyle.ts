@@ -66,7 +66,7 @@ export const ButtonContainer = styled.div`
 export const CancelButton = styled.button`
   width: 171px;
   height: 44px;
-  background: var(--Button);
+  background: var(--DeleteButton);
   font: var(--modalButton);
   color: var(--primary2);
   border-radius: 20px;

@@ -4,6 +4,7 @@ import LogoutModal from './ConfirmationModal';
 import DeleteAccountModal from '../../components/myPage/DeleteAccountModal';
 import ConfirmationModal from './ConfirmationModal';
 import { logout } from '../../api/myPage/logout';
+import { deleteProfile } from '../../api/myPage/\bdeleteProfile';
 
 const LeaveService = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // 로그아웃 모달
@@ -14,7 +15,7 @@ const LeaveService = () => {
   const [modalMessage, setModalMessage] = useState('');
 
   const handleLogout = async () => {
-    setModalMessage('스필더티에서 로그아웃 완료!'); // 모달 메시지는 고정
+    setModalMessage('스필더티에서 로그아웃 완료!');
     setIsLogoutModalOpen(true);
 
     try {
@@ -46,9 +47,18 @@ const LeaveService = () => {
     setIsLogoutModalOpen(false);
   };
 
-  const handleConfirmDeleteAccount = () => {
+  const handleConfirmDeleteAccount = async () => {
     setIsDeleteAccountModalOpen(false);
-    setModalMessage('탈퇴가 완료되었습니다.');
+    try {
+      const response = await deleteProfile();
+      if (response && response.success) {
+        console.log('탈퇴가 완료되었습니다.');
+      } else {
+        console.error('탈퇴 실패. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 중 오류 발생:', error);
+    }
     setIsFinalConfirmationModalOpen(true);
   };
 

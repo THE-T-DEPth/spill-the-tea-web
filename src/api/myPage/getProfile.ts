@@ -1,5 +1,6 @@
 import { api } from '../index';
 
+// 회원 정보 조회 API 요청 함수
 interface ProfileResponse {
   success: boolean;
   data: {

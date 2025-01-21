@@ -1,5 +1,6 @@
 import { api } from '../index';
 
+// 로그아웃 API 요청 함수
 interface LogoutResponse {
   success: boolean;
   data: {

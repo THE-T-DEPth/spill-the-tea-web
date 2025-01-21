@@ -1,20 +1,20 @@
 import { api } from '../index';
 
+// 프로필 이미지 변경 API 요청 함수
 interface ChangeProfileImageResponse {
   success: boolean;
   message: string;
   profileImageUrl?: string;
 }
 
+// 프로필 이미지 변경 API 요청 함수
 export async function changeProfileImage(
   file: File
 ): Promise<ChangeProfileImageResponse | null> {
   try {
-    // FormData 객체 생성 후 이미지 추가
     const formData = new FormData();
     formData.append('profile_image', file);
 
-    // API 요청
     const response = await api.put<ChangeProfileImageResponse>(
       '/members/image',
       formData,

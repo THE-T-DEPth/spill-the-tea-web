@@ -3,6 +3,7 @@ import * as S from '../../styles/myPage/EditProfileStyle';
 import { getProfile } from '../../api/myPage/getProfile';
 import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
+import { deleteProfileImage } from '../../api/myPage/\bdeleteProfileImage';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {
@@ -49,8 +50,9 @@ const EditProfile = () => {
   const [passwordError, setPasswordError] = useState(defaultMessage);
   const [checkPasswordError, setCheckPasswordError] = useState('');
   const [isMatch, setIsMatch] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [initialNickname, setInitialNickname] = useState('');
+  const [initialProfileImage, setInitialProfileImage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +61,8 @@ const EditProfile = () => {
         if (profileData) {
           setNickname(profileData.data.nickname);
           setProfileImage(profileData.data.profileImage);
-        } else {
-          console.error('프로필 데이터를 가져오지 못했습니다.');
+          setInitialNickname(profileData.data.nickname);
+          setInitialProfileImage(profileData.data.profileImage);
         }
       } catch (error) {
         console.error('프로필 불러오기 실패:', error);
@@ -137,36 +139,40 @@ const EditProfile = () => {
     }
   };
 
-  // 저장 버튼 클릭 시 API 호출
+  const handleProfileImageDelete = () => {
+    setProfileImage(''); // 미리보기 제거
+    setSelectedImage(null); // 상태 초기화
+  };
+
   const handleSave = async () => {
     if (password && password !== checkPassword) {
       setCheckPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
-
-    setIsLoading(true);
-
     try {
-      // 이미지가 선택된 경우에만 API 호출
       if (selectedImage) {
-        const response = await changeProfileImage(selectedImage);
-        if (response && response.success) {
-          console.log('프로필 이미지가 성공적으로 업데이트되었습니다.');
-          setProfileImage(response.profileImageUrl || profileImage);
-          setSelectedImage(null); // 이미지 업데이트 후 초기화
-        } else {
-          alert('프로필 이미지 업데이트에 실패했습니다.');
-        }
+        await changeProfileImage(selectedImage);
+      } else if (profileImage === '') {
+        await deleteProfileImage();
       }
-
-      // 닉네임과 비밀번호 업데이트 API 호출
       await putMembersUpdate(nickname, password, checkPassword);
-      console.log('회원 정보가 성공적으로 업데이트되었습니다.');
+      setInitialNickname(nickname);
+      setInitialProfileImage(profileImage);
+      setSelectedImage(null);
     } catch (error) {
       console.error('회원 정보 업데이트 중 오류 발생:', error);
-    } finally {
-      setIsLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    setNickname(initialNickname);
+    setProfileImage(initialProfileImage);
+    setPassword('');
+    setCheckPassword('');
+    setSelectedImage(null);
+    setPasswordError(defaultMessage);
+    setCheckPasswordError('');
+    setIsMatch(false);
   };
 
   const isDefaultMessage = passwordError === defaultMessage;
@@ -181,7 +187,9 @@ const EditProfile = () => {
         <S.ChangeButton onClick={handleProfileImageChange}>
           사진 변경
         </S.ChangeButton>
-        <S.DeleteButton>사진 삭제</S.DeleteButton>
+        <S.DeleteButton onClick={handleProfileImageDelete}>
+          사진 삭제
+        </S.DeleteButton>
       </S.ProfileButton>
       <S.NicknameLabel>닉네임 수정</S.NicknameLabel>
       <S.NicknameInput value={nickname} onChange={handleNicknameChange} />
@@ -213,10 +221,8 @@ const EditProfile = () => {
         )}
       </S.CheckContainer>
       <S.ButtonContainer>
-        <S.CancelButton disabled={isLoading}>취소</S.CancelButton>
-        <S.SaveButton onClick={handleSave} disabled={isLoading}>
-          {isLoading ? '저장 중...' : '저장'}
-        </S.SaveButton>
+        <S.CancelButton onClick={handleCancel}>취소</S.CancelButton>
+        <S.SaveButton onClick={handleSave}>저장</S.SaveButton>
       </S.ButtonContainer>
     </S.Container>
   );
