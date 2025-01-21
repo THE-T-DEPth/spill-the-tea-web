@@ -68,14 +68,11 @@ const LoginPage = () => {
 			if (data.success) {
 				const { accessToken, refreshToken } = data.data;
 
-				// 토큰을 로컬 스토리지에 저장
 				localStorage.setItem("accessToken", accessToken);
 				localStorage.setItem("refreshToken", refreshToken);
 
-				// 로그인 성공 후 홈으로 이동
 				navigate("/");
 			} else {
-				// 성공 응답인데 실패 플래그 처리
 				setEmailError("로그인에 실패했습니다. 다시 시도해주세요.");
 			}
 		} catch (error) {
