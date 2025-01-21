@@ -6,6 +6,7 @@ import DropdownIcon from '../../assets/images/dropdown.svg';
 import DropdownOpen from '../../assets/Icons/DropdownOpen.svg';
 
 const sortOptions = {
+  // 내가 쓴 게시글 페이지 정렬옵션
   myPosts: [
     {
       id: 1,
@@ -33,6 +34,7 @@ const sortOptions = {
     },
   ],
   likedSsuls: [
+    // 공감한 썰 페이지 정렬 옵션
     {
       id: 1,
       icon: AsendingIcon,

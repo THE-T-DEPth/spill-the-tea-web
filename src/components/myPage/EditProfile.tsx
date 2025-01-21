@@ -114,7 +114,7 @@ const EditProfile = () => {
     setNickname(value);
   };
 
-  // 사진 변경 핸들러 (미리보기만)
+  // 사진 변경 핸들러
   const handleProfileImageChange = async () => {
     try {
       const input = document.createElement('input');
@@ -126,14 +126,14 @@ const EditProfile = () => {
         if (target.files && target.files[0]) {
           const file = target.files[0];
 
-          // 미리보기 이미지 업데이트 (API 호출 없음)
+          // 미리보기 이미지 업데이트
           const imageUrl = URL.createObjectURL(file);
           setProfileImage(imageUrl);
           setSelectedImage(file);
         }
       };
 
-      input.click(); // 파일 선택창 강제 실행
+      input.click(); // 파일 선택창 실행
     } catch (error) {
       console.error('프로필 이미지 변경 중 오류 발생:', error);
     }
