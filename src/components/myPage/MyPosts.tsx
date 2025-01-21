@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from '../../styles/myPage/MyPostsStyle';
 import Box from '../searchResult/Box';
 import { BoxProps } from '../../components/searchResult/Box';
@@ -8,13 +8,14 @@ import { getMyPosts } from '../../api/myPage/getMyPosts';
 
 const MyPosts = () => {
   const [posts, setPosts] = useState<BoxProps[]>([]);
-  const [currentItems, setCurrentItems] = useState<BoxProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('DATE_DESC');
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await getMyPosts(0, 15, sortBy);
+        const response = await getMyPosts(currentPage - 1, 15, sortBy);
         if (response && response.success) {
           const formattedPosts = response.data.contents.map((post) => ({
             postId: post.postId,
@@ -29,17 +30,19 @@ const MyPosts = () => {
             comments: post.commentCount,
           }));
           setPosts(formattedPosts);
+          setTotalPages(response.data.totalPage);
         }
       } catch (error) {
         console.error('게시글 데이터를 불러오는 중 오류 발생:', error);
       }
     };
     fetchPosts();
-  }, [sortBy]);
+  }, [currentPage, sortBy]);
 
-  const handlePageChange = useCallback((pageItems: BoxProps[]) => {
-    setCurrentItems(pageItems);
-  }, []);
+  const handleSortChange = (selectedSort: string) => {
+    setSortBy(selectedSort);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -50,10 +53,10 @@ const MyPosts = () => {
       ) : (
         <S.Container>
           <S.SortButtonContainer>
-            <SortButton pageType='myPosts' onSortChange={setSortBy} />
+            <SortButton pageType='myPosts' onSortChange={handleSortChange} />
           </S.SortButtonContainer>
           <S.GridContainer>
-            {currentItems.map((data) => (
+            {posts.map((data) => (
               <Box
                 key={data.postId}
                 postId={data.postId}
@@ -68,10 +71,9 @@ const MyPosts = () => {
           </S.GridContainer>
           <S.PaginationContainer>
             <Pagination
-              totalItems={posts.length}
-              itemsPerPage={15}
-              items={posts}
-              onPageChange={handlePageChange}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
             />
           </S.PaginationContainer>
         </S.Container>

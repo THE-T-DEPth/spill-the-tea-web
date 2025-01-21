@@ -1,4 +1,3 @@
-// 내가 쓴 게시글 조회 API 요청 함수
 import { api } from '../index';
 
 interface Post {
@@ -21,6 +20,7 @@ interface GetMyPostsResponse {
   };
 }
 
+// 내가 쓴 게시글 조회 API 요청 함수
 export async function getMyPosts(
   page = 0,
   size = 15,

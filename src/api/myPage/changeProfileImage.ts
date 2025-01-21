@@ -1,6 +1,5 @@
 import { api } from '../index';
 
-// 프로필 이미지 변경 API 요청 함수
 interface ChangeProfileImageResponse {
   success: boolean;
   message: string;

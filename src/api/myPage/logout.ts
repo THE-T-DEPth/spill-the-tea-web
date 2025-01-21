@@ -1,6 +1,5 @@
 import { api } from '../index';
 
-// 로그아웃 API 요청 함수
 interface LogoutResponse {
   success: boolean;
   data: {
@@ -8,6 +7,7 @@ interface LogoutResponse {
   };
 }
 
+// 로그아웃 API 요청 함수
 export async function logout(): Promise<string | null> {
   try {
     const accessToken = localStorage.getItem('token');

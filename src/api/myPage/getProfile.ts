@@ -1,6 +1,5 @@
 import { api } from '../index';
 
-// 회원 정보 조회 API 요청 함수
 interface ProfileResponse {
   success: boolean;
   data: {
@@ -9,6 +8,7 @@ interface ProfileResponse {
   };
 }
 
+// 회원 정보 조회 API 요청 함수
 export async function getProfile(): Promise<ProfileResponse | null> {
   try {
     const response = await api.get('/members');
