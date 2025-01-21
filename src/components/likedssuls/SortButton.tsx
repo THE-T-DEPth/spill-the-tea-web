@@ -5,36 +5,94 @@ import DesendingIcon from '../../assets/images/descending.svg';
 import DropdownIcon from '../../assets/images/dropdown.svg';
 import DropdownOpen from '../../assets/Icons/DropdownOpen.svg';
 
-const sortOptions = [
-  { id: 1, icon: AsendingIcon, label: '제목 가나다 오름차순' },
-  { id: 2, icon: DesendingIcon, label: '제목 가나다 내림차순' },
-  { id: 3, icon: AsendingIcon, label: '공감 수 오름차순' },
-  { id: 4, icon: DesendingIcon, label: '공감 수 내림차순' },
-];
+const sortOptions = {
+  myPosts: [
+    {
+      id: 1,
+      icon: AsendingIcon,
+      label: '제목 가나다 오름차순',
+      value: 'TITLE_ASC',
+    },
+    {
+      id: 2,
+      icon: DesendingIcon,
+      label: '제목 가나다 내림차순',
+      value: 'DATE_DESC',
+    },
+    {
+      id: 3,
+      icon: AsendingIcon,
+      label: '최근 게시 날짜순',
+      value: 'DATE_DESC',
+    },
+    {
+      id: 4,
+      icon: DesendingIcon,
+      label: '과거 게시 날짜순',
+      value: 'DATE_ASC ',
+    },
+  ],
+  likedSsuls: [
+    {
+      id: 1,
+      icon: AsendingIcon,
+      label: '제목 가나다 오름차순',
+      value: 'TITLE_ASC',
+    },
+    {
+      id: 2,
+      icon: DesendingIcon,
+      label: '제목 가나다 내림차순',
+      value: 'TITLE_DESC',
+    },
+    { id: 3, icon: AsendingIcon, label: '공감 수 오름차순', value: 'LIKE_ASC' },
+    {
+      id: 4,
+      icon: DesendingIcon,
+      label: '공감 수 내림차순',
+      value: 'LIKE_DESC',
+    },
+  ],
+};
 
-const SortButton: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState(sortOptions[2]);
+interface SortButtonProps {
+  pageType: 'myPosts' | 'likedSsuls';
+  onSortChange: (sortValue: string) => void;
+}
+
+interface SortOption {
+  id: number;
+  icon: string;
+  label: string;
+  value: string;
+}
+
+const SortButton: React.FC<SortButtonProps> = ({ pageType, onSortChange }) => {
+  const [selectedOption, setSelectedOption] = useState<SortOption>(
+    sortOptions[pageType][0]
+  );
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleSelectOption = (option: (typeof sortOptions)[number]) => {
+  const handleSelectOption = (option: (typeof sortOptions.myPosts)[number]) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onSortChange(option.value);
   };
 
   return (
     <S.Container>
       <S.Button onClick={toggleDropdown}>
         {selectedOption.label}{' '}
-        <img src={isOpen ? DropdownOpen : DropdownIcon} />
+        <img src={isOpen ? DropdownOpen : DropdownIcon} alt='Dropdown Icon' />
       </S.Button>
-
       {isOpen && (
         <S.DropdownContainer>
-          {sortOptions.map((option) => (
+          {sortOptions[pageType].map((option) => (
             <S.DropdownMenu
               key={option.id}
               onClick={() => handleSelectOption(option)}>

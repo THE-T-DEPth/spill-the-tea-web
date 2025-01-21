@@ -1,37 +1,66 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import * as S from '../../styles/myPage/MyPostsStyle';
 import Box from '../searchResult/Box';
-import BoxData from '../../assets/data/BoxData';
 import { BoxProps } from '../../components/searchResult/Box';
 import SortButton from '../likedssuls/SortButton';
 import Pagination from '../../components/searchResult/Pagination';
+import { getMyPosts } from '../../api/myPage/getMyPosts';
 
 const MyPosts = () => {
-  const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15));
+  const [posts, setPosts] = useState<BoxProps[]>([]);
+  const [currentItems, setCurrentItems] = useState<BoxProps[]>([]);
+  const [sortBy, setSortBy] = useState('DATE_DESC');
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await getMyPosts(0, 15, sortBy);
+        if (response && response.success) {
+          const formattedPosts = response.data.contents.map((post) => ({
+            postId: post.postId,
+            title: post.title,
+            image: post.thumb,
+            keywords: post.keywordList
+              .replace(/\[|\]/g, '')
+              .split(', ')
+              .map((keyword) => `# ${keyword.trim()}`),
+            date: post.createdDateTime,
+            likes: post.likedCount,
+            comments: post.commentCount,
+          }));
+          setPosts(formattedPosts);
+        }
+      } catch (error) {
+        console.error('게시글 데이터를 불러오는 중 오류 발생:', error);
+      }
+    };
+    fetchPosts();
+  }, [sortBy]);
+
   const handlePageChange = useCallback((pageItems: BoxProps[]) => {
     setCurrentItems(pageItems);
   }, []);
 
   return (
     <>
-      {BoxData.length === 0 ? (
+      {posts.length === 0 ? (
         <S.EmptyContainer>
           <S.EmptyMessage>스필터디에서 썰을 풀어보세요!😂</S.EmptyMessage>
         </S.EmptyContainer>
       ) : (
         <S.Container>
           <S.SortButtonContainer>
-            <SortButton />
+            <SortButton pageType='myPosts' onSortChange={setSortBy} />
           </S.SortButtonContainer>
           <S.GridContainer>
-            {currentItems.map((data, index) => (
+            {currentItems.map((data) => (
               <Box
-                key={index}
+                key={data.postId}
+                postId={data.postId}
                 title={data.title}
                 image={data.image}
                 keywords={data.keywords}
                 date={data.date}
-                time={data.time}
                 likes={data.likes}
                 comments={data.comments}
               />
@@ -39,9 +68,9 @@ const MyPosts = () => {
           </S.GridContainer>
           <S.PaginationContainer>
             <Pagination
-              totalItems={BoxData.length}
+              totalItems={posts.length}
               itemsPerPage={15}
-              items={BoxData}
+              items={posts}
               onPageChange={handlePageChange}
             />
           </S.PaginationContainer>
