@@ -75,9 +75,11 @@ export const Image = styled.img<{ disabled?: boolean }>`
 export const Keywords = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  box-sizing: border-box;
   gap: 13px;
   margin: 8px 0 10px;
+  padding: 0 17px;
+  justify-content: space-between;
 
   ${isMobile} {
     gap: 0;
