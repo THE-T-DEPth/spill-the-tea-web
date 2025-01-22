@@ -12,6 +12,7 @@ export const KeywordContainer = styled.div<{ $isSelected: boolean }>`
   align-items: center;
   padding: 5.5px auto;
   transition: all 0.3s ease;
+  cursor: pointer;
 
   background: ${({ $isSelected }) =>
     $isSelected ? 'var(--Main3)' : 'var(--Yellow)'};
