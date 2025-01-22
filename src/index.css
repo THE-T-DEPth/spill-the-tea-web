@@ -74,10 +74,12 @@
 
 	--labelMini: 500 10px / normal 'Gmarket Sans';
 	--labelSmall: 500 12px / 150% 'Gmarket Sans';
+	--labelSmallMobile: 500 14px / 150% 'Gmarket Sans';
 	--labelMedium: 500 16px / 150% 'Gmarket Sans';
 	--labelLarge: 500 21.3px / 150% 'Gmarket Sans';
 	--labelXL: 500 28.4px / 150% 'Gmarket Sans';
 	--labelXXL: 500 37.9px / 150% 'Gmarket Sans';
+	--loginSmall: 500 15px / 150% 'Gmarket Sans';
 	--loginSmall: 500 15px / normal 'Gmarket Sans';
 	--headingSmall: 700 12px / 140% 'Gmarket Sans';
 	--headingMedium: 700 16px / 140% 'Gmarket Sans';
@@ -86,6 +88,7 @@
 	--headingXXL: 700 37.9px / 140% 'Gmarket Sans';
 	--searchBold: 700 10px / normal 'Gmarket Sans';
 
+	--labelButtonMobile: 500 15.29px / 150% 'Gmarket Sans';
 	--labelButton: 500 19.5px / normal 'Gmarket Sans';
 	--labelMini: 500 10px / normal 'Gmarket Sans';
 	--labelSmall: 500 12px / 150% 'Gmarket Sans';
@@ -94,6 +97,7 @@
 	--labelXL: 500 28.4px / 150% 'Gmarket Sans';
 	--labelXXL: 500 37.9px / 150% 'Gmarket Sans';
 
+	--paragraphSmallMobile: 300 11.47px / 160% 'Gmarket Sans';
 	--paragraphSmall: 300 12px / 160% 'Gmarket Sans';
 	--paragraphMedium: 300 16px / 160% 'Gmarket Sans';
 	--paragraphLarge: 300 21.3px / 160% 'Gmarket Sans';
