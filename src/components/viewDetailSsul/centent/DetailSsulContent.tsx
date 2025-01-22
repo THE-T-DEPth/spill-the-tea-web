@@ -17,6 +17,7 @@ import {
   getPostDetail,
   postLike,
 } from '../../../api/viewDetailSsul/viewDetailContent';
+import { getKeywordResult } from '../../../api/viewDetailSsul/viewDetailKeyword';
 
 //반환값 바뀔꺼임 memberid 없애고 사용자 프로필, 사용자 이름, email 추가하고 email setBlockEmail로 넘겨주기
 interface PostDetail {
@@ -40,6 +41,7 @@ const DetailSsulContent: React.FC<{
   setIsBlockModal: (value: boolean) => void;
   setBlockEmail: (value: string) => void;
   postId: number;
+  setMemberId: (value: number) => void;
 }> = ({
   setIsRemoveModal,
   setIsEditModal,
@@ -47,13 +49,13 @@ const DetailSsulContent: React.FC<{
   setIsBlockModal,
   setBlockEmail,
   postId,
+  setMemberId,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
   const [openTTS, setOpenTTS] = useState<boolean>(false);
-  const [confirmTTS, setConfirmTTS] = useState<boolean>(false);
   const [postDetail, setPostDetail] = useState<PostDetail>();
   const [token, setToken] = useState<string | null>();
   const [myPost, setMyPost] = useState<boolean>();
@@ -100,6 +102,10 @@ const DetailSsulContent: React.FC<{
   };
 
   const handleBlockClick = () => {
+    if (postDetail?.memberId) {
+      setMemberId(postDetail?.memberId);
+    }
+    console.log(postDetail?.memberId);
     setIsBlockModal(true);
   };
 
@@ -133,6 +139,19 @@ const DetailSsulContent: React.FC<{
     return `${year}.${month}.${day} / ${hours}:${minutes}`;
   };
 
+  const handleKeywordClick = (keyword: string) => {
+    const fetchKeywordResult = async () => {
+      try {
+        const response = await getKeywordResult(keyword);
+        console.log(response.data.contents);
+      } catch (error) {
+        console.log('fetchKeywordResult 중 오류 발생', error);
+        throw error;
+      }
+    };
+    fetchKeywordResult();
+  };
+
   //post 가져오기
   useEffect(() => {
     const fetchPostDetailData = async () => {
@@ -162,7 +181,7 @@ const DetailSsulContent: React.FC<{
 
   //음성 관리
   const pitch = 1; //음성의 높낮이
-  const rate = 10; //음성의 속도
+  const rate = 1; //음성의 속도
 
   async function populateVoiceList(synth: SpeechSynthesis) {
     try {
@@ -205,6 +224,23 @@ const DetailSsulContent: React.FC<{
       synth.speak(utterThis);
     }
   }
+
+  const handlePlay = async () => {
+    // const htmlContent = postDetail?.content ?? '';
+    // // HTML을 텍스트로 변환
+    // const tempElement = document.createElement('div');
+    // tempElement.innerHTML = htmlContent;
+    // const plainText = tempElement.textContent || tempElement.innerText || '';
+    // if (plainText == '') {
+    //   alert('글 내용이 없습니다.');
+    //   return;
+    // }
+    // try {
+    //   await postTTS(postDetail?.voiceType, plainText);
+    // } catch (error) {
+    //   console.log('fetch 중 에러 발생', error);
+    // }
+  };
 
   //페이지 reload 될 때마다 하트 클릭상태 최신 유지
   useEffect(() => {
@@ -309,7 +345,11 @@ const DetailSsulContent: React.FC<{
             <S.DSCTagDiv>
               {postDetail?.keywordList ? (
                 postDetail.keywordList.map((value, index) => (
-                  <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+                  <S.DSCEachTag
+                    key={index}
+                    onClick={() => handleKeywordClick(value)}>
+                    # {value}
+                  </S.DSCEachTag>
                 ))
               ) : (
                 <p>로딩 중...</p>
@@ -326,15 +366,23 @@ const DetailSsulContent: React.FC<{
                 </S.DSCProfileDate>
               </S.DSCProfileTextDiv>
             </S.DSCProfileDiv>
-            <S.DSCSpeaker
-              src={Speaker}
-              onClick={() => {
-                setOpenTTS(true); // TTS 모달 열기
-              }}
-            />
+            {postDetail?.voiceType == 'none' ? (
+              <S.DSCSpeaker
+                src={Speaker}
+                style={{ opacity: '0.5', cursor: 'default' }}
+              />
+            ) : (
+              <S.DSCSpeaker
+                src={Speaker}
+                onClick={() => {
+                  setOpenTTS(true); // TTS 모달 열기
+                }}
+              />
+            )}
             <S.DSCContentDiv>
-              <S.DSCContentText>{postDetail?.content}</S.DSCContentText>
-              <S.DSCContentImg src={postDetail?.thumb} />
+              <S.DSCContentText
+                dangerouslySetInnerHTML={{ __html: postDetail?.content ?? '' }}
+              />
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
@@ -352,12 +400,8 @@ const DetailSsulContent: React.FC<{
             <TTSModal
               setOpenModal={setOpenTTS}
               setConfirmTTS={(value) => {
-                setConfirmTTS(value);
                 if (value) {
-                  speak(
-                    postDetail?.content ? postDetail.content : '',
-                    window.speechSynthesis
-                  ); // TTS 실행
+                  handlePlay;
                 }
               }}
             />
@@ -425,17 +469,25 @@ const DetailSsulContent: React.FC<{
           </S.DSCTagDiv>
           <S.DSCTitleDiv>
             <S.DSCTitle>{postDetail?.title}</S.DSCTitle>
-            <S.DSCSpeaker
-              src={Speaker}
-              onClick={() => {
-                setOpenTTS(true); // TTS 모달 열기
-              }}
-            />
+            {postDetail?.voiceType == 'none' ? (
+              <S.DSCSpeaker
+                src={Speaker}
+                style={{ opacity: '0.5', cursor: 'default' }}
+              />
+            ) : (
+              <S.DSCSpeaker
+                src={Speaker}
+                onClick={() => {
+                  setOpenTTS(true); // TTS 모달 열기
+                }}
+              />
+            )}
           </S.DSCTitleDiv>
           <S.DSCContentWholeDiv>
             <S.DSCContentDiv>
-              <S.DSCContentText>{postDetail?.content}</S.DSCContentText>
-              <S.DSCContentImg src={postDetail?.thumb} />
+              <S.DSCContentText
+                dangerouslySetInnerHTML={{ __html: postDetail?.content ?? '' }}
+              />
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
@@ -453,12 +505,8 @@ const DetailSsulContent: React.FC<{
             <TTSModal
               setOpenModal={setOpenTTS}
               setConfirmTTS={(value) => {
-                setConfirmTTS(value);
                 if (value) {
-                  speak(
-                    postDetail?.content ? postDetail.content : '',
-                    window.speechSynthesis
-                  ); // TTS 실행
+                  handlePlay;
                 }
               }}
             />

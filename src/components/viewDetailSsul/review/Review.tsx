@@ -4,6 +4,7 @@ import FullHeart from '../../../assets/images/FullHeart.svg';
 import Send from '../../../assets/images/CombinedShape.svg';
 import ReReview from './ReReview';
 import {
+  deleteComment,
   postComment,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
@@ -13,6 +14,7 @@ import ArrowUpSmall from '../../../assets/images/ArrowUp_small.svg';
 
 interface Comment {
   commentId: number;
+  mine: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -24,6 +26,7 @@ interface Comment {
 
 interface Reply {
   commentId: number;
+  mine: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -38,6 +41,7 @@ interface ReviewProps {
   handleComplainClick: () => void;
   setCommentId: (value: number) => void;
   id: number;
+  postId: number;
 }
 
 const Review: React.FC<ReviewProps> = ({
@@ -45,6 +49,7 @@ const Review: React.FC<ReviewProps> = ({
   handleComplainClick,
   setCommentId,
   id,
+  postId,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openRereviewInput, setOpenRereviewInput] = useState<number | null>(
@@ -60,8 +65,50 @@ const Review: React.FC<ReviewProps> = ({
     setInput(e.target.value);
   };
 
-  const handleRereviewInputClick = (key: number) => {
-    setOpenRereviewInput((prev) => (prev === key ? null : key)); // 같은 키를 클릭하면 닫기
+  const handleReviewClick = (nickname: string | null) => {
+    setNickname('@' + nickname);
+    setInput('@' + nickname + ' ');
+  };
+
+  //제출 버튼을 클릭했을 때
+  const handleRereviewSubmitClick = (
+    parentCommentId: number,
+    nickname: string
+  ) => {
+    if (input !== '@' + nickname + '') {
+      alert('댓글 내용을 입력해주세요!');
+      return;
+    }
+    const fetchPostRereview = async () => {
+      try {
+        await postComment(postId, input, parentCommentId);
+      } catch (error) {
+        console.log('fetchPostRereview 중 오류 발생', error);
+      }
+    };
+    fetchPostRereview();
+    setInput('@' + nickname + ' ');
+  };
+
+  //input 내에서 enter와 backspace 처리
+  const onSubmitClick = (parentCommentId: number, nickname: string, e: any) => {
+    if (e.key === 'Enter') {
+      if (input !== '@' + nickname + '') {
+        alert('댓글 내용을 입력해주세요!');
+        return;
+      }
+      const fetchPostRereview = async () => {
+        try {
+          await postComment(postId, input, parentCommentId);
+        } catch (error) {
+          console.log('onSubmitClick 중 오류 발생', error);
+        }
+      };
+      fetchPostRereview();
+      setInput('@' + nickname + ' ');
+    } else if (e.key === 'Backspace' && input === '@' + nickname + '') {
+      setInput('');
+    }
   };
 
   const handleToggleRereview = (key: number) => {
@@ -76,9 +123,8 @@ const Review: React.FC<ReviewProps> = ({
     });
   };
 
-  const handleReviewClick = (nickname: string | null) => {
-    setNickname('@' + nickname);
-    setInput('@' + nickname + ' ');
+  const handleRereviewInputClick = (key: number) => {
+    setOpenRereviewInput((prev) => (prev === key ? null : key)); // 같은 키를 클릭하면 닫기
   };
 
   const handleCommentHeartClick = () => {
@@ -93,23 +139,16 @@ const Review: React.FC<ReviewProps> = ({
     fetchPostCommentLike();
   };
 
-  const handleRereviewSubmitClick = (
-    parentCommentId: number,
-    nickname: string
-  ) => {
-    if (!input.trim()) {
-      alert('댓글 내용을 입력해주세요!');
-      return;
-    }
-    const fetchPostRereview = async () => {
+  const handleRemoveComment = () => {
+    const fetchDeleteComment = async () => {
       try {
-        await postComment(1, input, parentCommentId);
+        await deleteComment(comment.commentId);
       } catch (error) {
-        console.log('fetchPostRereview 중 오류 발생', error);
+        console.log('fetchDeleteComment 중 오류 발생', error);
+        throw error;
       }
     };
-    fetchPostRereview();
-    setInput('@' + nickname + ' ');
+    fetchDeleteComment();
   };
 
   useEffect(() => {
@@ -133,9 +172,11 @@ const Review: React.FC<ReviewProps> = ({
           <S.DSRProfileDiv>
             <S.DSRProfileImg
               src={comment.profileImage ? comment.profileImage : Profile}
-              alt={`${comment.nickname} 프로필`}
             />
-            <S.DSRProfileName>{comment.nickname}</S.DSRProfileName>
+            <S.DSRProfileName
+              style={{ color: comment.mine ? 'var(--Green3)' : 'black' }}>
+              {comment.nickname}
+            </S.DSRProfileName>
           </S.DSRProfileDiv>
           {/* 댓글 본문 */}
           <S.DSRContentDiv>
@@ -151,13 +192,22 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRHeartBtn onClick={handleCommentHeartClick}>
                 공감
               </S.DSRHeartBtn>
-              <S.DSRComplainBtn
-                onClick={() => {
-                  handleComplainClick(); // 기존 함수 호출
-                  setCommentId(id); // 추가 동작 수행
-                }}>
-                신고
-              </S.DSRComplainBtn>
+              {!comment.mine ? (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleComplainClick(); // 기존 함수 호출
+                    setCommentId(id); // 추가 동작 수행
+                  }}>
+                  신고
+                </S.DSRComplainBtn>
+              ) : (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleRemoveComment(); // 기존 함수 호출
+                  }}>
+                  삭제
+                </S.DSRComplainBtn>
+              )}
             </S.DSRBtnDiv>
           </S.DSRContentDiv>
           {/* 댓글 시간 및 공감수 */}
@@ -186,6 +236,9 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRInput
                 placeholder='댓글을 입력하세요.'
                 onChange={(e) => handleInputValue(e)}
+                onKeyUp={(e) =>
+                  onSubmitClick(comment.commentId, comment.nickname, e)
+                }
                 value={input}
               />
               <S.DSRSendImg
@@ -227,7 +280,10 @@ const Review: React.FC<ReviewProps> = ({
               src={comment.profileImage ? comment.profileImage : Profile}
               alt={`${comment.nickname} 프로필`}
             />
-            <S.DSRProfileName>{comment.nickname}</S.DSRProfileName>
+            <S.DSRProfileName
+              style={{ color: comment.mine ? 'var(--Green3)' : 'black' }}>
+              {comment.nickname}
+            </S.DSRProfileName>
             <S.DSRBtnDiv>
               <S.DSRReviewBtn
                 onClick={() => {
@@ -239,9 +295,22 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRHeartBtn onClick={handleCommentHeartClick}>
                 공감
               </S.DSRHeartBtn>
-              <S.DSRComplainBtn onClick={handleComplainClick}>
-                신고
-              </S.DSRComplainBtn>
+              {!comment.mine ? (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleComplainClick(); // 기존 함수 호출
+                    setCommentId(id); // 추가 동작 수행
+                  }}>
+                  신고
+                </S.DSRComplainBtn>
+              ) : (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleRemoveComment();
+                  }}>
+                  삭제
+                </S.DSRComplainBtn>
+              )}
             </S.DSRBtnDiv>
           </S.DSRProfileDiv>
           <S.DSRContentDiv>
@@ -271,6 +340,9 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRInput
                 placeholder='댓글을 입력하세요.'
                 onChange={(e) => handleInputValue(e)}
+                onKeyUp={(e) =>
+                  onSubmitClick(comment.commentId, comment.nickname, e)
+                }
                 value={input}
               />
               <S.DSRSendImg

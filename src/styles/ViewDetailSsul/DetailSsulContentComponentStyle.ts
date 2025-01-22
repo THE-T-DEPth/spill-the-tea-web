@@ -246,10 +246,131 @@ export const DSCContentDiv = styled.div`
 
 export const DSCContentText = styled.p`
   display: flex;
+  flex-direction: column;
   color: var(--HeadLine);
-  font: var(--paragraphMedium);
+  font-family: 'Nanum Gothic', sans-serif;
   white-space: pre-line;
   margin-bottom: 30px;
+
+  @font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: normal;
+    src:
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff')
+        format('woff');
+  }
+  @font-face {
+    font-family: 'NanumMyeongjo';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.eot');
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.woff')
+      format('woff');
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nanum Pen Script';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff')
+        format('woff');
+  }
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanumgothic']::before {
+    font-family: Nanum Gothic;
+    content: '나눔고딕';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumgothic {
+    font-family: Nanum Gothic;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanumgothic']::before {
+    font-family: Nanum Gothic;
+    content: '나눔고딕';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumgothic {
+    font-family: Nanum Gothic;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanummyeongjo']::before {
+    font-family: NanumMyeongjo;
+    content: '나눔 명조';
+  }
+  /* Set effect font-families */
+  .ql-font-nanummyeongjo {
+    font-family: NanumMyeongjo;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanummyeongjo']::before {
+    font-family: NanumMyeongjo;
+    content: '나눔 명조';
+  }
+  /* Set effect font-families */
+  .ql-font-nanummyeongjo {
+    font-family: NanumMyeongjo;
+  }
+
+  .ql-snow .ql-picker.ql-font .ql-picker-label[data-value='dohyeon']::before {
+    font-family: BMDOHYEON;
+    content: '도 혜온';
+  }
+  /* Set effect font-families */
+  .ql-font-dohyeon {
+    font-family: BMDOHYEON;
+  }
+
+  .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='dohyeon']::before {
+    font-family: BMDOHYEON;
+    content: '도 혜온';
+  }
+  /* Set effect font-families */
+  .ql-font-dohyeon {
+    font-family: BMDOHYEON;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-label[data-value='nanumpenscript']::before {
+    font-family: Nanum Pen Script;
+    content: '나눔 펜 스크립트';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumpenscript {
+    font-family: Nanum Pen Script;
+  }
+
+  .ql-snow
+    .ql-picker.ql-font
+    .ql-picker-item[data-value='nanumpenscript']::before {
+    font-family: Nanum Pen Script;
+    content: '나눔 펜 스크립트';
+  }
+  /* Set effect font-families */
+  .ql-font-nanumpenscript {
+    font-family: Nanum Pen Script;
+  }
 
   @media (max-width: ${MAX}) {
     font-size: 14px;

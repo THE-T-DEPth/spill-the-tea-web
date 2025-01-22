@@ -3,7 +3,7 @@ import { api } from "..";
 export async function getPostDetail(postId: number) {
   try {
     // URL을 직접 사용하여 요청
-    const response = await api.get(`/post/${postId}`);
+    const response = await api.get(`/post/35`);
     return response.data;
   } catch (error) {
     console.error("API 호출 중 오류 발생:", error);
@@ -13,7 +13,7 @@ export async function getPostDetail(postId: number) {
 
 export async function postLike(postId: number) {
   try {
-    await api.post(`/post/liked/${postId}`);
+    await api.post(`/post/liked/35`);
   } catch (error) {
     console.log("postLike 중 오류 발생", error);
     throw error;
@@ -22,7 +22,7 @@ export async function postLike(postId: number) {
 
 export async function DeleteLike(postId: number) {
   try {
-    await api.delete(`/post/liked/${postId}`);
+    await api.delete(`/post/liked/35`);
   } catch (error) {
     console.log("deleteLike 중 오류 발생", error);
     throw error;
@@ -66,9 +66,9 @@ export async function postPostReport(postId: number) {
   }
 }
 
-export async function postBlock(email: string) {
+export async function postBlock(memberId: number) {
   try {
-    await api.post(`/blocks/blocked`, { email: email });
+    await api.post(`/blocks/blocked`, { memberId: memberId });
   } catch (error) {
     console.log("postBlock 중 오류 발생", error);
   }

@@ -13,6 +13,7 @@ import BlockUserModal from '../components/viewDetailSsul/modal/BlockUserModal';
 const ViewDetailSsulPage = () => {
   const { postId } = useParams<{ postId: string }>();
   const [commentId, setCommentId] = useState<number>(0);
+  const [memberId, setMemberId] = useState<number>(0);
   const [blcokEmail, setBlockEmail] = useState<string>('');
   const [isRemoveModal, setIsRemoveModal] = useState<boolean>(false);
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const ViewDetailSsulPage = () => {
             setIsBlockModal={setIsBlockModal}
             postId={Number(postId)}
             setBlockEmail={setBlockEmail}
+            setMemberId={setMemberId}
           />
           {/*content 내용*/}
           <DetailSsulReview
@@ -65,11 +67,7 @@ const ViewDetailSsulPage = () => {
         />
       )}
       {isBlockModal && (
-        <BlockUserModal
-          setOpenModal={setIsBlockModal}
-          postId={Number(postId)}
-          blockEmail={blcokEmail}
-        />
+        <BlockUserModal setOpenModal={setIsBlockModal} memberId={memberId} />
       )}
       {/* 모달 렌더링 */}
     </>
