@@ -47,124 +47,118 @@ const SignupEmailPage: React.FC = () => {
 			console.error('인증번호 전송 실패:', error);
 			alert('인증번호 전송에 실패했습니다. 다시 시도해주세요.');
 		}
-
-		const handleCodeSend = () => {
-			alert('인증번호 전송!');
-			setTimer(300);
-			setIsTimerActive(true);
-		};
-
-
-		// 인증번호 확인 로직
-		const handleCodeVerify = async () => {
-			try {
-				const result = await getVerifyEmailCode(verificationCode);
-				if (result.success) {
-					alert(result.data.message);
-					setIsVerified(true);
-				} else {
-					setShowModal(true);
-				}
-			} catch (error) {
-				console.error('인증번호 확인 중 오류 발생:', error);
-				setShowModal(true);
-			}
-		};
-		const handleNext = () => {
-			if (isVerified) {
-				navigate('/signup', { state: { email } });
-			} else {
-				alert('인증을 완료해주세요.');
-			}
-		};
-
-		const handleCloseModal = () => {
-			setShowModal(false);
-		};
-
-		useEffect(() => {
-			let interval: NodeJS.Timeout;
-			if (isTimerActive && timer > 0) {
-				interval = setInterval(() => {
-					setTimer((prev) => prev - 1);
-				}, 1000);
-			} else if (timer === 0) {
-				setIsTimerActive(false);
-			}
-			return () => clearInterval(interval);
-		}, [isTimerActive, timer]);
-
-
-		const formatTime = (time: number) => {
-			const minutes = Math.floor(time / 60);
-			const seconds = time % 60;
-			return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-		};
-
-		return (
-			<>
-				<S.Wrapper>
-					<S.Header>
-						<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
-						<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
-					</S.Header>
-
-					<S.SignupBox>
-						<S.SignupInputWrapper>
-							<S.Label>회원가입</S.Label>
-							<S.InputWrapper>
-								<SignupInputBox
-									placeholder="이메일을 입력하세요."
-									type="text"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									button={<div onClick={handleEmailCheck}>중복체크</div>}
-								/>
-								<S.EmailStatusText $status={emailStatus}>
-									{emailStatus === 'valid'
-										? '이메일 사용이 가능합니다.'
-										: emailStatus === 'invalid'
-											? '이미 가입된 이메일이 존재합니다. 다른 이메일을 입력해주세요.'
-											: ''}
-								</S.EmailStatusText>
-							</S.InputWrapper>
-
-
-							<S.InputWrapper>
-								<S.CustomButtonUp onClick={handleSendVerificationCode}>
-									인증번호 전송하기
-								</S.CustomButtonUp>
-							</S.InputWrapper>
-
-							<S.TypeInputWrapper>
-								<SignupInputBox
-									placeholder="인증번호를 입력하세요."
-									type="text"
-									value={verificationCode}
-									onChange={(e) => setVerificationCode(e.target.value)}
-									button={<div onClick={handleCodeVerify}>확인</div>}
-								/>
-								<S.TimerText>{isTimerActive ? formatTime(timer) : '타이머 종료'}</S.TimerText>
-							</S.TypeInputWrapper>
-
-
-							<S.InputWrapper>
-								<S.CustomButton onClick={handleNext}>다음</S.CustomButton>
-							</S.InputWrapper>
-						</S.SignupInputWrapper>
-					</S.SignupBox>
-				</S.Wrapper>
-
-
-				{showModal && (
-					<Modal
-						message="인증번호가 동일하지 않습니다. 다시 확인해주세요."
-						onClose={handleCloseModal}
-					/>
-				)}
-			</>
-		);
 	};
 
 
-	export default SignupEmailPage;
+	// 인증번호 확인 로직
+	const handleCodeVerify = async () => {
+		try {
+			const result = await getVerifyEmailCode(verificationCode);
+			if (result.success) {
+				alert(result.data.message);
+				setIsVerified(true);
+			} else {
+				setShowModal(true);
+			}
+		} catch (error) {
+			console.error('인증번호 확인 중 오류 발생:', error);
+			setShowModal(true);
+		}
+	};
+	const handleNext = () => {
+		if (isVerified) {
+			navigate('/signup', { state: { email } });
+		} else {
+			alert('인증을 완료해주세요.');
+		}
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
+
+	useEffect(() => {
+		let interval: NodeJS.Timeout;
+		if (isTimerActive && timer > 0) {
+			interval = setInterval(() => {
+				setTimer((prev) => prev - 1);
+			}, 1000);
+		} else if (timer === 0) {
+			setIsTimerActive(false);
+		}
+		return () => clearInterval(interval);
+	}, [isTimerActive, timer]);
+
+
+	const formatTime = (time: number) => {
+		const minutes = Math.floor(time / 60);
+		const seconds = time % 60;
+		return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+	};
+
+	return (
+		<>
+			<S.Wrapper>
+				<S.Header>
+					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
+					<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
+				</S.Header>
+
+				<S.SignupBox>
+					<S.SignupInputWrapper>
+						<S.Label>회원가입</S.Label>
+						<S.InputWrapper>
+							<SignupInputBox
+								placeholder="이메일을 입력하세요."
+								type="text"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								button={<div onClick={handleEmailCheck}>중복체크</div>}
+							/>
+							<S.EmailStatusText $status={emailStatus}>
+								{emailStatus === 'valid'
+									? '이메일 사용이 가능합니다.'
+									: emailStatus === 'invalid'
+										? '이미 가입된 이메일이 존재합니다. 다른 이메일을 입력해주세요.'
+										: ''}
+							</S.EmailStatusText>
+						</S.InputWrapper>
+
+
+						<S.InputWrapper>
+							<S.CustomButtonUp onClick={handleSendVerificationCode}>
+								인증번호 전송하기
+							</S.CustomButtonUp>
+						</S.InputWrapper>
+
+						<S.TypeInputWrapper>
+							<SignupInputBox
+								placeholder="인증번호를 입력하세요."
+								type="text"
+								value={verificationCode}
+								onChange={(e) => setVerificationCode(e.target.value)}
+								button={<div onClick={handleCodeVerify}>확인</div>}
+							/>
+							<S.TimerText>{isTimerActive ? formatTime(timer) : '타이머 종료'}</S.TimerText>
+						</S.TypeInputWrapper>
+
+
+						<S.InputWrapper>
+							<S.CustomButton onClick={handleNext}>다음</S.CustomButton>
+						</S.InputWrapper>
+					</S.SignupInputWrapper>
+				</S.SignupBox>
+			</S.Wrapper>
+
+
+			{showModal && (
+				<Modal
+					message="인증번호가 동일하지 않습니다. 다시 확인해주세요."
+					onClose={handleCloseModal}
+				/>
+			)}
+		</>
+	);
+};
+
+export default SignupEmailPage;
