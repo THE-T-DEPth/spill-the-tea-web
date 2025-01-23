@@ -1,49 +1,43 @@
 @font-face {
-  font-family: 'Gmarket Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
-    format('woff');
+	font-family: 'Gmarket Sans';
+	font-style: normal;
+	font-weight: 300;
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Gmarket Sans';
-  font-style: normal;
-  font-weight: 500;
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-    format('woff');
+	font-family: 'Gmarket Sans';
+	font-style: normal;
+	font-weight: 500;
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Gmarket Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
-    format('woff');
+	font-family: 'Gmarket Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'RixInooAriDuri';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2')
-    format('woff2');
-  font-weight: 400;
-  font-style: normal;
+	font-family: 'RixInooAriDuri';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  font-weight: 400;
-  font-style: normal;
+	font-family: 'Pretendard';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
-    format('woff');
-  font-weight: 700;
-  font-style: normal;
+	font-family: 'Pretendard';
+	src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
 }
 
 :root {
@@ -163,3 +157,4 @@
   --searchEmptyMini: 500 14px / 19.6px 'Gmarket Sans';
   --sortButtonMini: 500 8.62px / 12.93px 'Gmarket Sans';
 }
+
