@@ -5,8 +5,10 @@ import { BoxProps } from '../../components/searchResult/Box';
 import SortButton from '../likedssuls/SortButton';
 import Pagination from '../../components/searchResult/Pagination';
 import { getMyPosts } from '../../api/myPage/getMyPosts';
+import useNSMediaQuery from '../../hooks/useNSMediaQuery';
 
 const MyPosts = () => {
+  const { isMobile } = useNSMediaQuery();
   const [posts, setPosts] = useState<BoxProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('DATE_DESC');
@@ -48,7 +50,13 @@ const MyPosts = () => {
     <>
       {posts.length === 0 ? (
         <S.EmptyContainer>
-          <S.EmptyMessage>스필터디에서 썰을 풀어보세요!😂</S.EmptyMessage>
+          {isMobile ? (
+            <S.EmptyMessageMini>
+              따끈따끈한 티를 작성해보세요.
+            </S.EmptyMessageMini>
+          ) : (
+            <S.EmptyMessage>스필터디에서 썰을 풀어보세요!😂</S.EmptyMessage>
+          )}
         </S.EmptyContainer>
       ) : (
         <S.Container>
