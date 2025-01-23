@@ -1,21 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
 import Layout from './components/layout/Layout';
+import HomePage from './pages/HomePage';
 
-import LoginPage from './pages/LoginPage';
-import FindPassPage from './pages/FindPassPage';
 import CertificationNumPage from './pages/CertificationNumPage';
-import SearchResultPage from './pages/SearchResultPage';
-import SsulPage from './pages/SsulPage';
-import TemporaryPassPage from './pages/TemporaryPassPage';
 import ChangePassPage from './pages/ChangePassPage';
+import FindPassPage from './pages/FindPassPage';
+import LikedSsulPage from './pages/LikedSsulPage';
+import LoginPage from './pages/LoginPage';
+import MyPage from './pages/MyPage';
+import SearchResultPage from './pages/SearchResultPage';
+import SignupDonePage from './pages/SignupDonePage';
 import SignupEmailPage from './pages/SignupEmailPage';
 import SignupPage from './pages/SignupPage';
-import SignupDonePage from './pages/SignupDonePage';
-import WritePage from './pages/WritePage';
+import SsulPage from './pages/SsulPage';
+import TemporaryPassPage from './pages/TemporaryPassPage';
 import ViewDetailSsulPage from './pages/ViewDetailSsulPage';
-import LikedSsulPage from './pages/LikedSsulPage';
-import MyPage from './pages/MyPage';
+import WritePage from './pages/WritePage';
 
 const Router = () => {
   return (
