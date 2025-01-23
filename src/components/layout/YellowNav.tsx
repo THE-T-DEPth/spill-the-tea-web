@@ -5,10 +5,11 @@ const YellowNav = () => {
   const [text, setText] = useState<string>('');
 
   const isWritePage = location.pathname === '/write';
+  const isEditPage = /^\/edit\/\d+$/.test(location.pathname);
   const isVeiwDetailSsulPage = location.pathname === '/viewDetailSsul';
 
   useEffect(() => {
-    if (isWritePage) setText('나만의 뜨거운 티를 만들어보세요🥵');
+    if (isWritePage || isEditPage) setText('나만의 뜨거운 티를 만들어보세요🥵');
     else if (isVeiwDetailSsulPage) setText('오늘도 썰 한 잔, 짤 한 스푼 🍵');
   }, []);
 

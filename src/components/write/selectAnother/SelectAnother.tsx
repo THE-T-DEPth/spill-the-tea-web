@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import JjalData from '../../../assets/dummy/JJalDummy';
+import { useEffect, useState } from 'react';
 import Search from '../../../assets/images/Search.svg';
-import Play from '../../../assets/images/Play.svg';
 import keywordData from '../../../assets/dummy/KeywordDummy';
 import * as S from '../../../styles/Write/SelectAnotherComponentStyle';
 import KeywordModal from '../modal/KeywordModal';
@@ -9,24 +7,85 @@ import AnotherBtn from './AnotherBtn';
 import SelectVoice from './SelectVoice';
 import BottomBtn from './BottomBtn';
 import SelectKeywordType from './SelecteKeywordType';
+import { getGIFs } from '../../../api/write/search';
 
 interface KeywordProp {
   selectedThreeKeywords: string[];
   setSelectedThreeKeywords: React.Dispatch<React.SetStateAction<string[]>>;
+  setConfirmVoice: (value: string) => void;
+  confirmVoice: string;
 }
 
-const SelectAnother: React.FC<KeywordProp> = (props) => {
+interface Gif {
+  id: string;
+  images: {
+    fixed_height: {
+      url: string;
+    };
+  };
+}
+
+const SelectAnother: React.FC<KeywordProp> = ({
+  selectedThreeKeywords,
+  setSelectedThreeKeywords,
+  setConfirmVoice,
+  confirmVoice,
+}) => {
+  const [novelizationInputValue, setNovelizationInputValue] =
+    useState<string>('');
   const [novelizationValue, setNovelizationValue] = useState<string>('');
   const [selectedType, setSelectedType] = useState<string>('소설화');
   const [selectedKeywordType, setSelectedKeywordType] = useState<number>(1);
   const [ttsInput, setTtsInput] = useState<any>('');
+  const [searchInput, setSearchInput] = useState<string>('');
+  const [searchImg, setSearchImg] = useState<Gif[]>([]);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [openKeywordModal, setOpenKeywordModal] = useState<boolean>(false);
   const [selectedVoice, setSelectedVoice] =
     useState<string>('차분한 성인 남성');
 
-  const handleNovelizationInput = (e: any) => {
+  const handleNovelizationInInput = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setNovelizationInputValue(e.target.value);
+  };
+
+  const handleNovelizationInput = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setNovelizationValue(e.target.value);
+  };
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
+  const onSubmitSearch = (e: any) => {
+    if (e.key === 'Enter') {
+      const fetchSearch = async () => {
+        try {
+          const data = await getGIFs(searchInput);
+          setSearchImg(data);
+        } catch (error) {
+          console.log('fetchSearch 중 에러 발생', error);
+          throw error;
+        }
+      };
+      fetchSearch();
+    }
+  };
+
+  const handleSearchClick = () => {
+    const fetchSearch = async () => {
+      try {
+        const data = await getGIFs(searchInput);
+        setSearchImg(data);
+      } catch (error) {
+        console.log('fetchSearch 중 에러 발생', error);
+        throw error;
+      }
+    };
+    fetchSearch();
   };
 
   const handleNovelizationRemove = () => {
@@ -67,57 +126,20 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
 
   const handleSubmitKeyword = () => {
     if (selectedKeywords.length === 3) {
-      props.setSelectedThreeKeywords(selectedKeywords);
-      //제출하는 api 연결
+      setSelectedThreeKeywords(selectedKeywords);
     } else {
       setOpenKeywordModal(true);
     }
   };
 
-  const pitch = 1; //음성의 높낮이
-  const rate = 1; //음성의 속도
-
-  async function populateVoiceList(synth: SpeechSynthesis) {
-    try {
-      const voices = await synth.getVoices().sort(function (a, b) {
-        //브라우저가 지원하는 음성리스트 가져옴, 음성 리스트를 알파벳 순으로 정렬
-        const aname = a.name.toUpperCase();
-        const bname = b.name.toUpperCase();
-        if (aname < bname) return -1;
-        else if (aname === bname) return 0;
-        else return +1;
-      });
-
-      return voices;
-    } catch (error) {
-      throw new Error('Failure retrieving voices');
+  //edit일 때 초기 voice 세팅
+  useEffect(() => {
+    if (confirmVoice == 'none' || confirmVoice == 'ko_KR_Standard_C') {
+      setSelectedVoice('차분한 성인 남성');
+    } else {
+      setSelectedVoice('차분한 성인 여성');
     }
-  }
-
-  async function speak(textToRead: string, synth: SpeechSynthesis) {
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      //브라우저에서 음성 리스트 변경 시 최신 음성 목록 가져옴
-      speechSynthesis.onvoiceschanged = () => populateVoiceList;
-    }
-
-    if (synth.speaking) {
-      console.error('speechSynthesis.speaking');
-      return;
-    }
-    if (textToRead !== '') {
-      //음성이 비어있지 않으면 합성 시작
-      const utterThis = new SpeechSynthesisUtterance(textToRead); //텍스트를 객체로
-      utterThis.onend = function () {}; //음성 읽기가 끝났을 때 호출
-      utterThis.onerror = function () {
-        //음성 합성 중 오류가 발생했을 때때
-        console.error('SpeechSynthesisUtterance.onerror');
-      };
-      // utterThis.voice = voices[0]
-      utterThis.pitch = pitch;
-      utterThis.rate = rate;
-      synth.speak(utterThis);
-    }
-  }
+  }, [confirmVoice]);
 
   return (
     <>
@@ -152,8 +174,12 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
           )}
           {selectedType === '짤 검색' ? (
             <S.SearchContainer>
-              <S.AnotherSearch placeholder='키워드를 통해 짤 검색이 가능합니다.' />
-              <S.AnotherSearchImg src={Search} />
+              <S.AnotherSearch
+                placeholder='키워드를 통해 짤 검색이 가능합니다.'
+                onChange={handleSearchInput}
+                onKeyUp={onSubmitSearch}
+              />
+              <S.AnotherSearchImg src={Search} onClick={handleSearchClick} />
             </S.SearchContainer>
           ) : (
             <></>
@@ -174,10 +200,15 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
           <>
             <S.AnotherMiddleDiv>
               <S.MiddleNovelization
+                placeholder='소설화 하고 싶은 글을 붙여넣어보세요.'
+                style={{ borderBottom: '1px solid var(--G4)' }}
+                value={novelizationInputValue}
+                onChange={handleNovelizationInInput}
+              />
+              <S.MiddleNovelization
+                placeholder='하단의 버튼을 통해 소설화 된 글을 복사 해보세요.'
                 value={novelizationValue}
-                onChange={(e) => {
-                  handleNovelizationInput(e);
-                }}
+                onChange={handleNovelizationInput}
               />
             </S.AnotherMiddleDiv>
           </>
@@ -188,8 +219,11 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
           <>
             <S.AnotherMiddleDiv style={{ height: '633px', border: '0' }}>
               <S.JjalDiv>
-                {JjalData.map((data, index) => (
-                  <S.Jjal src={data.image} key={index} />
+                {/* {searchImg.map((data, index) => (
+                  <S.Jjal src={data} key={index} />
+                ))} */}
+                {searchImg.map((gif) => (
+                  <S.Jjal key={gif.id} src={gif.images.fixed_height.url} />
                 ))}
               </S.JjalDiv>
             </S.AnotherMiddleDiv>
@@ -211,7 +245,6 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
               ttsInput={ttsInput}
               selectedVoice={selectedVoice}
               handleVoiceClick={handleVoiceClick}
-              speak={speak}
             />
           </>
         ) : (
@@ -269,6 +302,9 @@ const SelectAnother: React.FC<KeywordProp> = (props) => {
           handleNovelizationRemove={handleNovelizationRemove}
           handleKeywordRemove={handleKeywordRemove}
           handleSubmitKeyword={handleSubmitKeyword}
+          setConfirmVoice={setConfirmVoice}
+          selectedVoice={selectedVoice}
+          novelizationValue={novelizationValue}
         />
         {openKeywordModal ? (
           <KeywordModal setOpenModal={setOpenKeywordModal} />

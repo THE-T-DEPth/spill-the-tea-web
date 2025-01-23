@@ -13,7 +13,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-	const location = useLocation();
+  const location = useLocation();
 	const { isMobile } = useNSMediaQuery();
 
 	const excludedPaths = [
@@ -26,29 +26,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 		"/signup",
 		"/signupdone",
 	];
-
+  
 	const shouldHideNavBar = excludedPaths.includes(location.pathname);
-	const isWritePage = location.pathname === '/write';
+  const isWritePage = location.pathname === '/write';
+  const isEditPage = /^\/edit\/\d+$/.test(location.pathname);
 
-	return (
-		<S.Container style={{ minWidth: isWritePage ? '1400px' : '' }}>
-			{/* 헤더는 PC에서는 항상 표시 */}
+  return (
+    <S.Container
+      style={{ minWidth: isWritePage || isEditPage ? '1400px' : '' }}>
+      {/* 헤더는 PC에서는 항상 표시 */}
 			{(!isMobile || !shouldHideNavBar) && <Header />}
-
-			{/* 네비게이션 바 */}
-			{!shouldHideNavBar && location.pathname !== "/mypage" && location.pathname !== "/write" && (
+    
+      {/* 네비게이션 바 */}
+			{!shouldHideNavBar && location.pathname !== "/mypage" && location.pathname !== "/write" && !/^\/edit\/\d+$/.test(location.pathname) && (
 				<NavBar />
 			)}
 
-			{isWritePage ? <WriteNav /> : <></>}
-			<YellowNav />
-			{/* 메인 콘텐츠 */}
-			<S.Main>{children}</S.Main>
+      {isWritePage || isEditPage ? <WriteNav /> : <></>}
+      <YellowNav />
+      {/* 메인 콘텐츠 */}
+      <S.Main>{children}</S.Main>
 
-			{/* 푸터 */}
-			<Footer />
-		</S.Container>
-	);
+      {/* 푸터 */}
+      <Footer />
+    </S.Container>
+  );
 };
 
 export default Layout;

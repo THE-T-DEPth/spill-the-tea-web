@@ -18,15 +18,18 @@ const RemoveModal: React.FC<RemoveModalProps> = ({ setOpenModal, postId }) => {
 
   //확인을 눌렀을 때, 삭제
   const handleConfirmClick = () => {
-    const fetchDeletePost = async () => {
-      try {
-        await deleteMyPost(1);
-      } catch (error) {
-        console.log('fetchDeletePost 중 오류 발생', error);
-        throw error;
-      }
-    };
-    fetchDeletePost();
+    console.log(postId);
+    if (postId) {
+      const fetchDeletePost = async () => {
+        try {
+          await deleteMyPost(postId);
+        } catch (error) {
+          console.log('fetchDeletePost 중 오류 발생', error);
+          throw error;
+        }
+      };
+      fetchDeletePost();
+    }
     navigate('/');
   };
 
