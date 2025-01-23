@@ -32,20 +32,15 @@ const validatePassword = (value: string) => {
   const noRepeat = !/(.)\1\1/.test(value);
 
   if (!isLengthValid) return '8자 이상으로 구성되어야 합니다.';
-  if (!isLengthValid) return '8자 이상으로 구성되어야 합니다.';
   if (!(hasUpperLower && hasNumber && hasSpecialChar))
-    return '대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
     return '대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
   if (!noSeq || !noRepeat)
     return '연속되거나 반복되는 문자는 사용할 수 없습니다.';
-    return '연속되거나 반복되는 문자는 사용할 수 없습니다.';
 
-  return '';
   return '';
 };
 
 const EditProfile = () => {
-  const { isMobile } = useNSMediaQuery();
   const defaultMessage =
     '8~20자 이내, 대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
   const [password, setPassword] = useState('');
@@ -79,15 +74,11 @@ const EditProfile = () => {
   const checkPasswordsMatch = (password: string, checkPassword: string) => {
     if (checkPassword.trim() === '') {
       setCheckPasswordError('');
-    if (checkPassword.trim() === '') {
-      setCheckPasswordError('');
       setIsMatch(false);
     } else if (password === checkPassword) {
       setCheckPasswordError('비밀번호 확인이 완료되었습니다.');
-      setCheckPasswordError('비밀번호 확인이 완료되었습니다.');
       setIsMatch(true);
     } else {
-      setCheckPasswordError('비밀번호가 일치하지 않습니다.');
       setCheckPasswordError('비밀번호가 일치하지 않습니다.');
       setIsMatch(false);
     }
@@ -103,7 +94,6 @@ const EditProfile = () => {
     if (value.trim() === '') {
       setPasswordError(defaultMessage);
     } else {
-      setPasswordError(validatePassword(value) || '');
       setPasswordError(validatePassword(value) || '');
     }
 
@@ -185,7 +175,7 @@ const EditProfile = () => {
     setIsMatch(false);
   };
 
-  const isDefaultMessage = passwordError === currentMessage;
+  const isDefaultMessage = passwordError === defaultMessage;
 
   return (
     <S.Container>
@@ -208,8 +198,6 @@ const EditProfile = () => {
         <S.PasswordInput
           type='password'
           placeholder='새로운 비밀번호'
-          type='password'
-          placeholder='새로운 비밀번호'
           value={password}
           onChange={handlePasswordChange}
         />
@@ -221,8 +209,6 @@ const EditProfile = () => {
       </S.PasswordContainer>
       <S.CheckContainer>
         <S.CheckInput
-          type='password'
-          placeholder='비밀번호 재확인'
           type='password'
           placeholder='비밀번호 재확인'
           value={checkPassword}
