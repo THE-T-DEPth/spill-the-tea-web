@@ -131,26 +131,24 @@ export const Slider = styled.div.withConfig({
 	width: ${({ isMobile }) => (isMobile ? "calc(100% + 118.9px)" : "calc(100% + 112px)")};
   `;
 
-
-
-
 export const BoxWrapper = styled.div.attrs<{ isActive: boolean }>(() => ({
-	isActive: undefined, // DOM에 전달되지 않도록 설정
+	isActive: undefined,
 })) <{ isActive: boolean }>`
-  pointer-events: ${({ isActive }) => (isActive ? "auto" : "none")};
-  transition: opacity 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 37px 11px;
-  width: 190px;
-  height: 253px;
-  transition: all 0.3s ease-in-out;
-  ${isMobile} {
-    margin-top: 15px;
-  }
-`;
+	/* pointer-events: ${({ isActive }) => (isActive ? "auto" : "none")}; */
+	transition: all 0.3s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 37px 11px;
+	width: 190px;
+	height: 253px;
+  
+	${isMobile} {
+	  margin-top: 15px;
+	}
+  `;
+
 
 export const EmptyMessage = styled.div`
   display: flex;

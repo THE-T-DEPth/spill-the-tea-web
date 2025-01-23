@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as S from "../styles/Login/CertificationNumPageStyle";
 import LoginInput from "../components/login/LoginInput";
 import { useLocation, useNavigate } from "react-router-dom";
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 import { postVerify } from "../api/login/certificationNum"; // API import
 
 const CertificationNumPage = () => {
@@ -11,7 +12,7 @@ const CertificationNumPage = () => {
 	const [certificationNumber, setCertificationNumber] = useState(""); // 인증번호 입력 상태
 	const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
 	const [showError, setShowError] = useState(false); // 오류 메시지 표시 여부
-
+	const { isMobile } = useNSMediaQuery();
 	// 인증번호 입력 핸들러
 	const handleCertificationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCertificationNumber(e.target.value);
@@ -49,27 +50,31 @@ const CertificationNumPage = () => {
 	};
 
 	return (
-		<S.Wrapper>
-			<S.Title>비밀번호 찾기</S.Title>
-			<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
-			<S.PasswordBox>
-				<S.passwordWrapper>
-					<S.Label>비밀번호 인증하기</S.Label>
-					<S.EmailLabel>{`"${email}"로 인증번호가 발송되었습니다.`}</S.EmailLabel>
-					<LoginInput
-						type="text"
-						text={certificationNumber}
-						setText={setCertificationNumber}
-						placeholder="인증번호를 입력하세요."
-						onChange={handleCertificationChange}
-					/>
-					<S.ErrorMessage className={showError ? "visible" : ""}>
-						{errorMessage}
-					</S.ErrorMessage>
-				</S.passwordWrapper>
-				<S.SubmitButton onClick={handleCertificationSubmit}>확인</S.SubmitButton>
-			</S.PasswordBox>
-		</S.Wrapper>
+		<>
+
+			<S.Wrapper>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 찾기"}</S.Title>
+				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
+				<S.PasswordBox>
+					<S.passwordWrapper>
+						<S.Label>{isMobile ? "인증하기" : "비밀번호 인증하기"}</S.Label>
+						<S.EmailLabel>{`"${email}"로 인증번호가 발송되었습니다.`}</S.EmailLabel>
+						<LoginInput
+							type="password"
+							text={certificationNumber}
+							setText={setCertificationNumber}
+							placeholder="인증번호를 입력하세요."
+							onChange={handleCertificationChange}
+						/>
+						<S.ErrorMessage className={showError ? "visible" : ""}>
+							{errorMessage}
+						</S.ErrorMessage>
+					</S.passwordWrapper>
+					<S.SubmitButton onClick={handleCertificationSubmit}>확인</S.SubmitButton>
+				</S.PasswordBox>
+			</S.Wrapper>
+
+		</>
 	);
 };
 

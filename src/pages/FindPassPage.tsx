@@ -3,11 +3,12 @@ import * as S from "../styles/Login/FindPassPageStyle";
 import LoginInput from "../components/login/LoginInput";
 import { useNavigate } from "react-router-dom";
 import { getPassword } from "../api/login/findPass";
-
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 const FindPassPage: React.FC = () => {
 	const [email, setEmail] = useState<string>("");
 	const [emailError, setEmailError] = useState<string>("");
 	const navigate = useNavigate();
+	const { isMobile } = useNSMediaQuery();
 
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +43,7 @@ const FindPassPage: React.FC = () => {
 		<>
 
 			<S.Wrapper>
-				<S.Title>비밀번호 찾기</S.Title>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 찾기"}</S.Title>
 				<S.Subtitle>"맛있었던 차 메뉴를 까먹었군요 😑"</S.Subtitle>
 				<S.PasswordBox>
 					<S.passwordWrapper>

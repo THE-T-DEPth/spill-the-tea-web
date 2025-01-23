@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { postLogin } from "../api/login/loginPage";
 import LoginInput from "../components/login/LoginInput";
 import { AxiosError } from "axios";
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const validateInputs = (email: string, password: string): { valid: boolean; emailError: string; passwordError: string } => {
 	let emailError = "";
@@ -41,6 +42,7 @@ const LoginPage = () => {
 	const [passwordError, setPasswordError] = useState("");
 	const navigate = useNavigate();
 
+	const { isMobile } = useNSMediaQuery();
 	const togglePasswordVisibility = () => {
 		setIsPasswordVisible(!isPasswordVisible);
 	};
@@ -102,8 +104,10 @@ const LoginPage = () => {
 
 	return (
 		<S.Wrapper>
-			<S.Title>로그인</S.Title>
+			<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "로그인"}</S.Title>
 			<S.Subtitle>"우리 찻집 단골손님으로 들어오실건가요?🤤"</S.Subtitle>
+
+
 			<S.LoginBox>
 				<S.LoginInputWrapper>
 					<S.Label>로그인</S.Label>
@@ -144,7 +148,7 @@ const LoginPage = () => {
 					</S.ForgotPassword>
 				</S.NewInputWrapper>
 			</S.LoginBox>
-		</S.Wrapper>
+		</S.Wrapper >
 	);
 };
 

@@ -3,6 +3,7 @@ import LoginInput from "../components/login/LoginInput"; // LoginInput 컴포넌
 import * as S from "../styles/Login/ChangePassPageStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { putChangePassword } from "../api/login/changePass";
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const isValidPassword = (password: string): boolean => {
 	const lengthCondition = password.length >= 8 && password.length <= 20;
@@ -24,6 +25,7 @@ const ChangePassPage: React.FC = () => {
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 	const [passwordError, setPasswordError] = useState(false);
 	const [isSameAsNewPassword, setIsSameAsNewPassword] = useState(false);
+	const { isMobile } = useNSMediaQuery();
 
 	const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -61,48 +63,66 @@ const ChangePassPage: React.FC = () => {
 	};
 
 	return (
-		<S.Wrapper>
-			<S.Title>비밀번호 변경하기</S.Title>
-			<S.PasswordBox>
-				<S.FirstInputWrapper>
-					<S.ChangeSubtitle>비밀번호 변경하기</S.ChangeSubtitle>
-					<LoginInput
-						type="password"
-						placeholder="새로운 비밀번호를 입력해주세요."
-						text={newPassword}
-						setText={setNewPassword}
-						onChange={handleNewPasswordChange}
-					/>
-					<S.ErrorMessage className={passwordError ? "visible" : ""}>
-						조건에 맞춰 비밀번호를 다시 입력해주세요.
-					</S.ErrorMessage>
-				</S.FirstInputWrapper>
-				<S.SecondInputWrapper>
-					<LoginInput
-						type="password"
-						placeholder="새로운 비밀번호를 다시 입력해주세요."
-						text={confirmPassword}
-						setText={setConfirmPassword}
-						onChange={handleConfirmPasswordChange}
-					/>
-					<S.ErrorMessage
-						className={!isPasswordMatch || isSameAsNewPassword ? "visible" : ""}
-						style={{ color: isSameAsNewPassword ? "var(--Green2)" : "var(--error1)" }}
-					>
-						{isSameAsNewPassword
-							? "새로운 비밀번호가 동일합니다."
-							: "새로운 비밀번호가 동일하지 않습니다. 다시 입력해주세요."}
-					</S.ErrorMessage>
-				</S.SecondInputWrapper>
-				<S.PasswordGuidelineWrapper>
-					<S.PasswordGuidelineTitle>비밀번호 설정 안내</S.PasswordGuidelineTitle>
-					<S.PasswordGuidelineText>
-						"비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br></br> 각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다."
-					</S.PasswordGuidelineText>
-				</S.PasswordGuidelineWrapper>
-				<S.Button onClick={handleChangePassword}>확인</S.Button>
-			</S.PasswordBox>
-		</S.Wrapper>
+		<>
+
+			<S.Wrapper>
+				<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "비밀번호 변경하기"}</S.Title>
+				<S.PasswordBox>
+					<S.FirstInputWrapper>
+						<S.ChangeSubtitle>비밀번호 변경하기</S.ChangeSubtitle>
+						<LoginInput
+							type="password"
+							placeholder="새로운 비밀번호를 입력해주세요."
+							text={newPassword}
+							setText={setNewPassword}
+							onChange={handleNewPasswordChange}
+						/>
+						<S.ErrorMessage className={passwordError ? "visible" : ""}>
+							조건에 맞춰 비밀번호를 다시 입력해주세요.
+						</S.ErrorMessage>
+					</S.FirstInputWrapper>
+					<S.SecondInputWrapper>
+						<LoginInput
+							type="password"
+							placeholder="새로운 비밀번호를 다시 입력해주세요."
+							text={confirmPassword}
+							setText={setConfirmPassword}
+							onChange={handleConfirmPasswordChange}
+						/>
+						<S.ErrorMessage
+							className={!isPasswordMatch || isSameAsNewPassword ? "visible" : ""}
+							style={{ color: isSameAsNewPassword ? "var(--Green2)" : "var(--error1)" }}
+						>
+							{isSameAsNewPassword
+								? "새로운 비밀번호가 동일합니다."
+								: "새로운 비밀번호가 동일하지 않습니다. 다시 입력해주세요."}
+						</S.ErrorMessage>
+
+
+					</S.SecondInputWrapper>
+					<S.PasswordGuidelineWrapper>
+						<S.PasswordGuidelineTitle>비밀번호 설정 안내</S.PasswordGuidelineTitle>
+						<S.PasswordGuidelineText>
+							{isMobile ? (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나<br />
+									반복되는 문자는 사용할 수 없습니다.
+								</>
+							) : (
+								<>
+									비밀번호는 8~20자 이내여야 하며, 대소문자, 숫자, 특수문자를<br />
+									각각 최소 1개씩 포함해야 합니다. 연속되거나 반복되는 문자는 사용할 수 없습니다.
+								</>
+							)}
+						</S.PasswordGuidelineText>
+
+					</S.PasswordGuidelineWrapper>
+					<S.Button onClick={handleChangePassword}>확인</S.Button>
+				</S.PasswordBox>
+			</S.Wrapper>
+
+		</>
 	);
 };
 

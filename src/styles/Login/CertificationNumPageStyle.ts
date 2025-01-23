@@ -1,17 +1,32 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f6f6f6;
+  background-color:var(--BackColor);
+  height: calc(100vh - 133px);
+  transition: color 0.2s ease-in-out;
+  ${isMobile} {
+    background-color: var(--primary2);
+	height: calc(100vh - 126px);
+  }
 `;
 
 export const Title = styled.h1`
   font: var(--headingXXL);
   color: var(--Black);
   margin-top: 228px;
+  transition: color 0.2s ease-in-out;
+  ${isMobile} {
+    font: var(--searchEmpty); 
+	margin-top: 200px;
+	text-align: left; 
+    width: 100%; 
+	max-width: 343px;
+  }
 `;
 
 export const Subtitle = styled.p`
@@ -19,6 +34,16 @@ export const Subtitle = styled.p`
   color: var(--Black);
   margin-top: 6px;
   margin-bottom: 41px;
+  transition: color 0.2s ease-in-out;
+  ${isMobile} {
+    font: var(--labelSmall); 
+	color: var(--G5);
+    margin-top: 0px;
+    margin-bottom: 42px;
+	text-align: left; 
+    width: 100%; 
+	max-width: 343px;
+  }
 `;
 
 export const PasswordBox = styled.div`
@@ -31,16 +56,28 @@ export const PasswordBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 55px;
+  ${isMobile} {
+    width: 343px; 
+	margin-bottom: 65px;
+    background: none; 
+    box-shadow: none; 
+  }
 `;
 
 export const passwordWrapper = styled.div`
   margin-top: 55px;
+  ${isMobile}{
+	margin-top: 0px;
+  }
 `;
 
 export const Label = styled.label`
   font: var(--loginSmall);
   color: var(--Sub5);
   display: block;
+  ${isMobile}{
+	font: var(--labelSmallMobile);
+  }
   
 `;
 
@@ -49,6 +86,10 @@ export const EmailLabel = styled.p`
   color: var(--Black);
   margin-top: 5px;
   margin-bottom: 12px;
+  ${isMobile}{
+	font: var(--labelSmall);
+	color: var(--G5);
+  }
 `;
 
 export const SubmitButton = styled.button`
@@ -62,6 +103,13 @@ export const SubmitButton = styled.button`
   padding-top: 4px;
   font: var(--labelLarge);
   cursor: pointer;
+  ${isMobile}{
+	width: 343px;
+	height: 50px;
+	font: var(--labelButtonMobile);
+	margin-top: 246px;
+	border-radius: 4px;
+  }
 
 `;
 
@@ -71,7 +119,10 @@ export const ErrorMessage = styled.p`
   margin-top: 2px;
   align-self: flex-start;
   height: 1em;
-  transition: color 0.2s;
+  transition: color 0.2s ease-in-out;
+  ${isMobile}{
+	font: var(--paragraphSmallMobile);
+  }
 
   &.visible {
     color: var(--error1);
