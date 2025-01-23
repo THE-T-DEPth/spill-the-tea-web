@@ -6,6 +6,7 @@ import Box from '../components/searchResult/Box';
 import BoxData from '../assets/data/BoxData';
 import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
+import MakeTeaButton from '../components/Home/MakeTeaButton';
 
 const LikedSsulPage = () => {
   const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15)); // 초기 데이터
@@ -23,21 +24,25 @@ const LikedSsulPage = () => {
         </S.EmptyContainer>
       ) : (
         <S.Container>
-          <SortButton />
-          <S.GridContainer>
-            {currentItems.map((data, index) => (
-              <Box
-                key={index}
-                title={data.title}
-                image={data.image}
-                keywords={data.keywords}
-                date={data.date}
-                time={data.time}
-                likes={data.likes}
-                comments={data.comments}
-              />
-            ))}
-          </S.GridContainer>
+          <S.MainContainer>
+            <S.SortButtonContainer>
+              <SortButton />
+            </S.SortButtonContainer>
+            <S.GridContainer>
+              {currentItems.map((data, index) => (
+                <Box
+                  key={index}
+                  title={data.title}
+                  image={data.image}
+                  keywords={data.keywords}
+                  date={data.date}
+                  time={data.time}
+                  likes={data.likes}
+                  comments={data.comments}
+                />
+              ))}
+            </S.GridContainer>
+          </S.MainContainer>
           <S.PaginationContainer>
             <Pagination
               totalItems={BoxData.length}
@@ -46,6 +51,9 @@ const LikedSsulPage = () => {
               onPageChange={handlePageChange}
             />
           </S.PaginationContainer>
+          <S.MakeTeaButtonContainer>
+            <MakeTeaButton />
+          </S.MakeTeaButtonContainer>
         </S.Container>
       )}
     </>

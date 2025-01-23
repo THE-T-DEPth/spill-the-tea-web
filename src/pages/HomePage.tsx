@@ -1,11 +1,12 @@
 import TopBar from "../components/Home/TopBar";
 import MainInputBox from "../components/Home/MainInputBox";
 import MakeTeaButton from "../components/Home/MakeTeaButton";
-
+import { useState } from "react";
 import * as S from "../styles/Home/HomPageComponentStyle";
 import boxData from "../assets/data/BoxData";
 
 const HomePage = () => {
+	const [data, setData] = useState(boxData);
 	return (
 		<>
 			<TopBar text='"오늘도 썰 한 잔, 짤 한 스푼 🍵"' />
@@ -13,14 +14,14 @@ const HomePage = () => {
 				<S.HomeDiv>
 					<MainInputBox
 						text="터지는 순 🔥"
-						boxData={boxData}
+						boxData={data}
 						emptyText="현재는 터지는 티가 없네요,,,"
 					/>
 				</S.HomeDiv>
 				<S.HomeDiv2>
 					<MainInputBox
 						text="갓 나온 따끈따끈 🍵"
-						boxData={boxData}
+						boxData={data}
 						emptyText="아직은 따끈따끈한 티가 없네요,,,"
 					/>
 

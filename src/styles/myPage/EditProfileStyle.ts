@@ -1,11 +1,20 @@
 import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   width: 404px;
-  height: 882px;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 76px auto 84px;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 358px;
+
+    margin: 42px auto 135px;
+  }
 `;
 
 export const Title = styled.span`
@@ -13,16 +22,30 @@ export const Title = styled.span`
   width: 100%;
   height: 30px;
   text-align: center;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    font: var(--headingMedium);
+    height: 22px;
+  }
 `;
 
 export const ImgContainer = styled.div`
   margin: 13px 77px 35px;
   width: 250px;
   height: 250px;
+  transition: all 0.3s ease;
 
   img {
     width: 100%;
     height: 100%;
+  }
+
+  ${isMobile} {
+    width: 180px;
+    height: 180px;
+    transition: all 0.3s ease;
+    margin: 9.84px auto 26.5px;
   }
 `;
 
@@ -32,6 +55,14 @@ export const ProfileButton = styled.div`
   height: 44px;
   gap: 64px;
   margin: 0 27px 50px;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 263px;
+    height: 33px;
+    gap: 48px;
+    margin: 0 46px 33.66px;
+  }
 `;
 
 export const ChangeButton = styled.button`
@@ -45,6 +76,12 @@ export const ChangeButton = styled.button`
   border: 1px solid var(--Main2);
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 108px;
+    font: var(--changeButtonMini);
+  }
 `;
 
 export const DeleteButton = styled.button`
@@ -58,6 +95,12 @@ export const DeleteButton = styled.button`
   border: 1px solid var(--Main2);
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 108px;
+    font: var(--changeButtonMini);
+  }
 `;
 
 export const NicknameLabel = styled.label`
@@ -66,6 +109,14 @@ export const NicknameLabel = styled.label`
   font: var(--mypageTitle);
   margin-bottom: 14px 
   box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+  font: var(--headingSmall);
+  margin-bottom: 11px;
+  height: 17px;
+
+  }
 `;
 
 export const NicknameInput = styled.input`
@@ -79,8 +130,14 @@ export const NicknameInput = styled.input`
   background: var(--InputBack);
   border-radius: 8px;
   color: var(--Secondary1);
+  transition: all 0.3s ease;
   &:focus {
     outline: none;
+  }
+
+  ${isMobile} {
+    border-radius: 4px;
+    margin-bottom: 22px;
   }
 `;
 
@@ -88,11 +145,20 @@ export const PasswordLabel = styled.span`
   width: 100%;
   font: var(--mypageTitle);
   margin-bottom: 14px;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    font: var(--headingSmall);
+  }
 `;
 
 export const PasswordContainer = styled.div`
   width: 100%;
   height: 67px;
+  transition: all 0.3s ease;
+  ${isMobile} {
+    height: 86px;
+  }
 `;
 
 export const PasswordInput = styled.input`
@@ -103,6 +169,7 @@ export const PasswordInput = styled.input`
   border: none;
   background: var(--InputBack);
   border-radius: 8px;
+  transition: all 0.3s ease;
   &::placeholder {
     color: var(--Secondary1);
     font: var(--labelMedium);
@@ -110,11 +177,15 @@ export const PasswordInput = styled.input`
   &:focus {
     outline: none;
   }
+  ${isMobile} {
+    border-radius: 4px;
+  }
 `;
 
 export const CheckContainer = styled.div`
   width: 100%;
   height: 67px;
+  transition: all 0.3s ease;
 `;
 
 export const CheckInput = styled.input`
@@ -126,12 +197,17 @@ export const CheckInput = styled.input`
   background: var(--InputBack);
   border-radius: 8px;
   margin-top: 14px;
+  transition: all 0.3s ease;
   &::placeholder {
     color: var(--Secondary1);
     font: var(--labelMedium);
   }
   &:focus {
     outline: none;
+  }
+  ${isMobile} {
+    border-radius: 4px;
+    margin-top: 11px;
   }
 `;
 
@@ -141,6 +217,14 @@ export const ButtonContainer = styled.div`
   height: 50px;
   gap: 51px;
   margin: 62px 5.5px 0;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 264px;
+    height: 33px;
+    margin: 42px 47px 0;
+    gap: 48px;
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -155,6 +239,13 @@ export const CancelButton = styled.button`
   font: var(--mypageButton);
   color: var(--Secondary1);
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 108px;
+    height: 33px;
+    font: var(--changeButtonMini);
+  }
 `;
 
 export const SaveButton = styled.button`
@@ -168,6 +259,13 @@ export const SaveButton = styled.button`
   font: var(--mypageButton);
   color: var(--primary2);
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    width: 108px;
+    height: 33px;
+    font: var(--changeButtonMini);
+  }
 `;
 
 export const ErrorMessage = styled.p<{ $isDefault: boolean }>`
@@ -175,6 +273,14 @@ export const ErrorMessage = styled.p<{ $isDefault: boolean }>`
   color: ${(props) => (props.$isDefault ? 'var(--primary1)' : 'var(--error1)')};
   margin-top: 3px;
   margin-bottom: 0;
+  height: 19px;
+  transition: all 0.3s ease;
+
+  ${isMobile} {
+    margin-bottom: 11px;
+    white-space: pre-wrap;
+    height: 38px;
+  }
 `;
 
 export const CheckMessage = styled.p<{ $isMatch: boolean }>`
@@ -183,4 +289,5 @@ export const CheckMessage = styled.p<{ $isMatch: boolean }>`
   margin-top: 3px;
   margin-bottom: 0;
   height: 19px;
+  transition: all 0.3s ease;
 `;

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import * as S from "../../styles/myPage/EditProfileStyle";
-import { ProfileData } from "../../assets/data/profileData";
+import React, { useState, useEffect } from 'react';
+import * as S from '../../styles/myPage/EditProfileStyle';
+import { ProfileData } from '../../assets/data/profileData';
+import useNSMediaQuery from '../../hooks/useNSMediaQuery';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {
@@ -28,34 +29,48 @@ const validatePassword = (value: string) => {
   const noSeq = !hasSequentialChars(value);
   const noRepeat = !/(.)\1\1/.test(value);
 
-  if (!isLengthValid) return "8자 이상으로 구성되어야 합니다.";
+  if (!isLengthValid) return '8자 이상으로 구성되어야 합니다.';
   if (!(hasUpperLower && hasNumber && hasSpecialChar))
-    return "대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.";
+    return '대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
   if (!noSeq || !noRepeat)
-    return "연속되거나 반복되는 문자는 사용할 수 없습니다.";
+    return '연속되거나 반복되는 문자는 사용할 수 없습니다.';
 
-  return "";
+  return '';
 };
 
 const EditProfile = () => {
+  const { isMobile } = useNSMediaQuery();
   const defaultMessage =
-    "8~20자 이내, 대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.";
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+    '8~20자 이내, 대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
+  const mobileMessage =
+    '8자 이상으로 구성되어야 합니다.\n대소문자, 숫자, 특수문자를 각각 최소 1개씩 포함해야 합니다.';
+
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [nickname, setNickname] = useState(ProfileData.nickname);
-  const [passwordError, setPasswordError] = useState(defaultMessage);
-  const [checkPasswordError, setCheckPasswordError] = useState("");
+  const [currentMessage, setCurrentMessage] = useState(
+    isMobile ? mobileMessage : defaultMessage
+  );
+  const [passwordError, setPasswordError] = useState(currentMessage);
+  const [checkPasswordError, setCheckPasswordError] = useState('');
   const [isMatch, setIsMatch] = useState(false);
 
+  // 화면 크기에 따라 기본 메시지 업데이트
+  useEffect(() => {
+    const message = isMobile ? mobileMessage : defaultMessage;
+    setCurrentMessage(message);
+    setPasswordError(message); // 기본 메시지 동기화
+  }, [isMobile]);
+
   const checkPasswordsMatch = (password: string, checkPassword: string) => {
-    if (checkPassword.trim() === "") {
-      setCheckPasswordError("");
+    if (checkPassword.trim() === '') {
+      setCheckPasswordError('');
       setIsMatch(false);
     } else if (password === checkPassword) {
-      setCheckPasswordError("비밀번호 확인이 완료되었습니다.");
+      setCheckPasswordError('비밀번호 확인이 완료되었습니다.');
       setIsMatch(true);
     } else {
-      setCheckPasswordError("비밀번호가 일치하지 않습니다.");
+      setCheckPasswordError('비밀번호가 일치하지 않습니다.');
       setIsMatch(false);
     }
   };
@@ -67,10 +82,10 @@ const EditProfile = () => {
 
     setPassword(value);
 
-    if (value.trim() === "") {
-      setPasswordError(defaultMessage);
+    if (value.trim() === '') {
+      setPasswordError(currentMessage); // 기본 메시지 유지
     } else {
-      setPasswordError(validatePassword(value) || "");
+      setPasswordError(validatePassword(value) || '');
     }
 
     checkPasswordsMatch(value, checkPassword);
@@ -90,13 +105,13 @@ const EditProfile = () => {
     setNickname(value); // 닉네임 상태 업데이트
   };
 
-  const isDefaultMessage = passwordError === defaultMessage;
+  const isDefaultMessage = passwordError === currentMessage;
 
   return (
     <S.Container>
       <S.Title>프로필 사진</S.Title>
       <S.ImgContainer>
-        <img src={ProfileData.profileImage} alt="프로필 이미지" />
+        <img src={ProfileData.profileImage} alt='프로필 이미지' />
       </S.ImgContainer>
       <S.ProfileButton>
         <S.ChangeButton>사진 변경</S.ChangeButton>
@@ -110,8 +125,8 @@ const EditProfile = () => {
       <S.PasswordLabel>비밀번호 수정</S.PasswordLabel>
       <S.PasswordContainer>
         <S.PasswordInput
-          type="password"
-          placeholder="새로운 비밀번호"
+          type='password'
+          placeholder='새로운 비밀번호'
           value={password}
           onChange={handlePasswordChange}
         />
@@ -123,8 +138,8 @@ const EditProfile = () => {
       </S.PasswordContainer>
       <S.CheckContainer>
         <S.CheckInput
-          type="password"
-          placeholder="비밀번호 재확인"
+          type='password'
+          placeholder='비밀번호 재확인'
           value={checkPassword}
           onChange={handleCheckPasswordChange}
         />

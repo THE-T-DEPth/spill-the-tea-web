@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { isMobile } from "../../hooks/Media";
 
 export const InputWrap = styled.div`
   display: flex;
@@ -19,6 +20,11 @@ export const Input = styled.input`
   font: var(--labelMedium);
   color: var(--Sub5);
   box-sizing: border-box;
+  ${isMobile} {
+	width: 342.64px;
+	height: 42.99px;
+	border-radius: 4px;
+  }
 
   &::placeholder {
     color: #bbb;

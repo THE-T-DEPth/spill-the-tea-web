@@ -15,18 +15,22 @@ const Header = () => {
 	const [searchInput, setSearchInput] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(true);
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [isSearchActive, setIsSearchActive] = useState(false); // 모바일에서 SearchBar 활성화 상태
+	const [isSearchActive, setIsSearchActive] = useState(false);
 	const searchBarRef = useRef<HTMLDivElement>(null);
 	const navigate = useNavigate();
 	const { isMobile } = useNSMediaQuery();
 
-	// 외부 클릭 감지
 	const handleClickOutside = (event: MouseEvent) => {
-		searchBarRef.current &&
+		if (
+			searchBarRef.current &&
 			!searchBarRef.current.contains(event.target as Node) &&
+			!(event.target as HTMLElement).closest("[data-teacup-icon]")
+		) {
 			setIsHistoryVisible(false);
-		setIsSearchActive(false);
+			setIsSearchActive(false);
+		}
 	};
+
 	useEffect(() => {
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -39,11 +43,11 @@ const Header = () => {
 			setIsHistoryVisible(false);
 		}
 	};
+
 	const handleSearchHistoryClick = (item: string) => {
 		setSearchInput(item);
 		setIsHistoryVisible(false);
 	};
-
 
 	const handleLogoutClick = () => {
 		setIsModalVisible(true);
@@ -68,14 +72,17 @@ const Header = () => {
 		}
 	};
 
+	const handleTeaCupIconClick = () => {
+		setIsSearchActive(false);
+		window.location.reload();
+	};
+
 	return (
 		<S.Container>
-			<S.LeftSection onClick={() => window.location.reload()}>
+			<S.LeftSection data-teacup-icon onClick={handleTeaCupIconClick}>
 				<S.IconWrapper>
 					<img src={TeaCupIcon} alt="Tea Cup Icon" />
 				</S.IconWrapper>
-
-
 
 				{!isMobile || !isSearchActive ? (
 					<S.Title>Spill The Tea : 썰푸는 장소</S.Title>
@@ -112,7 +119,6 @@ const Header = () => {
 						))}
 					</S.SearchHistory>
 				)}
-
 
 				<S.MyIconWrapper>
 					<img src={MyIcon} alt="My Icon" />

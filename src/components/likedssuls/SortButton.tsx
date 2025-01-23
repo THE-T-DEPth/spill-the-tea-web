@@ -8,8 +8,8 @@ import DropdownOpen from '../../assets/Icons/DropdownOpen.svg';
 const sortOptions = [
   { id: 1, icon: AsendingIcon, label: '제목 가나다 오름차순' },
   { id: 2, icon: DesendingIcon, label: '제목 가나다 내림차순' },
-  { id: 3, icon: AsendingIcon, label: '공감 수 오름차순' },
-  { id: 4, icon: DesendingIcon, label: '공감 수 내림차순' },
+  { id: 3, icon: AsendingIcon, label: '공감 누른 최근 날짜순' },
+  { id: 4, icon: DesendingIcon, label: '공감 누른 과거 날짜순' },
 ];
 
 const SortButton: React.FC = () => {

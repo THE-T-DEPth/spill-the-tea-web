@@ -5,7 +5,6 @@ import Layout from './components/layout/Layout';
 import LoginPage from './pages/LoginPage';
 import FindPassPage from './pages/FindPassPage';
 import CertificationNumPage from './pages/CertificationNumPage';
-// import ViewDetailSsul from "./pages/ViewDetailSsul";
 import SearchResultPage from './pages/SearchResultPage';
 import SsulPage from './pages/SsulPage';
 import TemporaryPassPage from './pages/TemporaryPassPage';
