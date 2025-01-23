@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import SignupInputBox from "../components/signup/SignupInputBox";
+import SignupInputBox from '../components/signup/SignupInputBox';
 import * as S from '../styles/Signup/SignupPageStyle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getcheckNicknameAvailability, postRegisterUser } from '../api/signUp/signUpPage';
 import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 // Dummy API for nickname check
@@ -14,6 +15,11 @@ const checkNicknameAvailability = (nickname: string): Promise<'valid' | 'invalid
 };
 
 const SignupPage: React.FC = () => {
+
+	const location = useLocation();
+	const email = location.state?.email;
+	const navigate = useNavigate();
+
 	const [name, setName] = useState('');
 	const [nickname, setNickname] = useState('');
 	const [password, setPassword] = useState('');
@@ -22,12 +28,8 @@ const SignupPage: React.FC = () => {
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 	const { isMobile } = useNSMediaQuery();
 
-	const navigate = useNavigate();
-
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const input = e.target.value;
-
-		// 입력값의 길이가 8자를 초과하지 않는 경우에만 업데이트
 		if (input.length <= 8) {
 			setName(input);
 		}
@@ -41,13 +43,23 @@ const SignupPage: React.FC = () => {
 		}
 	};
 
+	// 닉네임 중복 체크 로직
 	const handleNicknameCheck = async () => {
-		if (nickname.length < 2 || nickname.length > 8) {
-			setNicknameStatus('invalid');
-			return;
+		try {
+			if (nickname.length < 2 || nickname.length > 8) {
+				setNicknameStatus('invalid');
+				return;
+			}
+
+			const response = await getcheckNicknameAvailability(nickname);
+			if (response.success && response.data.availability) {
+				setNicknameStatus('valid');
+			} else {
+				setNicknameStatus('invalid');
+			}
+		} catch (error) {
+			console.error('닉네임 중복 체크 중 오류 발생:', error);
 		}
-		const status = await checkNicknameAvailability(nickname); // Call dummy API
-		setNicknameStatus(status);
 	};
 
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,19 +71,34 @@ const SignupPage: React.FC = () => {
 		setIsPasswordMatch(password === e.target.value);
 	};
 
-	const handleSignup = () => {
-		if (!isPasswordMatch || nicknameStatus !== 'valid' || !name || !nickname || !password || !confirmPassword) {
-			alert('모든 입력 필드를 올바르게 작성해주세요.');
-			return;
+	const handleSignup = async () => {
+		try {
+
+			if (!email) {
+				alert('이메일 정보가 누락되었습니다. 인증 페이지로 돌아가세요.');
+				navigate('/signup-email');
+				return;
+			}
+			if (!name || !nickname || !password || password !== confirmPassword) {
+				alert('모든 입력 필드를 올바르게 작성해주세요.');
+				return;
+			}
+			const response = await postRegisterUser(email, password, name, nickname);
+			if (response.success) {
+				alert('회원가입이 완료되었습니다.');
+				navigate('/signupdone');
+			}
+		} catch (error) {
+			console.error('회원가입 중 오류 발생:', error);
+			alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
 		}
-		navigate('/signupdone', { state: { nickname } });
 	};
+
 
 	const isFormValid = name.length >= 2 && nicknameStatus === 'valid' && isPasswordMatch && password.length >= 8;
 
 	return (
 		<>
-
 			<S.Wrapper>
 				<S.Header>
 					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
@@ -144,7 +171,6 @@ const SignupPage: React.FC = () => {
 					</S.SignupInputWrapper>
 				</S.SignupBox>
 			</S.Wrapper>
-
 		</>
 	);
 };

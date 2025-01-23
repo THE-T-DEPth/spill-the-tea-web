@@ -152,8 +152,8 @@ export const SubmitButton = styled.button<{ disabled: boolean }>`
   margin-bottom: 46px;
   padding-top: 4px;
   padding-bottom: 2.5px;
-  background-color: ${(props) => (props.disabled ? 'var(--Green2)' : 'var(--InputBack)')};
-  color: ${(props) => (props.disabled ? '#fff' : 'var(--primary2)')};
+  background-color: ${(props) => (props.disabled ? 'var(--InputBack)' : 'var(--Green2)')};
+  color: ${(props) => (props.disabled ? 'var(--primary2)' : '#fff')};
   border: none;
   border-radius: 8px;
   font: var(--labelLarge);
