@@ -5,15 +5,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { getcheckNicknameAvailability, postRegisterUser } from '../api/signUp/signUpPage';
 import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
-// Dummy API for nickname check
-const checkNicknameAvailability = (nickname: string): Promise<'valid' | 'invalid'> => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(nickname === 'existingNickname' ? 'invalid' : 'valid');
-		}, 500);
-	});
-};
-
 const SignupPage: React.FC = () => {
 
 	const location = useLocation();
