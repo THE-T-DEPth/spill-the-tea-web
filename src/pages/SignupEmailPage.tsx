@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import SignupInputBox from "../components/signup/SignupInputBox";
-import Modal from "../components/signup/Modal"; // 모달 컴포넌트 추가
+import Modal from "../components/signup/Modal";
 import * as S from '../styles/Signup/SignupEmailPageStyle';
-import { useNavigate } from 'react-router-dom'; // React Router
+import { useNavigate } from 'react-router-dom';
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const SignupEmailPage: React.FC = () => {
 	const [email, setEmail] = useState('');
 	const [verificationCode, setVerificationCode] = useState('');
 	const [emailStatus, setEmailStatus] = useState<'valid' | 'invalid' | null>(null);
 	const [isVerified, setIsVerified] = useState(false);
-	const [timer, setTimer] = useState(300); // 타이머 초기값: 300초 (5분)
+	const [timer, setTimer] = useState(300);
 	const [isTimerActive, setIsTimerActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
+	const { isMobile } = useNSMediaQuery();
 
 	const handleEmailCheck = () => {
 		setEmailStatus(email === 'test@example.com' ? 'invalid' : 'valid');
@@ -20,8 +22,8 @@ const SignupEmailPage: React.FC = () => {
 
 	const handleCodeSend = () => {
 		alert('인증번호 전송!');
-		setTimer(300); // 타이머 초기화
-		setIsTimerActive(true); // 타이머 활성화
+		setTimer(300);
+		setIsTimerActive(true);
 	};
 
 	const handleCodeVerify = () => {
@@ -68,7 +70,7 @@ const SignupEmailPage: React.FC = () => {
 
 			<S.Wrapper>
 				<S.Header>
-					<S.Title>회원가입</S.Title>
+					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
 					<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
 				</S.Header>
 
@@ -84,7 +86,7 @@ const SignupEmailPage: React.FC = () => {
 								onChange={(e) => setEmail(e.target.value)}
 								button={<div onClick={handleEmailCheck}>중복체크</div>}
 							/>
-							<S.EmailStatusText status={emailStatus}>
+							<S.EmailStatusText $status={emailStatus}>
 								{emailStatus === 'valid'
 									? '이메일 사용이 가능합니다.'
 									: emailStatus === 'invalid'
