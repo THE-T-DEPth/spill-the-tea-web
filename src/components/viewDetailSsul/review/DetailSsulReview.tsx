@@ -53,7 +53,7 @@ const DetailSsulReview: React.FC<{
 
     const fetchPostComment = async () => {
       try {
-        await postComment(1, input);
+        await postComment(postId, input);
       } catch (error) {
         console.log('postComment 중 오류 발생', error);
       }
@@ -65,7 +65,7 @@ const DetailSsulReview: React.FC<{
   useEffect(() => {
     const fetchComment = async () => {
       try {
-        const data = await getComment(1);
+        const data = await getComment(postId);
         setComments(data.data);
       } catch (error) {
         console.log('fetchComment 오류 발생', error);
