@@ -12,9 +12,9 @@ export const Title = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   color: ${({ disabled }) =>
     disabled ? 'var(--G5)' : 'inherit'}; /* 텍스트 색상 변경 */
+  transition: all 0.3s ease;
 
   ${isMobile} {
-    width: 100%;
     height: 17px;
     font: var(--boxTitleMini);
   }
@@ -32,23 +32,19 @@ export const Container = styled.div<{ disabled?: boolean }>`
   align-items: center;
   transition: all 0.3s ease;
 
-  &:hover {
-    box-shadow: ${({ disabled }) =>
-      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
-  }
-
   &:hover ${Title} {
     background-color: ${({ disabled }) =>
       disabled ? 'var(--G5)' : 'var(--Main3)'};
     transition: all 0.3s ease;
     color: ${({ disabled }) => (disabled ? 'var(--Black)' : 'var(--primary2)')};
+    box-shadow: ${({ disabled }) =>
+      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
   }
 
   ${isMobile} {
     width: 114px;
     height: 179px;
     border: none;
-    transition: all 0.3s ease;
     &:hover {
       box-shadow: none;
     }
@@ -60,10 +56,10 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
   height: 140px;
   margin-top: 8px;
   background: ${({ disabled }) => (disabled ? 'var(--G3)' : 'none')};
-  opacity: 1; /* 투명도 제거 */
+  opacity: 1;
 
   ${isMobile} {
-    width: 100%;
+    width: 114px;
     height: 105px;
     margin: 0 0 6px;
   }
@@ -72,7 +68,6 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
 export const Image = styled.img<{ disabled?: boolean }>`
   width: 100%;
   height: 100%;
-  object-fit: cover;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   opacity: 1; /* 투명도 제거 */
 `;
@@ -80,9 +75,11 @@ export const Image = styled.img<{ disabled?: boolean }>`
 export const Keywords = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  box-sizing: border-box;
   gap: 13px;
   margin: 8px 0 10px;
+  padding: 0 17px;
+  justify-content: space-between;
 
   ${isMobile} {
     gap: 0;
