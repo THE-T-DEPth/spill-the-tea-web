@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import LoginInput from "../components/login/LoginInput"; // LoginInput 컴포넌트 경로
 import * as S from "../styles/Login/ChangePassPageStyle";
+import { useLocation, useNavigate } from "react-router-dom";
+import { putChangePassword } from "../api/login/changePass";
 import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const isValidPassword = (password: string): boolean => {
 	const lengthCondition = password.length >= 8 && password.length <= 20;
-	const complexityCondition = /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password) && /[!@#$%^&*]/.test(password);
+	const complexityCondition =
+		/[A-Z]/.test(password) &&
+		/[a-z]/.test(password) &&
+		/[0-9]/.test(password) &&
+		/[!@#$%^&*]/.test(password);
 	const noSequential = !/(?:abc|123|zyx|987|111|aaa|bbb)/i.test(password);
 	return lengthCondition && complexityCondition && noSequential;
 };
 
 const ChangePassPage: React.FC = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const email = location.state?.email || "";
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
@@ -32,12 +41,25 @@ const ChangePassPage: React.FC = () => {
 		setIsSameAsNewPassword(value === newPassword);
 	};
 
-	const handleChangePassword = () => {
+	const handleChangePassword = async () => {
 		if (!isPasswordMatch || passwordError) {
 			alert("비밀번호를 다시 확인해주세요.");
 			return;
 		}
-		alert("비밀번호가 성공적으로 변경되었습니다.");
+
+		try {
+			const response = await putChangePassword(email, newPassword);
+
+			if (response.success) {
+				alert(response.message || "비밀번호가 성공적으로 변경되었습니다.");
+				navigate("/login");
+			} else {
+				alert(response.message || "비밀번호 변경에 실패했습니다.");
+			}
+		} catch (error) {
+			console.error("비밀번호 변경 중 오류 발생:", error);
+			alert("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
+		}
 	};
 
 	return (
