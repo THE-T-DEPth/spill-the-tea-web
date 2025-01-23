@@ -5,6 +5,7 @@ import { isMobile } from "../../hooks/Media";
 export const Wrapper = styled.div`
 display:flex;
 flex-direction: column;
+
 `;
 
 export const HomeDiv = styled.div`

@@ -4,6 +4,7 @@ import Modal from "../components/signup/Modal";
 import * as S from '../styles/Signup/SignupEmailPageStyle';
 import { useNavigate } from 'react-router-dom';
 import { getCheckEmailAvailability, getVerifyEmailCode, getVerificationCode } from '../api/signUp/signUpEmail';
+import useNSMediaQuery from "../hooks/useNSMediaQuery";
 
 const SignupEmailPage: React.FC = () => {
 	const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const SignupEmailPage: React.FC = () => {
 	const [isTimerActive, setIsTimerActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
+	const { isMobile } = useNSMediaQuery();
 
 	// 이메일 중복 체크 로직
 	const handleEmailCheck = async () => {
@@ -45,6 +47,11 @@ const SignupEmailPage: React.FC = () => {
 			console.error('인증번호 전송 실패:', error);
 			alert('인증번호 전송에 실패했습니다. 다시 시도해주세요.');
 		}
+
+	const handleCodeSend = () => {
+		alert('인증번호 전송!');
+		setTimer(300);
+		setIsTimerActive(true);
 	};
 
 
@@ -98,7 +105,7 @@ const SignupEmailPage: React.FC = () => {
 		<>
 			<S.Wrapper>
 				<S.Header>
-					<S.Title>회원가입</S.Title>
+					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
 					<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
 				</S.Header>
 
@@ -113,7 +120,7 @@ const SignupEmailPage: React.FC = () => {
 								onChange={(e) => setEmail(e.target.value)}
 								button={<div onClick={handleEmailCheck}>중복체크</div>}
 							/>
-							<S.EmailStatusText status={emailStatus}>
+							<S.EmailStatusText $status={emailStatus}>
 								{emailStatus === 'valid'
 									? '이메일 사용이 가능합니다.'
 									: emailStatus === 'invalid'

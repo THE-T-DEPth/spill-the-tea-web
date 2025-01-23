@@ -25,20 +25,22 @@ export const Container = styled.div<{ disabled?: boolean }>`
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
+
+  &:hover {
+  box-shadow: ${({ disabled }) =>
+		disabled ? "none" : "0px 4px 17px rgba(38, 130, 42, 0.25)"} ;
+}
+
+
+  &:hover ${Title} {
+	background-color: ${({ disabled }) =>
+		disabled ? 'none' : 'var(--Main3)'};
+	transition: all 0.3s ease;
+	color: ${({ disabled }) => (disabled ? 'none' : 'var(--primary2)')} ;
+  }
   ${isMobile}{
 	width: 152.88px;
 	height: 210px;
-  }
-
-  &:hover {
-    box-shadow: ${({ disabled }) =>
-		disabled ? "none" : "0px 4px 17px rgba(38, 130, 42, 0.25)"};
-  }
-
-  &:hover ${Title} {
-    background-color: ${({ disabled }) =>
-		disabled ? "var(--G5)" : "var(--Main3)"};
-    transition: all 0.3s ease;
   }
 `;
 
@@ -84,11 +86,6 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
-  ${isMobile}{    
-	padding: 2.84px 5px;
-	font: var(--boxInfoMobile);
-  }
-
   background-color: ${({ disabled }) =>
 		disabled ? "var(--G3)" : "transparent"};
   
@@ -98,6 +95,10 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
 			: "linear-gradient(var(--Yellow), var(--Yellow)), linear-gradient(141.28deg, #fffdee 12.77%, #dec181 57.01%)"};
   background-origin: border-box;
   background-clip: padding-box, border-box;
+  ${isMobile}{    
+	padding: 2.84px 5px;
+	font: var(--boxInfoMobile);
+  }
 `;
 
 

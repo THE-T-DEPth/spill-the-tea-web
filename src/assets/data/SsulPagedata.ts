@@ -19,7 +19,7 @@ const boxData = [
   },
   {
     title: '13글자이상13글자이상13글자이상',
-    image: 'https://via.placeholder.com/140',
+    image: '/src/assets/images/스크린샷 2024-09-03 123635.png',
     keywords: ['# 스트레스', '# 시험', '# 돈'],
     date: '24.12.20',
     likes: 300,

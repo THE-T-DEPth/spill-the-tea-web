@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div`
   width: 100%;
@@ -11,4 +12,8 @@ export const Container = styled.div`
   font: var(--topBar);
   border-top: 0.75px solid var(--Secondary3);
   border-bottom: 0.75px solid var(--Secondary3);
+
+  ${isMobile} {
+    font: var(--labelSmall);
+  }
 `;
