@@ -4,6 +4,7 @@ import * as S from '../../styles/Layout/HeaderStyle';
 import TeaCupIcon from '../../assets/Icons/TeaCup2.svg';
 import SearchIcon from '../../assets/Icons/Search.svg';
 import MyIcon from '../../assets/Icons/My.svg';
+import MyLogoutIcon from '../../assets/Icons/MyLogout.svg';
 import ClockIcon from '../../assets/Icons/Clock.svg';
 import LogoutModal from './LogoutModal';
 import { TSearchHistoryType } from '../../types/layout/NavBarType';
@@ -13,11 +14,11 @@ const Header = () => {
   const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
   const [isHistoryVisible, setIsHistoryVisible] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const searchBarRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const isAccessToken = !!localStorage.getItem('accessToken');
   const { isMobile } = useNSMediaQuery();
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -55,16 +56,12 @@ const Header = () => {
   };
 
   const handleLogoutConfirm = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem('accessToken');
     setIsModalVisible(false);
   };
 
   const handleLogoutCancel = () => {
     setIsModalVisible(false);
-  };
-
-  const handleLoginClick = () => {
-    navigate('/login');
   };
 
   const handleSearchIconClick = () => {
@@ -125,14 +122,20 @@ const Header = () => {
           </S.SearchHistory>
         )}
 
-        <S.MyIconWrapper>
-          <img src={MyIcon} alt='My Icon' />
+        <S.MyIconWrapper
+          onClick={() => navigate(isAccessToken ? '/mypage' : '/login')}>
+          <img
+            src={isAccessToken ? MyIcon : MyLogoutIcon}
+            alt={isAccessToken ? 'My Icon' : 'My Logout Icon'}
+          />
         </S.MyIconWrapper>
 
         {!isMobile && (
           <S.LogoutButton
-            onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}>
-            {isLoggedIn ? '로그아웃' : '로그인'}
+            onClick={
+              isAccessToken ? handleLogoutClick : () => navigate('/login')
+            }>
+            {isAccessToken ? '로그아웃' : '로그인'}
           </S.LogoutButton>
         )}
 
