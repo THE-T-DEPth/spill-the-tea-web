@@ -88,7 +88,11 @@ export const Keywords = styled.div`
 `;
 
 export const Keyword = styled.span<{ disabled?: boolean; $textLength: number }>`
-  padding: 3.5px 6px;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: ${({ $textLength }) => ($textLength >= 6 ? '5px' : '6px')};
+  padding-right:${({ $textLength }) => ($textLength >= 6 ? '5px' : '6px')};
+  white-space: nowrap;
   height: 17px;
   font: var(--boxKeyword);
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'var(--primary1)')};
@@ -112,7 +116,6 @@ export const Keyword = styled.span<{ disabled?: boolean; $textLength: number }>`
     padding-bottom: 2.84px;
     padding-left: ${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
     padding-right:${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
-    white-space: nowrap;
     height: 13.68px;
     font: var(--boxKeywordMini);
     border-radius: 22.5295px;
