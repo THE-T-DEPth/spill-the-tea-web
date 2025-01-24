@@ -76,26 +76,26 @@ export const Keywords = styled.div`
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  gap: 13px;
   margin: 8px 0 10px;
   padding: 0 17px;
   justify-content: space-between;
 
   ${isMobile} {
-    gap: 0;
     margin: 0 0 5.32px;
     justify-content: space-between;
+    padding: 0;
   }
 `;
 
-export const Keyword = styled.span<{ disabled?: boolean }>`
+export const Keyword = styled.span<{ disabled?: boolean; $textLength: number }>`
   padding: 3.5px 6px;
   height: 17px;
-  font: var(--boxInfo);
+  font: var(--boxKeyword);
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'var(--primary1)')};
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
+  display; flex;
 
   background-color: ${({ disabled }) =>
     disabled ? 'var(--G3)' : 'transparent'};
@@ -108,7 +108,11 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   background-clip: padding-box, border-box;
 
   ${isMobile} {
-    padding: 2.84px 5px;
+    padding-top: 2.84px;
+    padding-bottom: 2.84px;
+    padding-left: ${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
+    padding-right:${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
+    white-space: nowrap;
     height: 13.68px;
     font: var(--boxKeywordMini);
     border-radius: 22.5295px;

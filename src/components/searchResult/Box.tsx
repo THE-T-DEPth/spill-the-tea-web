@@ -20,6 +20,7 @@ export interface BoxProps {
   likes: number; // 공감 수
   comments: number; // 댓글 수
   disabled?: boolean; // 활성화 안될 시
+  textLength?: number;
 }
 
 const Box: React.FC<BoxProps> = ({
@@ -50,7 +51,10 @@ const Box: React.FC<BoxProps> = ({
       </S.ImageContainer>
       <S.Keywords>
         {keywords.map((keyword, index) => (
-          <S.Keyword key={index} disabled={disabled}>
+          <S.Keyword
+            key={index}
+            disabled={disabled}
+            $textLength={keyword.length}>
             {keyword}
           </S.Keyword>
         ))}
