@@ -22,18 +22,21 @@ const SearchResultPage: React.FC = () => {
       try {
         const response = await getSearchWord(searchQuery, currentPage - 1, 15);
         if (response && response.success) {
-          const formattedPosts = response.data.contents.map((post) => ({
-            postId: post.postId,
-            title: post.title,
-            image: post.thumb,
-            keywords: post.keywordList
-              .replace(/\[|\]/g, '')
-              .split(', ')
-              .map((keyword) => `# ${keyword.trim()}`),
-            date: post.createdDateTime,
-            likes: post.likedCount,
-            comments: post.commentCount.toString(),
-          }));
+          const formattedPosts: BoxProps[] = response.data.contents.map(
+            (post) => ({
+              postId: post.postId,
+              title: post.title,
+              image: post.thumbUrl,
+              keywords: post.keywordList
+                .replace(/\[|\]/g, '')
+                .split(', ')
+                .map((keyword) => `# ${keyword.trim()}`),
+              date: post.createDate,
+              time: post.createTime,
+              likes: post.likedCount,
+              comments: Number(post.commentCount),
+            })
+          );
           setPosts(formattedPosts);
           setTotalPages(response.data.totalPage);
         } else {
@@ -67,6 +70,7 @@ const SearchResultPage: React.FC = () => {
             {posts.map((data, index) => (
               <SearchBox
                 key={index}
+                postId={data.postId}
                 title={data.title}
                 image={data.image}
                 keywords={data.keywords}
