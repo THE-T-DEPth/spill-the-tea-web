@@ -11,7 +11,7 @@ export const Title = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   color: ${({ disabled }) => (disabled ? "var(--G5)" : "inherit")}; /* 텍스트 색상 변경 */
   ${isMobile}{
-	font: var(--boxTitleMobile);
+	font: var(--headingSmall);
   }
 `;
 
@@ -62,7 +62,7 @@ export const Image = styled.img<{ disabled?: boolean }>`
   height: 100%;
   object-fit: cover;
   cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-  opacity: 1; /* 투명도 제거 */
+  opacity: 1; 
 `;
 
 export const Keywords = styled.div`
@@ -73,6 +73,7 @@ export const Keywords = styled.div`
   margin: 8px 0 10px;
   ${isMobile}{
 	margin-top: 6.44px;
+	font: var(--boxKeywordMini);
 	margin-bottom: 6.44px;
 	gap: 10.46px;
   }
