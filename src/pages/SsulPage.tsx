@@ -1,21 +1,23 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import * as S from '../styles/ssulPage/SsulPageStyle';
 import CategoryBar from '../components/ssulPage/CategoryBar';
 import SelectedKeywordsBar from '../components/ssulPage/SelectedKeywordsBar';
 import TopBar from '../components/searchResult/TopBar';
 import Box from '../components/searchResult/Box';
-import BoxData from '../assets/data/SsulPagedata';
 import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
 import useNSMediaQuery from '../hooks/useNSMediaQuery';
 import KeywordModal from '../components/ssulPage/KeywordModal';
 import MakeTeaButton from '../components/Home/MakeTeaButton';
+import { getSearchKeyword } from '../api/ssulPage/getSearchKeyword';
 
 const SsulPage = () => {
   const { isMobile } = useNSMediaQuery();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]); // 선택된 키워드 초기화
   const [selectedCategory, setSelectedCategory] = useState('감정/ 관계'); // 카테고리 변경
-  const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15));
+  const [posts, setPosts] = useState<BoxProps[]>([]); // API 결과 상태 저장
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 키워드 추가
@@ -30,13 +32,53 @@ const SsulPage = () => {
     setSelectedKeywords((prev) => prev.filter((k) => k !== keyword));
   };
 
+  // API 호출
+  useEffect(() => {
+    if (selectedKeywords.length > 0) {
+      fetchPosts(selectedKeywords, currentPage);
+    } else {
+      setPosts([]);
+    }
+  }, [selectedKeywords, currentPage]);
+
+  const fetchPosts = async (keywords: string[], page: number) => {
+    try {
+      const response = await getSearchKeyword(keywords, page - 1, 15);
+      if (response && response.success) {
+        const formattedPosts: BoxProps[] = response.data.contents.map(
+          (post) => ({
+            postId: post.postId,
+            title: post.title,
+            image: post.thumb,
+            keywords: post.keywordList
+              .replace(/\[|\]/g, '')
+              .split(', ')
+              .map((kw) => `#${kw.trim()}`),
+            date: post.createdDateTime,
+            likes: post.likedCount,
+            comments: post.commentCount, // number -> 그대로 전달
+          })
+        );
+        console.log('검색 결과:', response.data);
+        setPosts(formattedPosts);
+        setTotalPages(response.data.totalPage);
+      } else {
+        setPosts([]);
+        console.error('데이터를 가져오지 못했습니다.');
+      }
+    } catch (error) {
+      console.error('게시글을 불러오는 중 오류 발생:', error);
+      setPosts([]);
+    }
+  };
+
   // 카테고리 변경
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
   };
 
-  const handlePageChange = useCallback((pageItems: BoxProps[]) => {
-    setCurrentItems(pageItems);
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page);
   }, []);
 
   const handleKeywordButtonClick = () => {
@@ -85,7 +127,10 @@ const SsulPage = () => {
               removeKeyword={removeKeyword}
               selectedKeywords={selectedKeywords}
               selectedCategory={selectedCategory}
-              setSelectedCategory={handleCategoryChange}
+              setSelectedCategory={setSelectedCategory}
+              onKeywordChange={(updatedKeywords) =>
+                setSelectedKeywords(updatedKeywords)
+              }
             />
             {/* 선택된 키워드 */}
             <SelectedKeywordsBar
@@ -103,14 +148,14 @@ const SsulPage = () => {
         ) : (
           <S.BoxContainer>
             <S.GridContainer>
-              {currentItems.map((data, index) => (
+              {posts.map((data) => (
                 <Box
-                  key={index}
+                  key={data.postId}
+                  postId={data.postId}
                   title={data.title}
                   image={data.image}
                   keywords={data.keywords}
                   date={data.date}
-                  time={data.time}
                   likes={data.likes}
                   comments={data.comments}
                 />
@@ -118,9 +163,8 @@ const SsulPage = () => {
             </S.GridContainer>
             <S.PaginationContainer>
               <Pagination
-                totalItems={BoxData.length}
-                itemsPerPage={15}
-                items={BoxData}
+                totalPages={totalPages}
+                currentPage={currentPage}
                 onPageChange={handlePageChange}
               />
             </S.PaginationContainer>
