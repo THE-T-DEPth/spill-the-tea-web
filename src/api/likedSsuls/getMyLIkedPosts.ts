@@ -9,6 +9,7 @@ interface LikedPost {
   keywordList: string;
   createDate: string;
   createTime: string;
+  liked: boolean;
 }
 
 interface GetMyLikedPostsResponse {

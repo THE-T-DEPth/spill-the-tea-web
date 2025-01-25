@@ -31,6 +31,7 @@ const LikedSsulPage = () => {
             time: post.createTime,
             likes: post.likedCount,
             comments: post.commentCount,
+            liked: post.liked,
           }));
           setPosts(formattedPosts);
           setTotalPages(response.data.totalPage);
@@ -78,6 +79,7 @@ const LikedSsulPage = () => {
                   time={data.time}
                   likes={data.likes}
                   comments={data.comments}
+                  liked={data.liked}
                 />
               ))}
             </S.GridContainer>
