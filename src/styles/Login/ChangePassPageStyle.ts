@@ -73,6 +73,7 @@ export const ChangeSubtitle = styled.div`
   ${isMobile}{
 	color: var(--G5);
 	margin-top: 42px;
+	font:var(--searchEmptyMini);
   }
 `;
 
@@ -150,7 +151,7 @@ export const Button = styled.button`
 	width: 343px;
   height: 50px;
   margin-bottom: 10px;
-  font: var(--labelButtonMobile);
+  font: var(--loginSmall);
   background-color: var(--Sub1);
   color: var(--Green2);
   border: 1px solid var(--Green2);
