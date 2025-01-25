@@ -9,7 +9,6 @@ import * as S from "../styles/Home/HomPageComponentStyle";
 const HomePage = () => {
 	const [likedData, setLikedData] = useState<BoxProps[]>([]);
 	const [latestData, setLatestData] = useState<BoxProps[]>([]);
-
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {

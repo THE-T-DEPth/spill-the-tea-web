@@ -1,7 +1,7 @@
 import { api } from "../index";
 import { BoxProps } from "../../components/Home/Box";
 
-// API 응답 데이터 인터페이스
+
 type ApiResponseData = {
 	postId: number;
 	title: string;
@@ -13,46 +13,54 @@ type ApiResponseData = {
 	createTime: string;
 };
 
-// BoxProps 인터페이스와 매핑 함수
 const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
+	let parsedKeywords: string[] = [];
+
+	try {
+		parsedKeywords = JSON.parse(data.keywordList);
+	} catch (error) {
+		parsedKeywords = data.keywordList
+			.replace(/[\[\]"]/g, "")
+			.split(",")
+			.map((keyword) => keyword.trim());
+	}
+
 	return {
+		postId: data.postId,
 		title: data.title,
 		image: data.thumbUrl,
-		keywords: JSON.parse(data.keywordList),
+		keywords: parsedKeywords,
 		date: data.createDate,
-		time: data.createTime,
 		likes: data.likedCount,
 		comments: String(data.commentCount),
 	};
 };
 
-// 공감순 데이터 가져오기
+
+
 export const fetchLikedPosts = async (): Promise<BoxProps[]> => {
 	try {
-		const response = await api.get("/posts", {
-			params: {
-				sortBy: "liked",
-			},
+		const response = await api.get("/post", {
+			params: { sortBy: "liked" },
+
 		});
-		return response.data.map(mapApiResponseToBoxProps);
+		return response.data.data.map(mapApiResponseToBoxProps);
 	} catch (error) {
 		console.error("fetchLikedPosts 중 오류 발생:", error);
 		throw error;
 	}
 };
 
-// 최신순 데이터 가져오기
+
 export const fetchLatestPosts = async (): Promise<BoxProps[]> => {
 	try {
-		const response = await api.get("/posts", {
-			params: {
-				sortBy: "latest",
-			},
+		const response = await api.get("/post", {
+			params: { sortBy: "latest" },
+
 		});
-		return response.data.map(mapApiResponseToBoxProps);
+		return response.data.data.map(mapApiResponseToBoxProps);
 	} catch (error) {
 		console.error("fetchLatestPosts 중 오류 발생:", error);
 		throw error;
 	}
 };
-
