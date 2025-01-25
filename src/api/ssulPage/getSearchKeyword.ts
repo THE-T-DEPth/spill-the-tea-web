@@ -7,7 +7,8 @@ interface SearchPost {
   likedCount: number;
   commentCount: number;
   keywordList: string;
-  createdDateTime: string;
+  createDate: string;
+  createTime: string;
 }
 
 interface SearchPostsResponse {
@@ -30,7 +31,7 @@ export async function getSearchKeyword(
     const limitedKeywords = keywords.slice(0, 5).join(','); // 최대 5개 키워드 조합
     console.log('API 요청:', { page, size, keywords: limitedKeywords });
     const response = await api.get<SearchPostsResponse>(
-      '/post/search/keywords',
+      '/post/search/keyword',
       {
         params: { page, size, keywords: limitedKeywords },
       }

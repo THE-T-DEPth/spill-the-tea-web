@@ -82,7 +82,7 @@ export const EmptyContainer = styled.div`
   height: 30px;
   display: flex;
   justify-content: center;
-  margin: 317px auto 497px;
+  margin: 350px auto 422px;
   ${isMobile} {
     margin: 274px auto 286px;
     transition: all 0.3s ease;

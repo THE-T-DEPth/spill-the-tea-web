@@ -54,7 +54,8 @@ const SsulPage = () => {
               .replace(/\[|\]/g, '')
               .split(', ')
               .map((kw) => `#${kw.trim()}`),
-            date: post.createdDateTime,
+            date: post.createDate,
+            time: post.createTime,
             likes: post.likedCount,
             comments: post.commentCount, // number -> 그대로 전달
           })
@@ -156,6 +157,7 @@ const SsulPage = () => {
                   image={data.image}
                   keywords={data.keywords}
                   date={data.date}
+                  time={data.time}
                   likes={data.likes}
                   comments={data.comments}
                 />
