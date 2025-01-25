@@ -76,7 +76,7 @@ export const Label = styled.label`
   color: var(--Sub5);
   display: block;
   ${isMobile}{
-	font: var(--labelSmallMobile);
+	font: var(--searchEmptyMini);
   }
   
 `;
@@ -106,7 +106,7 @@ export const SubmitButton = styled.button`
   ${isMobile}{
 	width: 343px;
 	height: 50px;
-	font: var(--labelButtonMobile);
+	font: var(--loginSmall);
 	margin-top: 246px;
 	border-radius: 4px;
   }
@@ -121,7 +121,7 @@ export const ErrorMessage = styled.p`
   height: 1em;
   transition: color 0.2s ease-in-out;
   ${isMobile}{
-	font: var(--paragraphSmallMobile);
+	font: var(--paragraphSmall);
   }
 
   &.visible {

@@ -61,7 +61,7 @@ export const Label = styled.label`
   margin-bottom: 12px;
   display: block;
   ${isMobile}{
-	font: var(--signupMobile);
+	font: var(--searchEmptyMini);
 	color: var(--G5);
 	margin-top: 0px;
   }
@@ -146,7 +146,7 @@ export const CustomButton = styled.button`
   height: 50px;
   margin-top: 130px;
   margin-bottom: 65px;
-  font: var(--labelButtonMobile);
+  font: var(--loginSmall);
   border-radius: 4px;
   }
   

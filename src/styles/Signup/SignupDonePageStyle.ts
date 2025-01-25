@@ -55,7 +55,7 @@ export const Button = styled.button`
   height: 50px;
   margin-top: 64px;
   margin-bottom: 213px;
-  font: var(--labelButtonMobile);
+  font: var(--loginSmall);
   border-radius: 4px;
   }
 `;
