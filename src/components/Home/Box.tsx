@@ -16,6 +16,7 @@ export interface BoxProps {
 	date: string;
 	likes: number;
 	comments: string;
+	liked: boolean;
 	disabled?: boolean;
 }
 
@@ -27,6 +28,7 @@ const Box: React.FC<BoxProps> = ({
 	date,
 	likes,
 	comments,
+	liked,
 	disabled,
 }) => {
 	const navigate = useNavigate();
@@ -36,6 +38,8 @@ const Box: React.FC<BoxProps> = ({
 			navigate(`/viewDetailSsul/${postId}`);
 		}
 	};
+	// liked 값 콘솔 출력
+	console.log(`Post ID: ${postId}, Liked: ${liked}`);
 
 	const truncatedTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
 
@@ -56,7 +60,7 @@ const Box: React.FC<BoxProps> = ({
 				<S.LikeContainer disabled={disabled}>
 					<S.Likes disabled={disabled}>
 						<img
-							src={disabled ? DisableLike : Like}
+							src={liked ? Like : DisableLike}
 							alt="like Icon"
 							className="Icon"
 						/>

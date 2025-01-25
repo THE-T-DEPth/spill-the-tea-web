@@ -11,6 +11,8 @@ type ApiResponseData = {
 	keywordList: string;
 	createDate: string;
 	createTime: string;
+	liked: boolean;
+
 };
 
 const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
@@ -33,6 +35,7 @@ const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
 		date: data.createDate,
 		likes: data.likedCount,
 		comments: String(data.commentCount),
+		liked: data.liked,
 	};
 };
 

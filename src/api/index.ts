@@ -19,7 +19,7 @@ export const api = axios.create({
 // Token 만료 여부 확인 함수
 function checkTokenExpiration(token: string): boolean {
 	const payload = JSON.parse(atob(token.split('.')[1]));
-	const exp = payload.exp * 1000; // 만료 시간 (밀리초)
+	const exp = payload.exp * 1000;
 	return Date.now() >= exp;
 }
 
