@@ -51,14 +51,14 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
     setInput(content);
   };
 
-  const urlToFile = async (url: string) => {
-    const response = await fetch(url);
-    const data = await response.blob();
-    const ext = url.split('.').pop();
-    const filename = url.split('/').pop();
-    const metadata = { type: `image/${ext === 'svg' ? 'svg+xml' : ext}` };
-    return new File([data], filename!, metadata);
-  };
+  // const urlToFile = async (url: string) => {
+  //   const response = await fetch(url);
+  //   const data = await response.blob();
+  //   const ext = url.split('.').pop();
+  //   const filename = url.split('/').pop();
+  //   const metadata = { type: `image/${ext === 'svg' ? 'svg+xml' : ext}` };
+  //   return new File([data], filename!, metadata);
+  // };
 
   // function b64toBlob(b64Data: string, contentType = 'image/png') {
   //   const image_data = atob(b64Data.split(',')[1]);
