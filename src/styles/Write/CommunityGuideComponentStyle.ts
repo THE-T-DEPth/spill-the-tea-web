@@ -10,7 +10,7 @@ export const CommunityGuide = styled.div`
   position: absolute;
   background-color: white;
   font: var(--labelMedium);
-  top: 265px; /* TopDiv 바로 아래 */
+  top: 260px; /* TopDiv 바로 아래 */
   z-index: 10; /* 다른 요소들 위로 표시 */
 
   ul {

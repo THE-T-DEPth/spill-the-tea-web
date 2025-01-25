@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import SignupInputBox from "../components/signup/SignupInputBox";
-import Modal from "../components/signup/Modal";
-import * as S from '../styles/Signup/SignupEmailPageStyle';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCheckEmailAvailability, getVerifyEmailCode, getVerificationCode } from '../api/signUp/signUpEmail';
-import useNSMediaQuery from "../hooks/useNSMediaQuery";
+import {
+	getCheckEmailAvailability,
+	getVerificationCode,
+	getVerifyEmailCode,
+} from '../api/signUp/signUpEmail';
+import Modal from '../components/signup/Modal';
+import SignupInputBox from '../components/signup/SignupInputBox';
+import useNSMediaQuery from '../hooks/useNSMediaQuery';
+import * as S from '../styles/Signup/SignupEmailPageStyle';
 
-const SignupEmailPage: React.FC = () => {
+const SignupEmailPage = () => {
 	const [email, setEmail] = useState('');
 	const [verificationCode, setVerificationCode] = useState('');
-	const [emailStatus, setEmailStatus] = useState<'valid' | 'invalid' | null>(null);
+	const [emailStatus, setEmailStatus] = useState<'valid' | 'invalid' | null>(
+		null
+	);
 	const [isVerified, setIsVerified] = useState(false);
 	const [timer, setTimer] = useState(300);
 	const [isTimerActive, setIsTimerActive] = useState(false);
@@ -48,7 +54,6 @@ const SignupEmailPage: React.FC = () => {
 			alert('인증번호 전송에 실패했습니다. 다시 시도해주세요.');
 		}
 	};
-
 
 	// 인증번호 확인 로직
 	const handleCodeVerify = async () => {
@@ -89,7 +94,6 @@ const SignupEmailPage: React.FC = () => {
 		return () => clearInterval(interval);
 	}, [isTimerActive, timer]);
 
-
 	const formatTime = (time: number) => {
 		const minutes = Math.floor(time / 60);
 		const seconds = time % 60;
@@ -100,7 +104,9 @@ const SignupEmailPage: React.FC = () => {
 		<>
 			<S.Wrapper>
 				<S.Header>
-					<S.Title>{isMobile ? "Spill the tea : 썰푸는 장소" : "회원가입"}</S.Title>
+					<S.Title>
+						{isMobile ? 'Spill the tea : 썰푸는 장소' : '회원가입'}
+					</S.Title>
 					<S.Subtitle>"우리집 차 맛있어요 얼른 들어오세요~😊"</S.Subtitle>
 				</S.Header>
 
@@ -109,8 +115,8 @@ const SignupEmailPage: React.FC = () => {
 						<S.Label>회원가입</S.Label>
 						<S.InputWrapper>
 							<SignupInputBox
-								placeholder="이메일을 입력하세요."
-								type="text"
+								placeholder='이메일을 입력하세요.'
+								type='text'
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								button={<div onClick={handleEmailCheck}>중복체크</div>}
@@ -124,7 +130,6 @@ const SignupEmailPage: React.FC = () => {
 							</S.EmailStatusText>
 						</S.InputWrapper>
 
-
 						<S.InputWrapper>
 							<S.CustomButtonUp onClick={handleSendVerificationCode}>
 								인증번호 전송하기
@@ -133,15 +138,16 @@ const SignupEmailPage: React.FC = () => {
 
 						<S.TypeInputWrapper>
 							<SignupInputBox
-								placeholder="인증번호를 입력하세요."
-								type="text"
+								placeholder='인증번호를 입력하세요.'
+								type='text'
 								value={verificationCode}
 								onChange={(e) => setVerificationCode(e.target.value)}
 								button={<div onClick={handleCodeVerify}>확인</div>}
 							/>
-							<S.TimerText>{isTimerActive ? formatTime(timer) : '타이머 종료'}</S.TimerText>
+							<S.TimerText>
+								{isTimerActive ? formatTime(timer) : '타이머 종료'}
+							</S.TimerText>
 						</S.TypeInputWrapper>
-
 
 						<S.InputWrapper>
 							<S.CustomButton onClick={handleNext}>다음</S.CustomButton>
@@ -150,10 +156,9 @@ const SignupEmailPage: React.FC = () => {
 				</S.SignupBox>
 			</S.Wrapper>
 
-
 			{showModal && (
 				<Modal
-					message="인증번호가 동일하지 않습니다. 다시 확인해주세요."
+					message='인증번호가 동일하지 않습니다. 다시 확인해주세요.'
 					onClose={handleCloseModal}
 				/>
 			)}

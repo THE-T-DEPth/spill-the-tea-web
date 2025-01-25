@@ -133,7 +133,7 @@ margin-left: 37px;
   ${isMobile}{
 	width: 171px;
 	height: 50px;
-	font: var(--labelButtonMobile);
+	font: var(--loginSmall);
 	margin-top: 294px;
 	border-radius: 4px;
 	margin-left: 0px;
@@ -154,7 +154,7 @@ margin-right: 37px;
   ${isMobile}{
 	width: 171px;
 	height: 50px;
-	font: var(--labelButtonMobile);
+	font: var(--loginSmall);
 	margin-top: 294px;
 	border-radius: 4px;
 	margin-right: 0px;

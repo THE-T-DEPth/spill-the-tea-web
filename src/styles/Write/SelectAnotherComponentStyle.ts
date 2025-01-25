@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AnotherInputDiv = styled.div`
   display: flex;
@@ -100,26 +100,33 @@ export const AnotherSearchImg = styled.img`
 
 export const AnotherMiddleDiv = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 537px;
   background-color: white;
   border-bottom: 1px solid var(--G4);
   justify-content: center;
+
+  ::placeholder {
+    font: var(--labelMedium);
+    color: #d9d9d9;
+    padding-top: 5px;
+    line-height: 100%;
+  }
 `;
 
 export const MiddleNovelization = styled.textarea`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 50%;
   align-items: center;
   justify-content: center;
-  font: var(--footerMini);
-  font-size: 19.5px;
-  color: #d9d9d9;
   outline: none;
   border: none;
-  padding: 30px 20px 0 20px;
+  padding: 15px 20px 0 20px;
   box-sizing: border-box;
+  color: black;
+  font: var(--labelMedium);
 `;
 
 export const JjalDiv = styled.div`
@@ -202,16 +209,10 @@ export const VoiceSelectedDiv = styled.div`
   padding-left: 20px;
 `;
 
-export const SelectedVoice = styled.button`
+export const SelectedVoice = styled.p`
   display: flex;
-  width: 20%;
-  height: 35px;
-  margin-left: 10px;
-  background-color: var(--Green3);
-  border: 1px solid var(--EarlGrey);
-  border-radius: 4px;
-  font: var(--labelMedium);
-  color: white;
+  font: var(--labelLarge);
+  color: black;
   align-items: center;
   justify-content: center;
 `;
