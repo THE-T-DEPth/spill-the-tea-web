@@ -3,11 +3,12 @@ import { api } from '../index';
 interface Post {
   postId: number;
   title: string;
-  thumb: string;
+  thumbUrl: string;
   likedCount: number;
   commentCount: number;
   keywordList: string;
-  createdDateTime: string;
+  createDate: string;
+  createTime: string;
 }
 
 interface GetMyPostsResponse {

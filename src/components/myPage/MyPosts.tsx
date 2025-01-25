@@ -22,15 +22,17 @@ const MyPosts = () => {
           const formattedPosts = response.data.contents.map((post) => ({
             postId: post.postId,
             title: post.title,
-            image: post.thumb,
+            image: post.thumbUrl,
             keywords: post.keywordList
               .replace(/\[|\]/g, '')
               .split(', ')
               .map((keyword) => `# ${keyword.trim()}`),
-            date: post.createdDateTime,
+            date: post.createDate,
+            time: post.createTime,
             likes: post.likedCount,
             comments: post.commentCount,
           }));
+          console.log(formattedPosts);
           setPosts(formattedPosts);
           setTotalPages(response.data.totalPage);
         }
@@ -72,6 +74,7 @@ const MyPosts = () => {
                 image={data.image}
                 keywords={data.keywords}
                 date={data.date}
+                time={data.time}
                 likes={data.likes}
                 comments={data.comments}
               />
