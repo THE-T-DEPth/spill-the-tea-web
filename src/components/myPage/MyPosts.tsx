@@ -31,6 +31,7 @@ const MyPosts = () => {
             time: post.createTime,
             likes: post.likedCount,
             comments: post.commentCount,
+            liked: post.liked,
           }));
           console.log(formattedPosts);
           setPosts(formattedPosts);
@@ -77,6 +78,7 @@ const MyPosts = () => {
                 time={data.time}
                 likes={data.likes}
                 comments={data.comments}
+                liked={data.liked}
               />
             ))}
           </S.GridContainer>
