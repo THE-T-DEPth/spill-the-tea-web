@@ -35,7 +35,7 @@ const KeywordModal: React.FC<KeywordModalProps> = ({
     }
 
     return () => {
-      document.body.style.overflow = 'auto'; // 컴포넌트 언마운트 시 원상 복구
+      document.body.style.overflow = 'auto';
     };
   }, [isOpen, selectedKeywords]);
 
@@ -86,6 +86,7 @@ const KeywordModal: React.FC<KeywordModalProps> = ({
             selectedKeywords={tempSelectedKeywords}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            onKeywordChange={setTempSelectedKeywords}
           />
         </S.CategoryBarContainer>
         <S.KeywordsBarContainer>
