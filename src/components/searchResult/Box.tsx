@@ -6,6 +6,7 @@ import Like from '../../assets/images/like.svg';
 import DisableLike from '../../assets/Icons/DisableLike.svg';
 import Comment from '../../assets/images/comment.svg';
 import DisableComment from '../../assets/Icons/DisableComment.svg';
+import { useNavigate } from 'react-router-dom';
 
 type Keyword = string;
 
@@ -19,9 +20,11 @@ export interface BoxProps {
   likes: number; // 공감 수
   comments: number; // 댓글 수
   disabled?: boolean; // 활성화 안될 시
+  textLength?: number;
 }
 
 const Box: React.FC<BoxProps> = ({
+  postId,
   title,
   image,
   keywords,
@@ -31,16 +34,27 @@ const Box: React.FC<BoxProps> = ({
   comments,
   disabled,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!disabled) {
+      navigate(`/viewDetailSsul/${postId}`);
+    }
+  };
+
   const truncatedTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
   return (
-    <S.Container disabled={disabled}>
+    <S.Container disabled={disabled} onClick={handleClick}>
       <S.Title disabled={disabled}>{truncatedTitle}</S.Title>
       <S.ImageContainer disabled={disabled}>
         <S.Image src={image} disabled={disabled} />
       </S.ImageContainer>
       <S.Keywords>
         {keywords.map((keyword, index) => (
-          <S.Keyword key={index} disabled={disabled}>
+          <S.Keyword
+            key={index}
+            disabled={disabled}
+            $textLength={keyword.length}>
             {keyword}
           </S.Keyword>
         ))}

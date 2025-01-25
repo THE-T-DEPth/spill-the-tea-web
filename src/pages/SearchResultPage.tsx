@@ -1,30 +1,59 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBox from '../components/searchResult/Box';
-import BoxData from '../assets/data/BoxData';
 import * as S from '../styles/searchResult/SearchResultPageStyle';
 import Pagination from '../components/searchResult/Pagination';
 import { BoxProps } from '../components/searchResult/Box';
 import TopBar from '../components/searchResult/TopBar';
 import { useLocation } from 'react-router-dom';
+import { getSearchWord } from '../api/searchResult/getSearchWord';
 
-interface SearchResultPageProps {
-  searchQuery?: string; // 검색어
-}
-
-const SearchResultPage: React.FC<SearchResultPageProps> = () => {
+const SearchResultPage: React.FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('query') || '검색한 제목';
-  const [currentItems, setCurrentItems] = useState(BoxData.slice(0, 15)); // 초기 데이터
+  const searchQuery = searchParams.get('query');
 
-  const handlePageChange = useCallback((pageItems: BoxProps[]) => {
-    setCurrentItems(pageItems);
-  }, []);
+  const [posts, setPosts] = useState<BoxProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (!searchQuery) return;
+      try {
+        const response = await getSearchWord(searchQuery, currentPage - 1, 15);
+        if (response && response.success) {
+          const formattedPosts: BoxProps[] = response.data.contents.map(
+            (post) => ({
+              postId: post.postId,
+              title: post.title,
+              image: post.thumbUrl,
+              keywords: post.keywordList
+                .replace(/\[|\]/g, '')
+                .split(', ')
+                .map((keyword) => `# ${keyword.trim()}`),
+              date: post.createDate,
+              time: post.createTime,
+              likes: post.likedCount,
+              comments: Number(post.commentCount),
+            })
+          );
+          setPosts(formattedPosts);
+          setTotalPages(response.data.totalPage);
+        } else {
+          setPosts([]);
+        }
+      } catch (error) {
+        console.error('검색 데이터를 불러오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchSearchResults();
+  }, [searchQuery, currentPage]);
 
   return (
     <>
       <TopBar text='"맛별로 골라서 먹어보자🤤"' />
-      {BoxData.length === 0 ? (
+      {posts.length === 0 ? (
         <S.EmptyContainer>
           <S.EmptyMessage>
             “{searchQuery}” 에 맞는 차가 품절 됐다고요??😂
@@ -38,9 +67,10 @@ const SearchResultPage: React.FC<SearchResultPageProps> = () => {
             </S.SearchTitle>
           </S.TitleContainer>
           <S.GridContainer>
-            {currentItems.map((data, index) => (
+            {posts.map((data, index) => (
               <SearchBox
                 key={index}
+                postId={data.postId}
                 title={data.title}
                 image={data.image}
                 keywords={data.keywords}
@@ -53,10 +83,9 @@ const SearchResultPage: React.FC<SearchResultPageProps> = () => {
           </S.GridContainer>
           <S.PaginationContainer>
             <Pagination
-              totalItems={BoxData.length} // 총 데이터 개수
-              itemsPerPage={15} // 페이지당 아이템 개수
-              items={BoxData} // 전체 데이터 배열
-              onPageChange={handlePageChange} // 페이지 데이터 업데이트
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
             />
           </S.PaginationContainer>
         </S.Container>

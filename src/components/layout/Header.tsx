@@ -40,6 +40,7 @@ const Header = () => {
   const handleSearchSubmit = () => {
     if (searchInput.trim()) {
       setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
+      navigate(`/search?query=${encodeURIComponent(searchInput.trim())}`);
       setSearchInput('');
       setIsHistoryVisible(false);
     }
