@@ -57,7 +57,8 @@ const SsulPage = () => {
             date: post.createDate,
             time: post.createTime,
             likes: post.likedCount,
-            comments: post.commentCount, // number -> 그대로 전달
+            comments: post.commentCount,
+            liked: post.liked,
           })
         );
         console.log('검색 결과:', response.data);
