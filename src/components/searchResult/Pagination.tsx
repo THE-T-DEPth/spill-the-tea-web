@@ -6,7 +6,7 @@ import RightArrowDisable from '../../assets/images/rightdisable.svg';
 import * as S from '../../styles/searchResult/PaginationStyle';
 
 interface PaginationProps {
-  totalPages: number;
+  totalPages: number; // totalPage를 직접 전달받음
   currentPage: number;
   onPageChange: (page: number) => void;
 }

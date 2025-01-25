@@ -83,10 +83,13 @@ const CategoryBar: React.FC<CategoryBarProps> = ({
 }) => {
   return (
     <S.Container>
-      <CategorySelector
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <S.CategorySelectorContainer>
+        <CategorySelector
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      </S.CategorySelectorContainer>
+
       <S.KeywordsList>
         {Keywords[selectedCategory].map((keyword, index) => (
           <Keyword

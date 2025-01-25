@@ -6,6 +6,7 @@ import Box from '../components/searchResult/Box';
 import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
 import { getMyLikedPosts } from '../api/likedSsuls/getMyLIkedPosts';
+import MakeTeaButton from '../components/Home/MakeTeaButton';
 
 const LikedSsulPage = () => {
   const [posts, setPosts] = useState<BoxProps[]>([]);
@@ -57,21 +58,28 @@ const LikedSsulPage = () => {
         </S.EmptyContainer>
       ) : (
         <S.Container>
-          <SortButton pageType='likedSsuls' onSortChange={handleSortChange} />
-          <S.GridContainer>
-            {posts.map((data) => (
-              <Box
-                key={data.postId}
-                postId={data.postId}
-                title={data.title}
-                image={data.image}
-                keywords={data.keywords}
-                date={data.date}
-                likes={data.likes}
-                comments={data.comments}
+          <S.MainContainer>
+            <S.SortButtonContainer>
+              <SortButton
+                pageType='likedSsuls'
+                onSortChange={handleSortChange}
               />
-            ))}
-          </S.GridContainer>
+            </S.SortButtonContainer>
+            <S.GridContainer>
+              {posts.map((data) => (
+                <Box
+                  key={data.postId}
+                  postId={data.postId}
+                  title={data.title}
+                  image={data.image}
+                  keywords={data.keywords}
+                  date={data.date}
+                  likes={data.likes}
+                  comments={data.comments}
+                />
+              ))}
+            </S.GridContainer>
+          </S.MainContainer>
           <S.PaginationContainer>
             <Pagination
               totalPages={totalPages}
@@ -79,6 +87,9 @@ const LikedSsulPage = () => {
               onPageChange={setCurrentPage}
             />
           </S.PaginationContainer>
+          <S.MakeTeaButtonContainer>
+            <MakeTeaButton />
+          </S.MakeTeaButtonContainer>
         </S.Container>
       )}
     </>

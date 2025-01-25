@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/images/FullHeart.svg';
 import Profile from '../../../assets/images/Profile.svg';

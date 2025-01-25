@@ -12,9 +12,9 @@ export const Title = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   color: ${({ disabled }) =>
     disabled ? 'var(--G5)' : 'inherit'}; /* 텍스트 색상 변경 */
+  transition: all 0.3s ease;
 
   ${isMobile} {
-    width: 100%;
     height: 17px;
     font: var(--boxTitleMini);
   }
@@ -32,23 +32,19 @@ export const Container = styled.div<{ disabled?: boolean }>`
   align-items: center;
   transition: all 0.3s ease;
 
-  &:hover {
-    box-shadow: ${({ disabled }) =>
-      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
-  }
-
   &:hover ${Title} {
     background-color: ${({ disabled }) =>
       disabled ? 'var(--G5)' : 'var(--Main3)'};
     transition: all 0.3s ease;
     color: ${({ disabled }) => (disabled ? 'var(--Black)' : 'var(--primary2)')};
+    box-shadow: ${({ disabled }) =>
+      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
   }
 
   ${isMobile} {
     width: 114px;
     height: 179px;
     border: none;
-    transition: all 0.3s ease;
     &:hover {
       box-shadow: none;
     }
@@ -60,10 +56,10 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
   height: 140px;
   margin-top: 8px;
   background: ${({ disabled }) => (disabled ? 'var(--G3)' : 'none')};
-  opacity: 1; /* 투명도 제거 */
+  opacity: 1;
 
   ${isMobile} {
-    width: 100%;
+    width: 114px;
     height: 105px;
     margin: 0 0 6px;
   }
@@ -72,7 +68,6 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
 export const Image = styled.img<{ disabled?: boolean }>`
   width: 100%;
   height: 100%;
-  object-fit: cover;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   opacity: 1; /* 투명도 제거 */
 `;
@@ -80,25 +75,31 @@ export const Image = styled.img<{ disabled?: boolean }>`
 export const Keywords = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
-  gap: 13px;
+  box-sizing: border-box;
   margin: 8px 0 10px;
+  padding: 0 17px;
+  justify-content: space-between;
 
   ${isMobile} {
-    gap: 0;
     margin: 0 0 5.32px;
     justify-content: space-between;
+    padding: 0;
   }
 `;
 
-export const Keyword = styled.span<{ disabled?: boolean }>`
-  padding: 3.5px 6px;
+export const Keyword = styled.span<{ disabled?: boolean; $textLength: number }>`
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: ${({ $textLength }) => ($textLength >= 6 ? '5px' : '6px')};
+  padding-right:${({ $textLength }) => ($textLength >= 6 ? '5px' : '6px')};
+  white-space: nowrap;
   height: 17px;
-  font: var(--boxInfo);
+  font: var(--boxKeyword);
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'var(--primary1)')};
   border-radius: 28px;
   border: 0.6px solid transparent;
   box-sizing: border-box;
+  display; flex;
 
   background-color: ${({ disabled }) =>
     disabled ? 'var(--G3)' : 'transparent'};
@@ -111,7 +112,10 @@ export const Keyword = styled.span<{ disabled?: boolean }>`
   background-clip: padding-box, border-box;
 
   ${isMobile} {
-    padding: 2.84px 5px;
+    padding-top: 2.84px;
+    padding-bottom: 2.84px;
+    padding-left: ${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
+    padding-right:${({ $textLength }) => ($textLength >= 6 ? '2px' : '5px')};
     height: 13.68px;
     font: var(--boxKeywordMini);
     border-radius: 22.5295px;

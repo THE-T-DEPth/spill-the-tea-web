@@ -16,7 +16,9 @@ const EditModal: React.FC<EditModalProps> = ({ setOpenModal, postId }) => {
   };
 
   //확인을 눌렀을 때, 수정 페이지로 이동
-  const handleConfirmClick = () => {};
+  const handleConfirmClick = () => {
+    navigate(`/edit/${postId}`);
+  };
 
   return (
     <>
