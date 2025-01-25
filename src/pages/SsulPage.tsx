@@ -161,6 +161,7 @@ const SsulPage = () => {
                   time={data.time}
                   likes={data.likes}
                   comments={data.comments}
+                  liked={data.liked}
                 />
               ))}
             </S.GridContainer>
