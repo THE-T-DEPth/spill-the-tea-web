@@ -9,6 +9,7 @@ interface SearchPost {
   keywordList: string;
   createDate: string;
   createTime: string;
+  liked: boolean;
 }
 
 interface SearchPostsResponse {
