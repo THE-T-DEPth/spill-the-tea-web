@@ -1,5 +1,5 @@
 import * as S from '../../../styles/ViewDetailSsul/modal/AlreadyComplainModalComponentStyle';
-import Close from '../../assets/images/Close.svg';
+import Close from '../../../assets/images/Close.svg';
 
 interface AlreadyProps {
   setOpenModal: (value: boolean) => void;

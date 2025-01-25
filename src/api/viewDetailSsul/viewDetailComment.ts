@@ -2,7 +2,7 @@ import { api } from '..';
 
 export async function getComment(postId: number) {
   try {
-    const response = await api.get(`/comments/posts/35`);
+    const response = await api.get(`/comments/posts/${postId}`);
     return response.data;
   } catch (error) {
     console.log('getComment 중 오류 발생', error);
@@ -19,13 +19,14 @@ export async function postComment(
     if (parentCommentId) {
       await api.post(`/comments`, {
         parentCommentId: parentCommentId,
-        postId: 35,
+        postId: postId,
         content: content,
       });
     } else {
-      await api.post(`/comments`, { postId: 35, content: content });
+      await api.post(`/comments`, { postId: postId, content: content });
     }
   } catch (error) {
+    alert('로그인을 해주세요.');
     console.error('postComment 중 오류 발생', error);
   }
 }
@@ -52,7 +53,7 @@ export async function postReports(commentId: number) {
   try {
     await api.post(`reports/comment/${commentId}`);
   } catch (error) {
-    console.log('postReports 중 오류 발생', error);
+    // console.log('postReports 중 오류 발생', error);
     throw error;
   }
 }

@@ -2,6 +2,7 @@ import { api } from '..';
 
 export async function getKeywordResult(keywords: string) {
   try {
+    console.log(keywords);
     const response = await api.get(
       `/post/search/keyword?keywords=${keywords}&page=0&size=15`
       //     {

@@ -4,7 +4,7 @@ import LogoutModal from './ConfirmationModal';
 import DeleteAccountModal from '../../components/myPage/DeleteAccountModal';
 import ConfirmationModal from './ConfirmationModal';
 import { logout } from '../../api/myPage/logout';
-import { deleteProfile } from '../../api/myPage/\bdeleteProfile';
+import { deleteProfile } from '../../api/myPage/deleteProfile';
 
 const LeaveService = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // 로그아웃 모달

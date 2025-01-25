@@ -58,7 +58,7 @@ const Review: React.FC<ReviewProps> = ({
   const [openRereviewIds, setOpenRereviewIds] = useState<Set<number>>(
     new Set()
   ); // 펼쳐진 대댓글 ID 관리
-  const [nickname, setNickname] = useState<string | null>('');
+  // const [nickname, setNickname] = useState<string | null>('');
   const [input, setInput] = useState<string>('');
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +66,7 @@ const Review: React.FC<ReviewProps> = ({
   };
 
   const handleReviewClick = (nickname: string | null) => {
-    setNickname('@' + nickname);
+    // setNickname('@' + nickname);
     setInput('@' + nickname + ' ');
   };
 
@@ -75,7 +75,7 @@ const Review: React.FC<ReviewProps> = ({
     parentCommentId: number,
     nickname: string
   ) => {
-    if (input !== '@' + nickname + '') {
+    if (input.trim() === '@' + nickname || input.trim() === '') {
       alert('댓글 내용을 입력해주세요!');
       return;
     }
@@ -93,7 +93,7 @@ const Review: React.FC<ReviewProps> = ({
   //input 내에서 enter와 backspace 처리
   const onSubmitClick = (parentCommentId: number, nickname: string, e: any) => {
     if (e.key === 'Enter') {
-      if (input !== '@' + nickname + '') {
+      if (input.trim() === '@' + nickname || input.trim() === '') {
         alert('댓글 내용을 입력해주세요!');
         return;
       }
@@ -196,7 +196,7 @@ const Review: React.FC<ReviewProps> = ({
                 <S.DSRComplainBtn
                   onClick={() => {
                     handleComplainClick(); // 기존 함수 호출
-                    setCommentId(id); // 추가 동작 수행
+                    setCommentId(comment.commentId); // 추가 동작 수행
                   }}>
                   신고
                 </S.DSRComplainBtn>
@@ -261,6 +261,7 @@ const Review: React.FC<ReviewProps> = ({
                   style={{ width: '95%', marginLeft: 'auto' }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
                   />
@@ -299,7 +300,7 @@ const Review: React.FC<ReviewProps> = ({
                 <S.DSRComplainBtn
                   onClick={() => {
                     handleComplainClick(); // 기존 함수 호출
-                    setCommentId(id); // 추가 동작 수행
+                    setCommentId(comment.commentId); // 추가 동작 수행
                   }}>
                   신고
                 </S.DSRComplainBtn>
@@ -368,6 +369,7 @@ const Review: React.FC<ReviewProps> = ({
                   }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
                   />

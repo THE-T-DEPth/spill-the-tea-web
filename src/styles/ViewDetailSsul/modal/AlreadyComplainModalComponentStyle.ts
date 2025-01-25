@@ -10,8 +10,7 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
   touch-action: none; /* 터치 비활성화 */
-  overflow: hidden; /* 스크롤 비활성화 */
-  pointer-events: none;
+  pointer-events: auto;
 `;
 
 // 모달 스타일

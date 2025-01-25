@@ -1,34 +1,35 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulContentComponentStyle';
-import dummyData from '../../../assets/dummy/DetailSSulDummy';
 import Speaker from '../../../assets/images/VolumeUp.svg';
 import FullHeart from '../../../assets/images/FullHeart.svg';
 import EmptyHeart from '../../../assets/images/EmptyHeart.svg';
 import Comment from '../../../assets/images/GrayComment.svg';
 import Share from '../../../assets/images/Share.svg';
 import Menu from '../../../assets/images/FixMenu.svg';
+import Profile from '../../../assets/images/Profile.svg';
 import { useEffect, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';
 import {
   DeleteLike,
-  deleteMyPost,
   getLike,
   getMyPost,
   getPostDetail,
   postLike,
 } from '../../../api/viewDetailSsul/viewDetailContent';
 import { getKeywordResult } from '../../../api/viewDetailSsul/viewDetailKeyword';
+import { postTTS } from '../../../api/write/tts';
 
-//반환값 바뀔꺼임 memberid 없애고 사용자 프로필, 사용자 이름, email 추가하고 email setBlockEmail로 넘겨주기
 interface PostDetail {
   postId: number;
   title: string;
   keywordList: string[];
   nickname: string;
-  createdDateTime: string;
+  profileImage: string;
+  createDate: string;
+  createTime: string;
   voiceType: string;
   content: string;
-  thumb: string; //이미지
+  thumbUrl: string; //이미지
   likedCount: number;
   commentCount: number;
   memberId: number;
@@ -39,7 +40,6 @@ const DetailSsulContent: React.FC<{
   setIsEditModal: (value: boolean) => void;
   setIsReportModal: (value: boolean) => void;
   setIsBlockModal: (value: boolean) => void;
-  setBlockEmail: (value: string) => void;
   postId: number;
   setMemberId: (value: number) => void;
 }> = ({
@@ -47,7 +47,6 @@ const DetailSsulContent: React.FC<{
   setIsEditModal,
   setIsReportModal,
   setIsBlockModal,
-  setBlockEmail,
   postId,
   setMemberId,
 }) => {
@@ -58,35 +57,8 @@ const DetailSsulContent: React.FC<{
   const [openTTS, setOpenTTS] = useState<boolean>(false);
   const [postDetail, setPostDetail] = useState<PostDetail>();
   const [token, setToken] = useState<string | null>();
+  const [view, setView] = useState<boolean>(false);
   const [myPost, setMyPost] = useState<boolean>();
-
-  //하트 post 및 delete
-  const handleHeartClick = () => {
-    console.log(token);
-    const nextIsHeartClick = !isHeartClick;
-    if (token) {
-      setIsHeartClick(nextIsHeartClick);
-      if (nextIsHeartClick) {
-        const fetchPostLike = async () => {
-          try {
-            await postLike(postId);
-          } catch (error) {
-            console.log('fetchPostLike 중 오류 발생', error);
-          }
-        };
-        fetchPostLike();
-      } else if (nextIsHeartClick == false) {
-        const fetchDeleteLike = async () => {
-          try {
-            await DeleteLike(postId);
-          } catch (error) {
-            console.log('fetchDeleteLike 중 오류 발생', error);
-          }
-        };
-        fetchDeleteLike();
-      }
-    }
-  };
 
   const handleEditClick = () => {
     setIsEditModal(true);
@@ -109,6 +81,11 @@ const DetailSsulContent: React.FC<{
     setIsBlockModal(true);
   };
 
+  //메뉴 버튼 클릭했을 시
+  const handleMenuClick = () => {
+    setOpenMenu(!openMenu);
+  };
+
   //공유버튼 클릭했을 시
   const handleShareClick = () => {
     const currentUrl = window.location.href;
@@ -122,23 +99,6 @@ const DetailSsulContent: React.FC<{
       });
   };
 
-  //이거 시간 설정 잘못된듯 - 저녁20:30분 게시글 11:30이라고 뜸
-  const formatDateTime = (isoString: string): string => {
-    const date = new Date(isoString);
-
-    // 날짜 추출
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
-    const year = date.getFullYear().toString().slice(-2); // 마지막 두 자리
-
-    // 시간 추출
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    // 원하는 형식으로 반환
-    return `${year}.${month}.${day} / ${hours}:${minutes}`;
-  };
-
   const handleKeywordClick = (keyword: string) => {
     const fetchKeywordResult = async () => {
       try {
@@ -150,6 +110,50 @@ const DetailSsulContent: React.FC<{
       }
     };
     fetchKeywordResult();
+  };
+
+  const handlePlay = async () => {
+    const htmlContent = postDetail?.content ?? '';
+    // HTML을 텍스트로 변환
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = htmlContent;
+    const plainText = tempElement.textContent || tempElement.innerText || '';
+    if (plainText == '') {
+      alert('글 내용이 없습니다.');
+      return;
+    }
+    try {
+      if (postDetail?.voiceType) {
+        if (postDetail.voiceType == 'ko_KR_Standard_A') {
+          await postTTS('ko-KR-Standard-A', plainText);
+        } else if (postDetail.voiceType == 'ko_KR_Standard_C') {
+          await postTTS('ko-KR-Standard-C', plainText);
+        }
+      }
+    } catch (error) {
+      console.log('fetch 중 에러 발생', error);
+    }
+  };
+
+  //하트 post 및 delete
+  const handleHeartClick = async () => {
+    if (!token) return;
+
+    const nextIsHeartClick = !isHeartClick;
+
+    try {
+      if (nextIsHeartClick) {
+        // 좋아요 추가
+        await postLike(postId);
+      } else {
+        // 좋아요 삭제
+        await DeleteLike(postId);
+      }
+      // API 성공 시 상태 업데이트
+      setIsHeartClick(nextIsHeartClick);
+    } catch (error) {
+      console.log('좋아요 처리 중 오류 발생:', error);
+    }
   };
 
   //post 가져오기
@@ -172,79 +176,10 @@ const DetailSsulContent: React.FC<{
       }
     };
     fetchPostDetailData();
-  }, [postId, handleHeartClick]);
+  }, [postId, postDetail]);
 
-  //메뉴 버튼 클릭했을 시
-  const handleMenuClick = () => {
-    setOpenMenu(!openMenu);
-  };
-
-  //음성 관리
-  const pitch = 1; //음성의 높낮이
-  const rate = 1; //음성의 속도
-
-  async function populateVoiceList(synth: SpeechSynthesis) {
-    try {
-      const voices = await synth.getVoices().sort(function (a, b) {
-        //브라우저가 지원하는 음성리스트 가져옴, 음성 리스트를 알파벳 순으로 정렬
-        const aname = a.name.toUpperCase();
-        const bname = b.name.toUpperCase();
-        if (aname < bname) return -1;
-        else if (aname === bname) return 0;
-        else return +1;
-      });
-
-      return voices;
-    } catch (error) {
-      throw new Error('Failure retrieving voices');
-    }
-  }
-
-  async function speak(textToRead: string, synth: SpeechSynthesis) {
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      //브라우저에서 음성 리스트 변경 시 최신 음성 목록 가져옴
-      speechSynthesis.onvoiceschanged = () => populateVoiceList;
-    }
-
-    if (synth.speaking) {
-      console.error('speechSynthesis.speaking');
-      return;
-    }
-    if (textToRead !== '') {
-      //음성이 비어있지 않으면 합성 시작
-      const utterThis = new SpeechSynthesisUtterance(textToRead); //텍스트를 객체로
-      utterThis.onend = function () {}; //음성 읽기가 끝났을 때 호출
-      utterThis.onerror = function () {
-        //음성 합성 중 오류가 발생했을 때때
-        console.error('SpeechSynthesisUtterance.onerror');
-      };
-      // utterThis.voice = voices[0]
-      utterThis.pitch = pitch;
-      utterThis.rate = rate;
-      synth.speak(utterThis);
-    }
-  }
-
-  const handlePlay = async () => {
-    // const htmlContent = postDetail?.content ?? '';
-    // // HTML을 텍스트로 변환
-    // const tempElement = document.createElement('div');
-    // tempElement.innerHTML = htmlContent;
-    // const plainText = tempElement.textContent || tempElement.innerText || '';
-    // if (plainText == '') {
-    //   alert('글 내용이 없습니다.');
-    //   return;
-    // }
-    // try {
-    //   await postTTS(postDetail?.voiceType, plainText);
-    // } catch (error) {
-    //   console.log('fetch 중 에러 발생', error);
-    // }
-  };
-
-  //페이지 reload 될 때마다 하트 클릭상태 최신 유지
+  //하트 클릭상태 최신 유지
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
     const fetchMyLike = async (currentPostId: number) => {
       if (token) {
         try {
@@ -256,9 +191,11 @@ const DetailSsulContent: React.FC<{
             (post: { postId: number }) => post.postId === currentPostId
           );
 
+          setView(true); //정보를 불러올 수 있는지 없는지 확인함으로써 회원 정보, 로그인 정보를 확인
           setIsHeartClick(isLiked);
         } catch (error) {
           console.log('fetchMyLike 중 오류 발생', error);
+          setView(false);
           throw error;
         }
       }
@@ -266,21 +203,22 @@ const DetailSsulContent: React.FC<{
     fetchMyLike(postId);
 
     const fetchMyPost = async (currentPostId: number) => {
-      // if (token) {
-      try {
-        const data = await getMyPost();
-        const IsMyPost = data.data.contents.some(
-          (post: { postId: number }) => post.postId === currentPostId
-        );
-        setMyPost(IsMyPost);
-      } catch (error) {}
-      // }
+      if (token) {
+        try {
+          const data = await getMyPost();
+          const IsMyPost = data.data.contents.some(
+            (post: { postId: number }) => post.postId === currentPostId
+          );
+          setMyPost(IsMyPost);
+        } catch (error) {}
+      }
     };
     fetchMyPost(postId);
-  }, [postId]);
+  }, [postId, token]);
 
   //반응형 크기 조정
   useEffect(() => {
+    setToken(localStorage.getItem('accessToken'));
     const handleResize = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);
     };
@@ -302,12 +240,12 @@ const DetailSsulContent: React.FC<{
           </S.DSCTitleDiv>
           <S.DSCMenuDiv>
             {/*토큰과 내 게시글임이 맞을때 view*/}
-            {token ? (
+            {token && view ? (
               <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
             ) : (
               <></>
             )}
-            {openMenu ? (
+            {openMenu && token && view ? (
               <S.DSCMenuDetailContainer>
                 {myPost ? (
                   <>
@@ -342,7 +280,7 @@ const DetailSsulContent: React.FC<{
             )}
           </S.DSCMenuDiv>
           <S.DSCContentWholeDiv>
-            <S.DSCTagDiv>
+            <S.DSCTagDiv style={{ marginTop: token && view ? '' : '10px' }}>
               {postDetail?.keywordList ? (
                 postDetail.keywordList.map((value, index) => (
                   <S.DSCEachTag
@@ -357,12 +295,15 @@ const DetailSsulContent: React.FC<{
             </S.DSCTagDiv>
 
             <S.DSCProfileDiv>
-              <S.DSCProfileImg src={dummyData[0].profile} />
+              <S.DSCProfileImg
+                src={
+                  postDetail?.profileImage ? postDetail.profileImage : Profile
+                }
+              />
               <S.DSCProfileTextDiv>
-                <S.DSCName>{dummyData[0].nickname}</S.DSCName>
+                <S.DSCName>{postDetail?.nickname}</S.DSCName>
                 <S.DSCProfileDate>
-                  {postDetail?.createdDateTime &&
-                    formatDateTime(postDetail.createdDateTime)}
+                  {postDetail?.createDate} / {postDetail?.createTime}
                 </S.DSCProfileDate>
               </S.DSCProfileTextDiv>
             </S.DSCProfileDiv>
@@ -386,8 +327,8 @@ const DetailSsulContent: React.FC<{
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
-                onClick={token ? handleHeartClick : () => {}}
-                src={isHeartClick || !token ? FullHeart : EmptyHeart}
+                onClick={token && view ? handleHeartClick : () => {}}
+                src={isHeartClick || !view ? FullHeart : EmptyHeart}
               />
               <S.DSCHeartNum>{postDetail?.likedCount}</S.DSCHeartNum>
               <S.DSCCommenttImg src={Comment} />
@@ -401,7 +342,7 @@ const DetailSsulContent: React.FC<{
               setOpenModal={setOpenTTS}
               setConfirmTTS={(value) => {
                 if (value) {
-                  handlePlay;
+                  handlePlay();
                 }
               }}
             />
@@ -412,18 +353,25 @@ const DetailSsulContent: React.FC<{
       ) : (
         <S.CDiv>
           <S.DSCProfileDiv>
-            <S.DSCProfileImg src={dummyData[0].profile} />
+            <S.DSCProfileImg
+              src={
+                postDetail?.profileImage ? postDetail?.profileImage : Profile
+              }
+            />
             <S.DSCProfileTextDiv>
-              <S.DSCName>{dummyData[0].nickname}</S.DSCName>
+              <S.DSCName>{postDetail?.nickname}</S.DSCName>
               <S.DSCProfileDate>
-                {postDetail?.createdDateTime &&
-                  formatDateTime(postDetail.createdDateTime)}
+                {postDetail?.createDate} / {postDetail?.createTime}
               </S.DSCProfileDate>
             </S.DSCProfileTextDiv>
             <S.DSCMenuDiv>
               {/*토큰과 내 게시글임이 맞을때 view*/}
-              <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
-              {openMenu ? (
+              {token && view ? (
+                <S.DSCMenuImg src={Menu} onClick={handleMenuClick} />
+              ) : (
+                <></>
+              )}
+              {openMenu && token && view ? (
                 <S.DSCMenuDetailContainer>
                   {myPost ? (
                     <>
@@ -491,8 +439,8 @@ const DetailSsulContent: React.FC<{
             </S.DSCContentDiv>
             <S.DSCAnoterDiv>
               <S.DSCHeartImg
-                onClick={handleHeartClick}
-                src={isHeartClick ? FullHeart : EmptyHeart}
+                onClick={token && view ? handleHeartClick : () => {}}
+                src={isHeartClick || !view ? FullHeart : EmptyHeart}
               />
               <S.DSCHeartNum>{postDetail?.likedCount}</S.DSCHeartNum>
               <S.DSCCommenttImg src={Comment} />
@@ -506,7 +454,7 @@ const DetailSsulContent: React.FC<{
               setOpenModal={setOpenTTS}
               setConfirmTTS={(value) => {
                 if (value) {
-                  handlePlay;
+                  handlePlay();
                 }
               }}
             />

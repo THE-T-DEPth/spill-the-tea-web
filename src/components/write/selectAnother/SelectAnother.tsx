@@ -10,7 +10,6 @@ import SelectKeywordType from './SelecteKeywordType';
 import { getGIFs } from '../../../api/write/search';
 
 interface KeywordProp {
-  selectedThreeKeywords: string[];
   setSelectedThreeKeywords: React.Dispatch<React.SetStateAction<string[]>>;
   setConfirmVoice: (value: string) => void;
   confirmVoice: string;
@@ -26,7 +25,6 @@ interface Gif {
 }
 
 const SelectAnother: React.FC<KeywordProp> = ({
-  selectedThreeKeywords,
   setSelectedThreeKeywords,
   setConfirmVoice,
   confirmVoice,

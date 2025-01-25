@@ -22,12 +22,14 @@ interface ReReviewProps {
   reply: Reply;
   handleComplainClick: () => void;
   openInput: boolean;
+  setCommentId: (value: number) => void;
 }
 
 const ReReview: React.FC<ReReviewProps> = ({
   reply,
   handleComplainClick,
   openInput,
+  setCommentId,
 }) => {
   const handleCommentHeartClick = () => {
     const fetchPostCommentLike = async () => {
@@ -75,7 +77,11 @@ const ReReview: React.FC<ReReviewProps> = ({
               공감
             </S.DSRHeartBtn>
             {!reply.mine ? (
-              <S.DSRComplainBtn onClick={handleComplainClick}>
+              <S.DSRComplainBtn
+                onClick={() => {
+                  handleComplainClick();
+                  setCommentId(reply.commentId);
+                }}>
                 신고
               </S.DSRComplainBtn>
             ) : (
