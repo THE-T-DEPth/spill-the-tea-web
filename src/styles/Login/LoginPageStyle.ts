@@ -109,7 +109,7 @@ export const Label = styled.label`
   display: block;
   transition: all 0.3s ease-in-out;
   ${isMobile}{
-	font: var(--labelSmallMobile);
+	font: var( --searchEmptyMini);
   }
 `;
 
@@ -155,7 +155,7 @@ export const LoginButton = styled.button`
 	width: 343px;
   height: 50px;
   margin-bottom: 10px;
-  font: var(--labelButtonMobile);
+  font: var(--loginSmall);
   border-radius: 4px;
   }
 `;
@@ -175,7 +175,7 @@ export const SignupButton = styled.button`
 	width: 343px;
   height: 50px;
   margin-bottom: 10px;
-  font: var(--labelButtonMobile);
+  font: var(--loginSmall);
   border-radius: 4px;
   
   }
@@ -204,7 +204,7 @@ export const ErrorMessage = styled.p`
   height: 1em; 
   transition: color 0.2s ease-in-out; 
   ${isMobile}{
-	font: var(--paragraphSmallMobile);
+	font: var(--paragraphSmall);
   }
 
   &.visible {
