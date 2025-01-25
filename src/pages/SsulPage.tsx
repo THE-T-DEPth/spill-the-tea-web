@@ -61,7 +61,6 @@ const SsulPage = () => {
             liked: post.liked,
           })
         );
-        console.log('검색 결과:', response.data);
         setPosts(formattedPosts);
         setTotalPages(response.data.totalPage);
       } else {
