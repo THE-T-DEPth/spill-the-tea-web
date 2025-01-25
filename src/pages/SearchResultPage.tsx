@@ -35,6 +35,7 @@ const SearchResultPage: React.FC = () => {
               time: post.createTime,
               likes: post.likedCount,
               comments: Number(post.commentCount),
+              liked: post.liked,
             })
           );
           setPosts(formattedPosts);
@@ -78,6 +79,7 @@ const SearchResultPage: React.FC = () => {
                 time={data.time}
                 likes={data.likes}
                 comments={data.comments}
+                liked={data.liked}
               />
             ))}
           </S.GridContainer>
