@@ -23,7 +23,7 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/searchresult' element={<SearchResultPage />} />
+          <Route path='/search' element={<SearchResultPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/find-password' element={<FindPassPage />} />
           <Route
