@@ -63,25 +63,27 @@ const MyPosts = () => {
         </S.EmptyContainer>
       ) : (
         <S.Container>
-          <S.SortButtonContainer>
-            <SortButton pageType='myPosts' onSortChange={handleSortChange} />
-          </S.SortButtonContainer>
-          <S.GridContainer>
-            {posts.map((data) => (
-              <Box
-                key={data.postId}
-                postId={data.postId}
-                title={data.title}
-                image={data.image}
-                keywords={data.keywords}
-                date={data.date}
-                time={data.time}
-                likes={data.likes}
-                comments={data.comments}
-                liked={data.liked}
-              />
-            ))}
-          </S.GridContainer>
+          <S.MainContainer>
+            <S.SortButtonContainer>
+              <SortButton pageType='myPosts' onSortChange={handleSortChange} />
+            </S.SortButtonContainer>
+            <S.GridContainer>
+              {posts.map((data) => (
+                <Box
+                  key={data.postId}
+                  postId={data.postId}
+                  title={data.title}
+                  image={data.image}
+                  keywords={data.keywords}
+                  date={data.date}
+                  time={data.time}
+                  likes={data.likes}
+                  comments={data.comments}
+                  liked={data.liked}
+                />
+              ))}
+            </S.GridContainer>
+          </S.MainContainer>
           <S.PaginationContainer>
             <Pagination
               totalPages={totalPages}
