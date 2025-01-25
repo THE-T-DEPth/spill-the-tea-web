@@ -3,7 +3,7 @@ import * as S from '../../styles/myPage/EditProfileStyle';
 import { getProfile } from '../../api/myPage/getProfile';
 import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
-import { deleteProfileImage } from '../../api/myPage/\bdeleteProfileImage';
+import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {

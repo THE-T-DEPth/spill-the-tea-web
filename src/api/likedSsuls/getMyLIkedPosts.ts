@@ -3,11 +3,12 @@ import { api } from '../index';
 interface LikedPost {
   postId: number;
   title: string;
-  thumb: string;
+  thumbUrl: string;
   likedCount: number;
   commentCount: number;
   keywordList: string;
-  createdDateTime: string;
+  createDate: string;
+  createTime: string;
 }
 
 interface GetMyLikedPostsResponse {
@@ -28,7 +29,7 @@ export async function getMyLikedPosts(
 ): Promise<GetMyLikedPostsResponse | null> {
   try {
     const response = await api.get<GetMyLikedPostsResponse>(
-      '/post/my-liked-posts',
+      '/post/my-liked-post',
       {
         params: { page, size, sortBy },
       }
