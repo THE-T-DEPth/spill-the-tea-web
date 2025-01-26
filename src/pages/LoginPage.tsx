@@ -61,7 +61,7 @@ const LoginPage = () => {
 		}
 
 		try {
-			// 실제 API 호출
+
 			const data = await postLogin({
 				email: email.trim(),
 				password: password,
