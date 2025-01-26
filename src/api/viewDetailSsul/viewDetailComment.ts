@@ -26,6 +26,7 @@ export async function postComment(
       await api.post(`/comments`, { postId: postId, content: content });
     }
   } catch (error) {
+    alert('로그인을 해주세요.');
     console.error('postComment 중 오류 발생', error);
   }
 }
@@ -39,11 +40,20 @@ export async function postCommentLike(commentId: number) {
   }
 }
 
+export async function deleteComment(commentId: number) {
+  try {
+    await api.delete(`/comments/${commentId}`);
+  } catch (error) {
+    console.log('deleteComment 중 오류 발생', error);
+    throw error;
+  }
+}
+
 export async function postReports(commentId: number) {
   try {
     await api.post(`reports/comment/${commentId}`);
   } catch (error) {
-    console.log('postReports 중 오류 발생', error);
+    // console.log('postReports 중 오류 발생', error);
     throw error;
   }
 }

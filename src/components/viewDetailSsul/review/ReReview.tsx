@@ -1,10 +1,14 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/images/FullHeart.svg';
 import Profile from '../../../assets/images/Profile.svg';
-import { postCommentLike } from '../../../api/viewDetailSsul/viewDetailComment';
+import {
+  deleteComment,
+  postCommentLike,
+} from '../../../api/viewDetailSsul/viewDetailComment';
 
 interface Reply {
   commentId: number;
+  mine: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -18,12 +22,14 @@ interface ReReviewProps {
   reply: Reply;
   handleComplainClick: () => void;
   openInput: boolean;
+  setCommentId: (value: number) => void;
 }
 
 const ReReview: React.FC<ReReviewProps> = ({
   reply,
   handleComplainClick,
   openInput,
+  setCommentId,
 }) => {
   const handleCommentHeartClick = () => {
     const fetchPostCommentLike = async () => {
@@ -37,15 +43,29 @@ const ReReview: React.FC<ReReviewProps> = ({
     fetchPostCommentLike();
   };
 
+  const handleRemoveComment = () => {
+    const fetchDeleteComment = async () => {
+      try {
+        await deleteComment(reply.commentId);
+      } catch (error) {
+        console.log('fetchDeleteComment 중 오류 발생', error);
+        throw error;
+      }
+    };
+    fetchDeleteComment();
+  };
+
   return (
     <>
       <S.DSRCocomentDiv $inputclick={openInput ? 'true' : 'false'}>
         <S.DSRProfileDiv>
           <S.DSRProfileImg
             src={reply.profileImage ? reply.profileImage : Profile}
-            alt={`${reply.nickname} 프로필`}
           />
-          <S.DSRProfileName>{reply.nickname}</S.DSRProfileName>
+          <S.DSRProfileName
+            style={{ color: reply.mine ? 'var(--Green3)' : 'black' }}>
+            {reply.nickname}
+          </S.DSRProfileName>
         </S.DSRProfileDiv>
         <S.DSRContentDiv>
           <S.DSRContent>{reply.content}</S.DSRContent>
@@ -56,9 +76,19 @@ const ReReview: React.FC<ReReviewProps> = ({
               }}>
               공감
             </S.DSRHeartBtn>
-            <S.DSRComplainBtn onClick={handleComplainClick}>
-              신고
-            </S.DSRComplainBtn>
+            {!reply.mine ? (
+              <S.DSRComplainBtn
+                onClick={() => {
+                  handleComplainClick();
+                  setCommentId(reply.commentId);
+                }}>
+                신고
+              </S.DSRComplainBtn>
+            ) : (
+              <S.DSRComplainBtn onClick={handleRemoveComment}>
+                삭제
+              </S.DSRComplainBtn>
+            )}
           </S.DSRBtnDiv2>
         </S.DSRContentDiv>
         <S.DSRDateHeartDiv>

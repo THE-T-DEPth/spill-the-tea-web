@@ -5,15 +5,13 @@ import { postBlock } from '../../../api/viewDetailSsul/viewDetailContent';
 
 interface BlockModalProps {
   setOpenModal: (value: boolean) => void;
-  postId: number | undefined;
-  blockEmail: string;
+  memberId: number;
 }
 
 // React.FC를 사용한 ComplainModal 정의
 const BlockUserModal: React.FC<BlockModalProps> = ({
   setOpenModal,
-  postId,
-  blockEmail,
+  memberId,
 }) => {
   const navigate = useNavigate();
 
@@ -23,16 +21,19 @@ const BlockUserModal: React.FC<BlockModalProps> = ({
 
   //여기 email 받아가지고
   const handleConfirmClick = () => {
+    setOpenModal(false);
+
     const fetchPostReport = async () => {
       try {
-        await postBlock(blockEmail);
+        await postBlock(memberId);
+        navigate('/');
       } catch (error) {
-        console.log('fetchPostReport 중 오류 발생', error);
+        alert('이미 차단한 사용자 입니다.');
+        // console.log('fetchPostReport 중 오류 발생', error);
         throw error;
       }
     };
     fetchPostReport();
-    navigate('/');
   };
 
   return (

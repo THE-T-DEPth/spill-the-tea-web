@@ -4,7 +4,6 @@ import { getProfile } from '../../api/myPage/getProfile';
 import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
 import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
-
 import defaultProflieImg from '../../assets/images/profileimg.png';
 
 // 연속된 문자 검사 함수

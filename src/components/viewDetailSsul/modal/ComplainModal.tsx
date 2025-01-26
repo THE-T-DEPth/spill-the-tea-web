@@ -6,12 +6,14 @@ import { postReports } from '../../../api/viewDetailSsul/viewDetailComment';
 
 interface ComplainModalProps {
   setComplainModal: (value: boolean) => void; //
+  setAlreadyComplainModal: (value: boolean) => void;
   commentId: number;
 }
 
 // React.FC를 사용한 ComplainModal 정의
 const ComplainModal: React.FC<ComplainModalProps> = ({
   setComplainModal,
+  setAlreadyComplainModal,
   commentId,
 }) => {
   const [step, setStep] = useState(1);
@@ -54,12 +56,12 @@ const ComplainModal: React.FC<ComplainModalProps> = ({
     if (onConfirm) setComplainModal(false);
 
     const fetchPostReportsComment = async () => {
-      console.log(commentId);
       try {
         await postReports(commentId);
         alert('신고가 완료되었습니다.');
       } catch (error) {
-        console.log('postReports 중 오류 발생', error);
+        setAlreadyComplainModal(true);
+        // console.log('postReports 중 오류 발생', error);
         throw error;
       }
     };
