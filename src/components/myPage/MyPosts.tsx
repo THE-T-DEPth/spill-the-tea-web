@@ -22,15 +22,18 @@ const MyPosts = () => {
           const formattedPosts = response.data.contents.map((post) => ({
             postId: post.postId,
             title: post.title,
-            image: post.thumb,
+            image: post.thumbUrl,
             keywords: post.keywordList
               .replace(/\[|\]/g, '')
               .split(', ')
               .map((keyword) => `# ${keyword.trim()}`),
-            date: post.createdDateTime,
+            date: post.createDate,
+            time: post.createTime,
             likes: post.likedCount,
             comments: post.commentCount,
+            liked: post.liked,
           }));
+          console.log(formattedPosts);
           setPosts(formattedPosts);
           setTotalPages(response.data.totalPage);
         }
@@ -60,23 +63,27 @@ const MyPosts = () => {
         </S.EmptyContainer>
       ) : (
         <S.Container>
-          <S.SortButtonContainer>
-            <SortButton pageType='myPosts' onSortChange={handleSortChange} />
-          </S.SortButtonContainer>
-          <S.GridContainer>
-            {posts.map((data) => (
-              <Box
-                key={data.postId}
-                postId={data.postId}
-                title={data.title}
-                image={data.image}
-                keywords={data.keywords}
-                date={data.date}
-                likes={data.likes}
-                comments={data.comments}
-              />
-            ))}
-          </S.GridContainer>
+          <S.MainContainer>
+            <S.SortButtonContainer>
+              <SortButton pageType='myPosts' onSortChange={handleSortChange} />
+            </S.SortButtonContainer>
+            <S.GridContainer>
+              {posts.map((data) => (
+                <Box
+                  key={data.postId}
+                  postId={data.postId}
+                  title={data.title}
+                  image={data.image}
+                  keywords={data.keywords}
+                  date={data.date}
+                  time={data.time}
+                  likes={data.likes}
+                  comments={data.comments}
+                  liked={data.liked}
+                />
+              ))}
+            </S.GridContainer>
+          </S.MainContainer>
           <S.PaginationContainer>
             <Pagination
               totalPages={totalPages}
