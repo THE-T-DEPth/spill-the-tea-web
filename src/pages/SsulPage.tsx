@@ -10,8 +10,10 @@ import useNSMediaQuery from '../hooks/useNSMediaQuery';
 import KeywordModal from '../components/ssulPage/KeywordModal';
 import MakeTeaButton from '../components/Home/MakeTeaButton';
 import { getSearchKeyword } from '../api/ssulPage/getSearchKeyword';
+import { useLocation } from 'react-router-dom';
 
 const SsulPage = () => {
+  const location = useLocation();
   const { isMobile } = useNSMediaQuery();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]); // 선택된 키워드 초기화
   const [selectedCategory, setSelectedCategory] = useState('감정/ 관계'); // 카테고리 변경
@@ -20,16 +22,37 @@ const SsulPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 키워드 추가
-  const addKeyword = (keyword: string) => {
-    if (selectedKeywords.length < 5 && !selectedKeywords.includes(keyword)) {
-      setSelectedKeywords((prev) => [...prev, keyword]);
+  useEffect(() => {
+    if (location.state?.newKeyword) {
+      setSelectedKeywords((prev) => {
+        if (!prev.includes(location.state.newKeyword)) {
+          return [...prev, location.state.newKeyword]; // 기존 키워드 유지 후 추가
+        }
+        return prev;
+      });
     }
-  };
+  }, [location.state]);
 
-  // 키워드 제거
-  const removeKeyword = (keyword: string) => {
-    setSelectedKeywords((prev) => prev.filter((k) => k !== keyword));
+  useEffect(() => {
+    console.log('현재 키워드 상태:', selectedKeywords);
+  }, [selectedKeywords]);
+
+  // 키워드 추가, 제거
+  const addKeyword = (keyword: string) => {
+    const cleanedKeyword = keyword.replace(/^#\s*/, ''); // # 제거
+
+    setSelectedKeywords((prev) => {
+      if (prev.includes(cleanedKeyword)) {
+        // 이미 존재하면 제거
+        return prev.filter((k) => k !== cleanedKeyword);
+      } else {
+        // 존재하지 않으면 추가 (최대 5개까지)
+        if (prev.length < 5) {
+          return [...prev, cleanedKeyword];
+        }
+        return prev;
+      }
+    });
   };
 
   // API 호출
@@ -125,7 +148,6 @@ const SsulPage = () => {
             {/* 카테고리 - 해당 키워드 */}
             <CategoryBar
               addKeyword={addKeyword}
-              removeKeyword={removeKeyword}
               selectedKeywords={selectedKeywords}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}

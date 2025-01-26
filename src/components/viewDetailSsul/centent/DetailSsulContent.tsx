@@ -9,6 +9,8 @@ import Menu from '../../../assets/images/FixMenu.svg';
 import { useEffect, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';
+import { useNavigate } from 'react-router-dom';
+
 import {
   DeleteLike,
   deleteMyPost,
@@ -57,6 +59,12 @@ const DetailSsulContent: React.FC<{
   const [postDetail, setPostDetail] = useState<PostDetail>();
   const [token, setToken] = useState<string | null>();
   const [myPost, setMyPost] = useState<boolean>();
+  const navigate = useNavigate();
+
+  const handleKeywordClick = (keyword: string) => {
+    console.log(`키워드 클릭됨: ${keyword}`);
+    navigate('/ssulpage', { state: { newKeyword: keyword } });
+  };
 
   //하트 post 및 delete
   const handleHeartClick = () => {
@@ -309,7 +317,11 @@ const DetailSsulContent: React.FC<{
             <S.DSCTagDiv>
               {postDetail?.keywordList ? (
                 postDetail.keywordList.map((value, index) => (
-                  <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+                  <S.DSCEachTag
+                    key={index}
+                    onClick={() => handleKeywordClick(value)}>
+                    # {value}
+                  </S.DSCEachTag>
                 ))
               ) : (
                 <p>로딩 중...</p>
@@ -417,7 +429,11 @@ const DetailSsulContent: React.FC<{
           <S.DSCTagDiv>
             {postDetail?.keywordList ? (
               postDetail.keywordList.map((value, index) => (
-                <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+                <S.DSCEachTag
+                  key={index}
+                  onClick={() => handleKeywordClick(value)}>
+                  # {value}
+                </S.DSCEachTag>
               ))
             ) : (
               <p>로딩 중...</p>
