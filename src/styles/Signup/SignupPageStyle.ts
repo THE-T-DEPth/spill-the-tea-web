@@ -104,7 +104,7 @@ export const Label = styled.label`
   margin-bottom: 12px;
   display: block;
   ${isMobile}{
-	font: var(--signupMobile);
+	font: var(--searchEmptyMini);
 	color: var(--G5);
 	margin-top: 0px;
   }

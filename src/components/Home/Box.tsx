@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "../../styles/Home/BoxStyle";
 import Vector from "../../assets/images/time.svg";
 import DisableClock from "../../assets/Icons/DisableClock.svg";
@@ -7,32 +8,42 @@ import DisableLike from "../../assets/Icons/DisableLike.svg";
 import Comment from "../../assets/images/comment.svg";
 import DisableComment from "../../assets/Icons/DisableComment.svg";
 
-type Keyword = string;
-
 export interface BoxProps {
-	title: string; // 글 제목
-	image: string; // 이미지 URL
-	keywords: Keyword[]; // 키워드 목록
-	date: string; // 작성 날짜
-	time?: string; // 작성 시간(없어도 됨)
-	likes: number; // 공감 수
-	comments: string; // 댓글 수
-	disabled?: boolean; // 활성화 안될 시
+	postId: number;
+	title: string;
+	image: string;
+	keywords: string[];
+	date: string;
+	likes: number;
+	comments: string;
+	liked: boolean;
+	disabled?: boolean;
 }
 
 const Box: React.FC<BoxProps> = ({
+	postId,
 	title,
 	image,
 	keywords,
 	date,
-	time,
 	likes,
 	comments,
+	liked,
 	disabled,
 }) => {
+	const navigate = useNavigate();
+
+	const handleBoxClick = () => {
+		if (!disabled) {
+			navigate(`/viewDetailSsul/${postId}`);
+		}
+	};
+
+
 	const truncatedTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
+
 	return (
-		<S.Container disabled={disabled}>
+		<S.Container disabled={disabled} onClick={handleBoxClick}>
 			<S.Title disabled={disabled}>{truncatedTitle}</S.Title>
 			<S.ImageContainer disabled={disabled}>
 				<S.Image src={image} disabled={disabled} />
@@ -48,7 +59,7 @@ const Box: React.FC<BoxProps> = ({
 				<S.LikeContainer disabled={disabled}>
 					<S.Likes disabled={disabled}>
 						<img
-							src={disabled ? DisableLike : Like}
+							src={liked ? Like : DisableLike}
 							alt="like Icon"
 							className="Icon"
 						/>
@@ -69,7 +80,7 @@ const Box: React.FC<BoxProps> = ({
 						alt="clock Icon"
 						className="Icon"
 					/>
-					{date} {time && ` / ${time}`}
+					{date}
 				</S.TimeContainer>
 			</S.InfoContainer>
 		</S.Container>

@@ -5,6 +5,8 @@ import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
 import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
 
+import defaultProflieImg from '../../assets/images/profileimg.png';
+
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {
   for (let i = 0; i < value.length - 2; i++) {
@@ -60,7 +62,7 @@ const EditProfile = () => {
         const profileData = await getProfile();
         if (profileData) {
           setNickname(profileData.data.nickname);
-          setProfileImage(profileData.data.profileImage);
+          setProfileImage(profileData.data.profileImage || defaultProflieImg);
           setInitialNickname(profileData.data.nickname);
           setInitialProfileImage(profileData.data.profileImage);
         }
