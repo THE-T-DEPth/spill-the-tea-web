@@ -4,7 +4,6 @@ import * as S from '../styles/Signup/SignupPageStyle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getcheckNicknameAvailability, postRegisterUser } from '../api/signUp/signUpPage';
 import useNSMediaQuery from "../hooks/useNSMediaQuery";
-
 const SignupPage: React.FC = () => {
 
 	const location = useLocation();

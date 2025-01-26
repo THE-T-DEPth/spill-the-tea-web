@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import * as S from '../../styles/Home/MakeTeaButtonStyle';
-import LeafIcon from '../../assets/icons/Leaf.svg';
-import LoginRequestModal from './LoginRequestModal';
-import { useNavigate } from 'react-router-dom';
+
+import React, { useState, useEffect } from "react";
+import * as S from "../../styles/Home/MakeTeaButtonStyle";
+import LeafIcon from "../../assets/icons/Leaf.svg";
+import LoginRequestModal from "./LoginRequestModal";
+import { useNavigate } from "react-router-dom";
 
 const MakeTeaButton: React.FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const navigate = useNavigate();
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const navigate = useNavigate();
 
-  const isLoggedIn = true; // 실제 토큰 검사로 api연결할 예정
-
-  const handleButtonClick = () => {
-    if (isLoggedIn) {
-      navigate('/write');
-    } else {
-      setIsModalVisible(true);
-    }
-  };
+	// 토큰 존재 여부로 로그인 상태 확인
+	useEffect(() => {
+		const token = localStorage.getItem("accessToken");
+		console.log("토큰 존재 여부:", token ? "존재" : "없음");
+		setIsLoggedIn(!!token);
+	}, []);
 
   return (
     <>

@@ -3,10 +3,10 @@ import * as S from '../../styles/searchResult/BoxStyle';
 import Vector from '../../assets/images/time.svg';
 import DisableClock from '../../assets/Icons/DisableClock.svg';
 import Like from '../../assets/images/like.svg';
-import DisableLike from '../../assets/Icons/DisableLike.svg';
 import Comment from '../../assets/images/comment.svg';
 import DisableComment from '../../assets/Icons/DisableComment.svg';
 import { useNavigate } from 'react-router-dom';
+import emptyLike from '../../assets/images/emptyLike.svg';
 
 type Keyword = string;
 
@@ -19,6 +19,7 @@ export interface BoxProps {
   time?: string; // 작성 시간(없어도 됨)
   likes: number; // 공감 수
   comments: number; // 댓글 수
+  liked: boolean; // 좋아요 상태
   disabled?: boolean; // 활성화 안될 시
   textLength?: number;
 }
@@ -32,6 +33,7 @@ const Box: React.FC<BoxProps> = ({
   time,
   likes,
   comments,
+  liked,
   disabled,
 }) => {
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ const Box: React.FC<BoxProps> = ({
         <S.LikeContainer disabled={disabled}>
           <S.Likes disabled={disabled}>
             <img
-              src={disabled ? DisableLike : Like}
+              src={liked ? Like : emptyLike}
               alt='like Icon'
               className='Icon'
             />
