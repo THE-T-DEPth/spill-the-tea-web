@@ -19,7 +19,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
   const [textInput, setInput] = useState<string | null>(null); //content input이 있나 없나
   const [imageCount, setImageCount] = useState<number>(0);
   const [confirmVoice, setConfirmVoice] = useState<string>('none');
-  const [firstImg, setFirstImg] = useState<File | null>(null);
+  const [firstImg, setFirstImg] = useState<string>();
   const { postId } = useParams();
 
   //edit일 때 초기 값 세팅
@@ -48,32 +48,30 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
   }, [mode, postId]);
 
   const handleInput = (content: string) => {
-    // const updatedHtml = await replaceBase64WithBlobUrls(content);
     setInput(content);
-    // console.log(removeHtmlTags(textInput.html));
   };
 
-  const urlToFile = async (url: string) => {
-    const response = await fetch(url);
-    const data = await response.blob();
-    const ext = url.split('.').pop();
-    const filename = url.split('/').pop();
-    const metadata = { type: `image/${ext === 'svg' ? 'svg+xml' : ext}` };
-    return new File([data], filename!, metadata);
-  };
+  // const urlToFile = async (url: string) => {
+  //   const response = await fetch(url);
+  //   const data = await response.blob();
+  //   const ext = url.split('.').pop();
+  //   const filename = url.split('/').pop();
+  //   const metadata = { type: `image/${ext === 'svg' ? 'svg+xml' : ext}` };
+  //   return new File([data], filename!, metadata);
+  // };
 
-  function b64toBlob(b64Data: string, contentType = 'image/png') {
-    const image_data = atob(b64Data.split(',')[1]);
+  // function b64toBlob(b64Data: string, contentType = 'image/png') {
+  //   const image_data = atob(b64Data.split(',')[1]);
 
-    const arraybuffer = new ArrayBuffer(image_data.length);
-    const view = new Uint8Array(arraybuffer);
+  //   const arraybuffer = new ArrayBuffer(image_data.length);
+  //   const view = new Uint8Array(arraybuffer);
 
-    for (let i = 0; i < image_data.length; i++) {
-      view[i] = image_data.charCodeAt(i) & 0xff;
-    }
+  //   for (let i = 0; i < image_data.length; i++) {
+  //     view[i] = image_data.charCodeAt(i) & 0xff;
+  //   }
 
-    return new Blob([arraybuffer], { type: contentType });
-  }
+  //   return new Blob([arraybuffer], { type: contentType });
+  // }
 
   const handleGuideClick = () => {
     setOpenGuide(!openGuide);
@@ -95,66 +93,67 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
 
     setImageCount(images.length); // 이미지 개수 상태 업데이트
 
-    if (images.length > 0) {
-      const firstImgSrc = images[0].src; // 첫 번째 이미지의 src 가져오기
-      // const firstImgFile = await urlToFile(firstImgSrc); // URL을 File로 변환
-      // console.log(firstImgFile);
-      let blob = null;
-      let firstImgFile = null;
-      let url = '';
+    let hasRemoved = false; // 이미지를 삭제했는지 추적
+    let firstValidImageProcessed = false;
 
-      //base64로 들어왔을 때
-      if (firstImgSrc.startsWith('data:')) {
-        blob = b64toBlob(firstImgSrc);
-        firstImgFile = new File([blob], 'first.png', { type: blob.type });
-        url = URL.createObjectURL(blob);
-        setFirstImg(firstImgFile);
-      }
-      // images[0].setAttribute("src", url);
+    for (const img of images) {
+      const imgSrc = img.src;
 
-      if (firstImgSrc.startsWith('https://')) {
-        firstImgFile = await urlToFile(firstImgSrc);
-        setFirstImg(firstImgFile);
+      // 이미지의 src가 조건에 맞지 않으면 삭제
+      if (
+        !(
+          imgSrc.startsWith('https://media0.giphy.com/') ||
+          imgSrc.startsWith('https://media1.giphy.com/') ||
+          imgSrc.startsWith('https://media2.giphy.com/') ||
+          imgSrc.startsWith('https://media3.giphy.com/') ||
+          imgSrc.startsWith('https://media4.giphy.com/') ||
+          imgSrc.startsWith('https://spill-the-tea-bucket.s3')
+        )
+      ) {
+        img.remove(); // 해당 이미지를 DOM에서 제거
+        hasRemoved = true; // 삭제된 이미지가 있음을 표시
+        alert('허용되지 않는 이미지가 포함되어 있습니다.');
+      } else if (!firstValidImageProcessed) {
+        // const firstImgFile = await urlToFile(imgSrc);
+        // setFirstImg(firstImgFile);
+        setFirstImg(img.src);
+        firstValidImageProcessed = true;
       }
+    }
 
-      try {
-        // const firstUrl = await baseToUrl(firstImgSrc);
-        // console.log("Generated Blob URL:", firstUrl);
-        // const firstImgFile = await urlToFile(firstUrl); // URL을 File로 변환
-        // console.log(firstImgFile, typeof firstImg);
-        // setFirstImg(firstImgFile); // 상태 업데이트
-      } catch (error) {
-        console.error('Failed to convert URL to File:', error);
-      }
+    // 조건에 맞지 않은 이미지를 삭제한 경우 수정된 HTML로 업데이트
+    if (hasRemoved) {
+      const updatedHTML = doc.body.innerHTML; // 수정된 HTML 가져오기
+      setInput(updatedHTML); // Quill 입력 값 업데이트
     }
   };
 
   //서버에서 처리해야할 것, url 부분에 파일을 보내고 넘겨받은 url 삽입해주기
-  const replaceBase64WithBlobUrls = async (html: string) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const images = doc.querySelectorAll('img');
+  // const replaceBase64WithBlobUrls = async (html: string) => {
+  //   const parser = new DOMParser();
+  //   const doc = parser.parseFromString(html, 'text/html');
+  //   const images = doc.querySelectorAll('img');
 
-    for (const img of images) {
-      const src = img.getAttribute('src');
-      if (src && src.startsWith('data:')) {
-        try {
-          // Base64 -> Blob 변환
-          const blob = b64toBlob(src);
-          // Blob -> URL 변환
-          const url = URL.createObjectURL(blob);
-          // 이미지 태그 src 속성 업데이트
-          img.setAttribute('src', url);
-          // console.log(url);
-        } catch (error) {
-          console.error('Failed to process image:', error);
-        }
-      }
-    }
+  //   for (const img of images) {
+  //     const src = img.getAttribute('src');
+  //     if (src && src.startsWith('data:')) {
+  //       try {
+  //         // Base64 -> Blob 변환
+  //         const blob = b64toBlob(src);
+  //         // Blob -> URL 변환
+  //         const url = URL.createObjectURL(blob);
+  //         // 이미지 태그 src 속성 업데이트
+  //         img.setAttribute('src', url);
+  //         // console.log(url);
+  //       } catch (error) {
+  //         console.error('Failed to process image:', error);
+  //       }
+  //     }
+  //   }
 
-    // 수정된 HTML 반환
-    return doc.body.innerHTML;
-  };
+  //   // 수정된 HTML 반환
+  //   return doc.body.innerHTML;
+  // };
 
   // useEffect로 textInput이 변경될 때마다 이미지 정보를 출력
   useEffect(() => {
@@ -207,7 +206,6 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
             </S.InputStyleDiv>
           </S.ContentInputDiv>
           <SelectAnother
-            selectedThreeKeywords={selectedThreeKeywords}
             setSelectedThreeKeywords={setSelectedThreeKeywords}
             setConfirmVoice={setConfirmVoice}
             confirmVoice={confirmVoice}
@@ -221,7 +219,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
             selectedThreeKeywords={selectedThreeKeywords}
             imageCount={imageCount}
             confirmVoice={confirmVoice}
-            firstImg={firstImg}
+            firstImg={firstImg ? firstImg : null}
             mode={mode}
             postId={Number(postId)}
           />

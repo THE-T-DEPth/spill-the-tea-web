@@ -5,12 +5,14 @@ import { postPostReport } from '../../../api/viewDetailSsul/viewDetailContent';
 
 interface BlockModalProps {
   setOpenModal: (value: boolean) => void;
-  postId: number | undefined;
+  setAlreadyComplainModal: (value: boolean) => void;
+  postId: number;
 }
 
 // React.FC를 사용한 ComplainModal 정의
 const ReportPostModal: React.FC<BlockModalProps> = ({
   setOpenModal,
+  setAlreadyComplainModal,
   postId,
 }) => {
   const navigate = useNavigate();
@@ -21,16 +23,19 @@ const ReportPostModal: React.FC<BlockModalProps> = ({
 
   //로그인 되면 아마 될거임
   const handleConfirmClick = () => {
+    setOpenModal(false);
+
     const fetchPostReport = async () => {
       try {
-        await postPostReport(1);
+        await postPostReport(postId);
+        navigate('/');
       } catch (error) {
+        setAlreadyComplainModal(true);
         console.log('fetchPostReport 중 오류 발생', error);
         throw error;
       }
     };
     fetchPostReport();
-    navigate('/');
   };
 
   return (

@@ -10,7 +10,7 @@ interface RemoveModalProps {
   selectedThreeKeywords: string[];
   imageCount: number;
   confirmVoice: string;
-  firstImg: File | null;
+  firstImg: string | null;
   mode: string;
   postId: number;
 }
@@ -42,7 +42,8 @@ const PostModal: React.FC<RemoveModalProps> = ({
 
   const handleViewPostClick = () => {
     setOpenPostModal(false); // 모달 닫기
-    window.location.href = '/';
+    // window.location.href = `/viewDetailSsul/${postId}`;
+    window.location.href = `/`;
   };
 
   const handlePost = () => {
@@ -50,6 +51,13 @@ const PostModal: React.FC<RemoveModalProps> = ({
     postInProgress.current = true;
 
     const fetchPostWrite = async () => {
+      console.log(
+        titleInput,
+        textInput,
+        selectedThreeKeywords,
+        confirmVoice,
+        firstImg
+      );
       try {
         setIsPosting(true);
         if (mode == 'write') {
@@ -58,7 +66,7 @@ const PostModal: React.FC<RemoveModalProps> = ({
             textInput,
             selectedThreeKeywords,
             confirmVoice,
-            firstImg
+            firstImg ? firstImg : null
           );
           setSuccess(true);
         } else if (mode == 'edit') {
@@ -68,7 +76,7 @@ const PostModal: React.FC<RemoveModalProps> = ({
             textInput,
             selectedThreeKeywords,
             confirmVoice,
-            firstImg
+            firstImg ? firstImg : null
           );
           setSuccess(true);
         }
@@ -139,9 +147,7 @@ const PostModal: React.FC<RemoveModalProps> = ({
         // 성공하지 못했을 때
         <S.Modal>
           <S.CloseBtn src={Close} onClick={() => setOpenPostModal(false)} />
-          <S.ModalText>
-            저작권에 위반되는 이미지가 포함되어 있습니다.
-          </S.ModalText>
+          <S.ModalText>게시에 실패했습니다.</S.ModalText>
           <S.ButtonDiv>
             <S.ConfirmButton onClick={handleOkayClick}>확인</S.ConfirmButton>
           </S.ButtonDiv>

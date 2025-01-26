@@ -3,31 +3,31 @@ import * as S from '../../styles/Layout/LayoutStyle';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import NavBar from '../layout/NavBar';
-import { useLocation } from "react-router-dom";
-import useNSMediaQuery from "../../hooks/useNSMediaQuery";
+import { useLocation } from 'react-router-dom';
+import useNSMediaQuery from '../../hooks/useNSMediaQuery';
 import YellowNav from './YellowNav';
 import WriteNav from './WriteNav';
 
 interface LayoutProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-	const { isMobile } = useNSMediaQuery();
+  const { isMobile } = useNSMediaQuery();
 
-	const excludedPaths = [
-		"/login",
-		"/find-password",
-		"/certification-number",
-		"/temporary-password",
-		"/change-password",
-		"/signup-email",
-		"/signup",
-		"/signupdone",
-	];
-  
-	const shouldHideNavBar = excludedPaths.includes(location.pathname);
+  const excludedPaths = [
+    '/login',
+    '/find-password',
+    '/certification-number',
+    '/temporary-password',
+    '/change-password',
+    '/signup-email',
+    '/signup',
+    '/signupdone',
+  ];
+
+  const shouldHideNavBar = excludedPaths.includes(location.pathname);
   const isWritePage = location.pathname === '/write';
   const isEditPage = /^\/edit\/\d+$/.test(location.pathname);
 
@@ -35,12 +35,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <S.Container
       style={{ minWidth: isWritePage || isEditPage ? '1400px' : '' }}>
       {/* 헤더는 PC에서는 항상 표시 */}
-			{(!isMobile || !shouldHideNavBar) && <Header />}
-    
+      {(!isMobile || !shouldHideNavBar) && <Header />}
+
       {/* 네비게이션 바 */}
-			{!shouldHideNavBar && location.pathname !== "/mypage" && location.pathname !== "/write" && !/^\/edit\/\d+$/.test(location.pathname) && (
-				<NavBar />
-			)}
+      {!shouldHideNavBar &&
+        location.pathname !== '/mypage' &&
+        location.pathname !== '/write' &&
+        !/^\/edit\/\d+$/.test(location.pathname) && <NavBar />}
 
       {isWritePage || isEditPage ? <WriteNav /> : <></>}
       <YellowNav />

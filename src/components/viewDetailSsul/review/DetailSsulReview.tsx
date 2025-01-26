@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import Send from '../../../assets/images/CombinedShape.svg';
 import Review from './Review';
+import Fire from '../../../assets/images/Fire.png';
 import {
   getComment,
   postComment,
@@ -9,6 +10,7 @@ import {
 
 interface Comment {
   commentId: number;
+  mine: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -20,6 +22,7 @@ interface Comment {
 
 interface Reply {
   commentId: number;
+  mine: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -55,22 +58,63 @@ const DetailSsulReview: React.FC<{
       try {
         await postComment(postId, input);
       } catch (error) {
-        console.log('postComment 중 오류 발생', error);
+        console.log('fetchPostComment 중 오류 발생', error);
       }
     };
     fetchPostComment();
     setInput('');
   };
 
+  const onSubmitClick = (e: any) => {
+    if (e.key === 'Enter') {
+      if (!input.trim()) {
+        alert('댓글 내용을 입력해주세요!');
+        return;
+      }
+
+      const fetchPostComment = async () => {
+        try {
+          await postComment(postId, input);
+        } catch (error) {
+          console.log('fetchPostComment 중 오류 발생', error);
+        }
+      };
+
+      fetchPostComment(); // if 조건 안에서 호출되도록 수정
+      setInput('');
+    }
+  };
+
   useEffect(() => {
     const fetchComment = async () => {
       try {
         const data = await getComment(postId);
-        setComments(data.data);
+        const fire = (
+          <img src={Fire} style={{ width: '13px', height: '13px' }} />
+        );
+        const modifiedComments = data.data.map(
+          (comment: Comment, index: number) => {
+            // 처음 3개의 댓글에 불꽃 이모지를 추가
+            if (index < 3) {
+              return {
+                ...comment,
+                content: (
+                  <>
+                    {fire} &nbsp; {comment.content}
+                  </>
+                ),
+              };
+            }
+            // 나머지는 그대로
+            return comment;
+          }
+        );
+        setComments(modifiedComments); // 전체 데이터를 설정
       } catch (error) {
         console.log('fetchComment 오류 발생', error);
       }
     };
+
     fetchComment();
   }, [postId, handleSubmitClick]);
 
@@ -82,6 +126,7 @@ const DetailSsulReview: React.FC<{
           <S.DSRInput
             placeholder='댓글을 입력하세요.'
             onChange={(e) => handleInputValue(e)}
+            onKeyUp={onSubmitClick}
             value={input}
           />
           <S.DSRSendImg src={Send} onClick={handleSubmitClick} />
@@ -98,6 +143,7 @@ const DetailSsulReview: React.FC<{
                   setCommentId={setCommentId}
                   comment={comment}
                   id={index}
+                  postId={postId}
                 />
               </S.DSREachCommentDiv>
             )

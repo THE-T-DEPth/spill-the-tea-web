@@ -9,17 +9,20 @@ import { useParams } from 'react-router-dom';
 import EditModal from '../components/viewDetailSsul/modal/EditModal';
 import ReportPostModal from '../components/viewDetailSsul/modal/ReportPostModal';
 import BlockUserModal from '../components/viewDetailSsul/modal/BlockUserModal';
+import AlreadyComplainModal from '../components/viewDetailSsul/modal/AlreadyComplainModal';
 
 const ViewDetailSsulPage = () => {
   const { postId } = useParams<{ postId: string }>();
   const [commentId, setCommentId] = useState<number>(0);
-  const [blcokEmail, setBlockEmail] = useState<string>('');
+  const [memberId, setMemberId] = useState<number>(0);
   const [isRemoveModal, setIsRemoveModal] = useState<boolean>(false);
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
   const [isReportModal, setIsReportModal] = useState<boolean>(false);
   const [isBlockModal, setIsBlockModal] = useState<boolean>(false);
   const [isComplainModalOpen, setIsComplainModalOpen] =
-    useState<boolean>(false); // 모달 상태 관리
+    useState<boolean>(false);
+  const [isAlreadyComaplainModalOpen, setiIsAlreadyComaplainModalOpen] =
+    useState<boolean>(false);
 
   return (
     <>
@@ -35,7 +38,7 @@ const ViewDetailSsulPage = () => {
             setIsReportModal={setIsReportModal}
             setIsBlockModal={setIsBlockModal}
             postId={Number(postId)}
-            setBlockEmail={setBlockEmail}
+            setMemberId={setMemberId}
           />
           {/*content 내용*/}
           <DetailSsulReview
@@ -48,6 +51,7 @@ const ViewDetailSsulPage = () => {
       </S.DSDiv>
       {isComplainModalOpen && (
         <ComplainModal
+          setAlreadyComplainModal={setiIsAlreadyComaplainModalOpen}
           setComplainModal={setIsComplainModalOpen}
           commentId={commentId}
         />
@@ -60,18 +64,17 @@ const ViewDetailSsulPage = () => {
       )}
       {isReportModal && (
         <ReportPostModal
+          setAlreadyComplainModal={setiIsAlreadyComaplainModalOpen}
           setOpenModal={setIsReportModal}
           postId={Number(postId)}
         />
       )}
       {isBlockModal && (
-        <BlockUserModal
-          setOpenModal={setIsBlockModal}
-          postId={Number(postId)}
-          blockEmail={blcokEmail}
-        />
+        <BlockUserModal setOpenModal={setIsBlockModal} memberId={memberId} />
       )}
-      {/* 모달 렌더링 */}
+      {isAlreadyComaplainModalOpen && (
+        <AlreadyComplainModal setOpenModal={setiIsAlreadyComaplainModalOpen} />
+      )}
     </>
   );
 };

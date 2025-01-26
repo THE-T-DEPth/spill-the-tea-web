@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import * as S from "../../styles/Home/MakeTeaButtonStyle";
 import LeafIcon from "../../assets/icons/Leaf.svg";
@@ -16,26 +17,16 @@ const MakeTeaButton: React.FC = () => {
 		setIsLoggedIn(!!token);
 	}, []);
 
-
-	const handleButtonClick = () => {
-		if (isLoggedIn) {
-			navigate("/write");
-		} else {
-			setIsModalVisible(true);
-		}
-	};
-
-	return (
-		<>
-			<S.ButtonContainer onClick={handleButtonClick}>
-				<S.Leaf src={LeafIcon} alt="Leaf Icon" />
-				티 만들기
-			</S.ButtonContainer>
-			{isModalVisible && (
-				<LoginRequestModal onCancel={() => setIsModalVisible(false)} />
-			)}
-		</>
-	);
+  return (
+    <>
+      <S.ButtonContainer onClick={handleButtonClick}>
+        <S.Leaf src={LeafIcon} alt='Leaf Icon' />티 만들기
+      </S.ButtonContainer>
+      {isModalVisible && (
+        <LoginRequestModal onCancel={() => setIsModalVisible(false)} />
+      )}
+    </>
+  );
 };
 
 export default MakeTeaButton;
