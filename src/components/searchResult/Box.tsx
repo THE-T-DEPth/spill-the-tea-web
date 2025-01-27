@@ -6,7 +6,7 @@ import Like from '../../assets/images/like.svg';
 import Comment from '../../assets/images/comment.svg';
 import DisableComment from '../../assets/Icons/DisableComment.svg';
 import { useNavigate } from 'react-router-dom';
-import emptyLike from '../../assets/images/emptyLike.svg';
+import emptyLike from '../../assets/Images/emptyLike.svg';
 
 type Keyword = string;
 
