@@ -1,5 +1,5 @@
 import * as S from '../../../styles/ViewDetailSsul/modal/ComplainModalComponentStyle';
-import Close from '../../../assets/images/Close.svg';
+import Close from '../../../assets/Images/Close.svg';
 import { useNavigate } from 'react-router-dom';
 import { postPostReport } from '../../../api/viewDetailSsul/viewDetailContent';
 

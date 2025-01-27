@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Play from '../../../assets/images/Play.svg';
-import Playing from '../../../assets/images/Playing.svg';
+import Play from '../../../assets/Images/Play.svg';
+import Playing from '../../../assets/Images/Playing.svg';
 import * as S from '../../../styles/Write/SelectAnotherComponentStyle';
 import { postTTS } from '../../../api/write/tts';
 

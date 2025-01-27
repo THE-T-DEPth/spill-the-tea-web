@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
-import Send from '../../../assets/images/CombinedShape.svg';
+import Send from '../../../assets/Images/CombinedShape.svg';
 import Review from './Review';
-import Fire from '../../../assets/images/Fire.png';
+import Fire from '../../../assets/Images/Fire.png';
 import {
   getComment,
   postComment,

@@ -1,6 +1,6 @@
 import * as S from '../styles/Write/WritePageComponentStyle';
 import DownArrow from '../assets/Images/ArrowDown.png';
-import ArrowUp from '../assets/Images/ArrowDown.png';
+import ArrowUp from '../assets/Images/ArrowUp.png';
 import { useEffect, useState } from 'react';
 import SelectAnother from '../components/write/selectAnother/SelectAnother';
 import CommunityGuide from '../components/write/selectAnother/CommunityGuide';

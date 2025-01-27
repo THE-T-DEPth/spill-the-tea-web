@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from '../../styles/searchResult/BoxStyle';
-import Vector from '../../assets/images/time.svg';
+import Vector from '../../assets/Images/time.svg';
 import DisableClock from '../../assets/Icons/DisableClock.svg';
-import Like from '../../assets/images/like.svg';
-import Comment from '../../assets/images/comment.svg';
+import Like from '../../assets/Images/like.svg';
+import Comment from '../../assets/Images/comment.svg';
 import DisableComment from '../../assets/Icons/DisableComment.svg';
 import { useNavigate } from 'react-router-dom';
 import emptyLike from '../../assets/Images/emptyLike.svg';

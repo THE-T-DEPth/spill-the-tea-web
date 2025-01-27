@@ -1,11 +1,11 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulContentComponentStyle';
-import Speaker from '../../../assets/images/VolumeUp.svg';
-import FullHeart from '../../../assets/images/FullHeart.svg';
-import EmptyHeart from '../../../assets/images/EmptyHeart.svg';
-import Comment from '../../../assets/images/GrayComment.svg';
-import Share from '../../../assets/images/Share.svg';
-import Menu from '../../../assets/images/FixMenu.svg';
-import Profile from '../../../assets/images/Profile.svg';
+import Speaker from '../../../assets/Images/VolumeUp.svg';
+import FullHeart from '../../../assets/Images/FullHeart.svg';
+import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
+import Comment from '../../../assets/Images/GrayComment.svg';
+import Share from '../../../assets/Images/Share.svg';
+import Menu from '../../../assets/Images/FixMenu.svg';
+import Profile from '../../../assets/Images/Profile.svg';
 import { useEffect, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';

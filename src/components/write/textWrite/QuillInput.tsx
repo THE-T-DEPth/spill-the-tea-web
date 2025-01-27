@@ -1,8 +1,8 @@
 import ReactQuill from 'react-quill';
 import * as S from '../../../styles/Write/QuillInputComponentStyle';
-import Bold from '../../../assets/images/Bold.svg';
-import Italic from '../../../assets/images/Italic.svg';
-import Underline from '../../../assets/images/Underline.svg';
+import Bold from '../../../assets/Images/Bold.svg';
+import Italic from '../../../assets/Images/Italic.svg';
+import Underline from '../../../assets/Images/Underline.svg';
 import React, { useRef } from 'react';
 
 interface QuillProps {
