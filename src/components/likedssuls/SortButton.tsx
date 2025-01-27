@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import * as S from '../../styles/likedssuls/SortButtonStyle';
-import AsendingIcon from '../../assets/Images/asending icon.svg';
-import DesendingIcon from '../../assets/Images/descending.svg';
-import DropdownIcon from '../../assets/Images/dropdown.svg';
+import AsendingIcon from '../../assets/Images/AscendingIcon.svg';
+import DesendingIcon from '../../assets/Images/Desc.svg';
+import DropdownIcon from '../../assets/Images/DownArrow.svg';
 import DropdownOpen from '../../assets/Icons/DropdownOpen.svg';
 
 const sortOptions = {
