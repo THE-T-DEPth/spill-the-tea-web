@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import * as S from "../../styles/myPage/ConfirmationModalStyle";
-import CloseIcon from "../../assets/images/closeIcon.svg";
-import { ModalProps } from "../../types/myPage/ModalProps";
+import React, { useEffect } from 'react';
+import * as S from '../../styles/myPage/ConfirmationModalStyle';
+import CloseIcon from '../../assets/Images/closeIcon.svg';
+import { ModalProps } from '../../types/myPage/ModalProps';
 
 const ConfirmationModal: React.FC<ModalProps> = ({
   onClose,
@@ -9,9 +9,9 @@ const ConfirmationModal: React.FC<ModalProps> = ({
   onConfirm,
 }) => {
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, []);
 
@@ -19,7 +19,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
     <S.Container>
       <S.ModalContainer>
         <S.CloseIcon onClick={onClose}>
-          <img src={CloseIcon} alt="close icon" />
+          <img src={CloseIcon} alt='close icon' />
         </S.CloseIcon>
         <S.ModalContent>
           <S.ModalMessage>{message}</S.ModalMessage>

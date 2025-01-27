@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
-import FullHeart from '../../../assets/images/FullHeart.svg';
-import Send from '../../../assets/images/CombinedShape.svg';
+import FullHeart from '../../../assets/Images/FullHeart.svg';
+import Send from '../../../assets/Images/CombinedShape.svg';
 import ReReview from './ReReview';
 import {
   deleteComment,
   postComment,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
-import Profile from '../../../assets/images/Profile.svg';
-import ArrowSmall from '../../../assets/images/Arrow_small.svg';
-import ArrowUpSmall from '../../../assets/images/ArrowUp_small.svg';
+import Profile from '../../../assets/Images/Profile.svg';
+import ArrowSmall from '../../../assets/Images/Arrow_small.svg';
+import ArrowUpSmall from '../../../assets/Images/ArrowUp.png';
 
 interface Comment {
   commentId: number;

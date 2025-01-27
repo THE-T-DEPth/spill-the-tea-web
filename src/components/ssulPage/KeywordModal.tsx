@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/ssulPage/KeywordModalStyle';
-import CloseIcon from '../../assets/images/closeIcon.svg';
+import CloseIcon from '../../assets/Images/closeIcon.svg';
 import CategoryBar from './CategoryBar';
 import SelectedKeywordsBar from './SelectedKeywordsBar';
 

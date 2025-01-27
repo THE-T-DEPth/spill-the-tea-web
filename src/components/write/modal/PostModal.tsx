@@ -1,5 +1,5 @@
 import * as S from '../../../styles/Write/PostModalComponentStyle';
-import Close from '../../../assets/images/Close.svg';
+import Close from '../../../assets/Images/Close.svg';
 import { postWrite, putWrite } from '../../../api/write/writePost';
 import { useEffect, useRef, useState } from 'react';
 

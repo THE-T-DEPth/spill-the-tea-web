@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import LeftArrow from '../../assets/images/left.svg';
-import RightArrow from '../../assets/images/right.svg';
-import LeftArrowDisable from '../../assets/images/leftdisable.svg';
-import RightArrowDisable from '../../assets/images/rightdisable.svg';
+import LeftArrow from '../../assets/Images/Left.png';
+import RightArrow from '../../assets/Images/Right.png';
+import LeftArrowDisable from '../../assets/Images/LeftDisable.png';
+import RightArrowDisable from '../../assets/Images/RightDisable.png';
 import * as S from '../../styles/searchResult/PaginationStyle';
 
 interface PaginationProps {

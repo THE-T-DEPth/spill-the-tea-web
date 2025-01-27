@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Search from '../../../assets/images/Search.svg';
+import Search from '../../../assets/Images/Search.svg';
 import keywordData from '../../../assets/dummy/KeywordDummy';
 import * as S from '../../../styles/Write/SelectAnotherComponentStyle';
 import KeywordModal from '../modal/KeywordModal';

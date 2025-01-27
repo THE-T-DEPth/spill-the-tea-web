@@ -1,5 +1,5 @@
 import * as S from '../../../styles/Write/KeywordModalComponentStyle';
-import Close from '../../../assets/images/Close.svg';
+import Close from '../../../assets/Images/Close.svg';
 
 interface KeywordModalProps {
   setOpenModal: (value: boolean) => void;

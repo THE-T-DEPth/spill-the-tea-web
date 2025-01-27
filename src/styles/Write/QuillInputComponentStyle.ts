@@ -1,12 +1,12 @@
-import Bold from "../../assets/images/Bold.svg";
-import Italic from "../../assets/images/Italic.svg";
-import Underline from "../../assets/images/Underline.svg";
-import Centerline from "../../assets/images/CenterLine.svg";
-import Color from "../../assets/images/Color.svg";
-import DropDown from "../../assets/images/dropdown.svg";
-import UpArrow from "../../assets/images/UpArrow.svg";
-import styled from "styled-components";
-import ReactQuill from "react-quill";
+import Bold from '../../assets/Images/Bold.svg';
+import Italic from '../../assets/Images/Italic.svg';
+import Underline from '../../assets/Images/Underline.svg';
+import Centerline from '../../assets/Images/CenterLine.svg';
+import Color from '../../assets/Images/Color.svg';
+import DropDown from '../../assets/Images/ArrowDown.png';
+import UpArrow from '../../assets/Images/ArrowUp.png';
+import styled from 'styled-components';
+import ReactQuill from 'react-quill';
 
 export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
   .ql-editor img {
@@ -90,7 +90,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   //기본 폰트와 크기
   .ql-container {
-    font-family: "Nanum Gothic";
+    font-family: 'Nanum Gothic';
     font-size: 15px;
     line-height: 1.5; // 줄 간격
     background-color: white; // 배경색
@@ -333,40 +333,40 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   //font import
   @font-face {
-    font-family: "Nanum Gothic";
+    font-family: 'Nanum Gothic';
     font-style: normal;
     font-weight: normal;
     src:
-      url("https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2")
-        format("woff2"),
-      url("https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff")
-        format("woff");
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff')
+        format('woff');
   }
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.eot");
-    src: url("https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.woff")
-      format("woff");
+    font-family: 'NanumMyeongjo';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.eot');
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.woff')
+      format('woff');
     font-style: normal;
     font-weight: normal;
   }
 
   @font-face {
-    font-family: "BMDOHYEON";
-    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff")
-      format("woff");
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+      format('woff');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
-    font-family: "Nanum Pen Script";
+    font-family: 'Nanum Pen Script';
     font-style: normal;
     font-weight: 400;
     src:
-      url("https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff2")
-        format("woff2"),
-      url("https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff")
-        format("woff");
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff2')
+        format('woff2'),
+      url('https://fonts.gstatic.com/ea/nanumpenscript/v2/NanumPenScript-Regular.woff')
+        format('woff');
   }
 
   ////////////////////////////////////////////// 폰트 설정 ///////////////////////////
@@ -377,9 +377,9 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-label[data-value="nanumgothic"]::before {
+    .ql-picker-label[data-value='nanumgothic']::before {
     font-family: Nanum Gothic;
-    content: "나눔고딕";
+    content: '나눔고딕';
   }
   /* Set effect font-families */
   .ql-font-nanumgothic {
@@ -388,16 +388,16 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-item[data-value="nanumgothic"]::before {
+    .ql-picker-item[data-value='nanumgothic']::before {
     font-family: Nanum Gothic;
-    content: "나눔고딕";
+    content: '나눔고딕';
   }
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-label[data-value="nanummyeongjo"]::before {
+    .ql-picker-label[data-value='nanummyeongjo']::before {
     font-family: NanumMyeongjo;
-    content: "나눔 명조";
+    content: '나눔 명조';
   }
   /* Set effect font-families */
   .ql-font-nanummyeongjo {
@@ -406,30 +406,30 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-item[data-value="nanummyeongjo"]::before {
+    .ql-picker-item[data-value='nanummyeongjo']::before {
     font-family: NanumMyeongjo;
-    content: "나눔 명조";
+    content: '나눔 명조';
   }
 
-  .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="dohyeon"]::before {
+  .ql-snow .ql-picker.ql-font .ql-picker-label[data-value='dohyeon']::before {
     font-family: BMDOHYEON;
-    content: "도 혜온";
+    content: '도 혜온';
   }
   /* Set effect font-families */
   .ql-font-dohyeon {
     font-family: BMDOHYEON;
   }
 
-  .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="dohyeon"]::before {
+  .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='dohyeon']::before {
     font-family: BMDOHYEON;
-    content: "도 혜온";
+    content: '도 혜온';
   }
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-label[data-value="nanumpenscript"]::before {
+    .ql-picker-label[data-value='nanumpenscript']::before {
     font-family: Nanum Pen Script;
-    content: "나눔 펜 스크립트";
+    content: '나눔 펜 스크립트';
   }
   /* Set effect font-families */
   .ql-font-nanumpenscript {
@@ -438,9 +438,9 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-snow
     .ql-picker.ql-font
-    .ql-picker-item[data-value="nanumpenscript"]::before {
+    .ql-picker-item[data-value='nanumpenscript']::before {
     font-family: Nanum Pen Script;
-    content: "나눔 펜 스크립트";
+    content: '나눔 펜 스크립트';
   }
 
   ///////////////////////////////////////////폰트 크기 설정////////////////////////////////////
@@ -449,33 +449,33 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
     padding: 20px;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="15px"]::before {
-    content: "15";
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='15px']::before {
+    content: '15';
     font-size: 15px !important;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="15px"]::before {
-    content: "15";
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='15px']::before {
+    content: '15';
     font-size: 15px !important;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="28px"]::before {
-    content: "28";
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='28px']::before {
+    content: '28';
     font-size: 15px !important;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="28px"]::before {
-    content: "28";
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='28px']::before {
+    content: '28';
     font-size: 28px !important;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="38px"]::before {
-    content: "38";
+  .ql-snow .ql-picker.ql-size .ql-picker-label[data-value='38px']::before {
+    content: '38';
     font-size: 15px !important;
   }
 
-  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="38px"]::before {
-    content: "38";
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value='38px']::before {
+    content: '38';
     font-size: 38px !important;
   }
 `;
