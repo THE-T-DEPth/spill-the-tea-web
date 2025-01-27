@@ -41,24 +41,26 @@ const KeywordModal: React.FC<KeywordModalProps> = ({
 
   // 키워드 추가
   const handleAddTempKeyword = (keyword: string) => {
-    if (
-      tempSelectedKeywords.length < 5 &&
-      !tempSelectedKeywords.includes(keyword)
-    ) {
-      setTempSelectedKeywords((prev) => [...prev, keyword]);
-    }
+    const cleanedKeyword = keyword.replace(/^#\s*/, ''); // # 제거
+    setTempSelectedKeywords((prev) => {
+      if (prev.includes(cleanedKeyword)) {
+        // 이미 존재하면 제거
+        return prev.filter((k) => k !== cleanedKeyword);
+      } else {
+        // 존재하지 않으면 추가 (최대 5개까지)
+        if (prev.length < 5) {
+          return [...prev, cleanedKeyword];
+        }
+        return prev;
+      }
+    });
   };
 
-  // 키워드 제거
-  const handleRemoveTempKeyword = (keyword: string) => {
-    setTempSelectedKeywords((prev) => prev.filter((k) => k !== keyword));
-  };
-
-  // 저장 버튼 클릭
+  // 저장 버튼 클릭시 실행
   const handleSave = () => {
     if (tempSelectedKeywords.length > 0) {
-      tempSelectedKeywords.forEach((keyword) => addKeyword(keyword));
-      setTempSelectedKeywords([]);
+      selectedKeywords.forEach((keyword) => addKeyword(keyword)); // 기존 키워드 제거
+      tempSelectedKeywords.forEach((keyword) => addKeyword(keyword)); // 새 키워드 추가
       onClose();
     }
   };
@@ -66,7 +68,6 @@ const KeywordModal: React.FC<KeywordModalProps> = ({
   // 취소 버튼 클릭
   const handleCancel = () => {
     setTempSelectedKeywords([]); // 임시 배열 초기화
-    onClose();
   };
 
   if (!isOpen) return null;
@@ -82,7 +83,6 @@ const KeywordModal: React.FC<KeywordModalProps> = ({
         <S.CategoryBarContainer>
           <CategoryBar
             addKeyword={handleAddTempKeyword}
-            removeKeyword={handleRemoveTempKeyword}
             selectedKeywords={tempSelectedKeywords}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}

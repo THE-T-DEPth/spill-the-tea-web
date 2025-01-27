@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from '../../styles/ssulPage/CategoryBarStyle';
 import CategorySelector from './CategorySelector';
 import Keyword from './Keyword';
@@ -67,8 +67,7 @@ const Keywords: Record<string, string[]> = {
 };
 
 interface CategoryBarProps {
-  addKeyword: (keyword: string) => void; // 선택된 키워드 추가 함수
-  removeKeyword: (keyword: string) => void; // 선택된 키워드 제거 함수
+  addKeyword: (keyword: string) => void; // 선택된 키워드 추가,제거 함수
   selectedKeywords: string[]; // 선택된 키워드 리스트
   selectedCategory: string; // 현재 선택된 카테고리
   setSelectedCategory: (category: string) => void; // 카테고리 변경 함수
@@ -78,28 +77,9 @@ interface CategoryBarProps {
 const CategoryBar: React.FC<CategoryBarProps> = ({
   selectedCategory,
   setSelectedCategory,
-  onKeywordChange,
+  selectedKeywords,
+  addKeyword,
 }) => {
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-
-  // 키워드 추가 함수
-  const addKeyword = (keyword: string) => {
-    if (selectedKeywords.length < 5 && !selectedKeywords.includes(keyword)) {
-      const updatedKeywords = [...selectedKeywords, keyword.replace('# ', '')];
-      setSelectedKeywords(updatedKeywords);
-      onKeywordChange(updatedKeywords); // 부모 컴포넌트로 선택된 키워드 전달
-    }
-  };
-
-  // 키워드 제거 함수
-  const removeKeyword = (keyword: string) => {
-    const updatedKeywords = selectedKeywords.filter(
-      (item) => item !== keyword.replace('# ', '')
-    );
-    setSelectedKeywords(updatedKeywords);
-    onKeywordChange(updatedKeywords); // 부모 컴포넌트로 변경된 키워드 전달
-  };
-
   return (
     <S.Container>
       <S.CategorySelectorContainer>
@@ -115,7 +95,6 @@ const CategoryBar: React.FC<CategoryBarProps> = ({
             key={index}
             keyword={keyword}
             addKeyword={addKeyword}
-            removeKeyword={removeKeyword}
             isSelected={selectedKeywords.includes(keyword.replace('# ', ''))}
           />
         ))}

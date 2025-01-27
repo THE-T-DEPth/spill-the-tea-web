@@ -14,6 +14,8 @@ const SelectedKeywordsBar: React.FC<SelectedKeywordsBarProps> = ({
 }) => {
   const { isMobile } = useNSMediaQuery();
 
+  console.log('전달된 키워드:', selectedKeywords);
+
   return (
     <S.Container $isInModal={isInModal}>
       {isMobile && !isInModal ? null : (
@@ -26,7 +28,7 @@ const SelectedKeywordsBar: React.FC<SelectedKeywordsBarProps> = ({
         {selectedKeywords.map((keyword, index) => (
           <SelectedKeyword
             key={index}
-            keyword={keyword}
+            keyword={`# ${keyword}`}
             isInModal={isInModal}
           />
         ))}

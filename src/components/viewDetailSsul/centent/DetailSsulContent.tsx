@@ -9,6 +9,8 @@ import Profile from '../../../assets/images/Profile.svg';
 import { useEffect, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';
+import { useNavigate } from 'react-router-dom';
+
 import {
   DeleteLike,
   getLike,
@@ -59,6 +61,7 @@ const DetailSsulContent: React.FC<{
   const [token, setToken] = useState<string | null>();
   const [view, setView] = useState<boolean>(false);
   const [myPost, setMyPost] = useState<boolean>();
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     setIsEditModal(true);
@@ -100,16 +103,7 @@ const DetailSsulContent: React.FC<{
   };
 
   const handleKeywordClick = (keyword: string) => {
-    const fetchKeywordResult = async () => {
-      try {
-        const response = await getKeywordResult(keyword);
-        console.log(response.data.contents);
-      } catch (error) {
-        console.log('fetchKeywordResult 중 오류 발생', error);
-        throw error;
-      }
-    };
-    fetchKeywordResult();
+    navigate('/ssulpage', { state: { newKeyword: keyword } });
   };
 
   const handlePlay = async () => {
@@ -409,7 +403,11 @@ const DetailSsulContent: React.FC<{
           <S.DSCTagDiv>
             {postDetail?.keywordList ? (
               postDetail.keywordList.map((value, index) => (
-                <S.DSCEachTag key={index}># {value}</S.DSCEachTag>
+                <S.DSCEachTag
+                  key={index}
+                  onClick={() => handleKeywordClick(value)}>
+                  # {value}
+                </S.DSCEachTag>
               ))
             ) : (
               <p>로딩 중...</p>
