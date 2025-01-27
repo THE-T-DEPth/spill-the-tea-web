@@ -3,7 +3,7 @@ import * as S from '../../styles/searchResult/BoxStyle';
 import Vector from '../../assets/Images/Clock.png';
 import DisableClock from '../../assets/Icons/DisableClock.svg';
 import Like from '../../assets/Images/FullHeart.svg';
-import Comment from '../../assets/Images/comment.svg';
+import Comment from '../../assets/Images/Comment.png';
 import DisableComment from '../../assets/Icons/DisableComment.svg';
 import { useNavigate } from 'react-router-dom';
 import emptyLike from '../../assets/Images/emptyLike.svg';
