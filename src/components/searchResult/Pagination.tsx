@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LeftArrow from '../../assets/Images/left.svg';
+import LeftArrow from '../../assets/Images/Left.png';
 import RightArrow from '../../assets/Images/right.svg';
 import LeftArrowDisable from '../../assets/Images/leftdisable.svg';
 import RightArrowDisable from '../../assets/Images/rightdisable.svg';
