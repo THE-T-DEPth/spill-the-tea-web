@@ -18,7 +18,6 @@ import {
   getPostDetail,
   postLike,
 } from '../../../api/viewDetailSsul/viewDetailContent';
-import { getKeywordResult } from '../../../api/viewDetailSsul/viewDetailKeyword';
 import { postTTS } from '../../../api/write/tts';
 
 interface PostDetail {
