@@ -3,8 +3,8 @@ import Italic from '../../assets/Images/Italic.svg';
 import Underline from '../../assets/Images/Underline.svg';
 import Centerline from '../../assets/Images/CenterLine.svg';
 import Color from '../../assets/Images/Color.svg';
-import DropDown from '../../assets/Images/dropdown.svg';
-import UpArrow from '../../assets/Images/UpArrow.svg';
+import DropDown from '../../assets/Images/ArrowDown.png';
+import UpArrow from '../../assets/Images/ArrowUp.png';
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 
