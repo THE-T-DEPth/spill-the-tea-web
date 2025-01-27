@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/Home/MakeTeaButtonStyle';
-import LeafIcon from '../../assets/icons/Leaf.svg';
+import LeafIcon from '../../assets/Icons/Leaf.svg';
 import LoginRequestModal from './LoginRequestModal';
 import { useNavigate } from 'react-router-dom';
 
