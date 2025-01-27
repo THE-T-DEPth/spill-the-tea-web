@@ -1,5 +1,5 @@
 import * as S from '../styles/Write/WritePageComponentStyle';
-import DownArrow from '../assets/images/DownArrow.svg';
+import DownArrow from '../assets/Images/ArrowDown.png';
 import UpArrow from '../assets/images/UpArrow.svg';
 import { useEffect, useState } from 'react';
 import SelectAnother from '../components/write/selectAnother/SelectAnother';
