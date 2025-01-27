@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from '../../styles/searchResult/BoxStyle';
-import Vector from '../../assets/Images/time.svg';
+import Vector from '../../assets/Images/Clock.png';
 import DisableClock from '../../assets/Icons/DisableClock.svg';
 import Like from '../../assets/Images/like.svg';
 import Comment from '../../assets/Images/comment.svg';
