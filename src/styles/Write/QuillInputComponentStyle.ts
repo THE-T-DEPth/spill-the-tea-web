@@ -1,8 +1,8 @@
-import Bold from '../../assets/Images/Bold.svg';
-import Italic from '../../assets/Images/Italic.svg';
-import Underline from '../../assets/Images/Underline.svg';
-import Centerline from '../../assets/Images/CenterLine.svg';
-import Color from '../../assets/Images/Color.svg';
+import Bold from '../../assets/Images/Bold.png';
+import Italic from '../../assets/Images/Italic.png';
+import Underline from '../../assets/Images/UnderLine.png';
+import Centerline from '../../assets/Images/Strike.png';
+import Color from '../../assets/Images/Color.png';
 import DropDown from '../../assets/Images/ArrowDown.png';
 import UpArrow from '../../assets/Images/ArrowUp.png';
 import styled from 'styled-components';
@@ -172,12 +172,14 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
   //dropdown이 선택되었을 때
   .ql-snow .ql-picker:not(.ql-color-picker).ql-expanded .ql-picker-label {
     background: url(${UpArrow}) no-repeat 75px center;
+    background-size: 20px 20px;
   }
 
   //dropdown이 선택되어있지 않은 상태일 때
   .ql-snow .ql-picker:not(.ql-color-picker) .ql-picker-label {
     stroke: black;
-    background: url(${DropDown}) no-repeat 80px center;
+    background: url(${DropDown}) no-repeat 75px center;
+    background-size: 20px 20px;
   }
 
   ////////////////////////////////////////기존 stroke 관리//////////////////////////////
@@ -240,6 +242,9 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
   .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke {
     stroke: currentColor;
   }
+  .ql-snow.ql-toolbar .ql-picker-label:hover {
+    color: black;
+  }
 
   /////////////////////////////////////////color picker options(컬러 12개 표시)//////////////////////////////////////
 
@@ -285,6 +290,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-toolbar .ql-bold {
     background: url(${Bold}) no-repeat center center;
+    background-size: 24px 24px;
     width: 24px;
     height: 24px;
     margin: auto 20px;
@@ -292,6 +298,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-toolbar .ql-italic {
     background: url(${Italic}) no-repeat center center;
+    background-size: 24px 24px;
     width: 24px;
     height: 24px;
     margin: auto 20px;
@@ -299,6 +306,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-toolbar .ql-underline {
     background: url(${Underline}) no-repeat center center;
+    background-size: 24px 24px;
     width: 24px;
     height: 24px;
     margin: auto 20px;
@@ -307,6 +315,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
 
   .ql-toolbar .ql-strike {
     background: url(${Centerline}) no-repeat center center;
+    background-size: 24px 24px;
     width: 24px;
     height: 24px;
     margin: auto 20px;
@@ -315,6 +324,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
   .ql-snow .ql-color-picker {
     margin: auto 20px;
     background: url(${Color}) no-repeat center center;
+    background-size: 12px 14px;
   }
 
   //////////////////active 되었을 때 strike의 stroke 관리(없앰)///////////////////////////////
