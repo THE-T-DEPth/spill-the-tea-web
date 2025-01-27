@@ -1,6 +1,6 @@
 import * as S from '../styles/Write/WritePageComponentStyle';
 import DownArrow from '../assets/Images/ArrowDown.png';
-import UpArrow from '../assets/images/ArrowUp.svg';
+import ArrowUp from '../assets/images/ArrowDown.png';
 import { useEffect, useState } from 'react';
 import SelectAnother from '../components/write/selectAnother/SelectAnother';
 import CommunityGuide from '../components/write/selectAnother/CommunityGuide';
@@ -169,7 +169,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
           <S.CommunityGuideDiv>
             커뮤니티 가이드
             <S.CommunityArrowImg
-              src={openGuide ? UpArrow : DownArrow}
+              src={openGuide ? ArrowUp : DownArrow}
               onClick={handleGuideClick}
             />
           </S.CommunityGuideDiv>
