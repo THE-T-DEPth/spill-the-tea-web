@@ -10,7 +10,7 @@ import {
 } from '../../../api/viewDetailSsul/viewDetailComment';
 import Profile from '../../../assets/Images/Profile.svg';
 import ArrowSmall from '../../../assets/Images/Arrow_small.svg';
-import ArrowUpSmall from '../../../assets/Images/ArrowUp_small.svg';
+import ArrowUpSmall from '../../../assets/Images/ArrowUp.png';
 
 interface Comment {
   commentId: number;
