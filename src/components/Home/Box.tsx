@@ -48,13 +48,14 @@ const Box: React.FC<BoxProps> = ({
 			<S.ImageContainer disabled={disabled}>
 				<S.Image src={image} disabled={disabled} />
 			</S.ImageContainer>
-			<S.Keywords>
+			<S.Keywords hasLongKeyword={keywords.some(keyword => keyword.length >= 4)}>
 				{keywords.map((keyword, index) => (
 					<S.Keyword key={index} disabled={disabled}>
-						{keyword}
+						# {keyword}
 					</S.Keyword>
 				))}
 			</S.Keywords>
+
 			<S.InfoContainer disabled={disabled}>
 				<S.LikeContainer disabled={disabled}>
 					<S.Likes disabled={disabled}>
