@@ -10,7 +10,7 @@ interface LogoutResponse {
 // 로그아웃 API 요청 함수
 export async function logout(): Promise<string | null> {
   try {
-    const accessToken = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
     if (!accessToken || !refreshToken) {
@@ -25,7 +25,7 @@ export async function logout(): Promise<string | null> {
     });
 
     if (response.data.success) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       console.log('로그아웃 성공:', response.data.data.message);
       return response.data.data.message;

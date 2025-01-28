@@ -54,6 +54,7 @@ const EditProfile = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [initialNickname, setInitialNickname] = useState('');
   const [initialProfileImage, setInitialProfileImage] = useState('');
+  const [isProfileImageDeleted, setIsProfileImageDeleted] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +144,7 @@ const EditProfile = () => {
   const handleProfileImageDelete = () => {
     setProfileImage(defaultProflieImg); // 미리보기 제거
     setSelectedImage(null); // 상태 초기화
+    setIsProfileImageDeleted(true);
   };
 
   const handleSave = async () => {
@@ -153,8 +155,10 @@ const EditProfile = () => {
     try {
       if (selectedImage) {
         await changeProfileImage(selectedImage);
-      } else if (profileImage === '') {
+        setIsProfileImageDeleted(false);
+      } else if (isProfileImageDeleted) {
         await deleteProfileImage();
+        setIsProfileImageDeleted(false);
       }
       await putMembersUpdate(nickname, password, checkPassword);
       setInitialNickname(nickname);
@@ -174,6 +178,7 @@ const EditProfile = () => {
     setPasswordError(defaultMessage);
     setCheckPasswordError('');
     setIsMatch(false);
+    setIsProfileImageDeleted(false);
   };
 
   const isDefaultMessage = passwordError === defaultMessage;
