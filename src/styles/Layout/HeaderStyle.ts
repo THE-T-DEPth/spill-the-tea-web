@@ -121,6 +121,7 @@ export const MyIconWrapper = styled.div`
     margin-top: 3px;
     transition: all 0.3s ease-in-out;
     border-radius: 50%;
+    object-fit: cover;
 
     ${isMobile} {
       width: 23.17px;
