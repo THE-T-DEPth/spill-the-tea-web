@@ -168,7 +168,6 @@ export const Likes = styled.span<{ disabled?: boolean }>`
     img {
       width: 9.39px;
       height: 8.61px;
-      padding: 1.41px 0.94px;
     }
   }
 `;
@@ -178,6 +177,10 @@ export const Comments = styled.span<{ disabled?: boolean }>`
   align-items: center;
   gap: 4px;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
+  img {
+    width: 11.67px;
+    height: 11.67px;
+  }
   ${isMobile} {
     gap: 3px;
     img {
@@ -195,7 +198,10 @@ export const TimeContainer = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   align-items: center;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
-
+  img {
+    width: 11.67px;
+    height: 11.67px;
+  }
   ${isMobile} {
     height: 11.17px;
     img {
