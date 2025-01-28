@@ -19,7 +19,7 @@ export async function logout(
       throw new Error('로그아웃 실패: 토큰이 존재하지 않습니다.');
     }
 
-    //로그아웃 요청
+    // 서버 로그아웃 요청
     try {
       const response = await api.delete<LogoutResponse>('/auth/logout', {
         data: {
