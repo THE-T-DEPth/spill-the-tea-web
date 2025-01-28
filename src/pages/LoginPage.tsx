@@ -79,18 +79,20 @@ const LoginPage = () => {
 			}
 		} catch (error) {
 			if (error instanceof AxiosError && error.response) {
-				const errorMessage = error.response.data.message;
+				const { reason } = error.response.data;
 
-				if (errorMessage === "Invalid email") {
-					setEmailError("존재하지 않는 이메일입니다.");
-				} else if (errorMessage === "Invalid password") {
-					setPasswordError("비밀번호가 일치하지 않습니다.");
-				} else {
-					setEmailError("알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+				if (reason.includes("비밀번호가 일치하지 않습니다")) {
+					setPasswordError(reason);
+				} else if (reason.includes("password:must match")) {
+					setPasswordError("비밀번호가 일치하지 않습니다. 형식에 맞게 비밀번호를 입력하세요.");
+				} else if (reason.includes("해당 이메일의 유저를 찾을 수 없습니다")) {
+					setEmailError("해당 이메일은 존재하지 않습니다.");
 				}
+
 			} else {
 				setEmailError("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
 			}
+
 		}
 	};
 
