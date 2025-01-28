@@ -37,8 +37,9 @@ export const Container = styled.div<{ disabled?: boolean }>`
       disabled ? 'var(--G5)' : 'var(--Main3)'};
     transition: all 0.3s ease;
     color: ${({ disabled }) => (disabled ? 'var(--Black)' : 'var(--primary2)')};
-    box-shadow: ${({ disabled }) =>
-      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
+  }
+  &:hover {
+    box-shadow: 0px 4px 17px rgba(38, 130, 42, 0.25);
   }
 
   ${isMobile} {
