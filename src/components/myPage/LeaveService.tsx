@@ -21,10 +21,9 @@ const LeaveService = () => {
     setIsLogoutModalOpen(true);
 
     try {
-      const resultMessage = await logout();
+      const resultMessage = await logout(navigate);
       if (resultMessage) {
         console.log('로그아웃 성공:', resultMessage);
-        navigate('/');
       } else {
         console.error('로그아웃 실패. 다시 시도해주세요.');
       }
