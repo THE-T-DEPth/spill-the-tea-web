@@ -60,7 +60,7 @@ const SignupPage: React.FC = () => {
 		setPassword(input);
 
 		// 비밀번호 유효성 검사: 8~20자, 대소문자, 숫자, 특수문자 포함
-		const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,20}$/;
+		const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,20}$/;
 
 		setIsPasswordValid(passwordRegex.test(input));
 	};
@@ -86,7 +86,7 @@ const SignupPage: React.FC = () => {
 			const response = await postRegisterUser(email, password, name, nickname);
 			if (response.success) {
 				alert('회원가입이 완료되었습니다.');
-				navigate('/signupdone');
+				navigate('/signupdone', { state: { nickname } });
 			}
 		} catch (error) {
 			console.error('회원가입 중 오류 발생:', error);
