@@ -164,6 +164,7 @@ const EditProfile = () => {
       setInitialNickname(nickname);
       setInitialProfileImage(profileImage);
       setSelectedImage(null);
+      window.location.reload();
     } catch (error) {
       console.error('회원 정보 업데이트 중 오류 발생:', error);
     }
