@@ -141,7 +141,7 @@ const EditProfile = () => {
   };
 
   const handleProfileImageDelete = () => {
-    setProfileImage(''); // 미리보기 제거
+    setProfileImage(defaultProflieImg); // 미리보기 제거
     setSelectedImage(null); // 상태 초기화
   };
 
