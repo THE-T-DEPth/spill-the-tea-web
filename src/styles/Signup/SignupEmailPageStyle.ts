@@ -8,10 +8,8 @@ export const Wrapper = styled.div`
   justify-content: center;
   background-color: var(--BackColor);
   transition: all 0.3s ease-in-out;
-  height: calc(100vh - 133px);
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh - 126px);
   }
 `;
 

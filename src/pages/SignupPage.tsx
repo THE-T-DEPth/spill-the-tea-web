@@ -59,7 +59,6 @@ const SignupPage: React.FC = () => {
 		const input = e.target.value;
 		setPassword(input);
 
-		// 비밀번호 유효성 검사: 8~20자, 대소문자, 숫자, 특수문자 포함
 		const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,20}$/;
 
 		setIsPasswordValid(passwordRegex.test(input));
