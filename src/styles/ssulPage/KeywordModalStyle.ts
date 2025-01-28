@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   top: 0;
   left: 0;
   position: fixed;
@@ -16,7 +16,7 @@ export const ModalContainer = styled.div`
   position: absolute;
   width: 100vw;
   z-index: 10;
-  height: calc(100vh - 149px);
+  height: calc(100dvh - 149px);
   top: 149px;
   background-color: var(--primary2);
   border-radius: 20px 20px 0 0;
