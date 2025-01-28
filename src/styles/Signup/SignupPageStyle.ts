@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 export const Header = styled.div`
     width: 100%; 
   max-width: 452px; 
-  margin: 0 auto; 
+  margin-top:149px; 
   text-align: center; 
   transition: all 0.3s ease-in-out;
   ${isMobile} {
