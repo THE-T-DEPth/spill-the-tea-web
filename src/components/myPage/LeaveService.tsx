@@ -49,27 +49,32 @@ const LeaveService = () => {
     setIsLogoutModalOpen(false);
   };
 
+  // 회원탈퇴 첫번째 모달 (최종 탈퇴모달 열기)
   const handleConfirmDeleteAccount = async () => {
-    setIsDeleteAccountModalOpen(false);
-    try {
-      const response = await deleteProfile();
-      if (response && response.success) {
-        console.log('탈퇴가 완료되었습니다.');
-      } else {
-        console.error('탈퇴 실패. 다시 시도해주세요.');
-      }
-    } catch (error) {
-      console.error('회원 탈퇴 중 오류 발생:', error);
-    }
-    setIsFinalConfirmationModalOpen(true);
+    setIsDeleteAccountModalOpen(false); // 삭제 모달 닫기
+    setModalMessage('정말로 계정을 삭제하시겠습니까?');
+    setIsFinalConfirmationModalOpen(true); // 최종 확인 모달 열기
   };
 
   const handleCloseFinalConfirmationModal = () => {
     setIsFinalConfirmationModalOpen(false);
   };
 
-  const handleFinalConfirm = () => {
+  const handleFinalConfirm = async () => {
     setIsFinalConfirmationModalOpen(false);
+    try {
+      const response = await deleteProfile();
+      if (response && response.success) {
+        console.log('탈퇴가 완료되었습니다.');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        navigate('/'); // 탈퇴 후 메인 페이지로 이동
+      } else {
+        console.error('탈퇴 실패. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 중 오류 발생:', error);
+    }
   };
 
   return (

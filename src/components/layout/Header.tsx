@@ -57,6 +57,7 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     setIsModalVisible(false);
   };
 
