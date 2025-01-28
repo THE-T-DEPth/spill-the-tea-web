@@ -73,9 +73,9 @@ const Header = () => {
 	};
 
 	const handleTeaCupIconClick = () => {
-		const currentPath = window.location.pathname; // 현재 경로 가져오기
-		navigate(currentPath); // React Router로 현재 경로로 이동
-		window.location.reload(); // 페이지 강제 재로딩
+		const currentPath = window.location.pathname;
+		navigate(currentPath);
+		window.location.reload();
 	};
 
 
