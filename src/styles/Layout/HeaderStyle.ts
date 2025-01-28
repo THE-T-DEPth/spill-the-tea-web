@@ -88,7 +88,7 @@ export const SearchBar = styled.div`
     border: none;
     outline: none;
     box-shadow: none;
-    font: var(--searchBold);
+    font: var(--labelMini);
     background: none;
     padding-left: 4px;
     margin-top: 2px;
