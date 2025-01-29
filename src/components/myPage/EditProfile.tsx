@@ -5,6 +5,7 @@ import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
 import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
 import defaultProflieImg from '../../assets/Images/profileimg.png';
+import { useProfile } from '../../contexts/profileContext';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {
@@ -55,6 +56,7 @@ const EditProfile = () => {
   const [initialNickname, setInitialNickname] = useState('');
   const [initialProfileImage, setInitialProfileImage] = useState('');
   const [isProfileImageDeleted, setIsProfileImageDeleted] = useState(false);
+  const { fetchProfile } = useProfile();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -164,7 +166,7 @@ const EditProfile = () => {
       setInitialNickname(nickname);
       setInitialProfileImage(profileImage);
       setSelectedImage(null);
-      window.location.reload();
+      fetchProfile();
     } catch (error) {
       console.error('회원 정보 업데이트 중 오류 발생:', error);
     }

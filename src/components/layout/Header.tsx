@@ -9,7 +9,7 @@ import ClockIcon from '../../assets/Icons/Clock.svg';
 import LogoutModal from './LogoutModal';
 import { TSearchHistoryType } from '../../types/layout/NavBarType';
 import useNSMediaQuery from '../../hooks/useNSMediaQuery';
-import { getProfile } from '../../api/myPage/getProfile';
+import { useProfile } from '../../contexts/profileContext';
 
 const Header = () => {
   const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
@@ -21,7 +21,7 @@ const Header = () => {
   const navigate = useNavigate();
   const isAccessToken = !!localStorage.getItem('accessToken');
   const { isMobile } = useNSMediaQuery();
-  const [profileImage, setProfileImage] = useState<string | null>(null); // 프로필 이미지 상태
+  const { profileImage } = useProfile();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -60,7 +60,6 @@ const Header = () => {
   const handleLogoutConfirm = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    setProfileImage(null);
     setIsModalVisible(false);
   };
 
@@ -78,26 +77,6 @@ const Header = () => {
     setIsSearchActive(false);
     window.location.reload();
   };
-
-  // 프로필 이미지 가져오기
-  useEffect(() => {
-    const fetchProfileImage = async () => {
-      if (isAccessToken) {
-        try {
-          const profileData = await getProfile();
-          if (profileData) {
-            setProfileImage(profileData.data.profileImage || null); // 프로필 이미지 업데이트
-          }
-        } catch (error) {
-          console.error('프로필 이미지 가져오기 실패:', error);
-        }
-      } else {
-        setProfileImage(null); // 비로그인 상태에서 기본 아이콘 사용
-      }
-    };
-
-    fetchProfileImage();
-  }, [isAccessToken]); // 토큰 상태가 변경되면 프로필 이미지 다시 가져오기
 
   return (
     <S.Container>
