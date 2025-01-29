@@ -48,6 +48,7 @@ export const ImageContainer = styled.div<{ disabled?: boolean }>`
   width: 140px;
   height: 140px;
   margin-top: 8px;
+  position: relative;
   background: ${({ disabled }) => (disabled ? "var(--G3)" : "none")};
   opacity: 1; /* 투명도 제거 */
   ${isMobile}{
@@ -158,3 +159,18 @@ export const TimeContainer = styled.div<{ disabled?: boolean }>`
 	margin-bottom: 8.06px;
   }
 `;
+export const RankBadge = styled.div`
+  position: absolute; 
+  bottom: 0px; 
+  right: 8px; 
+  font: var(--rank);
+  color: var(--Headline);
+  transition: all 0.3s ease;
+  ${isMobile}{    
+	font: var(--rankMobile);
+  }
+`;
+
+
+
+

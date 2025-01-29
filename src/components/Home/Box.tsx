@@ -18,6 +18,7 @@ export interface BoxProps {
 	comments: string;
 	liked: boolean;
 	disabled?: boolean;
+	rank?: number;
 }
 
 const Box: React.FC<BoxProps> = ({
@@ -30,6 +31,7 @@ const Box: React.FC<BoxProps> = ({
 	comments,
 	liked,
 	disabled,
+	rank,
 }) => {
 	const navigate = useNavigate();
 
@@ -47,6 +49,7 @@ const Box: React.FC<BoxProps> = ({
 			<S.Title disabled={disabled}>{truncatedTitle}</S.Title>
 			<S.ImageContainer disabled={disabled}>
 				<S.Image src={image} disabled={disabled} />
+				{rank && <S.RankBadge>{rank}</S.RankBadge>}
 			</S.ImageContainer>
 			<S.Keywords hasLongKeyword={keywords.some(keyword => keyword.length >= 4)}>
 				{keywords.map((keyword, index) => (
@@ -83,6 +86,8 @@ const Box: React.FC<BoxProps> = ({
 					/>
 					{date}
 				</S.TimeContainer>
+
+
 			</S.InfoContainer>
 		</S.Container>
 	);
