@@ -72,7 +72,7 @@ export const PaginationContainer = styled.div`
 `;
 
 export const EmptyMessage = styled.span`
-  font: var(--searchEmpty);
+  font: var(--headingXXL);
   color: var(--Secondary2);
 `;
 

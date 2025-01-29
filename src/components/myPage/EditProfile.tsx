@@ -5,7 +5,7 @@ import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
 import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
 import defaultProflieImg from '../../assets/Images/profileimg.png';
-import { useProfile } from '../../contexts/profileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {

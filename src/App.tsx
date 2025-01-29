@@ -1,4 +1,4 @@
-import { ProfileProvider } from './contexts/profileContext';
+import { ProfileProvider } from './contexts/ProfileContext';
 import Router from './Router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
