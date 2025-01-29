@@ -139,8 +139,8 @@ const Header = () => {
 					<img
 						src={
 							isAccessToken
-								? profileImage || MyIcon
-								: MyLogoutIcon
+								? profileImage || MyIcon // 로그인 상태일 때: 프로필 이미지 없으면 기본 아이콘
+								: MyLogoutIcon // 로그아웃 상태일 때
 						}
 						alt={isAccessToken ? 'My Icon' : 'My Logout Icon'}
 					/>
