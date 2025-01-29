@@ -9,7 +9,7 @@ import ClockIcon from '../../assets/Icons/Clock.svg';
 import LogoutModal from './LogoutModal';
 import { TSearchHistoryType } from '../../types/layout/NavBarType';
 import useNSMediaQuery from '../../hooks/useNSMediaQuery';
-import { useProfile } from '../../contexts/profileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 
 const Header = () => {
   const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
