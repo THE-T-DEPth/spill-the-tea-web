@@ -70,7 +70,6 @@ const Header = () => {
 		navigate('/');
 	};
 
-
 	const handleLogoutCancel = () => {
 		setIsModalVisible(false);
 	};
@@ -86,7 +85,6 @@ const Header = () => {
 		navigate(currentPath);
 		window.location.reload();
 	};
-
 
 	return (
 		<S.Container>
@@ -162,7 +160,7 @@ const Header = () => {
 					/>
 				)}
 			</S.RightSection>
-		</S.Container >
+		</S.Container>
 	);
 };
 
