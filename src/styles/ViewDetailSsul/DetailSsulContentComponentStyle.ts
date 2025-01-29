@@ -254,6 +254,11 @@ export const DSCContentText = styled.p`
   white-space: pre-line;
   margin-bottom: 30px;
 
+  p:has(br) {
+    line-height: 0;
+    margin: 0;
+  }
+
   @font-face {
     font-family: 'Nanum Gothic';
     font-style: normal;
