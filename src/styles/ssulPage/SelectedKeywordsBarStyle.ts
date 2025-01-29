@@ -2,17 +2,18 @@ import styled from 'styled-components';
 import { isMobile } from '../../hooks/Media';
 
 export const Container = styled.div<{ $isInModal?: boolean }>`
-  width: 100%;
+  width: 1184px;
   height: 44px;
   display: flex;
   gap: 42px;
   align-items: center;
-  margin-top: 24px;
   transition: all 0.3s ease;
+  margin: 24px auto;
 
   ${isMobile} {
     border: none;
     margin: 0;
+    width: 100%;
 
     ${({ $isInModal }) =>
       $isInModal &&
@@ -32,7 +33,6 @@ export const Container = styled.div<{ $isInModal?: boolean }>`
 
 export const Title = styled.p`
   font: var(--searchEmpty);
-  margin-left: 128px;
   white-space: nowrap;
 `;
 

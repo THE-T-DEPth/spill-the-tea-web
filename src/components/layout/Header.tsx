@@ -9,6 +9,7 @@ import ClockIcon from '../../assets/Icons/Clock.svg';
 import LogoutModal from './LogoutModal';
 import { TSearchHistoryType } from '../../types/layout/NavBarType';
 import useNSMediaQuery from '../../hooks/useNSMediaQuery';
+import { useProfile } from '../../contexts/profileContext';
 
 const Header = () => {
   const [searchHistory, setSearchHistory] = useState<TSearchHistoryType>([]);
@@ -20,6 +21,13 @@ const Header = () => {
   const navigate = useNavigate();
   const isAccessToken = !!localStorage.getItem('accessToken');
   const { isMobile } = useNSMediaQuery();
+  const { profileImage, fetchProfile } = useProfile();
+
+  useEffect(() => {
+    if (isAccessToken) {
+      fetchProfile();
+    }
+  }, [isAccessToken]);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -57,6 +65,7 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     setIsModalVisible(false);
   };
 
@@ -125,7 +134,11 @@ const Header = () => {
         <S.MyIconWrapper
           onClick={() => navigate(isAccessToken ? '/mypage' : '/login')}>
           <img
-            src={isAccessToken ? MyIcon : MyLogoutIcon}
+            src={
+              isAccessToken
+                ? profileImage || MyIcon // 로그인 상태일 때: 프로필 이미지 없으면 기본 아이콘
+                : MyLogoutIcon // 로그아웃 상태일 때
+            }
             alt={isAccessToken ? 'My Icon' : 'My Logout Icon'}
           />
         </S.MyIconWrapper>
