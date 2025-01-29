@@ -66,20 +66,19 @@ export const Image = styled.img<{ disabled?: boolean }>`
   opacity: 1; 
 `;
 
-export const Keywords = styled.div<{ hasLongKeyword?: boolean }>`
+export const Keywords = styled.div<{ $hasLongKeyword?: boolean }>`
   display: flex;
   width: 100%;
   justify-content: center;
-  gap: ${({ hasLongKeyword }) => (hasLongKeyword ? "5px" : "13px")};
+  gap: ${({ $hasLongKeyword }) => ($hasLongKeyword ? "5px" : "13px")};
   margin: 8px 0 10px;
   ${isMobile}{
     margin-top: 6.44px;
     font: var(--boxKeywordMini);
     margin-bottom: 6.44px;
-    gap: ${({ hasLongKeyword }) => (hasLongKeyword ? "4px" : "10.46px")};
+    gap: ${({ $hasLongKeyword }) => ($hasLongKeyword ? "4px" : "10.46px")};
   }
 `;
-
 
 export const Keyword = styled.span<{ disabled?: boolean }>`
   padding: 3.5px 6px;

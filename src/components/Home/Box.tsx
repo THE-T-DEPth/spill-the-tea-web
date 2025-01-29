@@ -51,7 +51,7 @@ const Box: React.FC<BoxProps> = ({
 				<S.Image src={image} disabled={disabled} />
 				{rank && <S.RankBadge>{rank}</S.RankBadge>}
 			</S.ImageContainer>
-			<S.Keywords hasLongKeyword={keywords.some(keyword => keyword.length >= 4)}>
+			<S.Keywords $hasLongKeyword={keywords.some(keyword => keyword.length >= 4)}>
 				{keywords.map((keyword, index) => (
 					<S.Keyword key={index} disabled={disabled}>
 						# {keyword}
