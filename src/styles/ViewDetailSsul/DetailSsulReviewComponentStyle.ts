@@ -169,6 +169,7 @@ export const DSRBtnDiv2 = styled.div`
 
 export const DSRContent = styled.div`
   display: flex;
+  word-break: break-all;
   font: var(--labelSmall);
   margin-right: auto;
   left: 0;

@@ -30,7 +30,7 @@ const sortOptions = {
       id: 4,
       icon: DesendingIcon,
       label: '과거 게시 날짜순',
-      value: 'DATE_ASC ',
+      value: 'DATE_ASC',
     },
   ],
   likedSsuls: [
@@ -47,12 +47,17 @@ const sortOptions = {
       label: '제목 가나다 내림차순',
       value: 'TITLE_DESC',
     },
-    { id: 3, icon: AsendingIcon, label: '공감 수 오름차순', value: 'LIKE_ASC' },
+    {
+      id: 3,
+      icon: AsendingIcon,
+      label: '공감 누른 최근 날짜순',
+      value: 'DATE_ASC',
+    },
     {
       id: 4,
       icon: DesendingIcon,
-      label: '공감 수 내림차순',
-      value: 'LIKE_DESC',
+      label: '공감 누른 과거 날짜순',
+      value: 'DATE_DESC',
     },
   ],
 };

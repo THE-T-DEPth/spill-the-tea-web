@@ -1,14 +1,17 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
+import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Profile from '../../../assets/Images/Profile.svg';
 import {
   deleteComment,
+  deleteCommentLike,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
 
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -21,20 +24,33 @@ interface Reply {
 interface ReReviewProps {
   reply: Reply;
   handleComplainClick: () => void;
+  setIsFailReviewModal: (value: boolean) => void;
   openInput: boolean;
   setCommentId: (value: number) => void;
+  view: boolean;
 }
 
 const ReReview: React.FC<ReReviewProps> = ({
   reply,
   handleComplainClick,
+  setIsFailReviewModal,
   openInput,
   setCommentId,
+  view,
 }) => {
   const handleCommentHeartClick = () => {
+    if (!view) {
+      setIsFailReviewModal(true);
+      return;
+    }
+
     const fetchPostCommentLike = async () => {
       try {
-        await postCommentLike(reply.commentId);
+        if (!reply.liked) {
+          await postCommentLike(reply.commentId);
+        } else {
+          await deleteCommentLike(reply.commentId);
+        }
       } catch (error) {
         console.log('fetchPostCommentLike 중 오류 발생', error);
         throw error;
@@ -79,8 +95,12 @@ const ReReview: React.FC<ReReviewProps> = ({
             {!reply.mine ? (
               <S.DSRComplainBtn
                 onClick={() => {
-                  handleComplainClick();
-                  setCommentId(reply.commentId);
+                  if (view) {
+                    handleComplainClick();
+                    setCommentId(reply.commentId);
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
                 }}>
                 신고
               </S.DSRComplainBtn>
@@ -97,7 +117,9 @@ const ReReview: React.FC<ReReviewProps> = ({
             <S.DSRDate>{reply.createDate}</S.DSRDate>
           </S.DSRDateDiv>
           <S.DSRHeartDiv>
-            <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+            <S.DSRHeartImg
+              src={!reply.liked && view ? EmptyHeart : FullHeart}
+            />
             <S.DSRHeartNum>{reply.likedCount}</S.DSRHeartNum>
           </S.DSRHeartDiv>
         </S.DSRDateHeartDiv>

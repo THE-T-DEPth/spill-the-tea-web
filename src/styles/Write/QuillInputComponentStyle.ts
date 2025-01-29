@@ -5,6 +5,10 @@ import Centerline from '../../assets/Images/Strike.png';
 import Color from '../../assets/Images/Color.png';
 import DropDown from '../../assets/Images/ArrowDown.png';
 import UpArrow from '../../assets/Images/ArrowUp.png';
+import SelectedBold from '../../assets/Images/SelectedBold.png';
+import SelectedItalic from '../../assets/Images/SelectedItalic.png';
+import SelectedUnderLine from '../../assets/Images/SelectedUnderline.png';
+import SelectedStrike from '../../assets/Images/SelectedStrike.png';
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 
@@ -296,8 +300,24 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
     margin: auto 20px;
   }
 
+  .ql-toolbar .ql-bold.ql-active {
+    background: url(${SelectedBold}) no-repeat center center;
+    background-size: 24px 24px;
+    width: 24px;
+    height: 24px;
+    margin: auto 20px;
+  }
+
   .ql-toolbar .ql-italic {
     background: url(${Italic}) no-repeat center center;
+    background-size: 24px 24px;
+    width: 24px;
+    height: 24px;
+    margin: auto 20px;
+  }
+
+  .ql-toolbar .ql-italic.ql-active {
+    background: url(${SelectedItalic}) no-repeat center center;
     background-size: 24px 24px;
     width: 24px;
     height: 24px;
@@ -313,8 +333,24 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
     background-color:;
   }
 
+  .ql-toolbar .ql-underline.ql-active {
+    background: url(${SelectedUnderLine}) no-repeat center center;
+    background-size: 24px 24px;
+    width: 24px;
+    height: 24px;
+    margin: auto 20px;
+  }
+
   .ql-toolbar .ql-strike {
     background: url(${Centerline}) no-repeat center center;
+    background-size: 24px 24px;
+    width: 24px;
+    height: 24px;
+    margin: auto 20px;
+  }
+
+  .ql-toolbar .ql-strike.ql-active {
+    background: url(${SelectedStrike}) no-repeat center center;
     background-size: 24px 24px;
     width: 24px;
     height: 24px;
@@ -368,6 +404,7 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
     font-weight: normal;
     font-style: normal;
   }
+
   @font-face {
     font-family: 'Nanum Pen Script';
     font-style: normal;
@@ -435,21 +472,32 @@ export const StyledQuill = styled(ReactQuill)<{ $contents: any }>`
     content: '도 혜온';
   }
 
+  // /* 아직 폰트가 로드되지 않았을 때만 14px 적용 */
+  // .ql-picker.ql-font
+  //   .ql-picker-label[data-value='nanumpenscript']:not(
+  //     [style*='font-family: Nanum Pen Script']
+  //   )::before {
+  //   font-size: 8px !important;
+  // }
+
+  //로드 되었을 때 toolbar
   .ql-snow
     .ql-picker.ql-font
     .ql-picker-label[data-value='nanumpenscript']::before {
-    font-family: Nanum Pen Script;
+    font: var(--NanumPenScript);
     content: '나눔 펜 스크립트';
+    font-size: 9px !important;
   }
   /* Set effect font-families */
   .ql-font-nanumpenscript {
-    font-family: Nanum Pen Script;
+    font: var(--NanumPenScript);
   }
 
   .ql-snow
     .ql-picker.ql-font
     .ql-picker-item[data-value='nanumpenscript']::before {
-    font-family: Nanum Pen Script;
+    font: var(--NanumPenScript);
+    font-size: 14px !important;
     content: '나눔 펜 스크립트';
   }
 

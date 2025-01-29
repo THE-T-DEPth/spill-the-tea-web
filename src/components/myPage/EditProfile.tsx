@@ -5,6 +5,7 @@ import { putMembersUpdate } from '../../api/myPage/editProfile';
 import { changeProfileImage } from '../../api/myPage/changeProfileImage';
 import { deleteProfileImage } from '../../api/myPage/deleteProfileImage';
 import defaultProflieImg from '../../assets/Images/profileimg.png';
+import { useProfile } from '../../contexts/profileContext';
 
 // 연속된 문자 검사 함수
 const hasSequentialChars = (value: string) => {
@@ -54,6 +55,8 @@ const EditProfile = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [initialNickname, setInitialNickname] = useState('');
   const [initialProfileImage, setInitialProfileImage] = useState('');
+  const [isProfileImageDeleted, setIsProfileImageDeleted] = useState(false);
+  const { fetchProfile } = useProfile();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,8 +144,9 @@ const EditProfile = () => {
   };
 
   const handleProfileImageDelete = () => {
-    setProfileImage(''); // 미리보기 제거
+    setProfileImage(defaultProflieImg); // 미리보기 제거
     setSelectedImage(null); // 상태 초기화
+    setIsProfileImageDeleted(true);
   };
 
   const handleSave = async () => {
@@ -153,13 +157,16 @@ const EditProfile = () => {
     try {
       if (selectedImage) {
         await changeProfileImage(selectedImage);
-      } else if (profileImage === '') {
+        setIsProfileImageDeleted(false);
+      } else if (isProfileImageDeleted) {
         await deleteProfileImage();
+        setIsProfileImageDeleted(false);
       }
       await putMembersUpdate(nickname, password, checkPassword);
       setInitialNickname(nickname);
       setInitialProfileImage(profileImage);
       setSelectedImage(null);
+      fetchProfile();
     } catch (error) {
       console.error('회원 정보 업데이트 중 오류 발생:', error);
     }
@@ -174,6 +181,7 @@ const EditProfile = () => {
     setPasswordError(defaultMessage);
     setCheckPasswordError('');
     setIsMatch(false);
+    setIsProfileImageDeleted(false);
   };
 
   const isDefaultMessage = passwordError === defaultMessage;

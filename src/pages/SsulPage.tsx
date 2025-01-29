@@ -76,7 +76,7 @@ const SsulPage = () => {
             keywords: post.keywordList
               .replace(/\[|\]/g, '')
               .split(', ')
-              .map((kw) => `#${kw.trim()}`),
+              .map((kw) => `# ${kw.trim()}`),
             date: post.createDate,
             time: post.createTime,
             likes: post.likedCount,
