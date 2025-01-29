@@ -31,7 +31,7 @@ export async function postTTS(voice_name: string, text: string) {
       const audioBlob = base64ToBlob(audioContent, 'audio/mp3'); // base64 변환 함수 필요
       audioFile.src = URL.createObjectURL(audioBlob);
       audioFile.playbackRate = 1; // 재생 속도 설정
-      audioFile.play();
+      return audioFile;
     } else {
       console.error('Audio content is empty');
     }

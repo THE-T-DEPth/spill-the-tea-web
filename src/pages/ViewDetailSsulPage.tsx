@@ -10,6 +10,7 @@ import EditModal from '../components/viewDetailSsul/modal/EditModal';
 import ReportPostModal from '../components/viewDetailSsul/modal/ReportPostModal';
 import BlockUserModal from '../components/viewDetailSsul/modal/BlockUserModal';
 import AlreadyComplainModal from '../components/viewDetailSsul/modal/AlreadyComplainModal';
+import FailEnterReviewModal from '../components/viewDetailSsul/modal/FailEnterReviewModal';
 
 const ViewDetailSsulPage = () => {
   const { postId } = useParams<{ postId: string }>();
@@ -19,6 +20,8 @@ const ViewDetailSsulPage = () => {
   const [isEditModal, setIsEditModal] = useState<boolean>(false);
   const [isReportModal, setIsReportModal] = useState<boolean>(false);
   const [isBlockModal, setIsBlockModal] = useState<boolean>(false);
+  const [isFailReview, setIsFailReview] = useState<boolean>(false);
+  const [view, setView] = useState<boolean>(false);
   const [isComplainModalOpen, setIsComplainModalOpen] =
     useState<boolean>(false);
   const [isAlreadyComaplainModalOpen, setiIsAlreadyComaplainModalOpen] =
@@ -39,12 +42,16 @@ const ViewDetailSsulPage = () => {
             setIsBlockModal={setIsBlockModal}
             postId={Number(postId)}
             setMemberId={setMemberId}
+            view={view}
+            setView={setView}
           />
           {/*content 내용*/}
           <DetailSsulReview
             setIsComplainModalOpen={setIsComplainModalOpen}
+            setIsFailReviewModal={setIsFailReview}
             postId={Number(Number(postId))}
             setCommentId={setCommentId}
+            view={view}
           />
           {/*content 밑 댓글*/}
         </S.DSCDiv>
@@ -75,6 +82,7 @@ const ViewDetailSsulPage = () => {
       {isAlreadyComaplainModalOpen && (
         <AlreadyComplainModal setOpenModal={setiIsAlreadyComaplainModalOpen} />
       )}
+      {isFailReview && <FailEnterReviewModal setOpenModal={setIsFailReview} />}
     </>
   );
 };

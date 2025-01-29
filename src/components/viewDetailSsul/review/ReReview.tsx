@@ -1,5 +1,6 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
+// import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Profile from '../../../assets/Images/Profile.svg';
 import {
   deleteComment,
@@ -23,6 +24,7 @@ interface ReReviewProps {
   handleComplainClick: () => void;
   openInput: boolean;
   setCommentId: (value: number) => void;
+  view: boolean;
 }
 
 const ReReview: React.FC<ReReviewProps> = ({
@@ -30,6 +32,7 @@ const ReReview: React.FC<ReReviewProps> = ({
   handleComplainClick,
   openInput,
   setCommentId,
+  view,
 }) => {
   const handleCommentHeartClick = () => {
     const fetchPostCommentLike = async () => {
@@ -69,27 +72,31 @@ const ReReview: React.FC<ReReviewProps> = ({
         </S.DSRProfileDiv>
         <S.DSRContentDiv>
           <S.DSRContent>{reply.content}</S.DSRContent>
-          <S.DSRBtnDiv2>
-            <S.DSRHeartBtn
-              onClick={() => {
-                handleCommentHeartClick();
-              }}>
-              공감
-            </S.DSRHeartBtn>
-            {!reply.mine ? (
-              <S.DSRComplainBtn
+          {view ? (
+            <S.DSRBtnDiv2>
+              <S.DSRHeartBtn
                 onClick={() => {
-                  handleComplainClick();
-                  setCommentId(reply.commentId);
+                  handleCommentHeartClick();
                 }}>
-                신고
-              </S.DSRComplainBtn>
-            ) : (
-              <S.DSRComplainBtn onClick={handleRemoveComment}>
-                삭제
-              </S.DSRComplainBtn>
-            )}
-          </S.DSRBtnDiv2>
+                공감
+              </S.DSRHeartBtn>
+              {!reply.mine ? (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleComplainClick();
+                    setCommentId(reply.commentId);
+                  }}>
+                  신고
+                </S.DSRComplainBtn>
+              ) : (
+                <S.DSRComplainBtn onClick={handleRemoveComment}>
+                  삭제
+                </S.DSRComplainBtn>
+              )}
+            </S.DSRBtnDiv2>
+          ) : (
+            <></>
+          )}
         </S.DSRContentDiv>
         <S.DSRDateHeartDiv>
           <S.DSRDateDiv>

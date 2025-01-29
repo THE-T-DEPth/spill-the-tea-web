@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
+// import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Send from '../../../assets/Images/CombinedShape.svg';
 import ReReview from './ReReview';
 import {
@@ -42,6 +43,7 @@ interface ReviewProps {
   setCommentId: (value: number) => void;
   id: number;
   postId: number;
+  view: boolean;
 }
 
 const Review: React.FC<ReviewProps> = ({
@@ -50,6 +52,7 @@ const Review: React.FC<ReviewProps> = ({
   setCommentId,
   id,
   postId,
+  view,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openRereviewInput, setOpenRereviewInput] = useState<number | null>(
@@ -79,6 +82,12 @@ const Review: React.FC<ReviewProps> = ({
       alert('댓글 내용을 입력해주세요!');
       return;
     }
+
+    console.log(input.length);
+    if (input.length > 200) {
+      alert('댓글은 200자 제한입니다.');
+      return;
+    }
     const fetchPostRereview = async () => {
       try {
         await postComment(postId, input, parentCommentId);
@@ -95,6 +104,12 @@ const Review: React.FC<ReviewProps> = ({
     if (e.key === 'Enter') {
       if (input.trim() === '@' + nickname || input.trim() === '') {
         alert('댓글 내용을 입력해주세요!');
+        return;
+      }
+
+      console.log(input.length);
+      if (input.length > 200) {
+        alert('댓글은 200자 제한입니다.');
         return;
       }
       const fetchPostRereview = async () => {
@@ -181,34 +196,38 @@ const Review: React.FC<ReviewProps> = ({
           {/* 댓글 본문 */}
           <S.DSRContentDiv>
             <S.DSRContent>{comment.content}</S.DSRContent>
-            <S.DSRBtnDiv>
-              <S.DSRReviewBtn
-                onClick={() => {
-                  handleReviewClick(comment.nickname);
-                  handleRereviewInputClick(id);
-                }}>
-                대댓글
-              </S.DSRReviewBtn>
-              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
-                공감
-              </S.DSRHeartBtn>
-              {!comment.mine ? (
-                <S.DSRComplainBtn
+            {view ? (
+              <S.DSRBtnDiv>
+                <S.DSRReviewBtn
                   onClick={() => {
-                    handleComplainClick(); // 기존 함수 호출
-                    setCommentId(comment.commentId); // 추가 동작 수행
+                    handleReviewClick(comment.nickname);
+                    handleRereviewInputClick(id);
                   }}>
-                  신고
-                </S.DSRComplainBtn>
-              ) : (
-                <S.DSRComplainBtn
-                  onClick={() => {
-                    handleRemoveComment(); // 기존 함수 호출
-                  }}>
-                  삭제
-                </S.DSRComplainBtn>
-              )}
-            </S.DSRBtnDiv>
+                  대댓글
+                </S.DSRReviewBtn>
+                <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                  공감
+                </S.DSRHeartBtn>
+                {!comment.mine ? (
+                  <S.DSRComplainBtn
+                    onClick={() => {
+                      handleComplainClick(); // 기존 함수 호출
+                      setCommentId(comment.commentId); // 추가 동작 수행
+                    }}>
+                    신고
+                  </S.DSRComplainBtn>
+                ) : (
+                  <S.DSRComplainBtn
+                    onClick={() => {
+                      handleRemoveComment(); // 기존 함수 호출
+                    }}>
+                    삭제
+                  </S.DSRComplainBtn>
+                )}
+              </S.DSRBtnDiv>
+            ) : (
+              <></>
+            )}
           </S.DSRContentDiv>
           {/* 댓글 시간 및 공감수 */}
           <S.DSRDateHeartDiv>
@@ -264,6 +283,7 @@ const Review: React.FC<ReviewProps> = ({
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
+                    view={view}
                   />
                 </S.DSREachCommentDiv>
               ))}
@@ -285,34 +305,38 @@ const Review: React.FC<ReviewProps> = ({
               style={{ color: comment.mine ? 'var(--Green3)' : 'black' }}>
               {comment.nickname}
             </S.DSRProfileName>
-            <S.DSRBtnDiv>
-              <S.DSRReviewBtn
-                onClick={() => {
-                  handleReviewClick(comment.nickname);
-                  handleRereviewInputClick(id);
-                }}>
-                대댓글
-              </S.DSRReviewBtn>
-              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
-                공감
-              </S.DSRHeartBtn>
-              {!comment.mine ? (
-                <S.DSRComplainBtn
+            {view ? (
+              <S.DSRBtnDiv>
+                <S.DSRReviewBtn
                   onClick={() => {
-                    handleComplainClick(); // 기존 함수 호출
-                    setCommentId(comment.commentId); // 추가 동작 수행
+                    handleReviewClick(comment.nickname);
+                    handleRereviewInputClick(id);
                   }}>
-                  신고
-                </S.DSRComplainBtn>
-              ) : (
-                <S.DSRComplainBtn
-                  onClick={() => {
-                    handleRemoveComment();
-                  }}>
-                  삭제
-                </S.DSRComplainBtn>
-              )}
-            </S.DSRBtnDiv>
+                  대댓글
+                </S.DSRReviewBtn>
+                <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                  공감
+                </S.DSRHeartBtn>
+                {!comment.mine ? (
+                  <S.DSRComplainBtn
+                    onClick={() => {
+                      handleComplainClick(); // 기존 함수 호출
+                      setCommentId(comment.commentId); // 추가 동작 수행
+                    }}>
+                    신고
+                  </S.DSRComplainBtn>
+                ) : (
+                  <S.DSRComplainBtn
+                    onClick={() => {
+                      handleRemoveComment();
+                    }}>
+                    삭제
+                  </S.DSRComplainBtn>
+                )}
+              </S.DSRBtnDiv>
+            ) : (
+              <></>
+            )}
           </S.DSRProfileDiv>
           <S.DSRContentDiv>
             <S.DSRContent>{comment.content}</S.DSRContent>
@@ -372,6 +396,7 @@ const Review: React.FC<ReviewProps> = ({
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
+                    view={view}
                   />
                 </S.DSREachCommentDiv>
               ))}

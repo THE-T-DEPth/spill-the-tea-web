@@ -155,6 +155,8 @@ export const DSCEachTag = styled.button`
     width: 67px;
     height: 24px;
     font: var(--labelSmall);
+    color: black;
+    font-size: 10px;
     margin: 0 6px 6px 0;
     border-radius: 1.5px;
   }

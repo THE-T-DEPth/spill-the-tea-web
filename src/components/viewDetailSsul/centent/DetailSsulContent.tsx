@@ -6,7 +6,7 @@ import Comment from '../../../assets/Images/GrayComment.svg';
 import Share from '../../../assets/Images/Share.svg';
 import Menu from '../../../assets/Images/FixMenu.svg';
 import Profile from '../../../assets/Images/Profile.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CopyUrlModal from '../modal/CopyUrlModal';
 import TTSModal from '../modal/TTSModal';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +43,8 @@ const DetailSsulContent: React.FC<{
   setIsBlockModal: (value: boolean) => void;
   postId: number;
   setMemberId: (value: number) => void;
+  view: boolean;
+  setView: (value: boolean) => void;
 }> = ({
   setIsRemoveModal,
   setIsEditModal,
@@ -50,6 +52,8 @@ const DetailSsulContent: React.FC<{
   setIsBlockModal,
   postId,
   setMemberId,
+  view,
+  setView,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isHeartClick, setIsHeartClick] = useState<boolean>(false);
@@ -58,8 +62,8 @@ const DetailSsulContent: React.FC<{
   const [openTTS, setOpenTTS] = useState<boolean>(false);
   const [postDetail, setPostDetail] = useState<PostDetail>();
   const [token, setToken] = useState<string | null>();
-  const [view, setView] = useState<boolean>(false);
   const [myPost, setMyPost] = useState<boolean>();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const navigate = useNavigate();
 
   const handleEditClick = () => {
@@ -111,16 +115,29 @@ const DetailSsulContent: React.FC<{
     const tempElement = document.createElement('div');
     tempElement.innerHTML = htmlContent;
     const plainText = tempElement.textContent || tempElement.innerText || '';
-    if (plainText == '') {
-      alert('글 내용이 없습니다.');
-      return;
-    }
+
     try {
       if (postDetail?.voiceType) {
         if (postDetail.voiceType == 'ko_KR_Standard_A') {
-          await postTTS('ko-KR-Standard-A', plainText);
+          const audio = await postTTS('ko-KR-Standard-A', plainText);
+          audioRef.current = audio ? audio : null;
+
+          if (audio) {
+            audio?.play();
+            audio.onended = () => {
+              audioRef.current = null;
+            };
+          }
         } else if (postDetail.voiceType == 'ko_KR_Standard_C') {
-          await postTTS('ko-KR-Standard-C', plainText);
+          const audio = await postTTS('ko-KR-Standard-C', plainText);
+          audioRef.current = audio ? audio : null;
+
+          if (audio) {
+            audio?.play();
+            audio.onended = () => {
+              audioRef.current = null;
+            };
+          }
         }
       }
     } catch (error) {
