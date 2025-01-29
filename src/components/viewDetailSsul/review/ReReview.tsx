@@ -4,6 +4,7 @@ import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Profile from '../../../assets/Images/Profile.svg';
 import {
   deleteComment,
+  deleteCommentLike,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
 
@@ -23,6 +24,7 @@ interface Reply {
 interface ReReviewProps {
   reply: Reply;
   handleComplainClick: () => void;
+  setIsFailReviewModal: (value: boolean) => void;
   openInput: boolean;
   setCommentId: (value: number) => void;
   view: boolean;
@@ -31,14 +33,24 @@ interface ReReviewProps {
 const ReReview: React.FC<ReReviewProps> = ({
   reply,
   handleComplainClick,
+  setIsFailReviewModal,
   openInput,
   setCommentId,
   view,
 }) => {
   const handleCommentHeartClick = () => {
+    if (!view) {
+      setIsFailReviewModal(true);
+      return;
+    }
+
     const fetchPostCommentLike = async () => {
       try {
-        await postCommentLike(reply.commentId);
+        if (!reply.liked) {
+          await postCommentLike(reply.commentId);
+        } else {
+          await deleteCommentLike(reply.commentId);
+        }
       } catch (error) {
         console.log('fetchPostCommentLike 중 오류 발생', error);
         throw error;
@@ -73,31 +85,31 @@ const ReReview: React.FC<ReReviewProps> = ({
         </S.DSRProfileDiv>
         <S.DSRContentDiv>
           <S.DSRContent>{reply.content}</S.DSRContent>
-          {view ? (
-            <S.DSRBtnDiv2>
-              <S.DSRHeartBtn
+          <S.DSRBtnDiv2>
+            <S.DSRHeartBtn
+              onClick={() => {
+                handleCommentHeartClick();
+              }}>
+              공감
+            </S.DSRHeartBtn>
+            {!reply.mine ? (
+              <S.DSRComplainBtn
                 onClick={() => {
-                  handleCommentHeartClick();
-                }}>
-                공감
-              </S.DSRHeartBtn>
-              {!reply.mine ? (
-                <S.DSRComplainBtn
-                  onClick={() => {
+                  if (view) {
                     handleComplainClick();
                     setCommentId(reply.commentId);
-                  }}>
-                  신고
-                </S.DSRComplainBtn>
-              ) : (
-                <S.DSRComplainBtn onClick={handleRemoveComment}>
-                  삭제
-                </S.DSRComplainBtn>
-              )}
-            </S.DSRBtnDiv2>
-          ) : (
-            <></>
-          )}
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
+                }}>
+                신고
+              </S.DSRComplainBtn>
+            ) : (
+              <S.DSRComplainBtn onClick={handleRemoveComment}>
+                삭제
+              </S.DSRComplainBtn>
+            )}
+          </S.DSRBtnDiv2>
         </S.DSRContentDiv>
         <S.DSRDateHeartDiv>
           <S.DSRDateDiv>

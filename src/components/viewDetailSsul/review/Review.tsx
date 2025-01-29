@@ -43,6 +43,7 @@ interface Reply {
 interface ReviewProps {
   comment: Comment;
   handleComplainClick: () => void;
+  setIsFailReviewModal: (value: boolean) => void;
   setCommentId: (value: number) => void;
   id: number;
   postId: number;
@@ -52,6 +53,7 @@ interface ReviewProps {
 const Review: React.FC<ReviewProps> = ({
   comment,
   handleComplainClick,
+  setIsFailReviewModal,
   setCommentId,
   id,
   postId,
@@ -146,6 +148,11 @@ const Review: React.FC<ReviewProps> = ({
   };
 
   const handleCommentHeartClick = () => {
+    if (!view) {
+      setIsFailReviewModal(true);
+      return;
+    }
+
     const fetchPostCommentLike = async () => {
       try {
         if (!comment.liked) {
@@ -203,38 +210,42 @@ const Review: React.FC<ReviewProps> = ({
           {/* 댓글 본문 */}
           <S.DSRContentDiv>
             <S.DSRContent>{comment.content}</S.DSRContent>
-            {view ? (
-              <S.DSRBtnDiv>
-                <S.DSRReviewBtn
-                  onClick={() => {
+            <S.DSRBtnDiv>
+              <S.DSRReviewBtn
+                onClick={() => {
+                  if (view) {
                     handleReviewClick(comment.nickname);
                     handleRereviewInputClick(id);
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
+                }}>
+                대댓글
+              </S.DSRReviewBtn>
+              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                공감
+              </S.DSRHeartBtn>
+              {!comment.mine ? (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    if (view) {
+                      handleComplainClick();
+                      setCommentId(comment.commentId);
+                    } else {
+                      setIsFailReviewModal(true);
+                    }
                   }}>
-                  대댓글
-                </S.DSRReviewBtn>
-                <S.DSRHeartBtn onClick={handleCommentHeartClick}>
-                  공감
-                </S.DSRHeartBtn>
-                {!comment.mine ? (
-                  <S.DSRComplainBtn
-                    onClick={() => {
-                      handleComplainClick(); // 기존 함수 호출
-                      setCommentId(comment.commentId); // 추가 동작 수행
-                    }}>
-                    신고
-                  </S.DSRComplainBtn>
-                ) : (
-                  <S.DSRComplainBtn
-                    onClick={() => {
-                      handleRemoveComment(); // 기존 함수 호출
-                    }}>
-                    삭제
-                  </S.DSRComplainBtn>
-                )}
-              </S.DSRBtnDiv>
-            ) : (
-              <></>
-            )}
+                  신고
+                </S.DSRComplainBtn>
+              ) : (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleRemoveComment(); // 기존 함수 호출
+                  }}>
+                  삭제
+                </S.DSRComplainBtn>
+              )}
+            </S.DSRBtnDiv>
           </S.DSRContentDiv>
           {/* 댓글 시간 및 공감수 */}
           <S.DSRDateHeartDiv>
@@ -290,6 +301,7 @@ const Review: React.FC<ReviewProps> = ({
                   style={{ width: '95%', marginLeft: 'auto' }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setIsFailReviewModal={setIsFailReviewModal}
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
@@ -315,38 +327,42 @@ const Review: React.FC<ReviewProps> = ({
               style={{ color: comment.mine ? 'var(--Green3)' : 'black' }}>
               {comment.nickname}
             </S.DSRProfileName>
-            {view ? (
-              <S.DSRBtnDiv>
-                <S.DSRReviewBtn
-                  onClick={() => {
+            <S.DSRBtnDiv>
+              <S.DSRReviewBtn
+                onClick={() => {
+                  if (view) {
                     handleReviewClick(comment.nickname);
                     handleRereviewInputClick(id);
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
+                }}>
+                대댓글
+              </S.DSRReviewBtn>
+              <S.DSRHeartBtn onClick={handleCommentHeartClick}>
+                공감
+              </S.DSRHeartBtn>
+              {!comment.mine ? (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    if (view) {
+                      handleComplainClick();
+                      setCommentId(comment.commentId);
+                    } else {
+                      setIsFailReviewModal(true);
+                    }
                   }}>
-                  대댓글
-                </S.DSRReviewBtn>
-                <S.DSRHeartBtn onClick={handleCommentHeartClick}>
-                  공감
-                </S.DSRHeartBtn>
-                {!comment.mine ? (
-                  <S.DSRComplainBtn
-                    onClick={() => {
-                      handleComplainClick(); // 기존 함수 호출
-                      setCommentId(comment.commentId); // 추가 동작 수행
-                    }}>
-                    신고
-                  </S.DSRComplainBtn>
-                ) : (
-                  <S.DSRComplainBtn
-                    onClick={() => {
-                      handleRemoveComment();
-                    }}>
-                    삭제
-                  </S.DSRComplainBtn>
-                )}
-              </S.DSRBtnDiv>
-            ) : (
-              <></>
-            )}
+                  신고
+                </S.DSRComplainBtn>
+              ) : (
+                <S.DSRComplainBtn
+                  onClick={() => {
+                    handleRemoveComment();
+                  }}>
+                  삭제
+                </S.DSRComplainBtn>
+              )}
+            </S.DSRBtnDiv>
           </S.DSRProfileDiv>
           <S.DSRContentDiv>
             <S.DSRContent>{comment.content}</S.DSRContent>
@@ -406,6 +422,7 @@ const Review: React.FC<ReviewProps> = ({
                   }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setIsFailReviewModal={setIsFailReviewModal}
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}

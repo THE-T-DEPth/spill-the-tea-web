@@ -164,6 +164,7 @@ const DetailSsulReview: React.FC<{
               <S.DSREachCommentDiv key={index}>
                 <Review
                   handleComplainClick={handleComplainClick}
+                  setIsFailReviewModal={setIsFailReviewModal}
                   setCommentId={setCommentId}
                   comment={comment}
                   id={index}
