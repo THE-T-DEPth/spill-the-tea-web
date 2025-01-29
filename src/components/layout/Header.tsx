@@ -21,7 +21,13 @@ const Header = () => {
   const navigate = useNavigate();
   const isAccessToken = !!localStorage.getItem('accessToken');
   const { isMobile } = useNSMediaQuery();
-  const { profileImage } = useProfile();
+  const { profileImage, fetchProfile } = useProfile();
+
+  useEffect(() => {
+    if (isAccessToken) {
+      fetchProfile();
+    }
+  }, [isAccessToken]);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
