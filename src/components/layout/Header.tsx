@@ -72,7 +72,7 @@ const Header = () => {
 
   const handleTeaCupIconClick = () => {
     setIsSearchActive(false);
-    window.location.reload();
+    navigate('/');
   };
 
   return (
