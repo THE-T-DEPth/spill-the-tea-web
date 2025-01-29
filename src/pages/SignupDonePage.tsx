@@ -5,8 +5,6 @@ import * as S from '../styles/Signup/SignupDonePageStyle';
 const SignupDone: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-
-
 	const nickname = location.state?.nickname || '사용자';
 
 

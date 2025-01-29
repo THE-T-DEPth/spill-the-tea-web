@@ -7,18 +7,15 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color:var(--BackFirst);
-  height: calc(100vh - 133px);
   transition: all 0.3s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh - 126px);
   }
 `;
 
 export const Header = styled.div`
     width: 100%; 
   max-width: 452px; 
-  margin: 0 auto; 
   text-align: center; 
   transition: all 0.3s ease-in-out;
   ${isMobile} {
