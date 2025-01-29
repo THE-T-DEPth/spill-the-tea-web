@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
+import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Send from '../../../assets/Images/CombinedShape.svg';
 import ReReview from './ReReview';
 import {
   deleteComment,
+  deleteCommentLike,
   postComment,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
@@ -15,6 +17,7 @@ import ArrowUpSmall from '../../../assets/Images/ArrowUp.png';
 interface Comment {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -27,6 +30,7 @@ interface Comment {
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -39,17 +43,21 @@ interface Reply {
 interface ReviewProps {
   comment: Comment;
   handleComplainClick: () => void;
+  setIsFailReviewModal: (value: boolean) => void;
   setCommentId: (value: number) => void;
   id: number;
   postId: number;
+  view: boolean;
 }
 
 const Review: React.FC<ReviewProps> = ({
   comment,
   handleComplainClick,
+  setIsFailReviewModal,
   setCommentId,
   id,
   postId,
+  view,
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openRereviewInput, setOpenRereviewInput] = useState<number | null>(
@@ -79,6 +87,12 @@ const Review: React.FC<ReviewProps> = ({
       alert('댓글 내용을 입력해주세요!');
       return;
     }
+
+    console.log(input.length);
+    if (input.length > 200) {
+      alert('댓글은 200자 제한입니다.');
+      return;
+    }
     const fetchPostRereview = async () => {
       try {
         await postComment(postId, input, parentCommentId);
@@ -95,6 +109,12 @@ const Review: React.FC<ReviewProps> = ({
     if (e.key === 'Enter') {
       if (input.trim() === '@' + nickname || input.trim() === '') {
         alert('댓글 내용을 입력해주세요!');
+        return;
+      }
+
+      console.log(input.length);
+      if (input.length > 200) {
+        alert('댓글은 200자 제한입니다.');
         return;
       }
       const fetchPostRereview = async () => {
@@ -128,9 +148,18 @@ const Review: React.FC<ReviewProps> = ({
   };
 
   const handleCommentHeartClick = () => {
+    if (!view) {
+      setIsFailReviewModal(true);
+      return;
+    }
+
     const fetchPostCommentLike = async () => {
       try {
-        await postCommentLike(comment.commentId);
+        if (!comment.liked) {
+          await postCommentLike(comment.commentId);
+        } else {
+          await deleteCommentLike(comment.commentId);
+        }
       } catch (error) {
         console.log('fetchPostCommentLike 중 오류 발생', error);
         throw error;
@@ -184,8 +213,12 @@ const Review: React.FC<ReviewProps> = ({
             <S.DSRBtnDiv>
               <S.DSRReviewBtn
                 onClick={() => {
-                  handleReviewClick(comment.nickname);
-                  handleRereviewInputClick(id);
+                  if (view) {
+                    handleReviewClick(comment.nickname);
+                    handleRereviewInputClick(id);
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
                 }}>
                 대댓글
               </S.DSRReviewBtn>
@@ -195,8 +228,12 @@ const Review: React.FC<ReviewProps> = ({
               {!comment.mine ? (
                 <S.DSRComplainBtn
                   onClick={() => {
-                    handleComplainClick(); // 기존 함수 호출
-                    setCommentId(comment.commentId); // 추가 동작 수행
+                    if (view) {
+                      handleComplainClick();
+                      setCommentId(comment.commentId);
+                    } else {
+                      setIsFailReviewModal(true);
+                    }
                   }}>
                   신고
                 </S.DSRComplainBtn>
@@ -217,7 +254,10 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
-              <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+              <S.DSRHeartImg
+                src={!comment.liked && view ? EmptyHeart : FullHeart}
+                alt='공감 수'
+              />
               <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
@@ -261,9 +301,11 @@ const Review: React.FC<ReviewProps> = ({
                   style={{ width: '95%', marginLeft: 'auto' }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setIsFailReviewModal={setIsFailReviewModal}
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
+                    view={view}
                   />
                 </S.DSREachCommentDiv>
               ))}
@@ -288,8 +330,12 @@ const Review: React.FC<ReviewProps> = ({
             <S.DSRBtnDiv>
               <S.DSRReviewBtn
                 onClick={() => {
-                  handleReviewClick(comment.nickname);
-                  handleRereviewInputClick(id);
+                  if (view) {
+                    handleReviewClick(comment.nickname);
+                    handleRereviewInputClick(id);
+                  } else {
+                    setIsFailReviewModal(true);
+                  }
                 }}>
                 대댓글
               </S.DSRReviewBtn>
@@ -299,8 +345,12 @@ const Review: React.FC<ReviewProps> = ({
               {!comment.mine ? (
                 <S.DSRComplainBtn
                   onClick={() => {
-                    handleComplainClick(); // 기존 함수 호출
-                    setCommentId(comment.commentId); // 추가 동작 수행
+                    if (view) {
+                      handleComplainClick();
+                      setCommentId(comment.commentId);
+                    } else {
+                      setIsFailReviewModal(true);
+                    }
                   }}>
                   신고
                 </S.DSRComplainBtn>
@@ -323,7 +373,10 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
-              <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+              <S.DSRHeartImg
+                src={!comment.liked && view ? EmptyHeart : FullHeart}
+                alt='공감 수'
+              />
               <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
@@ -369,9 +422,11 @@ const Review: React.FC<ReviewProps> = ({
                   }}>
                   <ReReview
                     openInput={id === openRereviewInput}
+                    setIsFailReviewModal={setIsFailReviewModal}
                     setCommentId={setCommentId}
                     reply={reply}
                     handleComplainClick={handleComplainClick}
+                    view={view}
                   />
                 </S.DSREachCommentDiv>
               ))}

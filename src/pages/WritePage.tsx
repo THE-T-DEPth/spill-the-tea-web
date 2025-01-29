@@ -8,6 +8,7 @@ import PostModal from '../components/write/modal/PostModal';
 import QuillInput from '../components/write/textWrite/QuillInput';
 import { useParams } from 'react-router-dom';
 import { getPostDetail } from '../api/viewDetailSsul/viewDetailContent';
+import { useNavigate } from 'react-router-dom';
 
 const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
   const [openGuide, setOpenGuide] = useState<boolean>(false);
@@ -21,6 +22,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
   const [confirmVoice, setConfirmVoice] = useState<string>('none');
   const [firstImg, setFirstImg] = useState<string>();
   const { postId } = useParams();
+  const navigate = useNavigate();
 
   //edit일 때 초기 값 세팅
   useEffect(() => {
@@ -38,7 +40,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
             .map((keyword: string) => keyword.trim()); // 각 키워드의 공백 제거
 
           setSelectedThreeKeywords(parsedKeywordList);
-          setFirstImg(response.data.thumb);
+          setFirstImg(response.data.thumbUrl);
         } catch (error) {
           throw error;
         }
@@ -81,9 +83,12 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
     setTitleInput(e.target.value);
   };
 
+  const handleCancelClick = () => {
+    navigate('/');
+  };
+
   const handlePostClick = async () => {
     setOpenPostModal(true);
-    // window.location.href = '/';
   };
 
   const extractImagesFromHTML = async (htmlString: string) => {
@@ -184,7 +189,7 @@ const WritePage: React.FC<{ mode: string }> = ({ mode }) => {
                   ))}
             </S.KeyWordInputDiv>
             <S.TopBtnDiv>
-              <S.RemoveBtn>작성 취소</S.RemoveBtn>
+              <S.RemoveBtn onClick={handleCancelClick}>작성 취소</S.RemoveBtn>
               <S.PostBtn onClick={handlePostClick}>게시하기</S.PostBtn>
             </S.TopBtnDiv>
           </S.KeywordDiv>

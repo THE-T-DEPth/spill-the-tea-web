@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Check from '../../../assets/Images/Check.svg';
-import NonCheck from '../../../assets/Images/NonCheck.svg';
+import Check from '../../../assets/Images/Check.png';
+import NonCheck from '../../../assets/Images/NonCheck.png';
 
 export const CheckboxWrapper = styled.div`
   display: flex;

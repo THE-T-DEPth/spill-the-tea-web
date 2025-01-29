@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Play from '../../../assets/Images/Play.svg';
 import Playing from '../../../assets/Images/Playing.svg';
 import * as S from '../../../styles/Write/SelectAnotherComponentStyle';
@@ -17,25 +17,43 @@ const SelectVoice: React.FC<VoiceOptionsProps> = ({
 }) => {
   const [manVoice, setManVoice] = useState<boolean>(false);
   const [womanVoice, setWomanVoice] = useState<Boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlay = async (voice_name: string) => {
     if (ttsInput == '') {
       alert('글 내용이 없습니다.');
       return;
     }
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+      setManVoice(false);
+      setWomanVoice(false);
+      return;
+    }
+
     try {
-      if (voice_name == '차분한 성인 남성' && !manVoice && !womanVoice) {
-        await postTTS('ko-KR-Standard-C', ttsInput);
+      let voiceId = '';
+      if (voice_name === '차분한 성인 남성') {
+        voiceId = 'ko-KR-Standard-C';
         setManVoice(true);
-        setTimeout(() => {
-          setManVoice(false);
-        }, ttsInput.length * 150);
-      } else if (voice_name == '차분한 성인 여성' && !womanVoice && !manVoice) {
-        await postTTS('ko-KR-Standard-A', ttsInput);
+      } else if (voice_name === '차분한 성인 여성') {
+        voiceId = 'ko-KR-Standard-A';
         setWomanVoice(true);
-        setTimeout(() => {
+      }
+
+      // 🔹 postTTS에서 Audio 객체를 받아옴
+      const audio = await postTTS(voiceId, ttsInput);
+      audioRef.current = audio ? audio : null;
+
+      if (audio) {
+        audio?.play();
+        audio.onended = () => {
+          setManVoice(false);
           setWomanVoice(false);
-        }, ttsInput.length * 150);
+          audioRef.current = null;
+        };
       }
     } catch (error) {
       console.log('fetch 중 에러 발생', error);

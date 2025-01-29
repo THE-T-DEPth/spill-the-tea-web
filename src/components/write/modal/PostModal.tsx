@@ -2,6 +2,7 @@ import * as S from '../../../styles/Write/PostModalComponentStyle';
 import Close from '../../../assets/Images/Close.svg';
 import { postWrite, putWrite } from '../../../api/write/writePost';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface RemoveModalProps {
   setOpenPostModal: (value: boolean) => void;
@@ -28,12 +29,14 @@ const PostModal: React.FC<RemoveModalProps> = ({
 }) => {
   const [success, setSuccess] = useState<boolean>(false);
   const [isPosting, setIsPosting] = useState<boolean>(false);
+  const [newPostId, setNewPostId] = useState<number>();
   const postInProgress = useRef(false);
+  const navigate = useNavigate();
 
   let modalMessage = '';
   const handleConfirmClick = () => {
     setOpenPostModal(false); // 모달 닫기
-    window.location.href = '/';
+    navigate('/');
   };
 
   const handleOkayClick = () => {
@@ -43,7 +46,19 @@ const PostModal: React.FC<RemoveModalProps> = ({
   const handleViewPostClick = () => {
     setOpenPostModal(false); // 모달 닫기
     // window.location.href = `/viewDetailSsul/${postId}`;
-    window.location.href = `/`;
+    if (mode == 'write') {
+      navigate(`/viewDetailSsul/${newPostId}`);
+    } else {
+      navigate(`/viewDetailSsul/${postId}`);
+    }
+  };
+
+  const countCharactersInHTML = (html: string): number => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    // const paragraphs = doc.querySelectorAll('p');
+
+    return doc.body.textContent?.trim().length || 0;
   };
 
   const handlePost = () => {
@@ -61,14 +76,15 @@ const PostModal: React.FC<RemoveModalProps> = ({
       try {
         setIsPosting(true);
         if (mode == 'write') {
-          await postWrite(
+          const response = await postWrite(
             titleInput ? titleInput : '',
             textInput,
+            firstImg ? firstImg : null,
             selectedThreeKeywords,
-            confirmVoice,
-            firstImg ? firstImg : null
+            confirmVoice
           );
           setSuccess(true);
+          setNewPostId(response.data);
         } else if (mode == 'edit') {
           await putWrite(
             postId,
@@ -82,6 +98,7 @@ const PostModal: React.FC<RemoveModalProps> = ({
         }
       } catch (error) {
         console.log('fetchPostWrite 중 오류 발생', error);
+        console.log(countCharactersInHTML(textInput));
         setSuccess(false);
         throw error;
       } finally {
@@ -99,14 +116,20 @@ const PostModal: React.FC<RemoveModalProps> = ({
   // 조건별 메시지 설정
   if (!titleInput || titleInput.trim() === '') {
     modalMessage = '아차차,,\n제목을 정해주셔야 게시를 할 수 있어요!';
-  } else if (titleInput.length > 15) {
-    modalMessage = '아차차,,\n제목은 15자 이내로 입력해주세요!';
+  } else if (titleInput.length > 12) {
+    modalMessage = '아차차,,\n제목은 12자 이내로 입력해주세요!';
   } else if (isTextEmpty) {
     modalMessage = '아차차,,\n내용을 적어주셔야 게시를 할 수 있어요!';
   } else if (imageCount == 0) {
     modalMessage = '아차차,,\n짤을 최소 1개 지정해주셔야 게시를 할 수 있어요!';
   } else if (selectedThreeKeywords.length !== 3) {
     modalMessage = '아차차,,\n키워드를 지정해주셔야 게시를 할 수 있어요!';
+    //여기에
+  } else if (
+    countCharactersInHTML(textInput) < 2 ||
+    countCharactersInHTML(textInput) > 1500
+  ) {
+    modalMessage = '아차차,,\n글씨는 2 ~ 1,500자 사이로 작성해주셔야 해요!';
   } else {
     modalMessage = '';
   }
