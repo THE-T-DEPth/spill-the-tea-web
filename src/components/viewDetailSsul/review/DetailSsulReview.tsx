@@ -11,6 +11,7 @@ import {
 interface Comment {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -23,6 +24,7 @@ interface Comment {
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;

@@ -1,6 +1,6 @@
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
-// import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
+import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Profile from '../../../assets/Images/Profile.svg';
 import {
   deleteComment,
@@ -10,6 +10,7 @@ import {
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -104,7 +105,9 @@ const ReReview: React.FC<ReReviewProps> = ({
             <S.DSRDate>{reply.createDate}</S.DSRDate>
           </S.DSRDateDiv>
           <S.DSRHeartDiv>
-            <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+            <S.DSRHeartImg
+              src={!reply.liked && view ? EmptyHeart : FullHeart}
+            />
             <S.DSRHeartNum>{reply.likedCount}</S.DSRHeartNum>
           </S.DSRHeartDiv>
         </S.DSRDateHeartDiv>

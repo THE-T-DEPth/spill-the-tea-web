@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '../../../styles/ViewDetailSsul/DetailSsulReviewComponentStyle';
 import FullHeart from '../../../assets/Images/FullHeart.svg';
-// import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
+import EmptyHeart from '../../../assets/Images/EmptyHeart.svg';
 import Send from '../../../assets/Images/CombinedShape.svg';
 import ReReview from './ReReview';
 import {
   deleteComment,
+  deleteCommentLike,
   postComment,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
@@ -16,6 +17,7 @@ import ArrowUpSmall from '../../../assets/Images/ArrowUp.png';
 interface Comment {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -28,6 +30,7 @@ interface Comment {
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -145,7 +148,11 @@ const Review: React.FC<ReviewProps> = ({
   const handleCommentHeartClick = () => {
     const fetchPostCommentLike = async () => {
       try {
-        await postCommentLike(comment.commentId);
+        if (!comment.liked) {
+          await postCommentLike(comment.commentId);
+        } else {
+          await deleteCommentLike(comment.commentId);
+        }
       } catch (error) {
         console.log('fetchPostCommentLike 중 오류 발생', error);
         throw error;
@@ -236,7 +243,10 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
-              <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+              <S.DSRHeartImg
+                src={!comment.liked && view ? EmptyHeart : FullHeart}
+                alt='공감 수'
+              />
               <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
@@ -347,7 +357,10 @@ const Review: React.FC<ReviewProps> = ({
               <S.DSRDate>{comment.createDate}</S.DSRDate>
             </S.DSRDateDiv>
             <S.DSRHeartDiv>
-              <S.DSRHeartImg src={FullHeart} alt='공감 수' />
+              <S.DSRHeartImg
+                src={!comment.liked && view ? EmptyHeart : FullHeart}
+                alt='공감 수'
+              />
               <S.DSRHeartNum>{comment.likedCount}</S.DSRHeartNum>
             </S.DSRHeartDiv>
           </S.DSRDateHeartDiv>
