@@ -19,6 +19,7 @@ export const Title = styled.p`
   font: var(--headingXXL);
   text-align: center;
   transition: all 0.3s ease;
+  white-space: nowrap;
 
   ${isMobile} {
     font: var(--labelMedium);
