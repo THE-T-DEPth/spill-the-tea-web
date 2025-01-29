@@ -85,7 +85,7 @@ export const SearchBar = styled.div`
     border: none;
     outline: none;
     box-shadow: none;
-    font: var(--searchBold);
+    font: var(--labelMini);
     background: none;
     padding-left: 4px;
     margin-top: 2px;
@@ -121,6 +121,8 @@ export const MyIconWrapper = styled.div`
     height: 28px;
     margin-top: 3px;
     transition: all 0.3s ease-in-out;
+    border-radius: 50%;
+    object-fit: cover;
 
     ${isMobile} {
       width: 23.17px;

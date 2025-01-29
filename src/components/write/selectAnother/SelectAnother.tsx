@@ -8,6 +8,7 @@ import SelectVoice from './SelectVoice';
 import BottomBtn from './BottomBtn';
 import SelectKeywordType from './SelecteKeywordType';
 import { getGIFs } from '../../../api/write/search';
+import { postNovelization } from '../../../api/write/novelization';
 
 interface KeywordProp {
   setSelectedThreeKeywords: React.Dispatch<React.SetStateAction<string[]>>;
@@ -56,6 +57,23 @@ const SelectAnother: React.FC<KeywordProp> = ({
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
+  };
+
+  const handleNovelizationPost = () => {
+    if (novelizationInputValue.trim() == '') {
+      alert('값을 입력해주세요.');
+      return;
+    }
+
+    const fetchNovelization = async () => {
+      try {
+        const data = await postNovelization(novelizationInputValue);
+        setNovelizationValue(data.data.novel);
+      } catch (error) {
+        throw error;
+      }
+    };
+    fetchNovelization();
   };
 
   const onSubmitSearch = (e: any) => {
@@ -166,7 +184,9 @@ const SelectAnother: React.FC<KeywordProp> = ({
         </S.AnotherBtnDiv>
         <S.AnotherTextDiv>
           {selectedType === '소설화' ? (
-            <S.NovelizationBtn>소설화 실행</S.NovelizationBtn>
+            <S.NovelizationBtn onClick={handleNovelizationPost}>
+              소설화 실행
+            </S.NovelizationBtn>
           ) : (
             <></>
           )}

@@ -43,7 +43,7 @@ export const fetchLikedPosts = async (): Promise<BoxProps[]> => {
 	try {
 		const response = await api.get("/post", {
 			params: { sortBy: "liked" },
-			// 토큰 필요 없음
+
 			headers: { Authorization: undefined },
 		});
 		return response.data.data.map(mapApiResponseToBoxProps);
@@ -57,7 +57,7 @@ export const fetchLatestPosts = async (): Promise<BoxProps[]> => {
 	try {
 		const response = await api.get("/post", {
 			params: { sortBy: "latest" },
-			// 토큰 필요 없음
+
 			headers: { Authorization: undefined },
 		});
 		return response.data.data.map(mapApiResponseToBoxProps);

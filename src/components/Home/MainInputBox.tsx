@@ -10,13 +10,15 @@ interface MainInputBoxProps {
 	text: string;
 	boxData: BoxProps[];
 	emptyText?: string;
+	showRank?: boolean;
 }
 
 const ITEMS_PER_PAGE_DESKTOP = 4;
 const ITEMS_PER_PAGE_MOBILE = 1;
 const MAX_ITEMS = 12;
 
-const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText }) => {
+const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText, showRank = false }) => {
+
 	const { isMobile } = useNSMediaQuery();
 	const ITEMS_PER_PAGE = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE_DESKTOP;
 
@@ -113,7 +115,7 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 					<S.Header>{text}</S.Header>
 				</S.HeaderWrap>
 				<S.ContentContainer>
-					{boxData.length === 0 ? ( // 수정된 조건
+					{boxData.length === 0 ? (
 						<S.EmptyMessage>{emptyText || "데이터가 없습니다."}</S.EmptyMessage>
 					) : (
 						<S.Slider
@@ -123,15 +125,17 @@ const MainInputBox: React.FC<MainInputBoxProps> = ({ text, boxData, emptyText })
 							isMobile={isMobile}
 						>
 							{loopedData.map((data, index) => {
-								const isActive =
-									index >= currentIndex && index < currentIndex + ITEMS_PER_PAGE;
+								const isActive = index >= currentIndex && index < currentIndex + ITEMS_PER_PAGE;
+
+								const rank = showRank && data ? boxData.findIndex((item) => item.postId === data.postId) + 1 : undefined;
 
 								return (
 									<S.BoxWrapper key={index} isActive={isActive}>
-										{data ? <Box {...data} disabled={!isActive} /> : null}
+										{data ? <Box {...data} rank={rank} disabled={!isActive} /> : null}
 									</S.BoxWrapper>
 								);
 							})}
+
 						</S.Slider>
 					)}
 				</S.ContentContainer>

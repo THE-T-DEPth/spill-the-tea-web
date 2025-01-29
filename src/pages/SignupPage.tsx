@@ -16,6 +16,8 @@ const SignupPage: React.FC = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [nicknameStatus, setNicknameStatus] = useState<'valid' | 'invalid' | null>(null);
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+	const [isPasswordValid, setIsPasswordValid] = useState(true);
+
 	const { isMobile } = useNSMediaQuery();
 
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,9 +54,16 @@ const SignupPage: React.FC = () => {
 		}
 	};
 
+
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.target.value);
+		const input = e.target.value;
+		setPassword(input);
+
+		const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,20}$/;
+
+		setIsPasswordValid(passwordRegex.test(input));
 	};
+
 
 	const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setConfirmPassword(e.target.value);
@@ -76,7 +85,7 @@ const SignupPage: React.FC = () => {
 			const response = await postRegisterUser(email, password, name, nickname);
 			if (response.success) {
 				alert('회원가입이 완료되었습니다.');
-				navigate('/signupdone');
+				navigate('/signupdone', { state: { nickname } });
 			}
 		} catch (error) {
 			console.error('회원가입 중 오류 발생:', error);
@@ -85,7 +94,8 @@ const SignupPage: React.FC = () => {
 	};
 
 
-	const isFormValid = name.length >= 2 && nicknameStatus === 'valid' && isPasswordMatch && password.length >= 8;
+	const isFormValid = name.length >= 2 && nicknameStatus === 'valid' && isPasswordMatch && isPasswordValid && password.length >= 8;
+
 
 	return (
 		<>
@@ -151,9 +161,14 @@ const SignupPage: React.FC = () => {
 								value={confirmPassword}
 								onChange={handleConfirmPasswordChange}
 							/>
-							<S.ErrorMessage className={!isPasswordMatch ? 'visible' : ''}>
-								비밀번호가 동일하지 않습니다. 다시 확인해주세요.
+							<S.ErrorMessage className={!isPasswordMatch || !isPasswordValid ? 'visible' : ''}>
+								{!isPasswordMatch
+									? '비밀번호가 동일하지 않습니다. 다시 확인해주세요.'
+									: !isPasswordValid
+										? '비밀번호 형식이 올바르지 않습니다. 다시 입력해주세요.'
+										: ''}
 							</S.ErrorMessage>
+
 						</S.InputWrapper>
 						<S.SubmitButton onClick={handleSignup} disabled={!isFormValid}>
 							회원가입

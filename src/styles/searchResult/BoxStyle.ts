@@ -37,8 +37,9 @@ export const Container = styled.div<{ disabled?: boolean }>`
       disabled ? 'var(--G5)' : 'var(--Main3)'};
     transition: all 0.3s ease;
     color: ${({ disabled }) => (disabled ? 'var(--Black)' : 'var(--primary2)')};
-    box-shadow: ${({ disabled }) =>
-      disabled ? 'none' : '0px 4px 17px rgba(38, 130, 42, 0.25)'};
+  }
+  &:hover {
+    box-shadow: 0px 4px 17px rgba(38, 130, 42, 0.25);
   }
 
   ${isMobile} {
@@ -167,7 +168,6 @@ export const Likes = styled.span<{ disabled?: boolean }>`
     img {
       width: 9.39px;
       height: 8.61px;
-      padding: 1.41px 0.94px;
     }
   }
 `;
@@ -177,6 +177,10 @@ export const Comments = styled.span<{ disabled?: boolean }>`
   align-items: center;
   gap: 4px;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
+  img {
+    width: 11.67px;
+    height: 11.67px;
+  }
   ${isMobile} {
     gap: 3px;
     img {
@@ -194,7 +198,10 @@ export const TimeContainer = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   align-items: center;
   color: ${({ disabled }) => (disabled ? 'var(--G5)' : 'inherit')};
-
+  img {
+    width: 11.67px;
+    height: 11.67px;
+  }
   ${isMobile} {
     height: 11.17px;
     img {

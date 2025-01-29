@@ -11,6 +11,7 @@ import {
 interface Comment {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   profileImage: string;
   nickname: string;
   content: string;
@@ -23,6 +24,7 @@ interface Comment {
 interface Reply {
   commentId: number;
   mine: boolean;
+  liked: boolean;
   parentCommentId: number;
   profileImage: string;
   nickname: string;
@@ -34,9 +36,17 @@ interface Reply {
 
 const DetailSsulReview: React.FC<{
   setIsComplainModalOpen: (value: boolean) => void;
+  setIsFailReviewModal: (value: boolean) => void;
   postId: number;
   setCommentId: (value: number) => void;
-}> = ({ setIsComplainModalOpen, postId, setCommentId }) => {
+  view: boolean;
+}> = ({
+  setIsComplainModalOpen,
+  setIsFailReviewModal,
+  postId,
+  setCommentId,
+  view,
+}) => {
   const [input, setInput] = useState<string>('');
   const [comments, setComments] = useState<Comment[]>([]);
 
@@ -54,11 +64,18 @@ const DetailSsulReview: React.FC<{
       return;
     }
 
+    console.log(input.length);
+    if (input.length > 200) {
+      alert('댓글은 200자 제한입니다.');
+      return;
+    }
+
     const fetchPostComment = async () => {
       try {
         await postComment(postId, input);
       } catch (error) {
-        console.log('fetchPostComment 중 오류 발생', error);
+        setIsFailReviewModal(true);
+        throw error;
       }
     };
     fetchPostComment();
@@ -72,11 +89,18 @@ const DetailSsulReview: React.FC<{
         return;
       }
 
+      console.log(input.length);
+      if (input.length > 200) {
+        alert('댓글은 200자 제한입니다.');
+        return;
+      }
+
       const fetchPostComment = async () => {
         try {
           await postComment(postId, input);
         } catch (error) {
-          console.log('fetchPostComment 중 오류 발생', error);
+          setIsFailReviewModal(true);
+          throw error;
         }
       };
 
@@ -140,10 +164,12 @@ const DetailSsulReview: React.FC<{
               <S.DSREachCommentDiv key={index}>
                 <Review
                   handleComplainClick={handleComplainClick}
+                  setIsFailReviewModal={setIsFailReviewModal}
                   setCommentId={setCommentId}
                   comment={comment}
                   id={index}
                   postId={postId}
+                  view={view}
                 />
               </S.DSREachCommentDiv>
             )

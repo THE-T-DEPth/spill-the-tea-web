@@ -155,6 +155,8 @@ export const DSCEachTag = styled.button`
     width: 67px;
     height: 24px;
     font: var(--labelSmall);
+    color: black;
+    font-size: 10px;
     margin: 0 6px 6px 0;
     border-radius: 1.5px;
   }
@@ -251,6 +253,11 @@ export const DSCContentText = styled.p`
   font-family: 'Nanum Gothic', sans-serif;
   white-space: pre-line;
   margin-bottom: 30px;
+
+  p:has(br) {
+    line-height: 0;
+    margin: 0;
+  }
 
   @font-face {
     font-family: 'Nanum Gothic';

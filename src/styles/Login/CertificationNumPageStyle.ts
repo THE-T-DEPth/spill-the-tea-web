@@ -7,11 +7,9 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color:var(--BackColor);
-  height: calc(100vh - 133px);
   transition: color 0.2s ease-in-out;
   ${isMobile} {
     background-color: var(--primary2);
-	height: calc(100vh - 126px);
   }
 `;
 
