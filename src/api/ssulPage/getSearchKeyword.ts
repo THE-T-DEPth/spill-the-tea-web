@@ -3,7 +3,7 @@ import { api } from '..';
 interface SearchPost {
   postId: number;
   title: string;
-  thumb: string;
+  thumbUrl: string;
   likedCount: number;
   commentCount: number;
   keywordList: string;
