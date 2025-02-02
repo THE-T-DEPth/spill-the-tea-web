@@ -60,8 +60,8 @@ export const PaginationContainer = styled.div`
 `;
 
 export const EmptyMessage = styled.span`
-  font: var(--searchEmpty);
-  color: var(--Black);
+  font: var(--postEmptyMessage);
+  color: var(--G4);
   transition: all 0.3s ease;
   white-space: nowrap;
 `;
@@ -77,7 +77,7 @@ export const EmptyContainer = styled.div`
   height: 30px;
   display: flex;
   justify-content: center;
-  margin: 350px auto 422px;
+  margin: 230px auto 725px;
   transition: all 0.3s ease;
 
   ${isMobile} {
