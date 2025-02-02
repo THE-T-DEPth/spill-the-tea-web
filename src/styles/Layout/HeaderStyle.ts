@@ -168,7 +168,6 @@ export const SearchHistoryItem = styled.div`
   align-items: center;
   gap: 8px;
   padding: 7px 15px;
-
   font: var(--paragraphSmall);
   color: var(--Secondary2);
   cursor: pointer;
