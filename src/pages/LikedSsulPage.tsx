@@ -57,6 +57,9 @@ const LikedSsulPage = () => {
       {posts.length === 0 ? (
         <S.EmptyContainer>
           <S.EmptyMessage>아직은 공감을 누른 티가 없어요!</S.EmptyMessage>
+          <S.MakeTeaButtonContainer>
+            <MakeTeaButton />
+          </S.MakeTeaButtonContainer>
         </S.EmptyContainer>
       ) : (
         <S.Container>

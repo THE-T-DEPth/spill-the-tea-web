@@ -21,6 +21,7 @@ export const LeftSection = styled.div`
   margin-left: 26px;
   margin-bottom: 19px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
   ${isMobile} {
     gap: 5px;
     margin-left: 17px;

@@ -72,7 +72,7 @@ const SsulPage = () => {
           (post) => ({
             postId: post.postId,
             title: post.title,
-            image: post.thumb,
+            image: post.thumbUrl,
             keywords: post.keywordList
               .replace(/\[|\]/g, '')
               .split(', ')
