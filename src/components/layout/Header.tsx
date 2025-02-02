@@ -131,6 +131,7 @@ const Header = () => {
           </S.SearchHistory>
         )}
         <S.MyIconWrapper
+          $hasCustomImage={!!profileImage && profileImage !== MyIcon}
           onClick={() => navigate(isAccessToken ? '/mypage' : '/login')}>
           <img
             src={
