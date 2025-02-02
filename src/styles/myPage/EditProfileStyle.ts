@@ -30,11 +30,13 @@ export const Title = styled.span`
   }
 `;
 
-export const ImgContainer = styled.div`
+export const ImgContainer = styled.div<{ $hasCustomImage: boolean }>`
   margin: 13px 77px 35px;
   width: 250px;
   height: 250px;
   transition: all 0.3s ease;
+  border: ${(props) =>
+    props.$hasCustomImage ? '1.4px solid var(--EarlGrey)' : 'none'};
 
   img {
     width: 100%;
