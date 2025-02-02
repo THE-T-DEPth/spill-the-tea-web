@@ -70,6 +70,7 @@ export const PaginationContainer = styled.div`
 
 export const EmptyMessage = styled.span`
   font: var(--searchEmpty);
+  color: var(--G5);
 
   ${isMobile} {
     font: var(--searchEmptyMini);
@@ -82,7 +83,7 @@ export const EmptyContainer = styled.div`
   height: 30px;
   display: flex;
   justify-content: center;
-  margin: 350px auto 422px;
+  margin: 247px auto 525px;
   ${isMobile} {
     margin: 274px auto 286px;
     transition: all 0.3s ease;

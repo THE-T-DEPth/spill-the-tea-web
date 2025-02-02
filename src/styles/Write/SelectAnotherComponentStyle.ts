@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AnotherInputDiv = styled.div`
   display: flex;
   width: 30%;
+  min-width: 450px;
   flex-direction: column;
 `;
 

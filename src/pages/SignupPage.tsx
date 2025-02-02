@@ -29,11 +29,11 @@ const SignupPage: React.FC = () => {
 
 	const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const input = e.target.value;
-		const isValid = /^[a-zA-Z0-9가-힣]{0,8}$/.test(input);
-		if (isValid) {
+		if (input.length <= 8) {
 			setNickname(input);
 		}
 	};
+
 
 	// 닉네임 중복 체크 로직
 	const handleNicknameCheck = async () => {

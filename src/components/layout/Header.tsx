@@ -47,7 +47,12 @@ const Header = () => {
 
   const handleSearchSubmit = () => {
     if (searchInput.trim()) {
-      setSearchHistory((prev) => [searchInput, ...prev].slice(0, 4));
+      setSearchHistory((prev) =>
+        [searchInput, ...prev.filter((item) => item !== searchInput)].slice(
+          0,
+          4
+        )
+      );
       navigate(`/search?query=${encodeURIComponent(searchInput.trim())}`);
       setSearchInput('');
       setIsHistoryVisible(false);
@@ -55,8 +60,10 @@ const Header = () => {
   };
 
   const handleSearchHistoryClick = (item: string) => {
+    console.log(`Clicked search history: ${item}`); // 클릭 이벤트 확인
     setSearchInput(item);
     setIsHistoryVisible(false);
+    navigate(`/search?query=${encodeURIComponent(item)}`);
   };
 
   const handleLogoutClick = () => {
@@ -79,10 +86,8 @@ const Header = () => {
       setIsSearchActive((prev) => !prev);
     }
   };
-
   const handleTeaCupIconClick = () => {
-    setIsSearchActive(false);
-    navigate(0);
+    navigate('/');
   };
 
   return (
@@ -91,7 +96,6 @@ const Header = () => {
         <S.IconWrapper>
           <img src={TeaCupIcon} alt='Tea Cup Icon' />
         </S.IconWrapper>
-
         {!isMobile || !isSearchActive ? (
           <S.Title>Spill The Tea : 썰푸는 장소</S.Title>
         ) : null}
@@ -124,21 +128,22 @@ const Header = () => {
             {searchHistory.map((item, index) => (
               <S.SearchHistoryItem
                 key={index}
-                onClick={() => handleSearchHistoryClick(item)}>
+                onClick={() => {
+                  console.log(`Clicked on: ${item}`); // 확인용 로그
+                  handleSearchHistoryClick(item);
+                }}>
                 <img src={ClockIcon} alt='Clock Icon' />
                 <span>{item}</span>
               </S.SearchHistoryItem>
             ))}
           </S.SearchHistory>
         )}
+
         <S.MyIconWrapper
+          $hasCustomImage={!!profileImage && profileImage !== MyIcon}
           onClick={() => navigate(isAccessToken ? '/mypage' : '/login')}>
           <img
-            src={
-              isAccessToken
-                ? profileImage || MyIcon // 로그인 상태일 때: 프로필 이미지 없으면 기본 아이콘
-                : MyLogoutIcon // 로그아웃 상태일 때
-            }
+            src={isAccessToken ? profileImage || MyIcon : MyLogoutIcon}
             alt={isAccessToken ? 'My Icon' : 'My Logout Icon'}
           />
         </S.MyIconWrapper>
