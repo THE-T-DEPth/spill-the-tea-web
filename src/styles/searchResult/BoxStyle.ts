@@ -70,7 +70,8 @@ export const Image = styled.img<{ disabled?: boolean }>`
   width: 100%;
   height: 100%;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-  opacity: 1; /* 투명도 제거 */
+  opacity: 1;
+  object-fit: cover;
 `;
 
 export const Keywords = styled.div`

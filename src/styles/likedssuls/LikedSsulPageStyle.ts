@@ -82,6 +82,10 @@ export const EmptyContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 231px auto 805px;
+
+  ${isMobile} {
+    display: none;
+  }
 `;
 
 export const MakeTeaButtonContainer = styled.div`
@@ -97,4 +101,16 @@ export const MakeTeaButtonContainer = styled.div`
   ${isMobile} {
     display: none;
   }
+`;
+
+export const MobileEmptyContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 272px auto 284px;
+  justify-content: center;
+`;
+
+export const MobileEmptyMessage = styled.span`
+  font: var(--labelMedium);
+  color: var(--Secondary1);
 `;
