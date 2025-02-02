@@ -7,8 +7,10 @@ import { BoxProps } from '../components/searchResult/Box';
 import Pagination from '../components/searchResult/Pagination';
 import { getMyLikedPosts } from '../api/likedSsuls/getMyLIkedPosts';
 import MakeTeaButton from '../components/Home/MakeTeaButton';
+import useNSMediaQuery from '../hooks/useNSMediaQuery';
 
 const LikedSsulPage = () => {
+  const { isMobile } = useNSMediaQuery();
   const [posts, setPosts] = useState<BoxProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('DATE_DESC');
@@ -55,12 +57,20 @@ const LikedSsulPage = () => {
     <>
       <TopBar text='"내가 공감을 누른 티 컬렉션🍵"' />
       {posts.length === 0 ? (
-        <S.EmptyContainer>
-          <S.EmptyMessage>아직은 공감을 누른 티가 없어요!</S.EmptyMessage>
-          <S.MakeTeaButtonContainer>
-            <MakeTeaButton />
-          </S.MakeTeaButtonContainer>
-        </S.EmptyContainer>
+        isMobile ? (
+          <S.MobileEmptyContainer>
+            <S.MobileEmptyMessage>
+              공감을 눌러 티 컬렉션에 추가해보세요.
+            </S.MobileEmptyMessage>
+          </S.MobileEmptyContainer>
+        ) : (
+          <S.EmptyContainer>
+            <S.EmptyMessage>아직은 공감을 누른 티가 없어요!</S.EmptyMessage>
+            <S.MakeTeaButtonContainer>
+              <MakeTeaButton />
+            </S.MakeTeaButtonContainer>
+          </S.EmptyContainer>
+        )
       ) : (
         <S.Container>
           <S.MainContainer>
