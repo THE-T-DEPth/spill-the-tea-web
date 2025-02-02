@@ -82,9 +82,7 @@ const Header = () => {
 			setIsSearchActive((prev) => !prev);
 		}
 	};
-
 	const handleTeaCupIconClick = () => {
-		setIsSearchActive(false);
 		navigate('/');
 	};
 

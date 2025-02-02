@@ -7,7 +7,7 @@ export const WriteDiv = styled.div<{ $openpostmodal: string }>`
   height: 100vh
   height: ${({ $openpostmodal }) =>
     $openpostmodal == 'true' ? '100vh' : '100%'};
-  min-width: 1400px;
+  // min-width: 1400px;
   touch-action: ${({ $openpostmodal }) =>
     $openpostmodal == 'true' ? 'none' : 'active'};
   overflow: ${({ $openpostmodal }) =>
