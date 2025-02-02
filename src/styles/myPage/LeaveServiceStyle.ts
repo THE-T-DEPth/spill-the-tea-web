@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.p`
-  font: var(--headingXXL);
+  font: var(--postEmptyMessage);
   text-align: center;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -31,7 +31,7 @@ export const ButtonContainer = styled.div`
   height: 50px;
   display: flex;
   gap: 116px;
-  margin: 124px 49px 0;
+  margin: 137px 49px 0;
   transition: all 0.3s ease;
 
   ${isMobile} {

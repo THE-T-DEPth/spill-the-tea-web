@@ -189,7 +189,7 @@ const EditProfile = () => {
   return (
     <S.Container>
       <S.Title>프로필 사진</S.Title>
-      <S.ImgContainer>
+      <S.ImgContainer $hasCustomImage={profileImage !== defaultProflieImg}>
         <img src={profileImage} alt='프로필 이미지' />
       </S.ImgContainer>
       <S.ProfileButton>

@@ -115,7 +115,7 @@ export const SearchIconWrapper = styled.div`
   }
 `;
 
-export const MyIconWrapper = styled.div`
+export const MyIconWrapper = styled.div<{ $hasCustomImage: boolean }>`
   img {
     width: 28px;
     height: 28px;
@@ -123,6 +123,8 @@ export const MyIconWrapper = styled.div`
     transition: all 0.3s ease-in-out;
     border-radius: 50%;
     object-fit: cover;
+    border: ${(props) =>
+      props.$hasCustomImage ? '1px solid var(--Main2)' : 'none'};
 
     ${isMobile} {
       width: 23.17px;
