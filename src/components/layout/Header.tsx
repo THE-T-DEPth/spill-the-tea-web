@@ -81,8 +81,6 @@ const Header = () => {
   };
 
   const handleTeaCupIconClick = () => {
-    const currentPath = window.location.pathname;
-    navigate(currentPath);
     navigate('/');
   };
 
