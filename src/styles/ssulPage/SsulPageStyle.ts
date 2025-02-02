@@ -11,7 +11,7 @@ export const EmptyContainer = styled.div`
   align-items: center;
   width: 652px;
   height: 53px;
-  margin: 274px auto 727px;
+  margin: 173px auto 841px;
 
   ${isMobile} {
     width: 100%;
@@ -21,9 +21,10 @@ export const EmptyContainer = styled.div`
 
 export const EmptyMessage = styled.p`
   color: var(--Secondary2);
-  font: var(--headingXXL);
+  font: var(--postEmptyMessage);
   white-space: nowrap;
   transition: all 0.3s ease;
+  margin: 0;
 
   ${isMobile} {
     font: var(--dropDown);

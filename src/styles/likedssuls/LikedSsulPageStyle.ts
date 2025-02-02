@@ -72,7 +72,7 @@ export const PaginationContainer = styled.div`
 `;
 
 export const EmptyMessage = styled.span`
-  font: var(--headingXXL);
+  font: var(--postEmptyMessage);
   color: var(--Secondary2);
 `;
 
@@ -81,7 +81,7 @@ export const EmptyContainer = styled.div`
   height: 30px;
   display: flex;
   justify-content: center;
-  margin: 414px auto 609px;
+  margin: 231px auto 805px;
 `;
 
 export const MakeTeaButtonContainer = styled.div`
