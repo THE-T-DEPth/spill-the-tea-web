@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <S.Container
-      style={{ minWidth: isWritePage || isEditPage ? '1400px' : '' }}>
+      style={{ minWidth: isWritePage || isEditPage ? '1100px' : '' }}>
       {/* 헤더는 PC에서는 항상 표시 */}
       {(!isMobile || !shouldHideNavBar) && <Header />}
 
