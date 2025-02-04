@@ -37,12 +37,14 @@ interface Reply {
 const DetailSsulReview: React.FC<{
   setIsComplainModalOpen: (value: boolean) => void;
   setIsFailReviewModal: (value: boolean) => void;
+  setIsAlreadyComplainModal: (value: boolean) => void;
   postId: number;
   setCommentId: (value: number) => void;
   view: boolean;
 }> = ({
   setIsComplainModalOpen,
   setIsFailReviewModal,
+  setIsAlreadyComplainModal,
   postId,
   setCommentId,
   view,
@@ -52,10 +54,6 @@ const DetailSsulReview: React.FC<{
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-  };
-
-  const handleComplainClick = () => {
-    setIsComplainModalOpen(true); // 모달 열기
   };
 
   const handleSubmitClick = () => {
@@ -163,7 +161,8 @@ const DetailSsulReview: React.FC<{
             ) => (
               <S.DSREachCommentDiv key={index}>
                 <Review
-                  handleComplainClick={handleComplainClick}
+                  setIsComplainModalOpen={setIsComplainModalOpen}
+                  setIsAlreadyComplainModal={setIsAlreadyComplainModal}
                   setIsFailReviewModal={setIsFailReviewModal}
                   setCommentId={setCommentId}
                   comment={comment}

@@ -39,6 +39,7 @@ const ViewDetailSsulPage = () => {
             setIsRemoveModal={setIsRemoveModal}
             setIsEditModal={setIsEditModal}
             setIsReportModal={setIsReportModal}
+            setIsAlreadyComplainModal={setiIsAlreadyComaplainModalOpen}
             setIsBlockModal={setIsBlockModal}
             postId={Number(postId)}
             setMemberId={setMemberId}
@@ -48,6 +49,7 @@ const ViewDetailSsulPage = () => {
           {/*content 내용*/}
           <DetailSsulReview
             setIsComplainModalOpen={setIsComplainModalOpen}
+            setIsAlreadyComplainModal={setiIsAlreadyComaplainModalOpen}
             setIsFailReviewModal={setIsFailReview}
             postId={Number(Number(postId))}
             setCommentId={setCommentId}

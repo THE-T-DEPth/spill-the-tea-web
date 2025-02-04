@@ -65,3 +65,14 @@ export async function postReports(commentId: number) {
     throw error;
   }
 }
+
+export async function getReports(commentId: number) {
+  try {
+    const response = await api.get(
+      `reports/comment/check?commentId=${commentId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

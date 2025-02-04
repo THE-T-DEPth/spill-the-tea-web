@@ -77,3 +77,12 @@ export async function postBlock(memberId: number) {
     throw error;
   }
 }
+
+export async function getPostReports(postId: number) {
+  try {
+    const response = await api.get(`reports/post/check?postId=${postId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

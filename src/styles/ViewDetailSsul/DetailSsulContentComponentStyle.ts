@@ -371,33 +371,46 @@ export const DSCContentText = styled.p`
   .ql-snow
     .ql-picker.ql-font
     .ql-picker-item[data-value='nanumpenscript']::before {
-    font-family: Nanum Pen Script;
+    font-family: Nanum Pen Script
     content: '나눔 펜 스크립트';
   }
   /* Set effect font-families */
   .ql-font-nanumpenscript {
     font-family: Nanum Pen Script;
   }
+  img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
 
   @media (max-width: ${MAX}) {
     font-size: 14px;
     margin-bottom: 10px;
     margin-top: 0;
+
+    img {
+    max-width: 100%;
+    max-height: 233px;
+    object-fit: cover;
+    }
   }
 `;
 
-export const DSCContentImg = styled.img`
-  display: flex;
-  height: 300px;
-  border-radius: 4px;
-  margin-bottom: 30px;
-  @media (max-width: ${MAX}) {
-    display: flex;
-    height: 233px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-`;
+// export const DSCContentImg = styled.img`
+//   display: flex;
+//   max-height: 300px;
+//   width: 100%;
+//   border-radius: 4px;
+//   margin-bottom: 30px;
+//   @media (max-width: ${MAX}) {
+//     display: flex;
+//     max-height: 233px;
+//     width: 100%;
+//     border-radius: 4px;
+//     margin-bottom: 10px;
+//   }
+// `;
 
 export const DSCAnoterDiv = styled.div`
   display: flex;
