@@ -5,6 +5,7 @@ import Profile from '../../../assets/Images/Profile.svg';
 import {
   deleteComment,
   deleteCommentLike,
+  getReports,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
 
@@ -23,8 +24,9 @@ interface Reply {
 
 interface ReReviewProps {
   reply: Reply;
-  handleComplainClick: () => void;
   setIsFailReviewModal: (value: boolean) => void;
+  setIsAlreadyComplainModal: (value: boolean) => void;
+  setIsComplainModalOpen: (value: boolean) => void;
   openInput: boolean;
   setCommentId: (value: number) => void;
   view: boolean;
@@ -32,8 +34,9 @@ interface ReReviewProps {
 
 const ReReview: React.FC<ReReviewProps> = ({
   reply,
-  handleComplainClick,
   setIsFailReviewModal,
+  setIsAlreadyComplainModal,
+  setIsComplainModalOpen,
   openInput,
   setCommentId,
   view,
@@ -69,6 +72,21 @@ const ReReview: React.FC<ReReviewProps> = ({
       }
     };
     fetchDeleteComment();
+  };
+
+  const handleComplainClick = () => {
+    const fetchReport = async () => {
+      try {
+        const response = await getReports(reply.commentId);
+        if (response.success) {
+          setIsComplainModalOpen(true);
+        }
+      } catch (error) {
+        setIsAlreadyComplainModal(true);
+        throw error;
+      }
+    };
+    fetchReport();
   };
 
   return (

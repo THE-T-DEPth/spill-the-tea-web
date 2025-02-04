@@ -7,6 +7,7 @@ import ReReview from './ReReview';
 import {
   deleteComment,
   deleteCommentLike,
+  getReports,
   postComment,
   postCommentLike,
 } from '../../../api/viewDetailSsul/viewDetailComment';
@@ -42,7 +43,8 @@ interface Reply {
 
 interface ReviewProps {
   comment: Comment;
-  handleComplainClick: () => void;
+  setIsComplainModalOpen: (value: boolean) => void;
+  setIsAlreadyComplainModal: (value: boolean) => void;
   setIsFailReviewModal: (value: boolean) => void;
   setCommentId: (value: number) => void;
   id: number;
@@ -52,7 +54,8 @@ interface ReviewProps {
 
 const Review: React.FC<ReviewProps> = ({
   comment,
-  handleComplainClick,
+  setIsComplainModalOpen,
+  setIsAlreadyComplainModal,
   setIsFailReviewModal,
   setCommentId,
   id,
@@ -141,6 +144,21 @@ const Review: React.FC<ReviewProps> = ({
       }
       return newSet;
     });
+  };
+
+  const handleComplainClick = () => {
+    const fetchReport = async () => {
+      try {
+        const response = await getReports(comment.commentId);
+        if (response.success) {
+          setIsComplainModalOpen(true);
+        }
+      } catch (error) {
+        setIsAlreadyComplainModal(true);
+        throw error;
+      }
+    };
+    fetchReport();
   };
 
   const handleRereviewInputClick = (key: number) => {
@@ -302,9 +320,10 @@ const Review: React.FC<ReviewProps> = ({
                   <ReReview
                     openInput={id === openRereviewInput}
                     setIsFailReviewModal={setIsFailReviewModal}
+                    setIsAlreadyComplainModal={setIsAlreadyComplainModal}
+                    setIsComplainModalOpen={setIsComplainModalOpen}
                     setCommentId={setCommentId}
                     reply={reply}
-                    handleComplainClick={handleComplainClick}
                     view={view}
                   />
                 </S.DSREachCommentDiv>
@@ -423,9 +442,10 @@ const Review: React.FC<ReviewProps> = ({
                   <ReReview
                     openInput={id === openRereviewInput}
                     setIsFailReviewModal={setIsFailReviewModal}
+                    setIsComplainModalOpen={setIsComplainModalOpen}
+                    setIsAlreadyComplainModal={setIsAlreadyComplainModal}
                     setCommentId={setCommentId}
                     reply={reply}
-                    handleComplainClick={handleComplainClick}
                     view={view}
                   />
                 </S.DSREachCommentDiv>
