@@ -29,17 +29,15 @@ export const HomeDiv2 = styled.div`
 `;
 
 export const MakeTeaButtonContainer = styled.div`
-  position: absolute;
-  bottom: -60px;
-  right: calc((100% - 1440px) / 2 + 55px); 
+  position: fixed;
+  bottom: 79px;
+  right: calc((100% - 1440px) / 2 + 55px);
   z-index: 10;
-  transition: all 0.3s ease-in-out;
-   ${isMobile} {
-	  display: none; 
-	}
-
   @media (max-width: 1440px) {
-    right: 55px; 
+    right: 55px;
+  }
+  ${isMobile} {
+    display: none;
   }
 `;
 
