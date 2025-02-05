@@ -10,4 +10,5 @@ export const Container = styled.div`
 // 메인 콘텐츠
 export const Main = styled.main`
   grid-column: span 12;
+  flex: 1; 
 `;

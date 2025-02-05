@@ -11,9 +11,9 @@ type ApiResponseData = {
 	keywordList: string;
 	createDate: string;
 	createTime: string;
-	liked: boolean;
-
+	liked?: boolean;
 };
+
 
 const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
 	let parsedKeywords: string[] = [];
@@ -22,7 +22,7 @@ const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
 		parsedKeywords = JSON.parse(data.keywordList);
 	} catch (error) {
 		parsedKeywords = data.keywordList
-			.replace(/[\[\]"]/g, "")
+			.replace(/[[\]"]/g, "")
 			.split(",")
 			.map((keyword) => keyword.trim());
 	}
@@ -35,17 +35,26 @@ const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
 		date: data.createDate,
 		likes: data.likedCount,
 		comments: String(data.commentCount),
-		liked: data.liked,
+		liked: Boolean(data.liked),
 	};
 };
 
+
 export const fetchLikedPosts = async (): Promise<BoxProps[]> => {
 	try {
+		const accessToken = localStorage.getItem("accessToken");
+
+		const headers = accessToken
+			? { Authorization: `Bearer ${accessToken}` }
+			: {};
+
 		const response = await api.get("/post", {
 			params: { sortBy: "liked" },
-
-			headers: { Authorization: undefined },
+			headers,
 		});
+
+		console.log("fetchLikedPosts 응답 데이터:", response.data);
+
 		return response.data.data.map(mapApiResponseToBoxProps);
 	} catch (error) {
 		console.error("fetchLikedPosts 중 오류 발생:", error);
@@ -53,17 +62,25 @@ export const fetchLikedPosts = async (): Promise<BoxProps[]> => {
 	}
 };
 
+
 export const fetchLatestPosts = async (): Promise<BoxProps[]> => {
 	try {
+		const accessToken = localStorage.getItem("accessToken");
+
+		const headers = accessToken
+			? { Authorization: `Bearer ${accessToken}` }
+			: {};
+
 		const response = await api.get("/post", {
 			params: { sortBy: "latest" },
-
-			headers: { Authorization: undefined },
+			headers,
 		});
+
+		console.log("fetchLatestPosts 응답 데이터:", response.data);
+
 		return response.data.data.map(mapApiResponseToBoxProps);
 	} catch (error) {
 		console.error("fetchLatestPosts 중 오류 발생:", error);
 		throw error;
 	}
 };
-

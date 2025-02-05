@@ -51,10 +51,10 @@ const HomePage = () => {
 						emptyText='아직은 따끈따끈한 티가 없네요,,,'
 						showRank={false}
 					/>
-					<S.MakeTeaButtonContainer>
-						<MakeTeaButton />
-					</S.MakeTeaButtonContainer>
 				</S.HomeDiv2>
+				<S.MakeTeaButtonContainer>
+					<MakeTeaButton />
+				</S.MakeTeaButtonContainer>
 			</S.Wrapper>
 		</>
 	);
