@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../../styles/Home/BoxStyle";
 import Vector from "../../assets/images/time.svg";
 import DisableClock from "../../assets/Icons/DisableClock.svg";
-// import Like from "../../assets/images/like.svg";
+import Like from "../../assets/Icons/Like.svg";
 import FullHeart from "../../assets/images/FullHeart.svg";
 import DisableLike from "../../assets/Icons/DisableLike.svg";
 import Comment from "../../assets/images/comment.svg";
@@ -64,7 +64,7 @@ const Box: React.FC<BoxProps> = ({
 				<S.LikeContainer disabled={disabled}>
 					<S.Likes disabled={disabled}>
 						<img
-							src={liked ? FullHeart : DisableLike}
+							src={disabled ? DisableLike : liked ? FullHeart : Like}
 							alt="like Icon"
 							className="Icon"
 						/>
