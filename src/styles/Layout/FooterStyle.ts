@@ -7,10 +7,15 @@ export const Container = styled.footer`
   justify-content: center;
   align-items: center;
   background-color: var(--Main2);
-  height: 75.09px;
+  height: 83px;
   padding: 20px 0;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
+
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
   ${isMobile} {
     height: 126px;
   }
@@ -61,8 +66,8 @@ export const Icons = styled.div`
 
 export const IconWrapper = styled.div`
   img {
-    width: 11.48px;
-    height: 11.48px;
+    width: 12px;
+    height: 12px;
 	${isMobile} {
       width: 18.18px; 
       height: 18.18px;
