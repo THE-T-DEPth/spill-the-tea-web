@@ -22,7 +22,7 @@ const mapApiResponseToBoxProps = (data: ApiResponseData): BoxProps => {
 		parsedKeywords = JSON.parse(data.keywordList);
 	} catch (error) {
 		parsedKeywords = data.keywordList
-			.replace(/[\[\]"]/g, "")
+			.replace(/[[\]"]/g, "")
 			.split(",")
 			.map((keyword) => keyword.trim());
 	}
@@ -52,18 +52,18 @@ export const fetchLikedPosts = async (): Promise<BoxProps[]> => {
 		throw error;
 	}
 };
-
 export const fetchLatestPosts = async (): Promise<BoxProps[]> => {
 	try {
 		const response = await api.get("/post", {
 			params: { sortBy: "latest" },
-
 			headers: { Authorization: undefined },
 		});
+		console.log("fetchLatestPosts 응답 데이터:", response.data); // 👈 API 응답 확인
 		return response.data.data.map(mapApiResponseToBoxProps);
 	} catch (error) {
 		console.error("fetchLatestPosts 중 오류 발생:", error);
 		throw error;
 	}
 };
+
 
